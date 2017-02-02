@@ -1,6 +1,6 @@
 //app.js
 
-console.log(1);
+//console.log(1);
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
