@@ -1,9 +1,56 @@
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="container-row">
+	<view class="work-place" bindtap="toChooseWorkPlace">
+		<text>深圳</text>
+		<view class="arrows-down"></view>
+	</view>
+	<view class="search" >
+		<icon type="search" size="15" color="#b2b2b2" />
+		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" />
+	</view>
+	<view>
+		<button class="cancle" bindtap="goBack">取消</button>
+	</view>
+</view>
+
+<view class="container search-history">
+	<view>
+		<text>历史搜索</text>
+		<text class="handle">清除</text>
+	</view>
+	<view class="history-list"> 
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+	</view>
+</view>
+
+<view class="container search-hot">
+	<view>
+		<text>热门搜索</text>
+		<text class="handle">换一批</text>
+	</view>
+	<view class="hot-list"> 
+		<button class="hot-item" >java</button>
+		<button class="hot-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >java</button>
+		<button class="history-item" >c++</button>
+		<button class="history-item" >c++</button>
+	</view>
 </view>

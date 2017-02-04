@@ -3,20 +3,38 @@
 view,scroll-view{
 	font-family: '微软雅黑';
 	font-size: 28rpx;
+	color:#353535;
 }
 
 icon{
 	vertical-align: middle;
 }
 
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-} 
+.container{
+	background: #ffffff;
+	box-sizing: border-box;
+	padding:20rpx 30rpx;
+}
+
+.container-column{
+	background:#ffffff;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+}
+
+.container-row{
+	background:#ffffff;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	padding:20rpx 30rpx;
+}
 
 .placeholder-class{
 	color:#b2b2b2;
@@ -32,4 +50,14 @@ icon{
 
 ._right{
 	float:right;
+}
+
+.arrows-down{
+	display: inline-block;
+	vertical-align: middle;
+	width: 0;
+    height: 0;
+    border-left: 8rpx solid transparent;
+    border-right: 8rpx solid transparent;
+    border-top: 8rpx solid #353535;
 }

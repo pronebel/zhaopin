@@ -2,8 +2,9 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search",
     "pages/msg/msg",
+    "pages/search/search",
+    "pages/workplace/workplace",
     "pages/discover/discover",
     "pages/user/user"
   ],

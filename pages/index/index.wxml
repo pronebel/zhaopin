@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<!--<view class="container">
+<!--<view class="container-column">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
@@ -9,10 +9,10 @@
   </view>
 </view>-->
 <view>
-	<view class="container ">
+	<view class="container-column">
 		<image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
 		<view class="search" >
-			<view type="text" class="search-box" bindtap="toSearch">
+			<view class="search-box" bindtap="toSearch">
 				<icon type="search" size="14" color="rgba(255,255,255,0.8)" />
 				搜索职位/公司
 			</view>
