@@ -1,7 +1,5 @@
 //logs.js
-console.log(4);
 var util = require('../../utils/util.js')
-console.log(6);
 Page({
   data: {
     logs: []

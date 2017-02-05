@@ -10,6 +10,10 @@ icon{
 	vertical-align: middle;
 }
 
+view,text,icon{
+	vertical-align: middle;
+}
+
 .container{
 	background: #ffffff;
 	box-sizing: border-box;
@@ -60,4 +64,20 @@ icon{
     border-left: 8rpx solid transparent;
     border-right: 8rpx solid transparent;
     border-top: 8rpx solid #353535;
+}
+
+
+.placeicon-1{
+	width:12rpx;
+	height:18px;
+	background:#2196f3;
+	display: inline-block;
+	margin-right: 10rpx;
+}
+.placeicon-2{
+	width:12rpx;
+	height:18px;
+	background:#e53935;
+	display: inline-block;
+	margin-right: 10rpx;
 }

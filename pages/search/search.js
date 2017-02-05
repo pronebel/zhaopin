@@ -2,7 +2,7 @@ var app=getApp();
 
 Page({
 	data:{
-		
+		workplace:''
 	},
 	goBack:()=>{
 		wx.navigateBack({
@@ -13,5 +13,11 @@ Page({
 		wx.navigateTo({
 			url:'../workplace/workplace'
 		})
-	}
+	},
+	onShow:function(){  //这里用es6的箭头函数 this为undefined
+		console.log('onShow');
+		this.setData({
+			workplace:app.globalData.workplace
+		})
+	},
 })

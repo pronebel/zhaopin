@@ -1,6 +1,6 @@
 <view class="container-row">
 	<view class="work-place" bindtap="toChooseWorkPlace">
-		<text>深圳</text>
+		<text>{{workplace}}</text>
 		<view class="arrows-down"></view>
 	</view>
 	<view class="search" >
@@ -14,7 +14,8 @@
 
 <view class="container search-history">
 	<view>
-		<text>历史搜索</text>
+		<view class="placeicon-1"></view>
+		<text>历史搜索{{work}}</text>
 		<text class="handle">清除</text>
 	</view>
 	<view class="history-list"> 
@@ -35,6 +36,7 @@
 
 <view class="container search-hot">
 	<view>
+		<view class="placeicon-1"></view>
 		<text>热门搜索</text>
 		<text class="handle">换一批</text>
 	</view>
