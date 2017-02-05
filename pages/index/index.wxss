@@ -21,26 +21,26 @@
 }
 
 .search{
-/*	margin-top: 20rpx;*/
-	padding:20rpx 0;
-	/*background:rgba(0,0,255,0.2);*/
-	background:rgba(178,178,178,0.6);
+	background:#fff;
 	width:100%;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
 	position: fixed;
-	
+	box-shadow:0 10px 30px rgba(0,0,0,0.2);
+	text-align: center;
+	padding:26rpx 40rpx;
+	box-sizing:border-box;
 }
 
 .search-box{
-	color:rgba(255,255,255,0.8);
+	color:rgba(88,88,88,0.8);
 	text-align: center;
-	/*background:rgba(0,0,255,0.2);*/
-	background:rgba(136,136,136,0.4);
-	border-radius:30rpx;
-	width:600rpx;
-	padding:16rpx 0;
+	font-size:14px;
+	display: inline-block;
+}
+
+.searchicon{
+	position: absolute;
+	left:35rpx;
+	top:33rpx;
 }
 
 .list{

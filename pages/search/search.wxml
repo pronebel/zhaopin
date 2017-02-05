@@ -5,7 +5,7 @@
 	</view>
 	<view class="search" >
 		<icon type="search" size="15" color="#b2b2b2" />
-		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" />
+		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" auto-focus />
 	</view>
 	<view>
 		<button class="cancle" bindtap="goBack">取消</button>

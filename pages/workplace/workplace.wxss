@@ -8,7 +8,7 @@ view,text,icon{
 }
 
 .noBackCon{
-	padding:15rpx 30rpx;
+	padding:20rpx 30rpx;
 }
 
 .list{

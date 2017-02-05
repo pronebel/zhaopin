@@ -14,7 +14,7 @@ Page({
 			url:'../workplace/workplace'
 		})
 	},
-	onShow:function(){  //这里用es6的箭头函数 this为undefined
+	onShow:function(){  //这里用es6的箭头函数 this是window
 		console.log('onShow');
 		this.setData({
 			workplace:app.globalData.workplace

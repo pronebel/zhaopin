@@ -10,9 +10,9 @@
   ],
   "window":{
     "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#5B5758",
     "navigationBarTitleText": "招聘",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle":"light",
     "enablePullDownRefresh":true
   },
   "tabBar": {
