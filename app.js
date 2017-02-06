@@ -15,6 +15,6 @@ App({
   globalData:{
     userInfo:null,
     location:'',
-    workplace:''
+    workplace:'',
   }
 })

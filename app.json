@@ -1,9 +1,11 @@
 {
   "pages":[
+    "pages/search/search",
     "pages/index/index",
     "pages/logs/logs",
     "pages/msg/msg",
-    "pages/search/search",
+    
+    "pages/searchResult/searchResult",
     "pages/workplace/workplace",
     "pages/discover/discover",
     "pages/user/user"

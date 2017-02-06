@@ -44,6 +44,10 @@ view,text,icon{
 	color:#b2b2b2;
 }
 
+._fixed{
+	position:fixed;
+}
+
 ._block{
 	display: block;
 }
@@ -73,6 +77,7 @@ view,text,icon{
 	background:#2196f3;
 	display: inline-block;
 	margin-right: 10rpx;
+	
 }
 .placeicon-2{
 	width:12rpx;
@@ -80,4 +85,9 @@ view,text,icon{
 	background:#e53935;
 	display: inline-block;
 	margin-right: 10rpx;
+
+}
+
+.click-view{
+	background:rgb(239,239,244);
 }

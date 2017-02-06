@@ -20,6 +20,8 @@ view{
 	width:360rpx;
 	padding:10rpx 0;
 	vertical-align: middle;
+	font-size:15px;
+
 }
 
 .work-place text{
@@ -61,4 +63,28 @@ view{
 	color:#09bb07;
 	font-size:13px;
 	float:right;
+}
+.searchComplement{
+	background: #ffffff;
+	box-sizing: border-box;
+	
+}
+
+.complement-item{
+	box-sizing: border-box;
+	padding:0 30rpx;
+}
+
+._line{
+	padding: 26rpx 0;
+	/*width:100%;*/
+	border-bottom: 1rpx solid rgb(239,239,244);
+}
+
+.complement-item icon{
+	margin-right:40rpx;
+}
+
+.complement-item text{
+	vertical-align: baseline;
 }

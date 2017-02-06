@@ -1,58 +1,76 @@
-<view class="container-row">
+<view class="container-row" >
 	<view class="work-place" bindtap="toChooseWorkPlace">
 		<text>{{workplace}}</text>
 		<view class="arrows-down"></view>
 	</view>
 	<view class="search" >
 		<icon type="search" size="15" color="#b2b2b2" />
-		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" auto-focus />
+		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindinput="keyInput" value="{{jobName}}" />
 	</view>
 	<view>
-		<button class="cancle" bindtap="goBack">取消</button>
+		<button class="cancle" bindtap="goBack" hover-start-time="10" hover-stay-time="200">取消</button>
 	</view>
 </view>
 
-<view class="container search-history">
+<view class="container search-history" hidden="{{jobName!=''}}">
 	<view>
 		<view class="placeicon-1"></view>
 		<text>历史搜索{{work}}</text>
 		<text class="handle">清除</text>
 	</view>
 	<view class="history-list"> 
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200" >java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
 	</view>
 </view>
 
-<view class="container search-hot">
+<view class="container search-hot" hidden="{{jobName!=''}}">
 	<view>
-		<view class="placeicon-1"></view>
+		<view class="placeicon-2"></view>
 		<text>热门搜索</text>
 		<text class="handle">换一批</text>
 	</view>
 	<view class="hot-list"> 
-		<button class="hot-item" >java</button>
-		<button class="hot-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >java</button>
-		<button class="history-item" >c++</button>
-		<button class="history-item" >c++</button>
+		<button class="hot-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="hot-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">java</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+		<button class="history-item" hover-start-time="10" hover-stay-time="200">c++</button>
+	</view>
+</view>
+
+<view class=" searchComplement" hidden="{{jobName==''}}">
+	<view class="complement-list">
+		<view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch" data-complement="前端">
+			<view class="_line" data-complement="前端">
+				<icon type="search" size="15" color="#b2b2b2" data-complement="前端" />
+				<text data-complement="前端">前端开发</text>
+			</view>
+		</view>
+		<view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch" data-complement="前端">
+			<view class="_line" data-complement="前端">
+				<icon type="search" size="15" color="#b2b2b2" data-complement="前端" />
+				<text data-complement="前端">前端开发</text>
+			</view>
+		</view>
+		
 	</view>
 </view>
