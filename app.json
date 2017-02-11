@@ -1,10 +1,10 @@
 {
   "pages":[
-    "pages/search/search",
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/msg/msg",
-    
+    "pages/search/search",
     "pages/searchResult/searchResult",
     "pages/workplace/workplace",
     "pages/discover/discover",
@@ -12,7 +12,7 @@
   ],
   "window":{
     "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#5B5758",
+    "navigationBarBackgroundColor": "#353535",
     "navigationBarTitleText": "招聘",
     "navigationBarTextStyle":"light",
     "enablePullDownRefresh":true

@@ -24,7 +24,8 @@
 	background:#fff;
 	width:100%;
 	position: fixed;
-	box-shadow:0 10px 30px rgba(0,0,0,0.2);
+	/*box-shadow:0 10px 30px rgba(0,0,0,0.2);*/
+	box-shadow: 0 2px 4px #aaa;
 	text-align: center;
 	padding:26rpx 40rpx;
 	box-sizing:border-box;
@@ -103,3 +104,4 @@
 .release-date{
 	color:#b2b2b2;
 }
+

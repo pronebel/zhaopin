@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import "iconfont.wxss";
 
 view,scroll-view{
 	font-family: '微软雅黑';
@@ -37,7 +38,7 @@ view,text,icon{
 	justify-content: space-between;
 	align-items: center;
 	box-sizing: border-box;
-	padding:20rpx 30rpx;
+	padding:0 30rpx;
 }
 
 .placeholder-class{
@@ -46,6 +47,7 @@ view,text,icon{
 
 ._fixed{
 	position:fixed;
+	z-index: 10000;
 }
 
 ._block{
@@ -89,5 +91,5 @@ view,text,icon{
 }
 
 .click-view{
-	background:rgb(239,239,244);
+	background:rgb(239,239,244) !important;
 }

@@ -1,16 +1,26 @@
+
 page{
 	min-height:100%;
 	background-color:rgb(239,239,244);
+	padding-top: 48px;
+	box-sizing:border-box;
 }
 
 view{
 	font-size:15px;
 }
 
+.searchBar{
+	width: 100%;
+	top:0;
+	height:48px;
+}
+
 .search{
 	background:rgb(239,239,244);
 	padding:0 30rpx;
-	border-radius:40rpx;
+	border-radius:16px;
+	flex-grow: 1;
 }
 
 .search-input{
@@ -18,16 +28,24 @@ view{
 	margin-left:10rpx;
 	color:#353535;
 	width:360rpx;
-	padding:10rpx 0;
+	padding:5px 0;
 	vertical-align: middle;
 	font-size:15px;
 
 }
 
-.work-place text{
+.work-place{
+	padding-right:12rpx;
+}
+
+.work-place text,.handleItem text{
 	vertical-align: middle;
 	margin-right:8rpx;
 	color:#353535;
+}
+
+.canclebox{
+	padding-left: 12rpx;
 }
 
 .cancle{
@@ -72,7 +90,7 @@ view{
 
 .complement-item{
 	box-sizing: border-box;
-	padding:0 30rpx;
+	padding:0 34rpx;
 }
 
 ._line{
@@ -86,5 +104,88 @@ view{
 }
 
 .complement-item text{
+	vertical-align: baseline;
+}
+
+.handleBar{
+	background: #fff;
+	width: 100%;
+	border-top:1rpx solid rgb(239,239,244);
+	border-bottom:1rpx solid rgb(239,239,244);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding:0 80rpx;
+	height: 38px;
+}
+
+.handleItem{
+	font-size: 14px;
+}
+
+.handleArea{
+	position: relative;
+	margin-top:38px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.itemArea{
+	/*height:300px;*/
+	background:#fff;
+	/*transform:translateY(-300px);*/
+	top:-300px;
+	position: absolute;
+}
+
+.itemArea-1{
+	height:265px;
+	width:100%;
+}
+.itemArea .leftArea{
+	height:100%;
+	float:left;
+	width:30%;
+	background:rgb(239,239,244);
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+}
+
+.itemArea .rightArea{
+	height:100%;
+	float:right;
+	width:70%;
+	padding:0 50px;
+	box-sizing: border-box;
+}
+
+.cidx-text{
+	font-size: 14px;
+	text-align: center;
+	display: block;
+	line-height: 40px;
+	height: 40px;
+}
+
+.changeCity{
+	height:35px;
+	line-height: 35px;
+	color:#888888;
+	box-sizing: border-box;
+	text-align: center;
+	background: #ffffff;
+}
+
+.icon-change{
+	vertical-align: baseline;
+	margin-right: 10px;
+}
+
+.changeCity text{
+	color:#353535;
 	vertical-align: baseline;
 }

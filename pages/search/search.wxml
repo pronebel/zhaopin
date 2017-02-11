@@ -1,5 +1,5 @@
-<view class="container-row" >
-	<view class="work-place" bindtap="toChooseWorkPlace">
+<view class="container-row _fixed searchBar" >
+	<view class="work-place" bindtap="toChooseWorkPlace" >
 		<text>{{workplace}}</text>
 		<view class="arrows-down"></view>
 	</view>
@@ -7,12 +7,12 @@
 		<icon type="search" size="15" color="#b2b2b2" />
 		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindinput="keyInput" value="{{jobName}}" />
 	</view>
-	<view>
-		<button class="cancle" bindtap="goBack" hover-start-time="10" hover-stay-time="200">取消</button>
+	<view class="canclebox" >
+		<button class="cancle" bindtap="goBack" hover-start-time="10" hover-stay-time="200" >取消</button>
 	</view>
 </view>
 
-<view class="container search-history" hidden="{{jobName!=''}}">
+<view class="container search-history" hidden="{{jobName!=''}}" >
 	<view>
 		<view class="placeicon-1"></view>
 		<text>历史搜索{{work}}</text>
@@ -57,7 +57,7 @@
 	</view>
 </view>
 
-<view class=" searchComplement" hidden="{{jobName==''}}">
+<view class=" searchComplement" hidden="{{jobName!=''}}">
 	<view class="complement-list">
 		<view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch" data-complement="前端">
 			<view class="_line" data-complement="前端">
@@ -74,3 +74,66 @@
 		
 	</view>
 </view>
+
+
+<view class="handleBar _fixed" hidden="{{jobName==''}}">
+	<view class="handleItem" bindtap="handleAnimate" data-index="1">
+		<text style="color:{{active[0]}}" data-index="1">{{workplace}}</text>
+		<view class="arrows-down" style="border-top: 8rpx solid {{active[0]}};" data-index="1"></view>
+	</view>
+	<view class="handleItem" bindtap="handleAnimate" data-index="2">
+		<text style="color:{{active[1]}}" data-index="2">职位筛选</text>
+		<view class="arrows-down" style="border-top: 8rpx solid {{active[1]}};" data-index="2"></view>
+	</view>
+	<view class="handleItem" bindtap="handleAnimate" data-index="3">
+		<text style="color:{{active[2]}}" data-index="3">公司筛选</text>
+		<view class="arrows-down" style="border-top: 8rpx solid {{active[2]}};" data-index="3"></view>
+	</view>
+</view>
+
+<view class="handleArea" style="height:{{handleHeight}}px;" hidden="{{jobName==''}}" >
+	<view class="itemArea itemArea-1" hidden="{{hidden[0]}}" animation="{{animationData}}">
+		<view class="leftArea">
+			<text class="cidx-text">{{workplace}}</text>
+		</view>
+		<view class="rightArea">
+			<picker-view value="{{value}}"
+			indicator-style="line-height:40px;height:40px;box-sizing:border-box;border-top:1px solid #888888;border-bottom: 1px solid #888888;" >
+		    	<picker-view-column style="height:265px;">
+		    		<view class="cidx-text">全{{workplace}}</view>
+		      		<view class="cidx-text" wx:for="{{citycidx}}">{{item.fullname}}</view>
+		    	</picker-view-column>
+		    </picker-view>
+		</view>
+		<view style="clear:both;"></view>
+		<view class="changeCity" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toChooseWorkPlace">
+			<icon class="iconfont icon-change"></icon>
+			<text>切换城市</text>
+		</view>
+	</view>
+	<view class="itemArea" hidden="{{hidden[1]}}" animation="{{animationData}}"></view>
+	<view class="itemArea" hidden="{{hidden[2]}}" animation="{{animationData}}"></view>
+
+	<view class="shade" hidden="{{!hidden[0]&&!hidden[1]&&!hidden[2]}}" style="height:{{handleHeight}}px;background:rgba(0,0,0,0.2)" bindtap="hideHandle"></view>
+</view>
+
+
+
+
+
+
+<!-- 
+<view>
+  <view>{{year}}年{{month}}月{{day}}日</view>
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+    </picker-view-column>
+  </picker-view>
+</view> -->
