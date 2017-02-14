@@ -24,7 +24,6 @@ App({
         var workplaceDistrict = wx.getStorageSync('workplaceDistrict');
         console.log(workplaceDistrict);
         this.globalData.workplaceDistrict = workplaceDistrict;
-
         var _this = this;
         wx.login({
             success: function() {
@@ -39,7 +38,6 @@ App({
                 })
             }
         })
-
     },
     globalData: {
         userInfo: null,
