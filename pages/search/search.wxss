@@ -10,6 +10,10 @@ view{
 	font-size:15px;
 }
 
+.search-hot view view,.search-hot view text,.search-history view view,.search-history view text{
+	vertical-align: middle;
+}
+
 .searchBar{
 	width: 100%;
 	top:0;
@@ -19,7 +23,7 @@ view{
 .search{
 	background:rgb(239,239,244);
 	padding:0 30rpx;
-	border-radius:16px;
+	border-radius:30px;
 	flex-grow: 1;
 }
 
@@ -27,7 +31,9 @@ view{
 	display: inline-block;
 	margin-left:10rpx;
 	color:#353535;
-	width:360rpx;
+	/*width:360rpx;*/
+	min-width: 250rpx;
+	max-width:320rpx;
 	padding:5px 0;
 	vertical-align: middle;
 	font-size:15px;
@@ -38,8 +44,17 @@ view{
 	padding-right:12rpx;
 }
 
+.work-place text{
+	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	white-space: nowrap;
+	max-width: 60px;
+	display: inline-block;
+}
+
+
 .work-place text,.handleItem text{
-	vertical-align: middle;
+	vertical-align: baseline;
 	margin-right:8rpx;
 	color:#353535;
 }
@@ -123,6 +138,7 @@ view{
 
 .handleItem{
 	font-size: 14px;
+	line-height:38px;
 }
 
 .handleArea{
@@ -136,13 +152,13 @@ view{
 	/*height:300px;*/
 	background:#fff;
 	/*transform:translateY(-300px);*/
-	top:-300px;
+	top:-400px;
 	position: absolute;
+	width:100%;
 }
 
 .itemArea-1{
 	height:265px;
-	width:100%;
 }
 .itemArea .leftArea{
 	height:100%;
@@ -159,7 +175,7 @@ view{
 	height:100%;
 	float:right;
 	width:70%;
-	padding:0 50px;
+	padding:0 100rpx;
 	box-sizing: border-box;
 }
 
@@ -188,4 +204,74 @@ view{
 .changeCity text{
 	color:#353535;
 	vertical-align: baseline;
+}
+
+.itemArea-2,.itemArea-3{
+	padding:0 30rpx 15px 30rpx;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+
+.itemArea-2 text,.itemArea-3 text{
+	font-size: 13px;
+	width: 100rpx;
+}
+
+.itemArea-2 slider{
+	margin: 5px 40rpx;
+	width:510rpx;
+	display: inline-block;
+}
+
+.itemArea-2 .wx-slider-handle{
+	width: 24px;
+	height: 24px;
+}
+
+.itemArea-2 .title,.itemArea-3 .title{
+	color:#000;
+	font-size:15px;
+}
+
+.itemArea-item{
+	margin-top:7px;
+}
+
+.itemArea .btn-view{
+	margin-top:7px;
+	margin-left:-10px;
+}
+
+.lxCheckboxGroup view{
+	display: inline-block;
+	margin-left: 10px;
+}
+
+/*.checkbox-item{
+	width: 85px;
+}*/
+
+.circle{
+	background:#F8F8F8;
+	border-radius:4px;
+	padding:0px 15rpx;
+	box-sizing: border-box;
+	height: 30px;
+	line-height: 30px;
+	border:1px solid rgba(0, 0, 0, 0.2);
+	margin-bottom:7px;
+	font-size: 13px;
+}
+
+.success_circle{
+	background:rgb(200,200,200);
+	border-radius:4px;
+	padding:0px 15rpx;
+	box-sizing: border-box;
+	height: 30px;
+	line-height: 30px;
+	border:1px solid rgba(0, 0, 0, 0.2);
+	color: #fff;
+	margin-bottom:7px;
+	font-size: 13px;
 }

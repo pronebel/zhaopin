@@ -1,24 +1,29 @@
-var app=getApp();
+var app = getApp();
 
 Page({
-	data:{
-		workplace:''
+	data: {
+		workplaceCity: ''
 	},
-	onLoad:function(){
+	onLoad: function() {
 		this.setData({
-			workplace:app.globalData.workplace
+			workplaceCity: app.globalData.workplaceCity
 		})
 	},
-	goBack:()=>{
+	goBack: () => {
 		wx.navigateBack({
-  			delta: 1
+			delta: 1
 		})
 	},
-	selectPlace:function(e){
+	selectPlace: function(e) {
 		this.setData({
-			workplace:e.target.dataset.place
+			workplaceCity: e.target.dataset.place
 		})
-		app.globalData.workplace=this.data.workplace;
-		wx.setStorageSync('workplace',app.globalData.workplace);
+		if (app.globalData.workplaceCity != this.data.workplaceCity) {
+			console.log('change place');
+			app.globalData.workplaceCity = this.data.workplaceCity;
+			wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
+			app.globalData.workplaceDistrict = this.data.workplaceCity;
+			wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+		}
 	}
 })

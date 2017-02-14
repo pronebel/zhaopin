@@ -3,7 +3,7 @@
 
 view,scroll-view{
 	font-family: '微软雅黑';
-	font-size: 28rpx;
+	font-size: 14px;
 	color:#353535;
 }
 
@@ -11,9 +11,9 @@ icon{
 	vertical-align: middle;
 }
 
-view,text,icon{
+/*view,text,icon{
 	vertical-align: middle;
-}
+}*/
 
 .container{
 	background: #ffffff;
@@ -91,5 +91,15 @@ view,text,icon{
 }
 
 .click-view{
-	background:rgb(239,239,244) !important;
+	background:rgba(0,0,0,0.2) !important;
+}
+
+.btn-default{
+	display: inline-block;
+	padding-left:15rpx;
+	padding-right:15rpx;
+	line-height:2.2;
+	font-size:13px;
+	color:#353535;
+	margin-left:10px;
 }
