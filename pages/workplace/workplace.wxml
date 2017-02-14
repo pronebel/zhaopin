@@ -3,7 +3,7 @@
 	<text>期待工作地点</text>
 </view>
 <view class="container">
-	<text class="hope-workplace">{{workplace}}</text>
+	<text class="hope-workplace">{{workplaceCity}}</text>
 	<icon type="success_no_circle" color="green" size="15" style="float:right" bindtap="goBack"></icon>
 </view>
 
