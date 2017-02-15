@@ -29,7 +29,7 @@ App({
             success: function() {
                 wx.getUserInfo({
                     success: function(res) {
-                        _this.globalData.userInfo = res.userInfo;
+                        _this.globalData.userInfoFromWX = res.userInfo;
                     },
                     fail: function() {
                         console.log('用户拒绝授权');
@@ -40,7 +40,7 @@ App({
         })
     },
     globalData: {
-        userInfo: null,
+        userInfoFromWX: null,
         location: '',
         workplaceCity: '',
         workplaceDistrict: '',

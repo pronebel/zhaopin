@@ -1,12 +1,12 @@
 <view>
-	<view class="box-top">
+	<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toUserInfo">
 		<view class="item">
-			<image mode="aspectFit" src="{{userInfo.avatarUrl }}" class="img"></image>
-			<text>{{userInfo.nickName}}</text>
+			<image mode="aspectFit" src="{{userInfoFromWX.avatarUrl }}" class="img"></image>
+			<text>{{userInfoFromWX.nickName}}</text>
 		</view>
 	</view>
 	<view class="box">
-		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" >
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toResume">
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class="iconfont icon-wodejianli"></icon>
 				<text>简历</text>
@@ -19,7 +19,7 @@
 	</view>
 	<view class="box">
 		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
-			<icon class="iconfont icon-shezhi"></icon>
+			<icon class="iconfont icon-config"></icon>
 			<text>设置</text>
 		</view>
 	</view>

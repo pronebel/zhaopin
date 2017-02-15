@@ -1,23 +1,16 @@
-var app=getApp();
+var app = getApp();
 
 Page({
-	data:{
-		userinfo:{}
+	data: {
+
 	},
-	toSearch:()=>{
+	toSearch: () => {
 		wx.navigateTo({
-			url:'../search/search'
+			url: '../search/search'
 		})
 	},
 	onLoad: function() {
 		var that = this
-		//调用应用实例的方法获取全局数据
-		// app.getUserInfo(function(  userInfo){
-		// 	//更新数据
-		// 	that.setData({
-		// 		userInfo:userInfo
-		// 	})
-		// })
+
 	}
 })
-

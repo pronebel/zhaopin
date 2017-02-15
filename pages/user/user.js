@@ -2,11 +2,21 @@ var app = getApp();
 
 Page({
 	data: {
-		userInfo: {}
+		userInfoFromWX: {}
 	},
 	onLoad: function() {
 		this.setData({
-			userInfo: app.globalData.userInfo
+			userInfoFromWX: app.globalData.userInfoFromWX
+		})
+	},
+	toResume: function() {
+		wx.navigateTo({
+			url: '../resume/resume'
+		})
+	},
+	toUserInfo: function() {
+		wx.navigateTo({
+			url: '../userInfo/userInfo'
 		})
 	}
 })

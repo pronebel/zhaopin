@@ -62,6 +62,10 @@ icon{
 	float:right;
 }
 
+._relative{
+	position: relative;
+}
+
 .arrows-down{
 	display: inline-block;
 	vertical-align: middle;
@@ -92,7 +96,7 @@ icon{
 
 .click-view{
 	background:rgba(0,0,0,0.2) !important;
-	background:rgb(239,239,244) !important;
+	/*background:rgb(239,239,244) !important;*/
 }
 
 .btn-default{

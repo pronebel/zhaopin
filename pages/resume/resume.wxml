@@ -1,0 +1,33 @@
+<view>
+	<view class="box">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>简历1</text>
+				<icon class="iconfont icon-right"></icon>
+			</view>
+		</view>
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>简历2</text>
+				<icon class="iconfont icon-right"></icon>
+			</view>
+		</view>
+	</view>
+	<view class='box'>
+		<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='setDefaultResume'>
+				<text>默认投递简历</text>
+				<icon class="iconfont icon-right"></icon>
+				<text class="default-resume-text">{{array[index]}}</text>
+			</view>
+		</picker>
+	</view>
+	<view class='box'>
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<text>新建简历</text>
+			<icon class="iconfont icon-right"></icon>
+		</view>
+	</view>
+</view>
+
+
