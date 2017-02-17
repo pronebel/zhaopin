@@ -18,5 +18,15 @@ Page({
 		wx.navigateTo({
 			url: '../userInfo/userInfo'
 		})
+	},
+	toCollect: function() {
+		wx.navigateTo({
+			url: '../collect/collect'
+		})
+	},
+	toConfig: function() {
+		wx.navigateTo({
+			url: '../config/config'
+		})
 	}
 })

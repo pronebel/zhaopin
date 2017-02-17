@@ -139,10 +139,6 @@ const items = {
 		text: '房地产',
 		type: 'circle'
 	}, {
-		value: '物流运输',
-		text: '物流运输',
-		type: 'circle'
-	}, {
 		value: '新能源',
 		text: '新能源',
 		type: 'circle'

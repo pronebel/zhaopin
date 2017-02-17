@@ -15,7 +15,15 @@ function formatTime(date) {
     var second = date.getSeconds()
 
 
-    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    return [year, month, day].map(formatNumber).join('-');
 }
 
 function formatNumber(n) {
@@ -172,6 +180,7 @@ function inArray(value, array) {
 
 module.exports = {
     formatTime: formatTime,
+    formatDate: formatDate,
     getLocationAddress: getLocationAddress,
     getCityList: getCityList,
     getDistrictByCityName: getDistrictByCityName,

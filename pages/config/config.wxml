@@ -1,0 +1,24 @@
+<view>
+	<view class="box">
+		<view class="item" >
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>简历公开</text>
+				<switch checked="{{config.resumeOpen}}" bindchange="resumeSwitchChange" class="_right"/>
+			</view>
+		</view>
+	</view>
+	<view class="box">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>关于</text>
+				<icon class="iconfont icon-right"></icon>
+			</view>
+		</view>
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>用户协议</text>
+				<icon class="iconfont icon-right"></icon>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,29 +1,37 @@
 <view class="_relative" style="height:100%;">
-	<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+	<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='chooseImg'>
 		<view class="item">
-			<image mode="aspectFit" src="{{userInfoFromWX.avatarUrl }}" class="img"></image>
+			<image mode="aspectFit" src="{{userInfo.imgUrl || userInfoFromWX.avatarUrl }}" class="img"></image>
 		</view>
 		
 	</view>
-	<view class="box">
+	<view class="box">	
 		<view class="item">
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
 				<input value="{{userInfo.name}}" placeholder="姓名" placeholder-class="placeholder-class" />
 			</view>
 		</view>
-		<view class="item">
-			<view style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.sex}}" placeholder="性别" placeholder-class="placeholder-class" />
+		<picker bindchange="bindPickerChange" range="{{sexArray}}">
+			<view class="item">
+				<view style="border-bottom:1rpx solid rgb(239,239,244)">
+					<icon class='iconfont icon-circle-edit'></icon>
+					<!-- <input value="{{userInfo.sex}}" placeholder="性别" placeholder-class="placeholder-class" /> -->
+					<view class="inputMsg placeholder-class" wx:if="{{userInfo.sex==''}}">性别</view>
+					<view class="inputMsg" wx:else>{{userInfo.sex}}</view>
+				</view>
 			</view>
-		</view>
-		<view class="item">
-			<view style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.birth}}" placeholder="出生年月" placeholder-class="placeholder-class" />
+		</picker>
+		<picker bindchange="bindDatePickerChange" value="{{defaultDate}}" mode="date" start="1985-01-01" end="{{now}}">
+			<view class="item">
+				<view style="border-bottom:1rpx solid rgb(239,239,244)">
+					<icon class='iconfont icon-circle-edit'></icon>
+					<!-- <input value="{{userInfo.birth}}" placeholder="出生日期" placeholder-class="placeholder-class" /> -->
+					<view class="inputMsg placeholder-class" wx:if="{{userInfo.birth==''}}">出生日期</view>
+					<view class="inputMsg" wx:else>{{userInfo.birth}}</view>
+				</view>
 			</view>
-		</view>
+		</picker>
 	</view>
 
 	<view class='box'>
@@ -41,7 +49,7 @@
 		</view>
 	</view>
 
-	<view class="footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
 		<view class='item'>
 			<icon class="iconfont icon-baocun"></icon>
 			<text>保存</text>

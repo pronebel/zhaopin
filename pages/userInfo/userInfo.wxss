@@ -43,7 +43,7 @@ page{
 	vertical-align: middle;
 }
 
-input{
+input,.inputMsg{
 	display: inline-block;
 	vertical-align: middle;
 	width: calc(100% - 40px);
@@ -54,4 +54,8 @@ input{
 	bottom:60px;
 	width: 100%;
 	background:#fff;
+}
+
+._footer{
+	margin-top:40px;
 }

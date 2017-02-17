@@ -9,7 +9,9 @@
     "pages/workplace/workplace",
     "pages/discover/discover",
     "pages/userInfo/userInfo",
-    "pages/resume/resume"
+    "pages/resume/resume",
+    "pages/collect/collect",
+    "pages/config/config"
   ],
   "window": {
     "backgroundTextStyle": "dark",

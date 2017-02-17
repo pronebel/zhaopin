@@ -88,7 +88,7 @@
 		<view class="itemArea-item">
 			<view style="margin-bottom:10px;">
 				<text class="title">月薪范围</text>			
-				<text class="title" style="color:'#1aad19'; margin-left:10px">({{lower}} - {{upper}}k)</text>
+				<text class="title" style="color:#1aad19; margin-left:10px">({{lower}} - {{upper}}k)</text>
 			</view>
 			<view>
 				<text>最低月薪</text>

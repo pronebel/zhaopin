@@ -11,18 +11,15 @@ page{
 
 .box-top{
 	padding:10px 30rpx;
-}
-.img{
-	width: 60px;
-	height: 60px;
-	vertical-align: middle;
-	margin-right: 10px;
+	margin-top:0px;
 }
 
 .iconfont{
-	color:#353535;
-	vertical-align: baseline;
-	margin-right: 7px;
+	float: right;
+	line-height: 40px;
+	color:rgb(72,194,61);
+	vertical-align: middle;
+	font-size: 12px;
 }
 
 .box .item{
@@ -35,14 +32,6 @@ page{
 	line-height: 40px;
 }
 
-.box .item .iconfont{
-	line-height: 40px;
-}
-
-.icon-right{
-	float: right;
-	line-height: 40px;
-	color:rgb(72,194,61);
-	vertical-align: middle;
-	font-size: 12px;
+._right{
+	margin-top:4px;
 }
