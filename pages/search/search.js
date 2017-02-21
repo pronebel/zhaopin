@@ -44,7 +44,8 @@ Page({
 		var res = wx.getSystemInfoSync();
 		this.setData({
 			handleHeight: res.windowHeight - 48 - 38,
-			areaHeight: (res.windowHeight - 48) / 3 * 2 - 38
+			areaHeight: (res.windowHeight - 48) / 3 * 2 - 38,
+			windowHeight: res.windowHeight
 		})
 	},
 	changeDistrict: function(e) {
@@ -267,5 +268,10 @@ Page({
 		this.setData({
 			checkedValues: checkedValues
 		});
+	},
+	toJobDetail: function() {
+		wx.navigateTo({
+			url: '../jobDetail/jobDetail'
+		})
 	}
 })

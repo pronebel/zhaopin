@@ -1,0 +1,113 @@
+<view>
+	<view class="box">
+		<view class="item-2 line">
+			<view class="title">
+				<text class="jobName">{{job.jobName}}</text>
+				<text class="salary">[{{job.salary}}]</text>
+				<icon wx:if="{{star}}" class="icon-star-fill iconfont iconMR0" bindtap="star"></icon>
+				<icon wx:else class="icon-star iconfont iconMR0" bindtap="star"></icon>
+			</view>
+			<view class="icon-text">
+				<view>
+					<icon class="iconfont icon-place"></icon>
+					<text>{{job.workplace.city}}</text>
+				</view>
+				<view>
+					<icon class='iconfont icon-degree'></icon>
+					<text>{{job.degreeLimit}}</text>
+				</view>
+				<view>
+					<icon class="iconfont icon-time"></icon>
+					<text>{{job.workType}}</text>
+				</view>
+			</view>
+			<view class="welfarebox">
+				<view class="welfare">
+					<text>职位诱惑:</text>
+				</view>
+				<view class="welfareList">
+					<text class="" wx:for="{{job.welfare}}" wx:if="{{index!==job.welfare.length-1}}">{{item}},</text>
+					<text class="" wx:for="{{job.welfare}}" wx:if="{{index==job.welfare.length-1}}">{{item}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="item-2 flexbox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class="logo">
+        		<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+      		</view>
+      		<view class="companyMsg">
+      			<view style="color:#353535;font-size:14px;">{{job.company.short}}</view>
+      				<text>{{job.company.type}}/</text>
+      				<text>{{job.company.financle}}/</text>
+      				<text>{{job.company.scale}}</text>
+      				<text></text>  			
+      		</view>	
+      		<icon class="iconfont icon-right iconH iconMR0"></icon>
+		</view>
+	</view>
+	<view class='box'>
+		<view class="item">
+			<view class="item-top">
+				<icon class="iconfont icon-job"></icon>
+				<text>职位描述</text>
+			</view>
+			<view style="margin-bottom:10px;">
+				<text>岗位职责</text>
+			</view>
+			<view wx:for="{{job.duties}}" style="margin-bottom:10px;">
+				<text>{{index+1}}.{{item}}</text>
+			</view>
+		</view>
+	</view>
+	<view class='box box-workplace'>
+		<view class="item">
+			<view style="padding:0px 30rpx">
+				<view class="item-top">
+					<icon class='iconfont icon-place'></icon>
+					<text>工作地点</text>
+				</view>
+			</view>
+			<view class="flexbox" style="justify-content:space-between" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+				<view style="flex-grow:1;font-size:12px;">{{job.workplace.full}}</view>
+				<view class="iconfont icon-right iconMR0" style="font-size:15px"></view>
+			</view>
+		</view>
+	</view>
+	<view class='box'>
+		<view class="item">
+			<view class='item-top'>
+				<icon class="iconfont icon-fabuzhe"></icon>
+				<text>职位发布者</text>
+			</view>
+			<view class="flexbox">
+				<view>
+					<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
+				</view>
+				<view class="publisherDetail">
+					<text class="_block publisherName">it-hr</text>
+					<text class="_block">所属部门</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class='box'>
+		<view class="item">
+			<view class='item-top'>
+				<icon class="iconfont icon-edit1"></icon>
+				<text>面试评价</text>
+			</view>
+			
+		</view>
+	</view>
+
+	<view class='box box-last'>
+	</view>
+	
+	<view class='box box-last box-fixed'>
+		<view class="item footer" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<icon class='iconfont icon-send'></icon>
+			发送简历
+		</view>
+	</view>
+</view>

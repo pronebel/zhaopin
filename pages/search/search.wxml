@@ -1,157 +1,213 @@
-<view class="container-row _fixed searchBar" >
-	<view class="work-place" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}">
-		<text>{{workplaceCity}}</text>
-		<!-- <view class="arrows-down"></view> -->
-	</view>
-	<view class="search" >
-		<icon type="search" size="15" color="#b2b2b2" />
-		<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindfocus="showSuggestions" bindinput="keyInput" value="{{searchMsg}}" />
-	</view>
-	<view class="canclebox" wx:if="{{jobList.length==0 || showSuggestions}}">
-		<button class="cancle" bindtap="cancle" hover-start-time="10" hover-stay-time="200" >取消</button>
-	</view>
-</view>
 
-<view class="container search-history" hidden="{{searchMsg!='' || searchHistory.length==0 || !showSuggestions}}" >
-	<view>
-		<view class="placeicon-1"></view>
-		<text>历史搜索</text>
-		<text class="handle">清除</text>
+	<view class="container-row _fixed searchBar" >
+		<view class="work-place" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}">
+			<text>{{workplaceCity}}</text>
+			<!-- <view class="arrows-down"></view> -->
+		</view>
+		<view class="search" >
+			<icon type="search" size="15" color="#b2b2b2" />
+			<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindfocus="showSuggestions" bindinput="keyInput" value="{{searchMsg}}" />
+		</view>
+		<view class="canclebox" wx:if="{{jobList.length==0 || showSuggestions}}">
+			<button class="cancle" bindtap="cancle" hover-start-time="10" hover-stay-time="200" >取消</button>
+		</view>
 	</view>
-	<view class="history-list">
-		<button  class="history-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHistory}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
-		</button>
-	</view>
-</view>
 
-<view class="container search-hot" hidden="{{searchMsg!='' || !showSuggestions}}">
-	<view>
-		<view class="placeicon-2"></view>
-		<text>热门搜索</text>
-		<text class="handle">换一批</text>
+	<view class="container search-history" hidden="{{searchMsg!='' || searchHistory.length==0 || !showSuggestions}}" >
+		<view>
+			<view class="placeicon-1"></view>
+			<text>历史搜索</text>
+			<text class="handle">清除</text>
+		</view>
+		<view class="history-list">
+			<button  class="history-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHistory}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
+			</button>
+		</view>
 	</view>
-	<view class="hot-list"> 
-		<button  class="hot-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHistory}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
-		</button>	
-	</view>
-</view>
 
-<view class="searchComplement" hidden="{{searchSuggestions.length==0 || !showSuggestions}}">
-	<view class="complement-list">
-		<view wx:for="{{searchSuggestions}}">
-			<view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch"  data-complement="{{item}}">
-				<view class="_line" data-complement="{{item}}">
-					<icon type="search" size="15" color="#b2b2b2" data-complement="{{item}}" />
-					<text data-complement="{{item}}">{{item}}</text>
+	<view class="container search-hot" hidden="{{searchMsg!='' || !showSuggestions}}">
+		<view>
+			<view class="placeicon-2"></view>
+			<text>热门搜索</text>
+			<text class="handle">换一批</text>
+		</view>
+		<view class="hot-list"> 
+			<button  class="hot-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHistory}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
+			</button>	
+		</view>
+	</view>
+
+	<view class="searchComplement" hidden="{{searchSuggestions.length==0 || !showSuggestions}}">
+		<view class="complement-list">
+			<view wx:for="{{searchSuggestions}}">
+				<view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch"  data-complement="{{item}}">
+					<view class="_line" data-complement="{{item}}">
+						<icon type="search" size="15" color="#b2b2b2" data-complement="{{item}}" />
+						<text data-complement="{{item}}">{{item}}</text>
+					</view>
+				</view>
+			</view>	
+		</view>
+	</view>
+
+
+	<view class="handleBar _fixed" wx:if="{{jobList.length>0 && !showSuggestions}}">
+		<view class="handleItem" bindtap="handleAnimate" data-index="1">
+			<text style="color:{{active[0]}}" data-index="1">{{workplaceDistrict}}</text>
+			<view class="arrows-down" style="border-top: 8rpx solid {{active[0]}};" data-index="1"></view>
+		</view>
+		<view class="handleItem" bindtap="handleAnimate" data-index="2">
+			<text style="color:{{active[1]}}" data-index="2">职位筛选</text>
+			<view class="arrows-down" style="border-top: 8rpx solid {{active[1]}};" data-index="2"></view>
+		</view>
+		<view class="handleItem" bindtap="handleAnimate" data-index="3">
+			<text style="color:{{active[2]}}" data-index="3">公司筛选</text>
+			<view class="arrows-down" style="border-top: 8rpx solid {{active[2]}};" data-index="3"></view>
+		</view>
+	</view>
+
+	<!-- style="height:{{handleHeight}}px;" -->
+	<view class="handleArea"  wx:if="{{jobList.length>0 && !showSuggestions}}" >
+		<view class="itemArea itemArea-1" style="height:{{areaHeight-35}}px" hidden="{{hidden[0]}}" animation="{{animationData}}">
+			<view class="leftArea">
+				<text class="cidx-text">{{workplaceCity}}</text>
+			</view>
+			<view class="rightArea">
+				<picker-view  bindchange="changeDistrict" indicator-style="line-height:40px;height:40px;box-sizing:border-box;border-top:1px solid #888888;border-bottom: 1px solid #888888;" >
+			    	<picker-view-column style="height:{{areaHeight-35}}px">
+			    		<view class="cidx-text">{{workplaceCity}}</view>
+			      		<view class="cidx-text" wx:for="{{citycidx}}">{{item.fullname}}</view>
+			    	</picker-view-column>
+			    </picker-view>
+			</view>
+			<view style="clear:both;"></view>
+			<view class="changeCity" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toChooseWorkPlace">
+				<icon class="iconfont icon-change"></icon>
+				<text>切换城市</text>
+			</view>
+		</view>
+		<view class="itemArea itemArea-2" style="height:{{areaHeight}}px" hidden="{{hidden[1]}}" animation="{{animationData}}">
+			<view class="itemArea-item">
+				<view style="margin-bottom:10px;">
+					<text class="title">月薪范围</text>			
+					<text class="title" style="color:#1aad19; margin-left:10px">({{lower}} - {{upper}}k)</text>
+				</view>
+				<view>
+					<text>最低月薪</text>
+					<slider min="1" max="{{upper}}" value="{{lower}}" show-value="true" bindchange="changeLower"></slider>
+				</view>
+				<view>
+					<text>最高月薪</text>
+					<slider min="{{lower}}" max="50" value="{{upper}}" show-value="true" bindchange="changeUpper"></slider>
 				</view>
 			</view>
-		</view>	
-	</view>
-</view>
-
-
-<view class="handleBar _fixed" wx:if="{{jobList.length>0 && !showSuggestions}}">
-	<view class="handleItem" bindtap="handleAnimate" data-index="1">
-		<text style="color:{{active[0]}}" data-index="1">{{workplaceDistrict}}</text>
-		<view class="arrows-down" style="border-top: 8rpx solid {{active[0]}};" data-index="1"></view>
-	</view>
-	<view class="handleItem" bindtap="handleAnimate" data-index="2">
-		<text style="color:{{active[1]}}" data-index="2">职位筛选</text>
-		<view class="arrows-down" style="border-top: 8rpx solid {{active[1]}};" data-index="2"></view>
-	</view>
-	<view class="handleItem" bindtap="handleAnimate" data-index="3">
-		<text style="color:{{active[2]}}" data-index="3">公司筛选</text>
-		<view class="arrows-down" style="border-top: 8rpx solid {{active[2]}};" data-index="3"></view>
-	</view>
-</view>
-
-<view class="handleArea" style="height:{{handleHeight}}px;" wx:if="{{jobList.length>0 && !showSuggestions}}" >
-	<view class="itemArea itemArea-1" style="height:{{areaHeight-35}}px" hidden="{{hidden[0]}}" animation="{{animationData}}">
-		<view class="leftArea">
-			<text class="cidx-text">{{workplaceCity}}</text>
-		</view>
-		<view class="rightArea">
-			<picker-view  bindchange="changeDistrict" indicator-style="line-height:40px;height:40px;box-sizing:border-box;border-top:1px solid #888888;border-bottom: 1px solid #888888;" >
-		    	<picker-view-column style="height:{{areaHeight-35}}px">
-		    		<view class="cidx-text">{{workplaceCity}}</view>
-		      		<view class="cidx-text" wx:for="{{citycidx}}">{{item.fullname}}</view>
-		    	</picker-view-column>
-		    </picker-view>
-		</view>
-		<view style="clear:both;"></view>
-		<view class="changeCity" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toChooseWorkPlace">
-			<icon class="iconfont icon-change"></icon>
-			<text>切换城市</text>
-		</view>
-	</view>
-	<view class="itemArea itemArea-2" style="height:{{areaHeight}}px" hidden="{{hidden[1]}}" animation="{{animationData}}">
-		<view class="itemArea-item">
-			<view style="margin-bottom:10px;">
-				<text class="title">月薪范围</text>			
-				<text class="title" style="color:#1aad19; margin-left:10px">({{lower}} - {{upper}}k)</text>
-			</view>
-			<view>
-				<text>最低月薪</text>
-				<slider min="1" max="{{upper}}" value="{{lower}}" show-value="true" bindchange="changeLower"></slider>
-			</view>
-			<view>
-				<text>最高月薪</text>
-				<slider min="{{lower}}" max="50" value="{{upper}}" show-value="true" bindchange="changeUpper"></slider>
-			</view>
-		</view>
-		<view class="itemArea-item">
-			<view>
-				<text class="title">学历要求</text>
-			</view>
-			<view class="btn-view">
-				<view class="lxCheckboxGroup">
-				    <view wx:for="{{items.educations}}" data-index="{{index}}" data-value="educations" size="20" bindtap="bindCheckbox">
-				        <icon type="{{item.type}}" size="20"/>
-				        <text>{{item.text}}</text>
-				    </view>
+			<view class="itemArea-item">
+				<view style="margin-top:10px;">
+					<text class="title">学历要求</text>
+				</view>
+				<view class="btn-view">
+					<view class="lxCheckboxGroup">
+					    <view wx:for="{{items.educations}}" data-index="{{index}}" data-value="educations" size="20" bindtap="bindCheckbox">
+					        <icon type="{{item.type}}" size="20"/>
+					        <text>{{item.text}}</text>
+					    </view>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="itemArea-item">
-			<view>
-				<text class="title">工作性质</text>
-			</view>
-			<view class="btn-view">
-				<view class="lxCheckboxGroup">
-				    <view wx:for="{{items.types}}" data-index="{{index}}" data-value="types" size="20" bindtap="bindCheckbox">
-				        <icon type="{{item.type}}" size="20"/>
-				        <text>{{item.text}}</text>
-				    </view>
+			<view class="itemArea-item">
+				<view style="margin-top:10px;">
+					<text class="title">工作性质</text>
 				</view>
-			</view>
-		</view>
-	</view>
-	<view class="itemArea itemArea-3" style="min-height:{{areaHeight}}px" hidden="{{hidden[2]}}" animation="{{animationData}}">
-		<view class="itemArea-item">
-			<view>
-				<text class="title">融资阶段</text>
-			</view>
-			<view class="btn-view">
-				<view class="lxCheckboxGroup">
-				    <view wx:for="{{items.financle}}" data-index="{{index}}" data-value="financle"  bindtap="bindCheckbox" class="checkbox-item {{item.type}}" >
-				       	{{item.text}}
-				    </view>
+				<view class="btn-view">
+					<view class="lxCheckboxGroup">
+					    <view wx:for="{{items.types}}" data-index="{{index}}" data-value="types" size="20" bindtap="bindCheckbox">
+					        <icon type="{{item.type}}" size="20"/>
+					        <text>{{item.text}}</text>
+					    </view>
+					</view>
 				</view>
 			</view>
 		</view>
-		<view class="itemArea-item">
-			<view>
-				<text class="title">行业领域</text>
+		<view class="itemArea itemArea-3" style="min-height:{{areaHeight}}px" hidden="{{hidden[2]}}" animation="{{animationData}}">
+			<view class="itemArea-item">
+				<view>
+					<text class="title">融资阶段</text>
+				</view>
+				<view class="btn-view">
+					<view class="lxCheckboxGroup">
+					    <view wx:for="{{items.financle}}" data-index="{{index}}" data-value="financle"  bindtap="bindCheckbox" class="checkbox-item {{item.type}}" >
+					       	{{item.text}}
+					    </view>
+					</view>
+				</view>
 			</view>
-			<view class="btn-view">
-				<view class="lxCheckboxGroup">
-				    <view wx:for="{{items.industry}}" data-index="{{index}}" data-value="industry" size="18" bindtap="bindCheckbox" class="checkbox-item {{item.type}}" >
-				       	{{item.text}}
-				    </view>
+			<view class="itemArea-item">
+				<view>
+					<text class="title">行业领域</text>
+				</view>
+				<view class="btn-view">
+					<view class="lxCheckboxGroup">
+					    <view wx:for="{{items.industry}}" data-index="{{index}}" data-value="industry" size="18" bindtap="bindCheckbox" class="checkbox-item {{item.type}}" >
+					       	{{item.text}}
+					    </view>
+					</view>
 				</view>
 			</view>
 		</view>
+
+		<view class="shade" hidden="{{!hidden[0]&&!hidden[1]&&!hidden[2]}}" style="height:{{handleHeight}}px;background:rgba(0,0,0,0.2)" bindtap="hideHandle"></view>
+
 	</view>
 
-	<view class="shade" hidden="{{!hidden[0]&&!hidden[1]&&!hidden[2]}}" style="height:{{handleHeight}}px;background:rgba(0,0,0,0.2)" bindtap="hideHandle"></view>
-</view>
+	<view wx:if="{{jobList.length>0}}" class="jobList">
+		<view class='list'>
+			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
+			    <view class="logo">
+			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+			    </view>
+	      		<view class="details">
+	        		<view class="_block">
+				        <text class="job-title">web前端</text>
+				        <text class="job-salary">8k-10k</text>
+				        <view style="clear:both"></view>
+			        </view>
+			        <text class="company-name">公司名</text>
+			        <view class="_block translucence-msg" style="margin-top:10rpx">
+				        <text class="work-place">深圳</text>
+				        <text class="internship">有实习经历</text>
+				        <text class="degree">本科</text>
+				        <text class="_right release-date">01月11日</text>
+			        </view>
+			        <view class="_block translucence-msg" style="margin-top:6rpx">
+			        	<text class="scale">100-500人</text>
+			         	<text class="company-type">移动互联网</text>
+			        </view>
+	      		</view>
+	      		<view style="clear:both;"></view>
+	    	</view>
+	    	<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
+			    <view class="logo">
+			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+			    </view>
+	      		<view class="details">
+	        		<view class="_block">
+				        <text class="job-title">web前端</text>
+				        <text class="job-salary">8k-10k</text>
+				        <view style="clear:both"></view>
+			        </view>
+			        <text class="company-name">公司名</text>
+			        <view class="_block translucence-msg" style="margin-top:10rpx">
+				        <text class="work-place">深圳</text>
+				        <text class="internship">有实习经历</text>
+				        <text class="degree">本科</text>
+				        <text class="_right release-date">01月11日</text>
+			        </view>
+			        <view class="_block translucence-msg" style="margin-top:6rpx">
+			        	<text class="scale">100-500人</text>
+			         	<text class="company-type">移动互联网</text>
+			        </view>
+	      		</view>
+	      		<view style="clear:both;"></view>
+	    	</view>
+	    </view>
+	</view>

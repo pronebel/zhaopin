@@ -142,10 +142,11 @@ view{
 }
 
 .handleArea{
-	position: relative;
+	position: fixed;
 	margin-top:38px;
 	overflow: hidden;
-	background: #fff;
+	
+	width:100%;
 }
 
 .itemArea{
@@ -249,6 +250,7 @@ view{
 
 .itemArea-2 .lxCheckboxGroup view{
 	margin-bottom:10px;
+	margin-top:10px;
 }
 
 /*.checkbox-item{
@@ -275,4 +277,72 @@ view{
 	color: #fff;
 	margin-bottom:7px;
 	font-size: 11px;
+}
+
+
+
+.list{
+	width:100%;
+}
+
+.item{
+	width:100%;
+	padding:25rpx 25rpx 0 25rpx;
+	box-sizing: border-box;
+}
+
+.logo{
+	float:left;
+	width:175rpx;
+	/*background:rgba(0,0,0,0.1);*/
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	height:100%;
+}
+
+.details{
+	float:left;
+	width:525rpx;
+	height:100%;
+	padding-bottom: 20rpx;
+	border-bottom: 1rpx solid rgba(50,40,50,0.1);
+}
+
+.job-title{
+	font-weight:700;
+	font-size: 30rpx;
+	float:left;
+}
+
+.job-salary{
+	font-weight:700;
+	color:#ff9a00;
+	font-weight:600;
+	float:right;
+}
+
+.company-name{
+	color:#353535;
+}
+
+.translucence-msg{
+	color: #888888;
+}
+
+.work-place{
+
+}
+
+.internship,.degree,.company-type{
+	margin-left:15rpx;
+}
+
+.release-date{
+	color:#b2b2b2;
+}
+
+.jobList{
+	background: #fff;
+	margin-top: 38px;
 }
