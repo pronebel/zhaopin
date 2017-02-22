@@ -37,7 +37,9 @@ function formatNumber(n) {
  */
 function getLocationAddress(app) {
     wx.getLocation({
+  //      type:'gcj02',
         success: function(res) {
+            console.log(res);
             var location = res.latitude + ',' + res.longitude;
             wx.request({
                 url: 'http://apis.map.qq.com/ws/geocoder/v1/',

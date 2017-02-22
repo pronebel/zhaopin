@@ -16,8 +16,17 @@ Page({
 				province: '广东',
 				city: '深圳',
 				county: '南山区',
-				full: '广东省深圳市南山区高新科技园创维半导体大厦'
+				full: '广东省深圳市南山区高新科技园创维半导体大厦',
+				location: {
+					latitude: 23.55788,
+					longitude: 116.32807
+				}
 			},
+			careertalk: [{
+				school: '深圳大学',
+				date: '2017-02-20',
+				time: '13:00'
+			}],
 			duties: ['负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优'],
 			internshipLimit: '没要求',
 			degreeLimit: '本科',
@@ -42,6 +51,15 @@ Page({
 			title: title,
 			icon: 'success',
 			duration: 1500
+		})
+	},
+	openMap: function() {
+		const latitude = parseFloat(this.data.job.workplace.location.latitude);
+		const longitude = parseFloat(this.data.job.workplace.location.longitude);
+		wx.openLocation({
+			latitude: latitude,
+			longitude: longitude,
+			scale: 16
 		})
 	}
 

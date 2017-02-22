@@ -25,21 +25,23 @@ view{
 	padding:0 30rpx;
 	border-radius:30px;
 	flex-grow: 1;
+	display: flex;
 }
 
 .search-input{
 	display: inline-block;
 	margin-left:10rpx;
 	color:#353535;
-	/*width:360rpx;*/
 	min-width: 250rpx;
-	max-width:320rpx;
 	padding:5px 0;
-	vertical-align: middle;
 	font-size:15px;
-
+	flex-grow:1;
 }
 
+.icon-search{
+	color:#888888;
+	line-height:75rpx;
+}
 .work-place{
 	padding-right:12rpx;
 }

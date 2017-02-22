@@ -67,10 +67,19 @@
 					<text>工作地点</text>
 				</view>
 			</view>
-			<view class="flexbox" style="justify-content:space-between" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class="flexbox" style="justify-content:space-between" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='openMap'>
 				<view style="flex-grow:1;font-size:12px;">{{job.workplace.full}}</view>
 				<view class="iconfont icon-right iconMR0" style="font-size:15px"></view>
 			</view>
+		</view>
+	</view>
+	<view class='box'>
+		<view class="item">
+			<view class='item-top'>
+				<icon class="iconfont icon-careertalk"></icon>
+				<text>宣讲会</text>
+			</view>
+			
 		</view>
 	</view>
 	<view class='box'>

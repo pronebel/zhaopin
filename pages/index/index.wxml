@@ -1,5 +1,5 @@
 
-<view>
+<view bindtouchmove="touchmove" bindtouchend='touchend'>
   <view class="container-column">
     <image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
     <view class="search" bindtap="toSearch">
@@ -9,7 +9,7 @@
     </view>
   </view>
   <view class="list">
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>
@@ -33,7 +33,7 @@
       </view>
       <view style="clear:both;"></view>
     </view>
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>
@@ -57,7 +57,7 @@
       </view>
       <view style="clear:both;"></view>
     </view>
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>
@@ -81,7 +81,7 @@
       </view>
       <view style="clear:both;"></view>
     </view>
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>
@@ -105,7 +105,7 @@
       </view>
       <view style="clear:both;"></view>
     </view>
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>
@@ -129,7 +129,7 @@
       </view>
       <view style="clear:both;"></view>
     </view>
-    <view class="item">
+    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
       <view class="logo">
         <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       </view>

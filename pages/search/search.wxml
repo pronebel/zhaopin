@@ -5,7 +5,8 @@
 			<!-- <view class="arrows-down"></view> -->
 		</view>
 		<view class="search" >
-			<icon type="search" size="15" color="#b2b2b2" />
+			<view class="iconfont icon-search"></view>
+			<!-- <icon type="search" size="15" color="#b2b2b2" /> -->
 			<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindfocus="showSuggestions" bindinput="keyInput" value="{{searchMsg}}" />
 		</view>
 		<view class="canclebox" wx:if="{{jobList.length==0 || showSuggestions}}">
@@ -159,7 +160,7 @@
 
 	</view>
 
-	<view wx:if="{{jobList.length>0}}" class="jobList">
+	<view wx:if="{{jobList.length>0 && !showSuggestions}}" class="jobList">
 		<view class='list'>
 			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
 			    <view class="logo">
