@@ -1,8 +1,9 @@
 <view>
 	<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toUserInfo">
 		<view class="item">
-			<image mode="aspectFit" src="{{userInfoFromWX.avatarUrl }}" class="img"></image>
-			<text>{{userInfoFromWX.nickName}}</text>
+			<image mode="aspectFit" src="{{userInfo.imgUrl || userInfoFromWX.avatarUrl }}" class="img"></image>
+			<text>{{userInfo.name || userInfoFromWX.nickName}}</text>
+			<icon class="iconfont icon-right"></icon>
 		</view>
 	</view>
 	<view class="box">

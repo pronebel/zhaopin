@@ -54,6 +54,13 @@ icon{
 	display: block;
 }
 
+._inline-block{
+	display: inline-block;
+}
+
+._flex{
+	display: flex;
+}
 ._left{
 	float:left;
 }
@@ -83,6 +90,7 @@ icon{
 	background:#2196f3;
 	display: inline-block;
 	margin-right: 10rpx;
+	vertical-align:middle;
 	
 }
 .placeicon-2{
@@ -91,7 +99,7 @@ icon{
 	background:#e53935;
 	display: inline-block;
 	margin-right: 10rpx;
-
+	vertical-align:middle;
 }
 
 .click-view{

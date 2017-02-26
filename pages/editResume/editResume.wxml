@@ -1,0 +1,178 @@
+<view>
+	<view class="box box-top _relative" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toUserInfo'>
+		<view class="title">
+			<view class="placeicon-1"></view>
+			<text>基本信息</text>
+		</view>
+		<view>
+			<view class='item'>
+				<text >姓</text>
+				<text style="margin-left:26px;">名 :</text>
+				<text> {{resume.userInfo.name}}</text>
+			</view>
+			<view class='item'>
+				<text>性</text>
+				<text style="margin-left:26px;">别 :</text>
+				<text> {{resume.userInfo.sex}}</text>
+			</view>
+			<view class='item'>
+				<text>最高学历 :</text>
+				<text> {{resume.userInfo.degree}}</text>
+			</view>
+			<view class='item'>
+				<text>所在城市 :</text>
+				<text> {{resume.userInfo.city}}</text>
+			</view>
+			<view class='item'>
+				<text>联系电话 :</text>
+				<text> {{resume.userInfo.phone}}</text>
+			</view>
+			<view class='item'>
+				<text>电子邮箱 :</text>
+				<text> {{resume.userInfo.email}}</text>
+			</view>
+			<view class='item'>
+				<text>出生日期 :</text>
+				<text> {{resume.userInfo.birth}}</text>
+			</view>
+			<view class='imgbox'>
+				<image mode="aspectFit" src="{{resume.userInfo.imgUrl || userInfoFromWX.avatarUrl }}" class="img"></image>
+			</view>
+		</view>
+	</view>
+
+	<!-- <view>
+		<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class="title">
+				<view class="placeicon-1"></view>
+				<text>个人技能</text>
+			</view>
+			<view class="item" wx:for="{{resume.skills}}">
+				
+			</view>
+		</view>
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class="_inline-block iconfont icon-add"></view>
+			<text>新增</text>
+		</view>
+	</view> -->
+	
+	<view>
+		<view class="box datebox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toEducation">
+			<view class="title">
+				<view class="placeicon-1"></view>
+				<text>教育经历</text>
+			</view>
+			<view wx:if="{{resume.educations.length>0}}" style="margin-top:15px;margin-left:15px;">
+				<view class="item dateItem" wx:for="{{resume.educations}}">
+					<view class="dateTop">{{item.endDate}}年毕业</view>
+					<view class="text-2">{{item.school}}</view>
+					<view class="text-3">{{item.degree}}~{{item.major}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.educations.length==0}}">
+			<view class="_inline-block iconfont icon-add"></view>
+			<text>新增</text>
+		</view>
+	</view>
+
+	<view>
+		<view class="box datebox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toIntership'>
+			<view class="title">
+				<view class="placeicon-1"></view>
+				<text>实习经验</text>
+			</view>
+			<view wx:if="{{resume.interships.length>0}}" style="margin-top:15px;margin-left:15px;">
+				<view class="item dateItem" wx:for="{{resume.interships}}">
+					<view class="dateTop">{{item.startDate}}-{{item.endDate}}</view>
+					<view class="text-2">{{item.campany}}~{{item.job}}</view>
+					<view class="text-3">{{item.description}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.interships.length==0}}">
+			<view class="_inline-block iconfont icon-add"></view>
+			<text>新增</text>
+		</view>
+	</view>
+
+	<view>
+		<view class="box datebox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toProject'>
+			<view class="title">
+				<view class="placeicon-1"></view>
+				<text>项目经验</text>
+			</view>
+			<view wx:if="{{resume.projects.length>0}}" style="margin-top:15px;margin-left:15px;">
+				<view class="item dateItem" wx:for="{{resume.projects}}">
+					<view class="dateTop">{{item.startDate}}-{{item.endDate}}</view>
+					<view class="text-2">[项目名称] {{item.name}}</view>
+					<view class="text-2">[项目职责] {{item.selfDuty}}</view>
+					<view class="text-3">{{item.description}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view"  wx:if="{{resume.projects.length==0}}">
+			<view class="_inline-block iconfont icon-add"></view>
+			<text>新增</text>
+		</view>
+	</view>
+
+	<view>
+		<view class="box datebox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toHonor'>
+			<view class="title">
+				<view class="placeicon-1"></view>
+				<text>荣誉奖项</text>
+			</view>
+			<view wx:if="{{resume.honor.length>0}}" style="margin-top:15px;margin-left:15px;">
+				<view class="item dateItem" wx:for="{{resume.honor}}">
+					<view class="dateTop">{{item.date}}</view>
+					<view class="text-2">{{item.name}}</view>
+					<view class="text-3">{{item.prize}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.honor.length==0}}">
+			<view class="_inline-block iconfont icon-add"></view>
+			<text>新增</text>
+		</view>
+	</view>
+
+	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+		<view class="title">
+			<view class="placeicon-1"></view>
+			<text>自我评价</text>
+		</view>
+		<view>
+			<view class="item">
+				<view class="text-4">{{resume.selfAssessment}}</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+		<view class="title">
+			<view class="placeicon-1"></view>
+			<text>求职意向</text>
+		</view>
+		<view wx:if="{{resume.hope.length>0}}">
+			<view class="item" wx:for="{{resume.hope}}">
+				<view class="text-2">{{item.name}}</view>
+				<view class="text-2" style="font-size:13px; margin-top:4px;">{{item.type}}~{{item.city}}~{{item.salaryLower}}-{{item.salaryUpper}}</view>
+				<view class="text-3">{{item.otherDescription}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="handle">
+		<view class="handle-btn preview" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class="_inline-block iconfont icon-preview"></view>
+			<text>预览</text>
+		</view>
+		<!-- <view class="handle-btn" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+			<view class='_inline-block iconfont icon-save save'></view>
+			<text>保存</text>
+		</view> -->
+	</view>
+
+	<view class='box footer'></view>
+</view>

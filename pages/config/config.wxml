@@ -3,7 +3,13 @@
 		<view class="item" >
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>简历公开</text>
-				<switch checked="{{config.resumeOpen}}" bindchange="resumeSwitchChange" class="_right"/>
+				<switch checked="{{config.resumeOpen}}" bindchange="resumeSwitchChange" class="_right" />
+			</view>
+		</view>
+		<view class="item" >
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>开启默认投递</text>
+				<switch checked="{{config.defaultSend}}" bindchange="defaultSendSwitchChange" class="_right" />
 			</view>
 		</view>
 	</view>

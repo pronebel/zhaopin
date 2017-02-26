@@ -3,7 +3,8 @@ const app = getApp();
 Page({
 	data: {
 		config: {
-			resumeOpen: true
+			resumeOpen: true,
+			defaultSend: true
 		}
 	},
 	onload: function() {
@@ -12,6 +13,11 @@ Page({
 	resumeSwitchChange: function(e) {
 		this.setData({
 			'config.resumeOpen': e.detail.value
+		})
+	},
+	defaultSendSwitchChange: function(e) {
+		this.setData({
+			'config.defaultSend': e.detail.value
 		})
 	}
 })

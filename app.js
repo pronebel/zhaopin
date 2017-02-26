@@ -39,11 +39,29 @@ App({
             }
         })
     },
+    onShow: function() {
+        //获取本地存储 简历信息
+        var newResume = wx.getStorageSync('newResume');
+        if (newResume) {
+            this.globalData.newResume = newResume;
+        }
+        var editResume = wx.getStorageSync('editResume');
+        if (editResume) {
+            this.globalData.editResume = editResume;
+        }
+    },
+    onHide: function() {
+        //保存简历信息到本地存储
+        wx.setStorageSync('newResume', this.globalData.newResume);
+        wx.setStorageSync('editResume', this.globalData.editResume);
+    },
     globalData: {
         userInfoFromWX: null,
         location: '',
         workplaceCity: '',
         workplaceDistrict: '',
-        cityList: []
+        cityList: [],
+        newResume: {},
+        editResume: {}
     }
 })

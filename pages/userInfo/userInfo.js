@@ -1,6 +1,7 @@
 var app = getApp();
 
 var $ = require('../../utils/util.js');
+var event = require('../../utils/event.js')
 
 Page({
 	data: {
@@ -11,17 +12,19 @@ Page({
 			phone: '',
 			birth: '',
 			email: '',
-			imgUrl: ''
+			imgUrl: '',
+			degree: '',
+			school: '',
+			major: '',
+			graduationYear: ''
 		},
 		sexArray: ['男', '女'],
 		now: '',
 		defaultDate: '1994-01-01'
 	},
-	onLoad: function() {
+	onLoad: function(options) {
 		this.setData({
-			userInfoFromWX: app.globalData.userInfoFromWX
-		})
-		this.setData({
+			userInfoFromWX: app.globalData.userInfoFromWX,
 			now: $.formatDate(new Date())
 		})
 	},
@@ -45,6 +48,13 @@ Page({
 	bindDatePickerChange: function(e) {
 		this.setData({
 			'userInfo.birth': e.detail.value
+		})
+	},
+	save: function() {
+		var _this = this;
+		event.emit('resumeChanged', {
+			key: 'userInfo',
+			value: _this.data.userInfo
 		})
 	}
 })

@@ -1,0 +1,32 @@
+Page{
+	background:#fff;
+	box-sizing: border-box;
+}
+
+.box{
+	padding:0px 30rpx;
+}
+
+.item{
+	height:36px;
+	border-bottom: 1rpx solid rgb(239,239,244);
+}
+.iconfont{
+	line-height: 36px;
+	vertical-align: middle;
+}
+.btn{
+	font-size: 14px;
+	margin-top:25px;
+	padding-top:4px;
+	padding-bottom: 4px;
+	border-radius: 1px
+}
+
+.input{
+	flex-grow: 1;
+	line-height:36px;
+	height:100%;
+	vertical-align: middle;
+	margin-left:8px;
+}

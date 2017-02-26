@@ -19,6 +19,9 @@ page{
 	margin-right: 10px;
 }
 
+.box-top .icon-right{
+	line-height: 60px;
+}
 .iconfont{
 	color:#353535;
 	vertical-align: baseline;

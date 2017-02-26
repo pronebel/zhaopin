@@ -1,0 +1,12 @@
+<view>
+	<view class="box" wx:if="{{educations.length>0}}">
+		<view wx:for="{{educations}}" hover="true" hover-start-time="10" hover-stay-time="300"hover-class="click-view" bindtap='toEditEducation' data-date='{{item.endDate}}' data-school="{{item.school}}" data-degree='{{item.degree}}' data-major='{{item.major}}' data-id="{{item.id}}">
+			<view class="item"> 
+				<view class="dateTop">{{item.endDate}}年毕业</view>
+				<view class="text-2">{{item.school}}</view>
+				<view class="text-3">{{item.degree}}~{{item.major}}</view>
+			</view>
+		</view>
+	</view>
+	<button type="primary" class="btn">添加更多教育经历</button>
+</view>

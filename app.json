@@ -1,7 +1,14 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/user/user",
+    "pages/editResume/editResume",
+    "pages/editResume/education/education",
+    "pages/editResume/education/editEducation/editEducation",
+    "pages/editResume/honor/honor",
+    "pages/editResume/intership/intership",
+    "pages/editResume/project/project",
+    "pages/resume/resume",
+    "pages/index/index",
     "pages/logs/logs",
     "pages/msg/msg",
     "pages/search/search",
@@ -9,7 +16,6 @@
     "pages/workplace/workplace",
     "pages/discover/discover",
     "pages/userInfo/userInfo",
-    "pages/resume/resume",
     "pages/collect/collect",
     "pages/config/config",
     "pages/jobDetail/jobDetail"
@@ -24,7 +30,7 @@
   "tabBar": {
     "color": "#888888",
     "selectedColor": "#353535",
-    "borderStyle": "light",
+    "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [{
       "pagePath": "pages/index/index",

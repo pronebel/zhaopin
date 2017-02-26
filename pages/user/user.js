@@ -2,7 +2,11 @@ var app = getApp();
 
 Page({
 	data: {
-		userInfoFromWX: {}
+		userInfoFromWX: {},
+		userInfo: {
+			name: '',
+			imgUrl: ''
+		}
 	},
 	onLoad: function() {
 		this.setData({

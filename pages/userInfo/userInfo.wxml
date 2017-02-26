@@ -33,6 +33,33 @@
 			</view>
 		</picker>
 	</view>
+	
+	<view class='box'>
+		<!-- <view class="item">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class='iconfont icon-circle-edit'></icon>
+				<input value="{{userInfo.school}}" placeholder="毕业院校" placeholder-class="placeholder-class" />
+			</view>
+		</view>
+		<view class="item">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class='iconfont icon-circle-edit'></icon>
+				<input value="{{userInfo.major}}" placeholder="专业" placeholder-class="placeholder-class" />
+			</view>
+		</view> -->
+		<view class="item">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class='iconfont icon-circle-edit'></icon>
+				<input value="{{userInfo.degree}}" placeholder="最高学历" placeholder-class="placeholder-class" />
+			</view>
+		</view>
+		<!-- <view class="item">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class='iconfont icon-circle-edit'></icon>
+				<input value="{{userInfo.graduationYear}}" placeholder="毕业年份" placeholder-class="placeholder-class" />
+			</view>
+		</view> -->
+	</view>
 
 	<view class='box'>
 		<view class="item">
@@ -49,7 +76,7 @@
 		</view>
 	</view>
 
-	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='save'>
 		<view class='item'>
 			<icon class="iconfont icon-baocun"></icon>
 			<text>保存</text>
