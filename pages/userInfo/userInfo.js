@@ -1,7 +1,8 @@
 var app = getApp();
 
 var $ = require('../../utils/util.js');
-var event = require('../../utils/event.js')
+var event = require('../../utils/event.js');
+const degrees = require('../../configs/data_configs').degrees;
 
 Page({
 	data: {
@@ -16,7 +17,8 @@ Page({
 			degree: '',
 			school: '',
 			major: '',
-			graduationYear: ''
+			graduationYear: '',
+			city: ''
 		},
 		sexArray: ['男', '女'],
 		now: '',
@@ -24,9 +26,21 @@ Page({
 	},
 	onLoad: function(options) {
 		this.setData({
-			userInfoFromWX: app.globalData.userInfoFromWX,
-			now: $.formatDate(new Date())
-		})
+				userInfoFromWX: app.globalData.userInfoFromWX,
+				now: $.formatDate(new Date()),
+				degrees: degrees
+			})
+			//wx.request 
+		let _degree = this.data.userInfo.degree;
+		if (!_degree) {
+			this.setData({
+				degreeIndex: 1
+			})
+		} else {
+			this.setData({
+				degreeIndex: $.inArray(_degree, degrees)
+			})
+		}
 	},
 	chooseImg: function() {
 		var _this = this;
@@ -50,11 +64,18 @@ Page({
 			'userInfo.birth': e.detail.value
 		})
 	},
+	bindDegreePickerChange: function(e) {
+		this.setData({
+			'userInfo.degree': degrees[e.detail.value]
+		})
+	},
 	save: function() {
+		//wx.request
 		var _this = this;
 		event.emit('resumeChanged', {
 			key: 'userInfo',
 			value: _this.data.userInfo
 		})
+		wx.navigateBack({});
 	}
 })

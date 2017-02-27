@@ -46,7 +46,9 @@ page{
 input,.inputMsg{
 	display: inline-block;
 	vertical-align: middle;
-	width: calc(100% - 40px);
+	height:40px;
+	line-height: 40px;
+	flex-grow: 1;
 }
 
 .footer{
@@ -56,6 +58,6 @@ input,.inputMsg{
 	background:#fff;
 }
 
-._footer{
+/*._footer{
 	margin-top:40px;
-}
+}*/

@@ -5,49 +5,40 @@ const degrees = require('../../../../configs/data_configs.js').degrees;
 
 Page({
 	data: {
-		education: {}
+		intership: {},
+		maxlength: 1000,
+		checked: false,
 	},
 	onLoad: function(options) {
 		this.setData({
-			education: options
+			intership: options,
+			now: $.formatDate(new Date())
 		});
+		if (options.endDate == '至今') {
+			this.setData({
+				checked: true
+			})
+		}
 		var _this = this;
 		if ($.isEmptyObject(options)) {
 			_this.setData({
-				years: years,
-				yearIndex: 17,
-				degrees: degrees,
-				degreeIndex: 1,
 				flag: false //表示新建
 			})
 		} else {
-			years.forEach((val, index) => {
-				if (val == parseInt(_this.data.education.endDate)) {
-					_this.setData({
-						years: years,
-						yearIndex: index,
-						flag: true
-					})
-				}
-			})
-			degrees.forEach((val, index) => {
-				if (val == (_this.data.education.degree)) {
-					_this.setData({
-						degrees: degrees,
-						degreeIndex: index
-					})
-				}
+			_this.setData({
+				flag: true
 			})
 		}
 	},
-	bindYearPickerChange: function(e) {
+	bindEndPickerChange: function(e) {
 		this.setData({
-			'education.endDate': this.data.years[e.detail.value]
+			'intership.endDate': e.detail.value,
+			checked: false
 		})
 	},
-	bindDegreePickerChange: function(e) {
+	bindStartPickerChange: function(e) {
 		this.setData({
-			'education.degree': this.data.degrees[e.detail.value]
+			'intership.startDate': e.detail.value
 		})
 	},
 	save: function() {
@@ -55,14 +46,14 @@ Page({
 		var _this = this;
 		if (_this.data.flag) {
 			event.emit('resumeChanged', {
-				key: 'educations',
-				value: _this.data.education,
+				key: 'interships',
+				value: _this.data.intership,
 				event_type: 'change'
 			})
 		} else {
 			event.emit('resumeChanged', {
-				key: 'educations',
-				value: _this.data.education,
+				key: 'interships',
+				value: _this.data.intership,
 				event_type: 'add'
 			})
 		}
@@ -72,12 +63,23 @@ Page({
 		//wx.request
 		var _this = this;
 		event.emit('resumeChanged', {
-			key: 'educations',
+			key: 'interships',
 			value: {
-				id: this.data.education.id
+				id: this.data.intership.id
 			},
 			event_type: 'delete'
 		})
 		wx.navigateBack({})
+	},
+	textareaInput: function(e) {
+		this.setData({
+			'intership.description': e.detail.value
+		})
+	},
+	changeChecked: function() {
+		this.setData({
+			checked: true,
+			'intership.endDate': '至今'
+		})
 	}
 })

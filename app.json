@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/user/user",
     "pages/editResume/editResume",
+    "pages/user/user",
     "pages/editResume/education/education",
     "pages/editResume/education/editEducation/editEducation",
     "pages/editResume/honor/honor",
     "pages/editResume/intership/intership",
+    "pages/editResume/intership/editIntership/editIntership",
     "pages/editResume/project/project",
     "pages/resume/resume",
     "pages/index/index",

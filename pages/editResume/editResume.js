@@ -20,19 +20,20 @@ Page({
 			},
 			skills: [],
 			educations: [{
-				id: '1',
+				id: '0',
 				endDate: '2017',
 				school: '深圳大学',
 				degree: '本科',
 				major: '软件工程'
 			}, {
-				id: '2',
+				id: '1',
 				endDate: '2017',
 				school: '深圳大学',
 				degree: '本科',
 				major: '软件工程'
 			}],
 			interships: [{
+				id: '0',
 				campany: '深圳云计算',
 				job: '前端实习',
 				startDate: '2016-06',
@@ -52,14 +53,15 @@ Page({
 				name: 'xx竞赛',
 				prize: '二等奖'
 			}],
-			hope: [{
-				name: '前端开发',
-				type: '全职',
-				city: '深圳',
-				salaryLower: '5k',
-				salaryUpper: '10k',
-				otherDescription: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
-			}]
+			// hope: {
+			// 	name: '前端开发',
+			// 	type: '全职',
+			// 	city: '深圳',
+			// 	salaryLower: '5k',
+			// 	salaryUpper: '10k',
+			// 	otherDescription: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
+			// }
+			hope: null
 		},
 		userInfoFromWX: {},
 	},
@@ -83,59 +85,33 @@ Page({
 		})
 
 		//添加event 进行跨page通讯
-		event.on('resumeChanged', this, (data) => {
-			// this.setData({
-			// 	'resume[data.key]':data.value
-			// })
-			var _resume = this.data.resume;
-			if (data.key == 'userInfo') {
-				_resume[data.key] = data.value;
-				this.setData({
-					resume: _resume
-				})
-			} else if (data.key == 'education') {
-				_resume.educations.forEach((val, index) => {
-					if (val.id == data.value.id) {
-						var _educations = _resume.educations;
-						_educations[index] = data.value;
-						this.setData({
-							'resume.educations': _educations
-						})
-					}
-				})
-			}
-		})
-
-		event.on('resumeDeleted', this, (data) => {
-			var _resume = this.data.resume;
-			if (data.key == 'education') {
-				var _educations = _resume.educations;
-				_educations.forEach((val, index) => {
-					if (val.id == data.value.id) {
-						_educations.splice(index, 1);
-						this.setData({
-							'resume.educations': _educations
-						})
-					}
-				})
-			}
-		})
+		event.on('resumeChanged', this, event.cb.bind(this));
 	},
 	onShow: function() {
-		console.log(this.data.resume.educations);
+
 	},
 	onUnload: function() {
 		event.remove('resumeChanged', this);
-		event.remove('resumeDeleted', this);
 	},
 	toUserInfo: function() {
 		wx.navigateTo({
 			url: '../userInfo/userInfo'
 		})
 	},
-	toEducation: function() {
+	toEducation: function(e) {
+		var flag = e.currentTarget.dataset.flag;
+
+		if (flag == 'true') {
+			wx.navigateTo({
+				url: 'education/education?'
+			})
+		} else {
+			wx.navigateTo({
+				url: 'education/editEducation/editEducation'
+			})
+		}
 		wx.navigateTo({
-			url: 'education/education'
+			url: 'education/education?'
 		})
 	},
 	toIntership: function() {

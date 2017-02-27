@@ -4,6 +4,7 @@
  * @date 2017-02-24
  * @author linrui
  */
+
 var events = {};
 
 /**
@@ -51,8 +52,105 @@ function remove(name, self) {
 	})
 }
 
+/**
+ * [cb description] resume修改新建等通用callback 一共3种event_type change add delete
+ * @param  {[type]}   data [description] 
+ * @return {Function}      [description]
+ */
+function cb(data) {
+	if (!inArray(data.key, Object.keys(this.data.resume))) return;
+	let _key = data.key;
+	let _resume = this.data.resume;
+	if (data.event_type == 'change') {
+		if (Array.isArray(_resume[_key])) {
+			_resume[_key].forEach((val, index) => {
+				if (val.id == data.value.id) {
+					_resume[_key][index] = data.value;
+					this.setData({
+						resume: _resume
+					})
+				}
+			})
+		} else {
+			_resume[_key] = data.value;
+			this.setData({
+				resume: _resume
+			})
+		}
+	} else if (data.event_type == 'add') {
+		data.value['id'] = parseInt(_resume[_key][_resume[_key].length - 1].id) + 1;
+		_resume[_key].push(data.value);
+		this.setData({
+			resume: _resume
+		})
+	} else {
+		_resume[_key].forEach((val, index) => {
+			if (val.id == data.value.id) {
+				_resume[_key].splice(index, 1);
+				this.setData({
+					resume: _resume
+				})
+			}
+		})
+	}
+
+}
+
+function inArray(value, arr) {
+	for (let t in arr) {
+		if (arr[t] == value)
+			return true;
+	}
+	return false;
+}
+
 module.exports = {
 	on: on,
 	emit: emit,
-	remove: remove
+	remove: remove,
+	cb: cb
 }
+
+
+// event.on('resumeChanged', this, function(data) {
+// 	if (data.key != 'interships') {
+// 		return;
+// 	} else {
+// 		_this.data.interships.forEach((val, index) => {
+// 			if (val.id == data.value.id) {
+// 				var _interships = this.data.interships;
+// 				_interships[index] = data.value;
+// 				this.setData({
+// 					interships: _interships
+// 				})
+// 			}
+// 		})
+// 	}
+// })
+// event.on('resumeDeleted', this, function(data) {
+// 	if (data.key != 'interships') {
+// 		return;
+// 	} else {
+// 		var _interships = this.data.interships;
+// 		_interships.forEach((val, index) => {
+// 			if (val.id == data.value.id) {
+// 				_interships.splice(index, 1);
+// 				this.setData({
+// 					interships: _interships
+// 				})
+// 			}
+// 		})
+// 	}
+// })
+// event.on('resumeAdded', this, (data) => {
+// 	if (data.key != 'interships') {
+// 		return;
+// 	} else {
+// 		var _interships = this.data.interships;
+// 		data.value['id'] = _interships.length;
+// 		_interships.push(data.value);
+// 		this.setData({
+// 			interships: _interships
+// 		})
+// 	}
+// })

@@ -150,6 +150,16 @@ const items = {
 
 }
 
+const degrees = ['大专', '本科', '硕士', '博士'];
+
+let years = [];
+
+for (let i = 2000; i < new Date().getFullYear() + 4; i++) {
+	years.push(i);
+}
+
 module.exports = {
-	items: items
+	items: items,
+	degrees: degrees,
+	years: years
 }

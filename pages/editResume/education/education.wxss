@@ -48,6 +48,6 @@ page{
 	margin-top:15px;
 	font-size:14px;
 	border-radius:1px;
-	padding-top:4px;
-	padding-bottom: 4px;
+	padding-top:3px;
+	padding-bottom: 3px;
 }

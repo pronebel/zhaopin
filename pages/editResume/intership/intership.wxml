@@ -1,0 +1,12 @@
+<view>
+	<view class="box" wx:if="{{resume.interships.length>0}}">
+		<view wx:for="{{resume.interships}}" hover="true" hover-start-time="10" hover-stay-time="300"hover-class="click-view" bindtap='toEditIntership' data-start-date='{{item.startDate}}' data-end-date='{{item.endDate}}' data-campany="{{item.campany}}" data-job='{{item.job}}' data-description='{{item.description}}' data-id="{{item.id}}" data-flag='true'>
+			<view class="item"> 
+				<view class="dateTop">{{item.startDate}}~{{item.endDate}}</view>
+				<view class="text-2">{{item.campany}}~{{item.job}}</view>
+				<view class="text-3">{{item.description}}</view>
+			</view>
+		</view>
+	</view>
+	<button type="primary" class="btn" bindtap='toEditIntership' data-flag='false'>添加更多教育经历</button>
+</view>

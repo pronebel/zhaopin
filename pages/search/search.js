@@ -2,7 +2,7 @@ var app = getApp();
 
 var $ = require('../../utils/util.js');
 
-var items = require('../../configs/items.js').items
+var items = require('../../configs/data_configs.js').items
 Page({
 	data: {
 		workplaceCity: '',
