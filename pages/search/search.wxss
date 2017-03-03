@@ -43,7 +43,8 @@ view{
 	line-height:75rpx;
 }
 .work-place{
-	padding-right:12rpx;
+	padding-right:32rpx;
+	
 }
 
 .work-place text{
@@ -54,6 +55,11 @@ view{
 	display: inline-block;
 }
 
+.work-place .arrows-down{
+	position: absolute;
+	top:10px;
+	right: 15rpx;
+}
 
 .work-place text,.handleItem text{
 	vertical-align: baseline;

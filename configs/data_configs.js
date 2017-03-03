@@ -158,8 +158,16 @@ for (let i = 2000; i < new Date().getFullYear() + 4; i++) {
 	years.push(i);
 }
 
+const prizes = ['特等奖', '一等奖', '二等奖', '三等奖', '金奖', '银奖', '铜奖'];
+
+const types = ['全职', '兼职', '实习'];
+
+const salaryRanges = ['2k以下', '2k-5k', '5k-10k', '10k-15k', '15k-25k', '25k-50k', '50k以上'];
 module.exports = {
 	items: items,
 	degrees: degrees,
-	years: years
+	years: years,
+	prizes: prizes,
+	types: types,
+	salaryRanges: salaryRanges
 }

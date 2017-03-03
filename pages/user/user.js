@@ -9,8 +9,10 @@ Page({
 		}
 	},
 	onLoad: function() {
-		this.setData({
-			userInfoFromWX: app.globalData.userInfoFromWX
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
+			})
 		})
 	},
 	toResume: function() {

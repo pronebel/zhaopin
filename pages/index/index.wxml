@@ -1,6 +1,6 @@
 
 <view bindtouchmove="touchmove" bindtouchend='touchend'>
-  <view class="container-column">
+  <view class="container-column _relative">
     <image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
     <view class="search" bindtap="toSearch">
       <icon type="search" size="15" color="rgb(88,88,88,0.8)" class="searchicon" />

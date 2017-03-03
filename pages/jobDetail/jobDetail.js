@@ -40,6 +40,12 @@ Page({
 	},
 	onLoad: function() {
 		//getDetail
+
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
+			})
+		})
 	},
 	star: function() {
 		var star = this.data.star;

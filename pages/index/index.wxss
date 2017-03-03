@@ -29,6 +29,7 @@
 	text-align: center;
 	padding:26rpx 40rpx;
 	box-sizing:border-box;
+	top:0;
 }
 
 .search-box{

@@ -1,0 +1,32 @@
+<view class="box">
+	<view class="item _flex">
+		<view class="iconfont icon-circle-edit"></view>
+		<input class="input" value="{{hope.name}}" placeholder="期待的职位" placeholder-class="placeholder-class" />
+	</view>
+	<picker bindchange='bindTypePickerChange' value='{{typeIndex}}' range='{{types}}'>
+		<view class="item _flex">
+			<view class="iconfont icon-circle-edit"></view>
+			<view class="input" wx:if="{{hope.type}}">{{hope.type}}</view>
+			<view class="input placeholder-class" wx:else>工作类型</view>
+		</view>
+	</picker>
+	<view class="item _flex" style="margin-top:20px">
+		<view class="iconfont icon-circle-edit"></view>
+		<view class="input" wx:if="{{hope.startDate}}">期待城市 ~ {{hope.city}}</view>
+		<view class="input placeholder-class" wx:else>期待工作城市</view>
+	</view>
+	<picker bindchange='bindSalaryPickerChange' value='{{salaryIndex}}' range='{{salaryRanges}}'>
+		<view class="item _flex">
+			<view class="iconfont icon-circle-edit"></view>
+			<view class="input" wx:if="{{hope.salaryRange}}">期待薪水 ~ {{hope.salaryRange}}</view>
+			<view class="input placeholder-class" wx:else>期待薪水</view>
+		</view>
+	</picker>
+	<view class="item _flex" style="margin-top:20px">
+		<view class="iconfont icon-circle-edit"></view>
+		<view class="input" style="color:#888888">补充说明(若有)</view>
+	</view>
+	<textarea value='{{hope.otherDescription}}' maxlength="{{maxlength}}" class="_textarea" bindinput='textareaInput'></textarea>
+	<view class="hint">{{hope.otherDescription.length}}/{{maxlength}}</view>
+	<button type="primary" class='btn' bindtap="save">保存修改</button>
+</view>

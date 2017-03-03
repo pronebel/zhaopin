@@ -73,6 +73,9 @@ icon{
 	position: relative;
 }
 
+._nowrap{
+	white-space: nowrap;
+}
 .arrows-down{
 	display: inline-block;
 	vertical-align: middle;

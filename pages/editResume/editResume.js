@@ -41,14 +41,17 @@ Page({
 				description: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
 			}],
 			projects: [{
+				id: 0,
 				name: '基于微信小程序的招聘系统开发',
 				selfDuty: '前端开发',
 				startDate: '2017-02',
 				endDate: '至今',
+				url: '',
 				description: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
 			}],
 			selfAssessment: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看',
-			honor: [{
+			honors: [{
+				id: 0,
 				date: '2011-06',
 				name: 'xx竞赛',
 				prize: '二等奖'
@@ -57,8 +60,7 @@ Page({
 			// 	name: '前端开发',
 			// 	type: '全职',
 			// 	city: '深圳',
-			// 	salaryLower: '5k',
-			// 	salaryUpper: '10k',
+			// 	salaryRange: '5k-10k',
 			// 	otherDescription: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
 			// }
 			hope: null
@@ -80,8 +82,10 @@ Page({
 				title: '新建简历'
 			})
 		}
-		this.setData({
-			userInfoFromWX: app.globalData.userInfoFromWX
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
+			})
 		})
 
 		//添加event 进行跨page通讯
@@ -127,6 +131,20 @@ Page({
 	toHonor: function() {
 		wx.navigateTo({
 			url: 'honor/honor'
+		})
+	},
+	toSelfAssessment: function(e) {
+		wx.navigateTo({
+			url: 'selfAssessment/selfAssessment?msg=' + e.currentTarget.dataset.msg
+		})
+	},
+	toHope: function(e) {
+		const hope = this.data.resume.hope;
+		hope && wx.navigateTo({
+			url: 'hope/hope?name=' + hope.name + '&type=' + hope.type + '&city=' + hope.city + '&salaryRange=' + hope.salaryRange + '&otherDescription=' + hope.otherDescription
+		});
+		!hope && wx.navigateTo({
+			url: 'hope/hope'
 		})
 	}
 })

@@ -16,7 +16,6 @@
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<!-- <input value="{{userInfo.sex}}" placeholder="性别" placeholder-class="placeholder-class" /> -->
 					<view class="inputMsg placeholder-class" wx:if="{{userInfo.sex==''}}">性别</view>
 					<view class="inputMsg" wx:else>{{userInfo.sex}}</view>
 				</view>
@@ -51,7 +50,8 @@
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<input value="{{userInfo.degree}}" placeholder="最高学历" placeholder-class="placeholder-class" />
+					<view class="inputMsg placeholder-class" wx:if="{{userInfo.degree==''}}">出生年月</view>
+					<view class="inputMsg" wx:else>{{userInfo.degree}}</view>
 				</view>
 			</view>
 		</picker>

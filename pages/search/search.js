@@ -31,6 +31,11 @@ Page({
 		this.setData({
 			searchHistory: wx.getStorageSync('searchHistory') || []
 		})
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
+			})
+		})
 	},
 	onShow: function() { //这里用es6的箭头函数 this是window
 		this.setData({

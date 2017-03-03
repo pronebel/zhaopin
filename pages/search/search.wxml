@@ -1,8 +1,8 @@
 
 	<view class="container-row _fixed searchBar" >
-		<view class="work-place" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}">
-			<text>{{workplaceCity}}</text>
-			<!-- <view class="arrows-down"></view> -->
+		<view class="work-place _nowrap _relative" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}" >
+			<text class='_nowrap'>{{workplaceCity}}</text>
+			<view class="arrows-down "></view> 
 		</view>
 		<view class="search" >
 			<view class="iconfont icon-search"></view>
@@ -10,7 +10,7 @@
 			<input type="text" class="search-input" placeholder="搜索职位/公司" placeholder-class="placeholder-class" focus bindconfirm="toSearch" bindfocus="showSuggestions" bindinput="keyInput" value="{{searchMsg}}" />
 		</view>
 		<view class="canclebox" wx:if="{{jobList.length==0 || showSuggestions}}">
-			<button class="cancle" bindtap="cancle" hover-start-time="10" hover-stay-time="200" >取消</button>
+			<button class="cancle _nowrap" bindtap="cancle" hover-start-time="10" hover-stay-time="200" >取消</button>
 		</view>
 	</view>
 
@@ -54,7 +54,7 @@
 
 	<view class="handleBar _fixed" wx:if="{{jobList.length>0 && !showSuggestions}}">
 		<view class="handleItem" bindtap="handleAnimate" data-index="1">
-			<text style="color:{{active[0]}}" data-index="1">{{workplaceDistrict}}</text>
+			<text style="color:{{active[0]}}" data-index="1">{{workplaceDistrict || workplaceCity}}</text>
 			<view class="arrows-down" style="border-top: 8rpx solid {{active[0]}};" data-index="1"></view>
 		</view>
 		<view class="handleItem" bindtap="handleAnimate" data-index="2">

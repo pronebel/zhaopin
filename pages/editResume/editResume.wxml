@@ -124,21 +124,21 @@
 				<view class="placeicon-1"></view>
 				<text>荣誉奖项</text>
 			</view>
-			<view wx:if="{{resume.honor.length>0}}" style="margin-top:15px;margin-left:15px;">
-				<view class="item dateItem" wx:for="{{resume.honor}}">
+			<view wx:if="{{resume.honors.length>0}}" style="margin-top:15px;margin-left:15px;">
+				<view class="item dateItem" wx:for="{{resume.honors}}">
 					<view class="dateTop">{{item.date}}</view>
-					<view class="text-2">{{item.name}}</view>
-					<view class="text-3">{{item.prize}}</view>
+					<view class="text-2">{{item.prize}}</view>
+					<view class="text-3">{{item.name}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.honor.length==0}}">
+		<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.honors.length==0}}">
 			<view class="_inline-block iconfont icon-add"></view>
 			<text>新增</text>
 		</view>
 	</view>
 
-	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" data-msg='{{resume.selfAssessment}}' bindtap='toSelfAssessment'>
 		<view class="title">
 			<view class="placeicon-1"></view>
 			<text>自我评价</text>
@@ -149,12 +149,12 @@
 			</view>
 		</view>
 	</view>
-	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.selfAssessment}}'>
+	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.selfAssessment}}' data-msg='' bindtap='toSelfAssessment'>
 		<view class="_inline-block iconfont icon-add"></view>
 		<text>新增</text>
 	</view>
 
-	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+	<view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toHope'>
 		<view class="title">
 			<view class="placeicon-1"></view>
 			<text>求职意向</text>
@@ -162,12 +162,12 @@
 		<view wx:if='{{resume.hope}}'>
 			<view class="item" >
 				<view class="text-2">{{resume.hope.name}}</view>
-				<view class="text-2" style="font-size:13px; margin-top:4px;">{{resume.hope.type}}~{{resume.hope.city}}~{{resume.hope.salaryLower}}-{{resume.hope.salaryUpper}}</view>
+				<view class="text-2" style="font-size:13px; margin-top:4px;">{{resume.hope.type}}~{{resume.hope.city}}~{{resume.hope.salaryRange}}</view>
 				<view class="text-3">{{resume.hope.otherDescription}}</view>
 			</view>
 		</view>
 	</view>
-	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.hope}}'>
+	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.hope}}' bindtap='toHope'>
 		<view class="_inline-block iconfont icon-add"></view>
 		<text>新增</text>
 	</view>

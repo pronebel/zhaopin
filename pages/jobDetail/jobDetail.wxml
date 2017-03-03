@@ -110,7 +110,7 @@
 		</view>
 	</view>
 
-	<view class='box box-last'>
+	<view class='box box-last' style='background: rgb(239,239,244)'>
 	</view>
 	
 	<view class='box box-last box-fixed'>

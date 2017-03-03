@@ -26,11 +26,16 @@ Page({
 	},
 	onLoad: function(options) {
 		this.setData({
-				userInfoFromWX: app.globalData.userInfoFromWX,
-				now: $.formatDate(new Date()),
-				degrees: degrees
+			now: $.formatDate(new Date()),
+			degrees: degrees
+		})
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
 			})
-			//wx.request 
+		})
+
+		//wx.request 
 		let _degree = this.data.userInfo.degree;
 		if (!_degree) {
 			this.setData({

@@ -37,7 +37,7 @@ function formatNumber(n) {
  */
 function getLocationAddress(app) {
     wx.getLocation({
-  //      type:'gcj02',
+        //      type:'gcj02',
         success: function(res) {
             console.log(res);
             var location = res.latitude + ',' + res.longitude;
@@ -62,7 +62,7 @@ function getLocationAddress(app) {
             })
         },
         fail: function() {
-            //当用户拒绝授权时,采用默认地点------深圳
+            //当用户拒绝授权时,采用默认地点------全国
             console.log('用户拒绝授权获取当前地址,采用默认地点---全国')
             app.globalData.location = '全国';
             //默认期待工作地点为当地

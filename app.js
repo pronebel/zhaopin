@@ -24,20 +24,28 @@ App({
         var workplaceDistrict = wx.getStorageSync('workplaceDistrict');
         console.log(workplaceDistrict);
         this.globalData.workplaceDistrict = workplaceDistrict;
+    },
+    getUserInfo: function(cb) {
         var _this = this;
-        wx.login({
-            success: function() {
-                wx.getUserInfo({
-                    success: function(res) {
-                        _this.globalData.userInfoFromWX = res.userInfo;
-                    },
-                    fail: function() {
-                        console.log('用户拒绝授权');
-                        //do something
-                    }
-                })
-            }
-        })
+        if (this.globalData.userInfoFromWX) {
+            typeof cb == "function" && cb(this.globalData.userInfoFromWX)
+        } else {
+            wx.login({
+                success: function() {
+                    wx.getUserInfo({
+                        success: function(res) {
+                            _this.globalData.userInfoFromWX = res.userInfo;
+                            typeof cb == "function" && cb(_this.globalData.userInfoFromWX)
+                        },
+                        fail: function() {
+                            console.log('用户拒绝授权');
+                            _this.globalData.userInfoFromWX = {};
+                            typeof cb == "function" && cb(_this.globalData.userInfoFromWX)
+                        }
+                    })
+                }
+            })
+        }
     },
     onShow: function() {
         //获取本地存储 简历信息

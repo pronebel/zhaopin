@@ -33,5 +33,5 @@
 	<textarea value='{{intership.description}}' maxlength="{{maxlength}}" class="_textarea" bindinput='textareaInput'></textarea>
 	<view class="hint">{{intership.description.length}}/{{maxlength}}</view>
 	<button type="primary" class='btn' bindtap="save">保存修改</button>
-	<button type="default" class='btn' style='margin-top:15px;margin-bottom: 15px;' bindtap='delete'>删除此教育经历</button>
+	<button type="default" wx:if='{{flag}}' class='btn' style='margin-top:15px;margin-bottom: 15px;' bindtap='delete'>删除此教育经历</button>
 </view>
