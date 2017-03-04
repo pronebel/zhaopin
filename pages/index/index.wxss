@@ -1,35 +1,16 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
 
-.userinfo-nickname {
-  color: #aaa
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.search{
+/*.search{
 	background:#fff;
 	width:100%;
 	position: fixed;
-	/*box-shadow:0 10px 30px rgba(0,0,0,0.2);*/
 	box-shadow: 0 2px 4px #aaa;
 	text-align: center;
-	padding:26rpx 40rpx;
+	padding:12px 40rpx;
 	box-sizing:border-box;
 	top:0;
+	z-index: 11;
 }
 
 .search-box{
@@ -43,8 +24,43 @@
 	position: absolute;
 	left:35rpx;
 	top:33rpx;
+}*/
+
+page{
+	background: #fff;
 }
 
+.header{
+	height:43px;
+	width: 100%;
+	z-index:11;
+	background:#fff;
+	box-shadow: 0 2px 4px #aaa;
+}
+
+.header .iconfont{
+	line-height: 43px;
+	margin:0px 15px;
+}
+
+.search-box{
+	flex-grow: 1;
+	text-align: center;
+	background:rgb(239,239,244);
+	margin:6px 0px;
+	border-radius: 16px;
+}
+
+.search-box .icon-search{
+	line-height: 31px;
+	margin-right: 30rpx;
+	color:#888888;
+}
+.search{
+	display: inline-block;
+	line-height: 31px;
+	color:#888888;
+}
 .list{
 	width:100%;
 }
@@ -53,6 +69,7 @@
 	width:100%;
 	padding:25rpx 25rpx 0 25rpx;
 	box-sizing: border-box;
+	background:#fff;
 }
 
 .logo{
@@ -106,3 +123,35 @@
 	color:#b2b2b2;
 }
 
+.mpage {
+  z-index: 10;
+  background: #fff;
+  position: absolute;
+}
+
+.shadow{
+	position:fixed;
+	z-index:20;
+	height:100%;
+	background:#000;
+}
+.withAnimate {
+  transition: all 300ms ease;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.user {
+  position: fixed;
+  height:100%;
+  left: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.user .user-box {
+	height:100%;
+  	background: cadetblue;
+}

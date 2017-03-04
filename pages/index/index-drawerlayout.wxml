@@ -1,0 +1,117 @@
+<view wx:if="{{ui.offsetLeft!=0}}" style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px;opacity: {{ui.offsetLeft*0.001}}' class="shadow {{!ui.tStart? 'withAnimate': ''}}" bindtouchstart="handlerStart" bindouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" > 
+</view>
+
+    <view class="mpage {{!ui.tStart? 'withAnimate': ''}}" style="left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px" bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchend="handlerEnd">
+        <view class="container-column _relative">
+            <image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
+            <view class="search" bindtap="toSearch">
+                <icon type="search" size="15" color="rgb(88,88,88,0.8)" class="searchicon" />
+                <view class="search-box">搜索职位/公司</view>
+            </view>
+        </view>
+       <!--  <scroll-view class="list" scroll-y style='height:300px;'> -->
+        <view class='list'>
+            <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
+                <view class="logo">
+                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                </view>
+                <view class="details">
+                    <view class="_block">
+                        <text class="job-title">web前端</text>
+                        <text class="job-salary">8k-10k</text>
+                        <view style="clear:both"></view>
+                    </view>
+                    <text class="company-name">公司名</text>
+                    <view class="_block translucence-msg" style="margin-top:10rpx">
+                        <text class="work-place">深圳</text>
+                        <text class="internship">有实习经历</text>
+                        <text class="degree">本科</text>
+                        <text class="_right release-date">01月11日</text>
+                    </view>
+                    <view class="_block translucence-msg" style="margin-top:6rpx">
+                        <text class="scale">100-500人</text>
+                        <text class="company-type">移动互联网</text>
+                    </view>
+                </view>
+                <view style="clear:both;"></view>
+            </view>
+            <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
+                <view class="logo">
+                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                </view>
+                <view class="details">
+                    <view class="_block">
+                        <text class="job-title">web前端</text>
+                        <text class="job-salary">8k-10k</text>
+                        <view style="clear:both"></view>
+                    </view>
+                    <text class="company-name">公司名</text>
+                    <view class="_block translucence-msg" style="margin-top:10rpx">
+                        <text class="work-place">深圳</text>
+                        <text class="internship">有实习经历</text>
+                        <text class="degree">本科</text>
+                        <text class="_right release-date">01月11日</text>
+                    </view>
+                    <view class="_block translucence-msg" style="margin-top:6rpx">
+                        <text class="scale">100-500人</text>
+                        <text class="company-type">移动互联网</text>
+                    </view>
+                </view>
+                <view style="clear:both;"></view>
+            </view>
+            <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
+                <view class="logo">
+                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                </view>
+                <view class="details">
+                    <view class="_block">
+                        <text class="job-title">web前端</text>
+                        <text class="job-salary">8k-10k</text>
+                        <view style="clear:both"></view>
+                    </view>
+                    <text class="company-name">公司名</text>
+                    <view class="_block translucence-msg" style="margin-top:10rpx">
+                        <text class="work-place">深圳</text>
+                        <text class="internship">有实习经历</text>
+                        <text class="degree">本科</text>
+                        <text class="_right release-date">01月11日</text>
+                    </view>
+                    <view class="_block translucence-msg" style="margin-top:6rpx">
+                        <text class="scale">100-500人</text>
+                        <text class="company-type">移动互联网</text>
+                    </view>
+                </view>
+                <view style="clear:both;"></view>
+            </view>
+            <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toJobDetail' bindlongtap='longtapHandle'>
+                <view class="logo">
+                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                </view>
+                <view class="details">
+                    <view class="_block">
+                        <text class="job-title">web前端</text>
+                        <text class="job-salary">8k-10k</text>
+                        <view style="clear:both"></view>
+                    </view>
+                    <text class="company-name">公司名</text>
+                    <view class="_block translucence-msg" style="margin-top:10rpx">
+                        <text class="work-place">深圳</text>
+                        <text class="internship">有实习经历</text>
+                        <text class="degree">本科</text>
+                        <text class="_right release-date">01月11日</text>
+                    </view>
+                    <view class="_block translucence-msg" style="margin-top:6rpx">
+                        <text class="scale">100-500人</text>
+                        <text class="company-type">移动互联网</text>
+                    </view>
+                </view>
+                <view style="clear:both;"></view>
+            </view>
+        </view>
+        <!-- </scroll-view> -->
+    </view>
+
+
+<view bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" class="user" style="width: {{ui.menuWidth}}px;">
+   <view>content</view>
+</view>

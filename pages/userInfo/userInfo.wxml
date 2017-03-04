@@ -50,7 +50,7 @@
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{userInfo.degree==''}}">出生年月</view>
+					<view class="inputMsg placeholder-class" wx:if="{{userInfo.degree==''}}">最高学历</view>
 					<view class="inputMsg" wx:else>{{userInfo.degree}}</view>
 				</view>
 			</view>

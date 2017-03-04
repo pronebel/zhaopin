@@ -7,10 +7,10 @@ view,scroll-view{
 	color:#353535;
 }
 
-icon{
+/*icon{
 	vertical-align: middle;
 }
-
+*/
 /*view,text,icon{
 	vertical-align: middle;
 }*/
@@ -23,7 +23,6 @@ icon{
 
 .container-column{
 	background:#ffffff;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

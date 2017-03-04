@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/editResume/editResume",
+    "pages/index/index",
     "pages/user/user",
+    "pages/editResume/editResume",
     "pages/editResume/selfAssessment/selfAssessment",
     "pages/editResume/hope/hope",
     "pages/editResume/education/education",
@@ -13,7 +14,6 @@
     "pages/editResume/project/project",
     "pages/editResume/project/editProject/editProject",
     "pages/resume/resume",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/msg/msg",
     "pages/search/search",
@@ -58,6 +58,5 @@
       "selectedIconPath": "icons/user-2.png",
       "text": "我"
     }]
-  },
-  "debug": true
+  }
 }
