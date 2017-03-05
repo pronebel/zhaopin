@@ -1,4 +1,4 @@
-
+<view class='_relative searchBar' >
 	<view class="container-row _fixed searchBar" >
 		<view class="work-place _nowrap _relative" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}" >
 			<text class='_nowrap'>{{workplaceCity}}</text>
@@ -13,7 +13,7 @@
 			<button class="cancle _nowrap" bindtap="cancle" hover-start-time="10" hover-stay-time="200" >取消</button>
 		</view>
 	</view>
-
+</view>
 	<view class="container search-history" hidden="{{searchMsg!='' || searchHistory.length==0 || !showSuggestions}}" >
 		<view>
 			<view class="placeicon-1"></view>
@@ -163,6 +163,78 @@
 	<view wx:if="{{jobList.length>0 && !showSuggestions}}" class="jobList">
 		<view class='list'>
 			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
+			    <view class="logo">
+			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+			    </view>
+	      		<view class="details">
+	        		<view class="_block">
+				        <text class="job-title">web前端</text>
+				        <text class="job-salary">8k-10k</text>
+				        <view style="clear:both"></view>
+			        </view>
+			        <text class="company-name">公司名</text>
+			        <view class="_block translucence-msg" style="margin-top:10rpx">
+				        <text class="work-place">深圳</text>
+				        <text class="internship">有实习经历</text>
+				        <text class="degree">本科</text>
+				        <text class="_right release-date">01月11日</text>
+			        </view>
+			        <view class="_block translucence-msg" style="margin-top:6rpx">
+			        	<text class="scale">100-500人</text>
+			         	<text class="company-type">移动互联网</text>
+			        </view>
+	      		</view>
+	      		<view style="clear:both;"></view>
+	    	</view>
+	    	<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
+			    <view class="logo">
+			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+			    </view>
+	      		<view class="details">
+	        		<view class="_block">
+				        <text class="job-title">web前端</text>
+				        <text class="job-salary">8k-10k</text>
+				        <view style="clear:both"></view>
+			        </view>
+			        <text class="company-name">公司名</text>
+			        <view class="_block translucence-msg" style="margin-top:10rpx">
+				        <text class="work-place">深圳</text>
+				        <text class="internship">有实习经历</text>
+				        <text class="degree">本科</text>
+				        <text class="_right release-date">01月11日</text>
+			        </view>
+			        <view class="_block translucence-msg" style="margin-top:6rpx">
+			        	<text class="scale">100-500人</text>
+			         	<text class="company-type">移动互联网</text>
+			        </view>
+	      		</view>
+	      		<view style="clear:both;"></view>
+	    	</view>
+	    	<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
+			    <view class="logo">
+			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+			    </view>
+	      		<view class="details">
+	        		<view class="_block">
+				        <text class="job-title">web前端</text>
+				        <text class="job-salary">8k-10k</text>
+				        <view style="clear:both"></view>
+			        </view>
+			        <text class="company-name">公司名</text>
+			        <view class="_block translucence-msg" style="margin-top:10rpx">
+				        <text class="work-place">深圳</text>
+				        <text class="internship">有实习经历</text>
+				        <text class="degree">本科</text>
+				        <text class="_right release-date">01月11日</text>
+			        </view>
+			        <view class="_block translucence-msg" style="margin-top:6rpx">
+			        	<text class="scale">100-500人</text>
+			         	<text class="company-type">移动互联网</text>
+			        </view>
+	      		</view>
+	      		<view style="clear:both;"></view>
+	    	</view>
+	    	<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toJobDetail">
 			    <view class="logo">
 			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
 			    </view>

@@ -1,0 +1,17 @@
+<view>
+    <view class='header _flex _relative'>
+        <block wx:for='{{pages}}'>
+            <view bindtap='changeCurrent' data-index='{{index}}' class="item {{current==index?'active':''}}" style='width:{{windowWidth/pages.length}}px;'>{{item}}</view>
+        </block>
+        <view class='slider' style='width:{{windowWidth/pages.length}}px;left:{{sliderLeft*current}}px'></view>
+    </view>
+    <view class='content'>
+        <swiper  current='{{current}}' bindchange='currentChanged' style='height:{{windowHeight-40}}px'>
+            <block wx:for="{{pages}}">
+                <swiper-item class='_flex' style='align-items:center; justify-content: center;'>
+                    <image src='../../../images/nothing.png' style='width:320px;height:360px' mode='aspectFit'></image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+</view>

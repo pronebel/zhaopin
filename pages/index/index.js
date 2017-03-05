@@ -5,6 +5,7 @@ const FAST_SPEED_DISTANCE = 5;
 const FAST_SPEED_EFF_Y = 50;
 Page({
 	data: {
+		scrollTop: 1,
 		ui: {
 			windowWidth: 0,
 			menuWidth: 0,
@@ -48,7 +49,21 @@ Page({
 			scale: '100-500人',
 			type: '移动互联网',
 			releaseDate: '01月11日'
-		}]
+		}],
+		userInfo: {
+			imgUrl: '',
+			name: '林锐'
+		},
+		hope: {
+			city: '深圳',
+			job: '前端开发'
+		}
+	},
+	navigateTo(e) {
+		console.log(e.currentTarget.dataset.url);
+		wx.navigateTo({
+			url: e.currentTarget.dataset.url
+		})
 	},
 	toSearch: () => {
 		wx.navigateTo({
@@ -68,6 +83,14 @@ Page({
 				windowHeight: res.windowHeight
 			})
 		} catch (e) {}
+
+		app.getUserInfo(function(data) {
+			that.setData({
+				userInfoFromWX: data
+			})
+		})
+
+		//todo 获取用户信息
 	},
 	toJobDetail: function() {
 		wx.navigateTo({

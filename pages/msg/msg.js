@@ -1,10 +1,19 @@
-var app = getApp();
-
 Page({
 	data: {
+		resumeMsg: [1],
+		jobInvitationMsg: ['1'],
+		seenMsg: [2, 2, 3, 3]
+	},
+	onLoad() {
+		//获取消息
 
 	},
-	onLoad: function() {
-
+	getMsg() {
+		//wx.request
+	},
+	navigateTo(e) {
+		wx.navigateTo({
+			url: e.currentTarget.dataset.url
+		})
 	}
 })

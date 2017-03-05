@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/msg/seenMsg/seenMsg",
+    "pages/msg/jobInvitationMsg/jobInvitationMsg",
+    "pages/msg/msg",
+    "pages/msg/resumeMsg/resumeMsg",
     "pages/user/user",
     "pages/editResume/editResume",
     "pages/editResume/selfAssessment/selfAssessment",
@@ -15,7 +19,6 @@
     "pages/editResume/project/editProject/editProject",
     "pages/resume/resume",
     "pages/logs/logs",
-    "pages/msg/msg",
     "pages/search/search",
     "pages/searchResult/searchResult",
     "pages/workplace/workplace",

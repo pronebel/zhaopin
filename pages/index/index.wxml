@@ -5,16 +5,17 @@
     <icon type="search" size="15" color="rgb(88,88,88,0.8)" class="searchicon" />
     <view class="search-box">搜索职位/公司</view>
 </view> -->
-<view style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px; position: fixed;min-height:{{windowHeight}}px;z-index: 12' bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchend="handlerEnd" class="mpage {{!ui.tStart? 'withAnimate': ''}}">
-    <view class="header _flex _fixed"  >
-        <icon class='iconfont icon-bars' bindtap='showBars'></icon>
-        <view class='search-box' bindtap='toSearch'>
-            <icon class='iconfont icon-search'></icon>
-            <text class='search'>搜索职位/公司</text>
+<view style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px; position: fixed;height:{{windowHeight}}px;z-index: 12' bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchend="handlerEnd" class="mpage {{!ui.tStart? 'withAnimate': ''}}">
+<!-- <view style='transform:translateX({{ui.offsetLeft}}px);width: {{ui.windowWidth}}px; height:{{windowHeight}}px;' bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchend="handlerEnd" class=" {{!ui.tStart? 'withAnimate': ''}}"> -->
+        <view class="header _flex _fixed"  >
+            <icon class='iconfont icon-bars' bindtap='showBars'></icon>
+            <view class='search-box' bindtap='toSearch'>
+                <icon class='iconfont icon-search'></icon>
+                <text class='search'>搜索职位/公司</text>
+            </view>
+            <icon class='iconfont icon-scan' bindtap='showScan'></icon>
         </view>
-        <icon class='iconfont icon-scan' bindtap='showScan'></icon>
-    </view>
-    <scroll-view style="min-height:{{windowHeight}}px;" scroll-y>
+    <scroll-view style="height:{{windowHeight}}px;" scroll-y>
         <view class="container-column _relative">
             <image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
         </view>
@@ -50,8 +51,57 @@
 </view>
 
 <view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" class="user" style="width: {{ui.menuWidth}}px;left:{{-ui.menuWidth/3 + ui.offsetLeft/3}}px">
-   <view class="user-box">content
-   </view>
+    <image src='../../images/bkg.jpg' style='width: {{ui.menuWidth}}px;height:100%'></image>
+    <scroll-view class='user-box'>
+        <view>
+            <view class='user-box-item img-text'>
+                <view class='avator-box' bindtap='navigateTo' data-url='../userInfo/userInfo'>
+                    <image src='{{userInfo.imgUrl || userInfoFromWX.avatarUrl}}' class='avator'></image>
+                </view>
+                <text>{{userInfo.name || userInfoFromWX.nickName}}</text>
+            </view>
+        </view>
+        <view class='mrt10'>
+            <view hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+                <view class='user-box-item icon-text' style='border:none'>
+                    <view class='iconfont icon-collect'></view>
+                    <text>已收藏职位</text>
+                    <text class='ctn'>2</text>
+                </view>
+            </view>
+            <view  hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+                <view class='user-box-item icon-text' style='border:none; margin-bottom: 10px'>
+                    <view class='iconfont icon-company'></view>
+                    <text>已关注公司</text>
+                    <text class='ctn'>2</text>
+                </view>
+            </view>
+        </view>
+        <view class='line'></view>
+        <view class='mrt10'>
+            <view hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+                <view class='user-box-item icon-text' style='border:none'>
+                    <view class='iconfont icon-job'></view>
+                    <text>求职意向</text>
+                    <text class='ctn'>{{hope.job}}</text>
+                </view>
+            </view>
+            <view  hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
+                <view class='user-box-item icon-text user-box-item-last' style='border:none' >
+                    <view class='iconfont icon-place'></view>
+                    <text>工作地点</text>
+                    <text class='ctn'>{{hope.city}}</text>
+                </view>
+            </view>
+        </view>
+        <view class='footer-line'></view>
+        <view class='mrt10 config'>
+            <view class='icon-text'>
+                <view class='iconfont icon-config'></view>
+                <text>设置</text>
+            </view>
+        </view>
+    </scroll-view>
 </view>
 
 
