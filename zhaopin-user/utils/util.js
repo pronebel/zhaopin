@@ -83,6 +83,7 @@ function getLocationAddress(app) {
  * @return {[type]} 返回城市区县
  */
 function getDistrictByCityName(str, cityList, page) {
+    console.log(str);
     var id = 0;
     for (var i = 0; i < cityList.length; i++) {
         if (str == cityList[i].name) {
@@ -111,7 +112,7 @@ function getDistrictByCityName(str, cityList, page) {
 /**
  * @return {[type]}  调用腾讯地图开放平台API 获取城市列表
  */
-function getCityList() {
+function getCityList(self) {
     var cityList = [];
     var cityMsg;
     demo.getCityList({
@@ -127,6 +128,7 @@ function getCityList() {
                 }
             }
             wx.setStorageSync('cityList', cityList);
+            self.globalData.cityList = cityList;
         },
         fail: function(res) {
             console.log(res);
