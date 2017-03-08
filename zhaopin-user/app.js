@@ -15,8 +15,7 @@ App({
         //获取本地存储的cityList
         var cityList = wx.getStorageSync('cityList');
         if (!cityList) {
-            $.getCityList(); //调用腾讯地图开放平台获取城市列表 保存在本地存储
-            this.globalData.cityList = wx.getStorageSync('cityList');
+            $.getCityList(this); //调用腾讯地图开放平台获取城市列表 保存在本地存储
         } else {
             this.globalData.cityList = cityList;
         }
