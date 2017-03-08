@@ -32,6 +32,17 @@ App({
         } else {
             wx.login({
                 success: function() {
+                    // wx.request({
+                    //     url:'',
+                    //     data:{code:res.code},
+                    //     success:function(res){
+
+                    //     },fail:()=>{
+
+                    //     }
+                    // })
+                   
+                   
                     wx.getUserInfo({
                         success: function(res) {
                             _this.globalData.userInfoFromWX = res.userInfo;
