@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Student">
+	<resultMap id="Student" type="com.demo.model.Student">
+    	<id property="id" column="ID" jdbcType="BIGINT" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />		
+		<result property="birthday" column="BIRTHDAY" jdbcType="TIMESTAMP" />		
+		<result property="gender" column="GENDER" jdbcType="VARCHAR" />		
+		<result property="clazzId" column="CLAZZ_ID" jdbcType="BIGINT" />		
+	</resultMap>
+
+ 	<sql id="columns">
+		ID,NAME,BIRTHDAY,GENDER,CLAZZ_ID
+	</sql>
+
+	<sql id="TableName">
+		T_STUDENT
+	</sql>
+	
+	<select id="list" resultMap="Student">
+		SELECT *
+		FROM <include refid="TableName"/>
+	</select>
+	<update id="edit">
+		UPDATE t_student SET CLAZZ_ID =0 WHERE id = 2;
+	</update>
+</mapper>

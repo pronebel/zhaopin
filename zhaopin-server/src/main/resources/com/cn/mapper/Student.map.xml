@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Student">
+	<resultMap id="Student" type="com.demo.model.Student">
+    	<id property="id" column="ID" jdbcType="BIGINT" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />		
+		<result property="birthday" column="BIRTHDAY" jdbcType="TIMESTAMP" />		
+		<result property="gender" column="GENDER" jdbcType="VARCHAR" />		
+		<result property="clazzId" column="CLAZZ_ID" jdbcType="BIGINT" />		
+	</resultMap>
+
+	<sql id="TableName">
+		T_STUDENT
+	</sql>
+	
+	<select id="list" resultMap="Student">
+		SELECT *
+		FROM <include refid="TableName"/>
+	</select>
+	<select id="selectById" resultMap="Student">
+		select * from <include refid="TableName" />
+		where ID=#{id}
+	</select>
+	<insert id="insert" parameterType="com.demo.model.Student">
+		INSERT INTO T_STUDENT
+		(ID,NAME,BIRTHDAY,GENDER,CLAZZ_ID)
+		VALUES
+		(#{id},#{name},#{birthday},#{gender},#{clazzId})
+	</insert>
+	<update id="update" parameterType="com.demo.model.Student">
+		UPDATE <include refid="TableName"/>SET
+			NAME=#{name,jdbcType=VARCHAR},
+			GENDER=#{gender, jdbcType=VARCHAR}	
+		WHERE
+			ID=#{id}
+	</update>
+	<delete id="delete" parameterType="com.demo.model.Student">
+		delete from <include refid="TableName" />
+		where ID=#{id}
+	</delete>
+	
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

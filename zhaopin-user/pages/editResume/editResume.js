@@ -114,9 +114,6 @@ Page({
 				url: 'education/editEducation/editEducation'
 			})
 		}
-		wx.navigateTo({
-			url: 'education/education?'
-		})
 	},
 	toIntership: function() {
 		wx.navigateTo({
