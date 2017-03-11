@@ -1,18 +1,11 @@
-package com.cn.dao;
+package com.demo.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.cn.model.Student;
+import com.demo.model.Student;
 
-/**
- * 
- * @author Cloud Lau
- * @company SZU
- * @date 2016年3月5日
- * @description
- */
 
 @Repository
 public class StudentDao extends BaseDao<Student>{

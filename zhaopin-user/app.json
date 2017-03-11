@@ -61,5 +61,6 @@
       "selectedIconPath": "icons/user-2.png",
       "text": "我"
     }]
-  }
+  },
+  "debug": true
 }

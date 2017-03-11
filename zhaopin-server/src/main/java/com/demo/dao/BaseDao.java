@@ -1,4 +1,4 @@
-package com.cn.dao;
+package com.demo.dao;
 
 import javax.annotation.Resource;
 

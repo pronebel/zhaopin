@@ -1,12 +1,17 @@
-var app = getApp();
+const app = getApp();
 
 Page({
 	data: {
 		workplaceCity: ''
 	},
 	onLoad: function() {
-		this.setData({
-			workplaceCity: app.globalData.workplaceCity
+		// this.setData({
+		// 	workplaceCity: app.globalData.workplaceCity
+		// })
+		app.getWorkplace((data) => {
+			this.setData({
+				workplaceCity: data
+			})
 		})
 	},
 	goBack: () => {

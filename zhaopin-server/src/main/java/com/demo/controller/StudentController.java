@@ -1,4 +1,4 @@
-package com.cn.controller;
+package com.demo.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -13,17 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cn.model.Student;
-import com.cn.service.StudentService;
+import com.demo.model.Student;
+import com.demo.service.StudentService;
 
 
-/**
- * 学生控制器
- * @author Cloud Lau
- * @company SZU
- * @date 2016年3月5日
- * @description
- */
 @Controller
 @RequestMapping("student")
 public class StudentController {

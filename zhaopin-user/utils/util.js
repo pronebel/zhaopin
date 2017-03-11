@@ -35,7 +35,7 @@ function formatNumber(n) {
  * @param  {[obj]} app
  * @return {[string]}location
  */
-function getLocationAddress(app) {
+function getLocationAddress(app, cb) {
     wx.getLocation({
         //      type:'gcj02',
         success: function(res) {
@@ -57,6 +57,7 @@ function getLocationAddress(app) {
                         app.globalData.workplaceDistrict = app.globalData.location;
                         wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
                         wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+                        typeof cb == 'function' && cb();
                     }
                 }
             })
@@ -71,6 +72,7 @@ function getLocationAddress(app) {
                 app.globalData.workplaceDistrict = app.globalData.location;
                 wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
                 wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+                typeof cb == 'function' && cb();
             }
         }
     })
@@ -182,6 +184,66 @@ function inArray(value, array) {
     return -1;
 }
 
+/**
+ * [ajax description] 发起网络请求 
+ * @param  {[type]} options.url     [description]
+ * @param  {[type]} options.method: 'GET'         [description]
+ * @param  {[type]} options.data:   {}          [description]
+ * @return {[type]}                 [description] 返回promise对象
+ */
+function ajax({
+    url,
+    method = 'GET',
+    data = {},
+}) {
+    return new Promise((resolve, reject) => {
+        wx.request({
+            header: {
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('session').sessionId
+            },
+            url: url,
+            method: method,
+            data: data,
+            success: function(res) {
+                resolve(res)
+            },
+            fail: function(res) {
+                reject(res)
+            }
+        })
+    })
+}
+
+/**
+ * [ajaxCheckSession description] wx.checkSession
+ * @return {[type]} [description] 返回promise
+ */
+function ajaxCheckSession() {
+    return new Promise((resolve, reject) => {
+        wx.checkSession({
+            success: resolve(),
+            fail: reject()
+        })
+    })
+}
+
+/**
+ * [ajaxLogin description] wx.login
+ * @return {[type]} [description] 返回promise
+ */
+function ajaxLogin() {
+    return new Promise((resolve, reject) => {
+        wx.login({
+            success: function(res) {
+                resolve(res)
+            },
+            fail: function(res) {
+                reject(res)
+            }
+        })
+    })
+}
+
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
@@ -189,5 +251,8 @@ module.exports = {
     getCityList: getCityList,
     getDistrictByCityName: getDistrictByCityName,
     inArray: inArray,
-    isEmptyObject: isEmptyObject
+    isEmptyObject: isEmptyObject,
+    ajax: ajax,
+    ajaxCheckSession: ajaxCheckSession,
+    ajaxLogin: ajaxLogin
 }

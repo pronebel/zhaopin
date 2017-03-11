@@ -1,7 +1,7 @@
 <view class='_relative searchBar' >
 	<view class="container-row _fixed searchBar" >
 		<view class="work-place _nowrap _relative" bindtap="toChooseWorkPlace" wx:if="{{jobList.length==0 || showSuggestions}}" >
-			<text class='_nowrap'>{{workplaceCity}}</text>
+			<text class='_nowrap'>{{workplaceDistrict || workplaceCity}}</text>
 			<view class="arrows-down "></view> 
 		</view>
 		<view class="search" >

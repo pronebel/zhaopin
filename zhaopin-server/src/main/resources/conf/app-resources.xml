@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -15,8 +15,8 @@
 						http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	<!-- 自动扫描 -->
 	<!-- 填写包名前缀，如：com.cn.aaa -->
-	<context:component-scan base-package="com.cn.**.dao" />
-	<context:component-scan base-package="com.cn.**.service" />
+	<context:component-scan base-package="com.demo.**.dao" />
+	<context:component-scan base-package="com.demo.**.service" />
 	
 	<!-- <bean id="springContextUtil" class="org.sfa.web.util.AppUtil" /> -->
 	<!-- 引入配置文件 -->
@@ -56,7 +56,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" >
         	<list>
-        		<value>classpath:/com/cn/mapper/*.map.xml</value>
+        		<value>classpath:/com/demo/mapper/*.map.xml</value>
         	</list>
         </property>
 	</bean>
