@@ -1,19 +1,44 @@
 // pages/my/my.js
+var app = getApp();
+
 Page({
-  data:{},
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-  },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  }
+	data: {
+		userInfoFromWX: {},
+		userInfo: {
+			name: '',
+			imgUrl: ''
+		}
+	},
+	onLoad: function() {
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfoFromWX: data
+			})
+		})
+	},
+	toResume: function() {
+		wx.navigateTo({
+			url: '../company/company'
+		})
+	},
+	toUserInfo: function() {
+		wx.navigateTo({
+			url: '../userInfo/userInfo'
+		})
+	},
+	toCollect: function() {
+		wx.navigateTo({
+			url: '../collect/collect'
+		})
+	},
+	toConfig: function() {
+		wx.navigateTo({
+			url: '../config/config'
+		})
+	},
+	toCompanyInfo: function() {
+		wx.navigateTo({
+			url: '../companyInfo/companyInfo'
+		})
+	}
 })

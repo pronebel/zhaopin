@@ -5,7 +5,9 @@
     "pages/candidate/candidate",
     "pages/position/position",
     "pages/msg/msg",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/userInfo/userInfo",
+    "pages/companyInfo/companyInfo"
   ],
   "window":{
     "backgroundTextStyle":"light",
