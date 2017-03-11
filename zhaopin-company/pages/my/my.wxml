@@ -1,0 +1,31 @@
+<!--pages/my/my.wxml-->
+<view>
+	<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toUserInfo">
+		<view class="item">
+			<image mode="aspectFit" src="{{userInfo.imgUrl || userInfoFromWX.avatarUrl }}" class="img"></image>
+			<text>{{userInfo.name || userInfoFromWX.nickName}}</text>
+			<icon class="iconfont icon-right"></icon>
+		</view>
+	</view>
+	<view class="box">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toCompanyInfo">
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class="iconfont icon-jianli"></icon>
+				<text>公司档案</text>
+				<icon class="iconfont icon-right"></icon>
+			</view>
+		</view>
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toCollect'>
+			<icon class="iconfont icon-collect"></icon>
+			<text>收藏</text>
+			<icon class="iconfont icon-right"></icon>
+		</view>
+	</view>
+	<view class="box">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="toConfig">
+			<icon class="iconfont icon-config"></icon>
+			<text>设置</text>
+			<icon class="iconfont icon-right"></icon>
+		</view>
+	</view>
+</view>

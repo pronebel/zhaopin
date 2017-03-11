@@ -19,6 +19,7 @@ create table company(
 	id bigint(11) auto_increment primary key not null,
 	name varchar(50) not null,
 	scale varchar(20) not null,
+	financing_stage vachar(20) not null;
 	address varchar(100) not null,
 	province varchar(10) not null,
 	city varchar(10) not null,
