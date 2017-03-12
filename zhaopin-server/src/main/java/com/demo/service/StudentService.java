@@ -1,4 +1,4 @@
-package com.cn.service;
+package com.demo.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cn.dao.StudentDao;
-import com.cn.model.Student;
+import com.demo.dao.StudentDao;
+import com.demo.model.Student;
 
 /**
  * Student Service

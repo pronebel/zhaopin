@@ -1,5 +1,7 @@
-var event = require('../../utils/event.js');
-
+const event = require('../../utils/event.js');
+const {
+	url
+} = require('../../configs/serverConfig.js');
 var app = getApp();
 
 Page({

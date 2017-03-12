@@ -1,16 +1,17 @@
-var $ = require('utils/util.js');
+const $ = require('utils/util.js');
+const {
+    url
+} = require('configs/serverConfig.js');
 
 App({
     onLaunch: function() {
-        //获取本地存储的workplaceCity,如为空,采用当地为workplaceCity
+        //获取本地存储的workplaceCity,如为空,采用当地为workplaceCity,如果拒绝,采用'全国'
         var workplaceCity = wx.getStorageSync('workplaceCity');
         if (!workplaceCity) {
-            //还没存储workplaceCity，应该为第一次访问
+            $.getLocationAddress(this);
         } else {
             this.globalData.workplaceCity = workplaceCity;
-            console.log(workplaceCity);
         }
-        $.getLocationAddress(this);
 
         //获取本地存储的cityList
         var cityList = wx.getStorageSync('cityList');
@@ -20,28 +21,65 @@ App({
             this.globalData.cityList = cityList;
         }
 
-        var workplaceDistrict = wx.getStorageSync('workplaceDistrict');
-        console.log(workplaceDistrict);
-        this.globalData.workplaceDistrict = workplaceDistrict;
+        this.globalData.workplaceDistrict = wx.getStorageSync('workplaceDistrict');
+
+        //调用登录接口
+        this.login();
     },
-    getUserInfo: function(cb) {
+    onShow: function() {
+        //checkSession
+        this.checkSession();
+
+    },
+    login() {
+        var that = this;
+        $.ajaxLogin().then((res) => {
+            if (res) {
+                //登录成功 得到code 发送到服务器换取session
+                return $.ajax({
+                    url: url + '/common/onLogin',
+                    data: {
+                        code: res.code,
+                        identity: that.globalData.identity
+                    }
+                })
+            }
+        }).catch(() => null).then((res) => {
+            if (res) {
+                //获取session成功 保存到globalData中并存储到本地
+                that.globalData.session = res.data;
+                wx.setStorageSync('session', res.data);
+            }
+        })
+    },
+    checkSession() {
+        var that = this;
+        $.ajaxCheckSession().then(() => null).catch(() => $.ajaxLogin()).then((res) => {
+            if (res) {
+                //登录成功 得到code 发送到服务器换取session
+                return $.ajax({
+                    url: url + '/common/onLogin',
+                    data: {
+                        code: res.code,
+                        identity: that.globalData.identity
+                    }
+                })
+            }
+        }).catch(() => null).then((res) => {
+            if (res) {
+                //获取session成功 保存到globalData中并存储到本地
+                this.globalData.session = res.data;
+                wx.setStorageSync('session', res.data);
+            }
+        })
+    },
+    getUserInfo(cb) {
         var _this = this;
         if (this.globalData.userInfoFromWX) {
             typeof cb == "function" && cb(this.globalData.userInfoFromWX)
         } else {
             wx.login({
                 success: function() {
-                    // wx.request({
-                    //     url:'',
-                    //     data:{code:res.code},
-                    //     success:function(res){
-
-                    //     },fail:()=>{
-
-                    //     }
-                    // })
-                   
-                   
                     wx.getUserInfo({
                         success: function(res) {
                             _this.globalData.userInfoFromWX = res.userInfo;
@@ -57,21 +95,15 @@ App({
             })
         }
     },
-    onShow: function() {
-        //获取本地存储 简历信息
-        var newResume = wx.getStorageSync('newResume');
-        if (newResume) {
-            this.globalData.newResume = newResume;
+    getWorkplace(cb) {
+        var that = this;
+        if (this.globalData.workplaceCity) {
+            typeof cb == 'function' && cb(this.globalData.workplaceCity)
+        } else {
+            $.getLocationAddress(this, function() {
+                typeof cb == "function" && cb(this.globalData.workplaceCity);
+            });
         }
-        var editResume = wx.getStorageSync('editResume');
-        if (editResume) {
-            this.globalData.editResume = editResume;
-        }
-    },
-    onHide: function() {
-        //保存简历信息到本地存储
-        wx.setStorageSync('newResume', this.globalData.newResume);
-        wx.setStorageSync('editResume', this.globalData.editResume);
     },
     globalData: {
         userInfoFromWX: null,
@@ -79,7 +111,7 @@ App({
         workplaceCity: '',
         workplaceDistrict: '',
         cityList: [],
-        newResume: {},
-        editResume: {}
+        identity: 0, //0代表seeker  1代表hr
+        session: {}
     }
 })
