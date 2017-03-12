@@ -1,4 +1,16 @@
 <!--index.wxml-->
-<view class="container">
+ <!--<view wx:if="{{ui.offsetLeft!=0}}" style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px;opacity: {{ui.offsetLeft*0.002}}' class="shadow {{!ui.tStart? 'withAnimate': ''}}" catchtouchmove='shadowcatch' catchtouchstart='shadowcatch' catchtouchend='shadowcatch' catchtouchcancle='shadowcatch' catchtap='handlerPageTap'> 
+</view> -->
+<view style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px; position: fixed;height:{{windowHeight}}px;z-index: 12' bindtouchstart="handlerStart" bindtouchmove="handlerMove" bindtouchend="handlerEnd" class="mpage {{!ui.tStart? 'withAnimate': ''}}">
 
+        <view class="header _flex _fixed"  >
+            <view class='search-box' bindtap='toSearch'>
+                <icon class='iconfont icon-search'></icon>
+                <text class='search'>搜索职位，学校或专业</text>
+            </view>
+            <icon class='iconfont icon-scan' bindtap='showScan'></icon>
+        </view>
+        <view class="container-column _relative">
+            <image src="../../images/logo.jpg" style="height:380rpx;width:100%" background-size="cover"></image>
+        </view>  
 </view>
