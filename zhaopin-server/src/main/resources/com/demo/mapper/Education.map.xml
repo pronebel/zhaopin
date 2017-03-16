@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Education">
+	<resultMap id="Education" type="com.demo.model.Education">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
+		<result property="school" column="school" jdbcType="VARCHAR" />		
+		<result property="major" column="major" jdbcType="VARCHAR" />		
+		<result property="graduation_year" column="graduation_year" jdbcType="VARCHAR" />	
+		<result property="degree" column="degree" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		education
+	</sql>
+	
+	<select id="getEducations" resultMap="Education">
+		select * from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</select>
+	
+	<update id="updateEducation" parameterType="com.demo.model.Education">
+		update <include refid="TableName" /> set
+			school=#{school},
+			major=#{major},
+			graduation_year=#{graduation_year},
+			degree=#{degree}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteEducation" parameterType="com.demo.model.Education">
+		delete from <include refid="TableName" />
+		where id=#{id}
+	</delete>
+	
+	<insert id='addEducation' parameterType="com.demo.model.Education">
+		insert into <include refid="TableName" />
+		(resume_id,school,major,graduation_year,degree)
+		values(#{resume_id},#{school},#{major},#{graduation_year},#{degree})
+	</insert>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

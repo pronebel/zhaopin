@@ -4,22 +4,22 @@ use zhaopin;
 
 create table seeker(
 	id varchar(100) not null primary key comment 'openid',
-	name varchar(20) comment '真实姓名',
-	birthday varchar(30),
+	name varchar(20) comment '真实姓名' not null default '',
+	birthday varchar(30) not null default '',
 	sex enum('男','女'),
-	telephone varchar(11),
-	email varchar(30),
-	avatarUrl varchar(100),
-	city varchar(10),
-	degree varchar(10),
-	electronic_resume varchar(100)
+	telephone varchar(11) not null default '',
+	email varchar(30) not null default '',
+	avatarUrl varchar(100) not null default '',
+	city varchar(10) not null default '',
+	degree varchar(10) not null default '',
+	electronic_resume varchar(100) not null default ''
 );
 
 create table company(
 	id bigint(11) auto_increment primary key not null,
 	name varchar(50) not null,
 	scale varchar(20) not null,
-	financing_stage vachar(20) not null;
+	financing_stage varchar(20) not null,
 	address varchar(100) not null,
 	province varchar(10) not null,
 	city varchar(10) not null,
@@ -42,14 +42,16 @@ create table hr(
 
 create table resume(
 	id bigint(11) auto_increment primary key not null,
+	name varchar(50),
 	seeker_id varchar(100) not null,
-	description varchar(500),
+	selfAssessment varchar(500),
 	hope_job varchar(20),
 	hope_job_type enum('全职','实习','兼职'),
 	hope_city varchar(10),
 	hope_salary varchar(30),
 	hope_description varchar(500),
-	report_card_url varchar(100)
+	report_card_url varchar(100),
+	foreign key(seeker_id) references seeker(id)
 );
 
 create table education(
@@ -69,7 +71,7 @@ create table intership(
 	job varchar(20) not null,
 	start_date varchar(20) not null,
 	end_date varchar(20) not null,
-	description varchar(500) not null,
+	description varchar(500),
 	foreign key(resume_id) references resume(id)
 );
 
@@ -81,7 +83,7 @@ create table project(
 	url varchar(100),
 	start_date varchar(20) not null,
 	end_date varchar(20) not null,
-	description varchar(500) not null,
+	description varchar(500),
 	foreign key(resume_id) references resume(id)
 );
 

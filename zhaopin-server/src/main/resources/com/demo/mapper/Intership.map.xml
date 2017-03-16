@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Intership">
+	<resultMap id="Intership" type="com.demo.model.Intership">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
+		<result property="company" column="company" jdbcType="VARCHAR" />		
+		<result property="job" column="job" jdbcType="VARCHAR" />		
+		<result property="start_date" column="start_date" jdbcType="VARCHAR" />	
+		<result property="end_date" column="end_date" jdbcType="VARCHAR" />	
+		<result property="description" column="description" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		intership
+	</sql>
+	
+	<select id="getInterships" resultMap="Intership">
+		select * from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</select>
+	
+	<update id="updateIntership" parameterType="com.demo.model.Intership">
+		update <include refid="TableName" /> set
+			company=#{school},
+			job=#{job},
+			start_date=#{start_date},
+			end_date=#{end_date},
+			description=#{description}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteIntership" parameterType="com.demo.model.Intership">
+		delete from <include refid="TableName" />
+		where id=#{id}
+	</delete>
+	
+	<insert id='addIntership' parameterType="com.demo.model.Intership">
+		insert into <include refid="TableName" />
+		(resume_id,company,job,start_date,end_date,description)
+		values(#{resume_id},#{company},#{job},#{start_date},#{end_date},#{description})
+	</insert>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

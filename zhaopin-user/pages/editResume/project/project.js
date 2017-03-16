@@ -1,20 +1,25 @@
-var event = require('../../../utils/event.js');
+let event = require('../../../utils/event.js');
+let app = getApp();
 
 Page({
 	data: {
-		resume: {
-			projects: [{
-				id: '0',
-				name: '基于微信小程序的招聘系统开发',
-				selfDuty: '前端开发',
-				startDate: '2017-02',
-				endDate: '至今',
-				url: '',
-				description: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
-			}]
-		}
+		resume: {}
 	},
-	onLoad: function() {
+	onLoad: function(options) {
+		this.setData({
+			resume_id: options.resume_id
+		});
+
+		app.resume('resume/getProjects', 'GET', {
+			resume_id: options.resume_id
+		}).then((res) => {
+			if (res.data) {
+				this.setData({
+					'resume.projects': res.data
+				})
+			}
+		})
+
 		event.on('resumeChanged', this, event.cb.bind(this));
 	},
 	onUnload: function() {
@@ -23,11 +28,11 @@ Page({
 	toEditProject: function(e) {
 		if (e.currentTarget.dataset.flag == 'true') {
 			wx.navigateTo({
-				url: 'editProject/editProject?endDate=' + e.currentTarget.dataset.endDate + '&startDate=' + e.currentTarget.dataset.startDate + '&name=' + e.currentTarget.dataset.name + '&selfDuty=' + e.currentTarget.dataset.selfDuty + '&description=' + e.currentTarget.dataset.description + '&id=' + e.currentTarget.dataset.id
+				url: 'editProject/editProject?end_date=' + e.currentTarget.dataset.end_date + '&start_date=' + e.currentTarget.dataset.start_date + '&name=' + e.currentTarget.dataset.name + '&duty=' + e.currentTarget.dataset.duty + '&description=' + e.currentTarget.dataset.description + '&id=' + e.currentTarget.dataset.id + '&resume_id=' + e.currentTarget.dataset.resume_id + '&flag=' + true
 			})
 		} else {
 			wx.navigateTo({
-				url: 'editProject/editProject'
+				url: `editProject/editProject?resume_id=${this.data.resume_id}&flag=false`
 			})
 		}
 	}

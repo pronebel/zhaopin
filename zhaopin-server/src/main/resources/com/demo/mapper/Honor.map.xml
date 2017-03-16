@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Honor">
+	<resultMap id="Honor" type="com.demo.model.Honor">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
+		<result property="date" column="date" jdbcType="VARCHAR" />		
+		<result property="name" column="name" jdbcType="VARCHAR" />		
+		<result property="prize" column="prize" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		honor
+	</sql>
+	
+	<select id="getHonors" resultMap="Honor">
+		select * from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</select>
+	
+	<update id="updateHonor" parameterType="com.demo.model.Honor">
+		update <include refid="TableName" /> set
+			date=#{date},
+			name=#{name},
+			prize=#{prize}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteHonor" parameterType="com.demo.model.Honor">
+		delete from <include refid="TableName" />
+		where id=#{id}
+	</delete>
+	
+	<insert id='addHonor' parameterType="com.demo.model.Honor">
+		insert into <include refid="TableName" />
+		(resume_id,date,name,prize)
+		values(#{resume_id},#{date},#{name},#{prize})
+	</insert>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

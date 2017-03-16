@@ -1,28 +1,28 @@
 <view class="box">
 	<view class="item _flex">
 		<view class="iconfont icon-circle-edit"></view>
-		<input class="input" value="{{intership.campany}}" placeholder="公司名称" placeholder-class="placeholder-class" />
+		<input class="input" value="{{intership.company}}" placeholder="公司名称" placeholder-class="placeholder-class" bindinput='input' data-key='company' />
 	</view>
 	<view class="item _flex">
 		<view class="iconfont icon-circle-edit"></view>
-		<input class="input" value="{{intership.job}}" placeholder="你的职位" placeholder-class="placeholder-class" />
+		<input class="input" value="{{intership.job}}" placeholder="你的职位" placeholder-class="placeholder-class" bindinput='input' data-key='job' />
 	</view>
-	<picker bindchange="bindStartPickerChange" value="{{intership.startDate}}" mode="date" start="2000-01-01" end="{{now}}" fields='month'>
+	<picker bindchange="bindStartPickerChange" value="{{intership.start_date}}" mode="date" start="2000-01-01" end="{{now}}" fields='month'>
 		<view class="item _flex" style="margin-top:20px">
 			<view class="iconfont icon-circle-edit"></view>
-			<view class="input" wx:if="{{intership.startDate}}">{{intership.startDate}}入职</view>
+			<view class="input" wx:if="{{intership.start_date}}">{{intership.start_date}}入职</view>
 			<view class="input placeholder-class" wx:else>入职时间</view>
 		</view>
 	</picker>
 	<view class="item _flex">
 		<view class="iconfont icon-circle-edit"></view>
-		<picker bindchange="bindEndPickerChange" value="{{intership.endDate}}" mode="date" star="2000-01-01" end="{{now}}" fields='month' style="flex-grow:1">
-			<view class="input" wx:if="{{intership.endDate&&!checked}}">{{intership.endDate}}离职</view>
-			<view class="input" wx:if="{{intership.endDate&&checked}}">{{intership.endDate}}</view>
-			<view class="input placeholder-class" wx:if="{{!intership.endDate}}">离职时间</view>
+		<picker bindchange="bindEndPickerChange" value="{{intership.end_date}}" mode="date" star="2000-01-01" end="{{now}}" fields='month' style="flex-grow:1">
+			<view class="input" wx:if="{{intership.end_date&&!checked}}">{{intership.end_date}}离职</view>
+			<view class="input" wx:if="{{intership.end_date&&checked}}">{{intership.end_date}}</view>
+			<view class="input placeholder-class" wx:if="{{!intership.end_date}}">离职时间</view>
 		</picker>
-		<view class="present" bindtap='changeChecked' wx:if='{{!checked}}'>
-			<icon type="{{checked?'success_circle':'circle'}}" size="20" style='height:24px;margin-right:5px;'/>
+		<view class="present _relative" bindtap='changeChecked' wx:if='{{!checked}}'>
+			<icon type="{{checked?'success_circle':'circle'}}" size="20" style='position: absolute;right:34px;top:7px;'/>
 			<text>至今</text>
 		</view>
 	</view>

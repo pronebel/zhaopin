@@ -5,7 +5,7 @@
  * @author linrui
  */
 
-var events = {};
+let events = {};
 
 /**
  * [on description] 
@@ -15,11 +15,11 @@ var events = {};
  * @return {[type]}            [description]
  */
 function on(name, self, callback) {
-	var tuple = {
+	let tuple = {
 		'self': self,
 		callback: callback
 	};
-	var tuples = events[name] || [];
+	let tuples = events[name] || [];
 	tuples.push(tuple);
 	events[name] = tuples;
 }
@@ -31,10 +31,10 @@ function on(name, self, callback) {
  * @return {[type]}      [description]  
  */
 function emit(name, data) {
-	var tuples = events[name] || [];
+	let tuples = events[name] || [];
 	tuples.map((tuple) => {
-		var _this = tuple['self'];
-		var callback = tuple['callback'];
+		let _this = tuple['self'];
+		let callback = tuple['callback'];
 		callback.call(_this, data);
 	})
 }
@@ -46,7 +46,7 @@ function emit(name, data) {
  * @return {[type]}      [description]
  */
 function remove(name, self) {
-	var tuples = events[name] || [];
+	let tuples = events[name] || [];
 	events[name] = tuples.filter((tuple) => {
 		return tuple['self'] != self;
 	})
@@ -72,16 +72,35 @@ function cb(data) {
 				}
 			})
 		} else {
-			_resume[_key] = data.value;
-			this.setData({
-				resume: _resume
-			})
+			if (_key == 'userInfo') {
+				this.setData({
+					userInfo: data.value
+				})
+			} else {
+				_resume[_key] = data.value;
+				this.setData({
+					resume: _resume
+				})
+			}
 		}
 	} else if (data.event_type == 'add') {
-		data.value['id'] = parseInt(_resume[_key][_resume[_key].length - 1].id) + 1;
-		_resume[_key].push(data.value);
-		this.setData({
-			resume: _resume
+		let _this = this;
+		let app = getApp();
+		// data.value['id'] = parseInt(_resume[_key][_resume[_key].length - 1].id) + 1;
+		// _resume[_key].push(data.value);
+		// this.setData({
+		// 	resume: _resume
+		// })
+		console.log(`resume/get${_key.substring(0,1).toUpperCase()+_key.substring(1)}`);
+		app.resume(`resume/get${_key.substring(0,1).toUpperCase()+_key.substring(1)}`, 'GET', {
+			resume_id: data.value.resume_id
+		}).then((res) => {
+			if (res.data) {
+				_resume[_key] = res.data;
+				_this.setData({
+					resume: _resume
+				})
+			}
 		})
 	} else {
 		_resume[_key].forEach((val, index) => {
@@ -93,7 +112,6 @@ function cb(data) {
 			}
 		})
 	}
-
 }
 
 function inArray(value, arr) {
@@ -118,7 +136,7 @@ module.exports = {
 // 	} else {
 // 		_this.data.interships.forEach((val, index) => {
 // 			if (val.id == data.value.id) {
-// 				var _interships = this.data.interships;
+// 				let _interships = this.data.interships;
 // 				_interships[index] = data.value;
 // 				this.setData({
 // 					interships: _interships
@@ -131,7 +149,7 @@ module.exports = {
 // 	if (data.key != 'interships') {
 // 		return;
 // 	} else {
-// 		var _interships = this.data.interships;
+// 		let _interships = this.data.interships;
 // 		_interships.forEach((val, index) => {
 // 			if (val.id == data.value.id) {
 // 				_interships.splice(index, 1);
@@ -146,7 +164,7 @@ module.exports = {
 // 	if (data.key != 'interships') {
 // 		return;
 // 	} else {
-// 		var _interships = this.data.interships;
+// 		let _interships = this.data.interships;
 // 		data.value['id'] = _interships.length;
 // 		_interships.push(data.value);
 // 		this.setData({

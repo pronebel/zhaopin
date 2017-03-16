@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Project">
+	<resultMap id="Project" type="com.demo.model.Project">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
+		<result property="name" column="name" jdbcType="VARCHAR" />		
+		<result property="duty" column="duty" jdbcType="VARCHAR" />		
+		<result property="url" column="url" jdbcType="VARCHAR" />	
+		<result property="start_date" column="start_date" jdbcType="VARCHAR" />	
+		<result property="end_date" column="end_date" jdbcType="VARCHAR" />	
+		<result property="description" column="description" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		project
+	</sql>
+	
+	<select id="getProjects" resultMap="Project">
+		select * from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</select>
+	
+	<update id="updateProject" parameterType="com.demo.model.Project">
+		update <include refid="TableName" /> set
+			name=#{name},
+			duty=#{duty},
+			url=#{url},
+			start_date=#{start_date},
+			end_date=#{end_date},
+			description=#{description}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteProject" parameterType="com.demo.model.Project">
+		delete from <include refid="TableName" />
+		where id=#{id}
+	</delete>
+	
+	<insert id='addProject' parameterType="com.demo.model.Project">
+		insert into <include refid="TableName" />
+		(resume_id,name,duty,url,start_date,end_date,description)
+		values(#{resume_id},#{name},#{duty},#{url},#{start_date},#{end_date},#{description})
+	</insert>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

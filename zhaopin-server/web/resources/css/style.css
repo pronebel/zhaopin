@@ -1,0 +1,269 @@
+		@font-face {font-family: 'iconfont';
+		    src: url('../iconfont/iconfont.eot'); /* IE9*/
+		    src: url('../iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		    url('../iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+		    url('../iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+		    url('../iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+		}
+		
+		.iconfont{
+		    font-family:"iconfont" !important;
+		    font-size:16px;font-style:normal;
+		    -webkit-font-smoothing: antialiased;
+		    -webkit-text-stroke-width: 0.2px;
+		    -moz-osx-font-smoothing: grayscale;
+		    color: #fff;
+		    margin-left:35px;
+		    line-height: 40px;
+		    opacity: 0.5;
+		    cursor: default;
+		}
+		.onfocus{
+			opacity: 1;
+		}
+		body{
+			font-family: 'Microsoft Yahei';
+			
+			/*background-image: url(../img/xingkong.png);*/
+			background-color:rgb(106,76,156);
+			background-image:
+			radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+			radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+			radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+			radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+			background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+			background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+		}
+		#container,#login,#register,#success,#register_success{
+			width: 320px;
+			height: 500px;
+			background-color: #545;
+			background-color: rgba(0,0,0,0.5);
+			position:relative;
+		}
+		#login,#success,#register_success{
+			position:absolute;
+			left:0;top:0;			
+		}
+		#register{
+			position:absolute;
+			left:0;top:0;
+			display: none;
+			-webkit-transform-style: preserve-3d;
+			-webkit-perspective: 800;
+			transform:perspective(800px) rotateY(-180deg);
+		}
+		#container{
+			margin:60px auto 0;
+			-webkit-transform-style: preserve-3d;
+			-webkit-perspective: 800;
+			transform:perspective(800px) rotateY(0deg);
+			/*box-shadow: 2px 2px 3px 1px rgba(255,255,255,0.4);*/
+		}
+		#success,#register_success{
+			display: none;
+		}
+		#register_success{
+			-webkit-transform-style: preserve-3d;
+			-webkit-perspective: 800;
+			transform:perspective(800px) rotateY(-180deg);
+		}
+		.head{
+			font-size:18px;
+			text-align:left;
+			display: block;
+			width:220px;
+			height:50px;
+			line-height: 50px;
+			margin-top:20px;
+			margin-left: 35px;
+		    color:rgba(255,255,255,0.6);
+		}
+		.user,.pass{
+			border:1px solid rgba(255,255,255,0.3);
+			width:320px;
+			height:40px;
+			border-left: none;
+			border-right: none;		
+			position: relative;
+		}
+		.user{
+			margin-top:30px;
+			border-bottom: none;
+		}
+		.username,.password{
+			border:none;
+			background-color: rgba(0,0,0,0);
+			outline:none;
+			font-size: 19px;
+			color:rgba(255,255,255,0.8);
+			margin-left: 15px;
+		}
+		.btn{
+			width:150px;
+			height:45px;
+			text-align: center;
+			border:2px solid #DC6180;
+			border-radius: 45px;
+			margin-top:35px;
+			margin-left:35px;
+			background-color: rgba(0,0,0,0);
+			color:rgba(255,255,255,0.6);
+			line-height:40px ;
+			font-size: 18px;
+			behavior: url("../../resources/pie/pie.htc");
+		}
+		.btn:hover{
+			background-color: #DC6180;
+		}
+		.choose{
+			width:10px;
+			height: 10px;
+			border: 2px solid #fff;
+			border: 2px solid rgba(255,255,255,0.6);
+			border-radius: 10px;
+			display: block;
+			margin-left: 35px;
+			margin-top:20px;
+			float:left;
+			behavior: url("../../resources/pie/pie.htc");		
+		}
+		.txt{
+			float:left;
+			color: rgba(255,255,255,0.6);
+			font-size: 18px;
+			margin-top: 15px;
+			margin-left:25px;
+			cursor: default;
+		}
+		.choosein{
+			background-color: #fff;
+			background-color: rgba(255,255,255,0.6);
+		}
+		.title1,.title2{
+			font-size: 24px;
+			display: block;
+			width:auto;
+			height:50px;
+			line-height: 50px;
+			margin-top:40px;
+			margin-left:35px;
+			color: #fff;
+			cursor: pointer;
+		}
+		.title2{
+			position: absolute;
+			right:35px;
+			top:0;
+			color: rgba(255,255,255,0.4);
+		}
+		#flag{
+			height:3px;
+			background-color:blue ;
+			display: block;	
+			position:absolute;	
+		}
+		.flag1{
+			width:75px;
+			left: 35px;
+		}
+		.flag2{
+			width:110px;
+			right:35px;
+		}
+		.title{
+			width:320px;
+			background-color:rgba(0,0,0,0);
+		}
+		.txt2{
+			color: rgba(255,255,255,0.6);
+			font-size: 18px;
+			margin-top: 20px;
+			margin-left:16px;
+			cursor: pointer;
+		}
+		.box{
+			width:250px;
+			height:120px;
+			position:absolute;
+			left:550px;
+			top:260px;
+			display: none;
+			background-color: rgba(0,0,0,0.6);
+		}
+		.loading{
+			position: absolute;
+			left:105px;
+			top:40px;			
+		}
+		.loading1,.loading2{
+			width:40px;
+			height: 40px;
+			border:2px solid rgba(255,255,255,0.6);
+			border-radius: 40px;
+			display: block;
+			-webkit-animation: wm 1s infinite linear;
+			position: absolute;
+			left:105px;
+			top:40px;
+			display: none;
+		}
+		.loading2{
+			-webkit-animation: wm 1s infinite linear;
+			display: none;
+		}
+		@-webkit-keyframes wm1{
+			from{transform:scale(0.1);opacity: 1;}
+			to{transform:scale(1);opacity: 0;}
+		}
+		.text1,.text2{
+			font-size: 18px;
+			margin-left:40px;
+			color:#fff;	
+			display: block;	
+		}
+		.text1{
+			margin-top:130px;	
+		}
+		.text3{
+			font-size: 16px;
+			margin-left:40px;
+			margin-top: 40px;
+			display: block;		
+			color: rgba(255,255,255,0.8);
+		}
+		input::-webkit-input-placeholder { /* WebKit browsers */ 
+			color: rgba(255,255,255,0.3);
+		} 
+		input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+			color:rgba(255,255,255,0.3);
+		} 
+		input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+			color: rgba(255,255,255,0.3);
+		}
+		input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		    color: rgba(255,255,255,0.3);
+		}
+		
+		#judge_false,#judge_true{
+			font-size: 16px;
+			color:#f00;
+			position: absolute;
+			right:15px;
+			top:2px;
+			display: none;
+		}
+		
+		.copyright{
+			width:300px;
+			height:20px;
+			position: absolute;
+			bottom: 20px;
+			right: 55px;
+		}
+		.copyright .desc{
+			color:#000;
+			opacity: 0.8;
+			text-align: right;
+			font-size: 13px;
+		}

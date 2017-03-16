@@ -1,80 +1,22 @@
 const event = require('../../utils/event.js');
+const $ = require('../../utils/util.js');
 const {
-	url
+	server
 } = require('../../configs/serverConfig.js');
-var app = getApp();
+let app = getApp();
 
 Page({
 	data: {
 		actionType: '', //0表示新建简历   1表示修改简历
-		resume: {
-			userInfo: {
-				name: '林锐',
-				sex: '男',
-				city: '深圳',
-				phone: '13728738411',
-				birth: '1994-11-05',
-				email: '670390939@qq.com',
-				imgUrl: '',
-				degree: '本科',
-				school: '深圳大学',
-				major: '软件工程'
-			},
-			skills: [],
-			educations: [{
-				id: '0',
-				endDate: '2017',
-				school: '深圳大学',
-				degree: '本科',
-				major: '软件工程'
-			}, {
-				id: '1',
-				endDate: '2017',
-				school: '深圳大学',
-				degree: '本科',
-				major: '软件工程'
-			}],
-			interships: [{
-				id: '0',
-				campany: '深圳云计算',
-				job: '前端实习',
-				startDate: '2016-06',
-				endDate: '2016-09',
-				description: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
-			}],
-			projects: [{
-				id: 0,
-				name: '基于微信小程序的招聘系统开发',
-				selfDuty: '前端开发',
-				startDate: '2017-02',
-				endDate: '至今',
-				url: '',
-				description: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
-			}],
-			selfAssessment: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看',
-			honors: [{
-				id: 0,
-				date: '2011-06',
-				name: 'xx竞赛',
-				prize: '二等奖'
-			}],
-			// hope: {
-			// 	name: '前端开发',
-			// 	type: '全职',
-			// 	city: '深圳',
-			// 	salaryRange: '5k-10k',
-			// 	otherDescription: '阿德块哈师大是看见和萨芬哈市客服哈啥时考司sadadasdasdasdadadada法奥斯卡的骄傲开始的急啊跨世纪的看看'
-			// }
-			hope: null
-		},
-		userInfoFromWX: {},
 	},
 	onLoad: function(options) {
 		if (options.flag == 'true') {
-			// 通过options.id  获取简历信息  设置app.globalData.editResume 
 			this.setData({
-				actionType: 1
+				actionType: 1,
 			})
+
+			// 通过options.id  获取简历信息
+			this.getResume(options.id);
 		} else {
 			//新建简历
 			this.setData({
@@ -85,6 +27,11 @@ Page({
 			})
 		}
 		app.getUserInfo((data) => {
+			this.setData({
+				userInfo: data
+			})
+		})
+		app.getUserInfoFromWX((data) => {
 			this.setData({
 				userInfoFromWX: data
 			})
@@ -99,39 +46,55 @@ Page({
 	onUnload: function() {
 		event.remove('resumeChanged', this);
 	},
+	getResume(id) {
+		let _this = this;
+		$.ajax({
+			url: `${server}/resume/getResume`,
+			data: {
+				id: id
+			}
+		}).then((res) => {
+			if (res.data) {
+				_this.setData({
+					resume: res.data
+				})
+			}
+		})
+	},
 	toUserInfo: function() {
 		wx.navigateTo({
 			url: '../userInfo/userInfo'
 		})
 	},
-	toEducation: function(e) {
-		var flag = e.currentTarget.dataset.flag;
-
+	gotoPage(e) {
+		let {
+			flag,
+			url,
+		} = e.currentTarget.dataset;
+		let resume_id = this.data.resume.id;
 		if (flag == 'true') {
 			wx.navigateTo({
-				url: 'education/education?'
+				url: `${url}?resume_id=${resume_id}`
 			})
 		} else {
 			wx.navigateTo({
-				url: 'education/editEducation/editEducation'
+				url: `${url}?resume_id=${resume_id}&flag=false`
 			})
 		}
 	},
-	toIntership: function() {
-		wx.navigateTo({
-			url: 'intership/intership'
-		})
-	},
-	toProject: function() {
-		wx.navigateTo({
-			url: 'project/project'
-		})
-	},
-	toHonor: function() {
-		wx.navigateTo({
-			url: 'honor/honor'
-		})
-	},
+	// toEducation: function(e) {
+	// 	let flag = e.currentTarget.dataset.flag;
+
+	// 	if (flag == 'true') {
+	// 		wx.navigateTo({
+	// 			url: `education/education?resume_id=${this.data.resume.id}`
+	// 		})
+	// 	} else {
+	// 		wx.navigateTo({
+	// 			url: `education/editEducation/editEducation?resume_id=${this.data.resume.id}&flag=false`
+	// 		})
+	// 	}
+	// },
 	toSelfAssessment: function(e) {
 		wx.navigateTo({
 			url: 'selfAssessment/selfAssessment?msg=' + e.currentTarget.dataset.msg

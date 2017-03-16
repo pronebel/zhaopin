@@ -3,6 +3,13 @@ package com.demo.model;
 public class Session {
 	private String sessionId;
 	private String thirdSessionKey;
+	private String openid;
+	public String getOpenid() {
+		return openid;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 	public String getThirdSessionKey() {
 		return thirdSessionKey;
 	}

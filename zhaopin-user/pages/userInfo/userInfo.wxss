@@ -58,6 +58,12 @@ input,.inputMsg{
 	background:#fff;
 }
 
+.icon-warn{
+	position:absolute;
+	right: 0px;
+	top:10px;
+}
+
 /*._footer{
 	margin-top:40px;
 }*/

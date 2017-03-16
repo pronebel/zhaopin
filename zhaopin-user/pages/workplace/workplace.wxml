@@ -1,8 +1,8 @@
-<view class="noBackCon">
+<view class="noBackCon" >
 	<view class="placeicon-1"></view>
 	<text>期待工作地点</text>
 </view>
-<view class="container">
+<view class="container" wx:if='{{workplaceCity!=""}}'>
 	<text class="hope-workplace">{{workplaceCity}}</text>
 	<icon type="success_no_circle" color="green" size="15" style="float:right" bindtap="goBack"></icon>
 </view>

@@ -1,8 +1,8 @@
-var event = require('../../../../utils/event.js');
+let event = require('../../../../utils/event.js');
 var $ = require('../../../../utils/util.js');
 const years = require('../../../../configs/data_configs.js').years;
 const degrees = require('../../../../configs/data_configs.js').degrees;
-
+let app = getApp();
 Page({
 	data: {
 		project: {},
@@ -14,62 +14,95 @@ Page({
 			project: options,
 			now: $.formatDate(new Date())
 		});
-		if (options.endDate == '至今') {
+		if (options.description == 'null') {
+			this.setData({
+				'project.description': ''
+			})
+		}
+		if (options.end_date == '至今') {
 			this.setData({
 				checked: true
 			})
 		}
-		var _this = this;
-		if ($.isEmptyObject(options)) {
-			_this.setData({
+		if (options.flag === 'false') {
+			this.setData({
 				flag: false //表示新建
 			})
 		} else {
-			_this.setData({
+			this.setData({
 				flag: true
 			})
 		}
 	},
 	bindEndPickerChange: function(e) {
 		this.setData({
-			'project.endDate': e.detail.value,
+			'project.end_date': e.detail.value,
 			checked: false
 		})
 	},
 	bindStartPickerChange: function(e) {
 		this.setData({
-			'project.startDate': e.detail.value
+			'project.start_date': e.detail.value
+		})
+	},
+	input(e) {
+		let {
+			key
+		} = e.currentTarget.dataset;
+		let {
+			project
+		} = this.data;
+		project[key] = e.detail.value
+		this.setData({
+			project: project
 		})
 	},
 	save: function() {
 		//wx.request
-		var _this = this;
-		if (_this.data.flag) {
-			event.emit('resumeChanged', {
-				key: 'projects',
-				value: _this.data.project,
-				event_type: 'change'
+		if (this.data.flag) {
+			app.resume('resume/updateProject', 'POST', {
+				project: JSON.stringify(this.data.project)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'projects',
+						value: this.data.project,
+						event_type: 'change'
+					})
+					wx.navigateBack({})
+				}
 			})
 		} else {
-			event.emit('resumeChanged', {
-				key: 'projects',
-				value: _this.data.project,
-				event_type: 'add'
+			app.resume('resume/addProject', 'POST', {
+				project: JSON.stringify(this.data.project)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'projects',
+						value: this.data.project,
+						event_type: 'add'
+					})
+					wx.navigateBack({})
+				}
 			})
 		}
-		wx.navigateBack({})
 	},
 	delete: function() {
 		//wx.request
-		var _this = this;
-		event.emit('resumeChanged', {
-			key: 'projects',
-			value: {
-				id: this.data.project.id
-			},
-			event_type: 'delete'
+		app.resume('resume/deleteProject', 'POST', {
+			id: this.data.project.id
+		}).then((res) => {
+			if (res.data) {
+				event.emit('resumeChanged', {
+					key: 'projects',
+					value: {
+						id: this.data.project.id
+					},
+					event_type: 'delete'
+				})
+				wx.navigateBack({})
+			}
 		})
-		wx.navigateBack({})
 	},
 	textareaInput: function(e) {
 		this.setData({
@@ -79,7 +112,7 @@ Page({
 	changeChecked: function() {
 		this.setData({
 			checked: true,
-			'project.endDate': '至今'
+			'project.end_date': '至今'
 		})
 	}
 })

@@ -28,7 +28,6 @@ import net.sf.json.JSONObject;
 public class LoginController {
 	@Resource
 	private SeekerService ss;
-	private SeekerController sc;
 	
 	@RequestMapping(value = {"" , "/"})
 	public String index(){
@@ -40,7 +39,7 @@ public class LoginController {
 	 * 用户登录同意接口  登录后 
 	 * @param code 客户端获取的code
 	 * @param identity  登录者身份    0代表seeker  1代表hr
-	 * @return 返回session对象 包含3rdSessionKey sessionId 已经设置session的过期时间为120分钟 比微信服务器的90分钟要长，所以不考虑session过期的问题
+	 * @return 返回session对象 包含3rdSessionKey sessionId 已经设置session的过期时间比微信服务器的要长，所以不考虑session过期的问题
 	 */
 	@ResponseBody
 	@RequestMapping("/onLogin")
@@ -55,9 +54,10 @@ public class LoginController {
 			return null;
 		}
 		JSONObject jsonobject = JSONObject.fromObject(res);
-		Session s=new Session();
+		Session s=(Session)JSONObject.toBean(jsonobject, Session.class);
 		s.setSessionId(req.getSession().getId());
 		s.setThirdSessionKey(RandomStringUtils.randomAlphanumeric(128));
+		System.out.println(s.getThirdSessionKey());
 		req.getSession().setAttribute(s.getThirdSessionKey(),jsonobject.get("openid").toString());
 		//检测用户是否已经存储到数据库中
 		if(identity==0){
@@ -78,7 +78,7 @@ public class LoginController {
 	 * @param thirdSessionKey
 	 * @return openid
 	 */
-	public String getOpenid(HttpServletRequest req,String thirdSessionKey){
+	public String getOpenid(String thirdSessionKey,HttpServletRequest req){
 		return req.getSession().getAttribute(thirdSessionKey).toString();		
 	}
 	

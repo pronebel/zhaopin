@@ -9,21 +9,26 @@ import org.springframework.stereotype.Service;
 import com.demo.dao.SeekerDao;
 import com.demo.model.Seeker;
 
-/**
- * Student Service
- * @author Cloud Lau
- * @company SZU
- * @date 2016年3月5日
- * @description
- */
+
 @Service
 public class SeekerService {
 
 	@Resource
-	private  SeekerDao sd;
+	private SeekerDao sd;
 	
-	public void newSeeker(Seeker sk){
-		sd.newSeeker(sk);
+	public void newSeeker(Seeker s){
+		sd.newSeeker(s);
 	}
 	
+	public Seeker getUserInfo(Seeker s){
+		return sd.getUserInfo(s);
+	}
+	
+	public boolean updateSeeker(Seeker s){
+		return sd.updateSeeker(s);
+	}
+	
+	public boolean updateAvatar(Seeker s){
+		return sd.updateAvatar(s);
+	}
 }

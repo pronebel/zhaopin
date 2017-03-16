@@ -1,27 +1,31 @@
 <view>
 	<view class="box">
-		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toEditResume' data-flag="true" data-index="{{index}}" wx:for="{{resumes}}">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toEditResume' data-flag="true" data-index="{{index}}" wx:for="{{resumes}}" bindlongtap='openActionSheet' data-id='{{item.id}}'>
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>{{item.name}}</text>
 				<icon class="iconfont icon-right"></icon>
 			</view>
 		</view>	
 	</view>
-	<view class='box'>
+	<view class='box' wx:if='{{resumes.length>0}}'>
 		<picker bindchange="bindPickerChange" range="Object Array" range-key="name" value="{{index}}" range="{{resumes}}">
 			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='setDefaultResume'>
 				<text>默认投递简历</text>
 				<icon class="iconfont icon-right"></icon>
-				<text class="default-resume-text">{{resumes[index].name}}</text>
+				<text class="default-resume-text">{{defaultResumeName}}</text>
 			</view>
 		</picker>
 	</view>
 	<view class='box'>
-		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toEditResume' data-flag="false">
+		<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='newResume' data-flag='true'>
 			<text>新建简历</text>
 			<icon class="iconfont icon-right"></icon>
+			<text class="default-resume-text">还可创建{{5-resumes.length}}份简历</text>
 		</view>
 	</view>
 </view>
 
 
+<modal bindconfirm="confirm" hidden="{{!changeResumeName}}" bindcancel='cancel' title='修改简历名称'>
+	<input class="modal-input" placeholder="{{actionResumeName}}" placeholder-class="placeholder-class" bindinput='inputNewResumeName'  data-id='{{actionResumeId}}' class='modal-input' focus value='{{newResumeName}}' max-length='20' />
+</modal>

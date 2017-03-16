@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Resume">
+	<resultMap id="Resume" type="com.demo.model.Resume">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="name" column="name" jdbcType="VARCHAR" />		
+		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
+		<result property="selfAssessment" column="selfAssessment" jdbcType="VARCHAR" />		
+		<result property="hope_job" column="hope_job" jdbcType="VARCHAR" />	
+		<result property="hope_job_type" column="hope_job_type" jdbcType="VARCHAR" />	
+		<result property="hope_city" column="hope_city" jdbcType="VARCHAR" />	
+		<result property="hope_salary" column="hope_salary" jdbcType="VARCHAR" />
+		<result property="hope_description" column="hope_description" jdbcType="VARCHAR" />	
+		<result property="report_card_url" column="report_card_url" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		resume
+	</sql>
+	
+	<select id="getResumesName" resultMap="Resume">
+		select id,name from <include refid="TableName" />
+		where seeker_id = #{seeker_id} order by id asc
+	</select>	
+	
+	<select id="getResumeById" resultMap="Resume">
+		select * from <include refid="TableName" />
+		where id=#{id}
+	</select>
+	
+	<update id='updateResumeName' parameterType='com.demo.model.Resume'>
+		update <include refid="TableName" /> set
+			name=#{name}
+		where
+		id=#{id}
+	</update>
+	
+	<insert id='addNewResume' parameterType='com.demo.model.Resume'>
+		insert into <include refid="TableName" />
+		(name,seeker_id,selfAssessment,hope_job,hope_job_type,hope_city,hope_salary,hope_description,report_card_url)
+		values
+		(#{name},#{seeker_id},#{selfAssessment},#{hope_job},#{hope_job_type},#{hope_city},#{hope_salary},#{hope_description},#{report_card_url})
+	</insert>
+	
+	<delete id='deleteResume' parameterType='com.demo.model.Resume'>
+		delete from <include refid="TableName" />
+		where id=#{id}
+	</delete>
+	
+	<select id='getNewestResumeName' resultMap="Resume">
+		select id,name from <include refid="TableName" />
+		where id=(select max(id) from <include refid="TableName" /> where seeker_id=#{seeker_id})
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->
