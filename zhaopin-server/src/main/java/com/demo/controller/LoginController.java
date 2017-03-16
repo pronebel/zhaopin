@@ -28,6 +28,10 @@ import net.sf.json.JSONObject;
 public class LoginController {
 	@Resource
 	private SeekerService ss;
+	@Resource
+	private HrService hs;
+	@Resource
+	private HrController hc;
 	
 	@RequestMapping(value = {"" , "/"})
 	public String index(){
@@ -65,9 +69,11 @@ public class LoginController {
 			Seeker sk=new Seeker();
 			sk.setOpenid(jsonobject.get("openid").toString());
 			ss.newSeeker(sk);
-		}else{
+		}else if(identity==1){
 			//hr
-			//TODO
+			Hr sk=new Hr();
+			sk.setOpenid(jsonobject.get("openid").toString());
+			hs.newHr(sk);
 		}
 		return s;
 	}

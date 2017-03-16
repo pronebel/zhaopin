@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Seeker">
+	<resultMap id="Hr" type="com.demo.model.Hr">
+    	<id property="openid" column="id" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />		
+		<result property="birthday" column="birthday" jdbcType="VARCHAR" />		
+		<result property="company_id" column="company_id" jdbcType="VARCHAR" />		
+		<result property="job" column="job" jdbcType="VARCHAR" />	
+		<result property="telephone" column="telephone" jdbcType="VARCHAR" />	
+		<result property="avatarUrl" column="avatarUrl" jdbcType="VARCHAR" />	
+		<result property="sex" column="sex" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="TableName">
+		hr
+	</sql>
+	
+	<select id="selectFromOpenid" resultMap="Hr">
+		select * from <include refid="TableName" />
+		where id = #{openid}
+	</select>
+	
+	<insert id="newHr" parameterType="com.demo.model.Hr">
+		insert into <include refid="TableName" />
+		(id) values(#{openid})
+	</insert>
+	
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->
