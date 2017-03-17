@@ -82,31 +82,24 @@ Page({
 			})
 		}
 	},
-	// toEducation: function(e) {
-	// 	let flag = e.currentTarget.dataset.flag;
-
-	// 	if (flag == 'true') {
-	// 		wx.navigateTo({
-	// 			url: `education/education?resume_id=${this.data.resume.id}`
-	// 		})
-	// 	} else {
-	// 		wx.navigateTo({
-	// 			url: `education/editEducation/editEducation?resume_id=${this.data.resume.id}&flag=false`
-	// 		})
-	// 	}
-	// },
 	toSelfAssessment: function(e) {
 		wx.navigateTo({
-			url: 'selfAssessment/selfAssessment?msg=' + e.currentTarget.dataset.msg
+			url: `selfAssessment/selfAssessment?msg=${e.currentTarget.dataset.msg}&resume_id=${this.data.resume.id}`
 		})
 	},
 	toHope: function(e) {
-		const hope = this.data.resume.hope;
-		hope && wx.navigateTo({
-			url: 'hope/hope?name=' + hope.name + '&type=' + hope.type + '&city=' + hope.city + '&salaryRange=' + hope.salaryRange + '&otherDescription=' + hope.otherDescription
-		});
-		!hope && wx.navigateTo({
-			url: 'hope/hope'
+		let {
+			hope
+		} = this.data.resume;
+		if (hope == null) {
+			wx.navigateTo({
+				url: `hope/hope?resume_id=${this.data.resume.id}`
+			})
+			return;
+		}
+		console.log(2);
+		wx.navigateTo({
+			url: `hope/hope?id=${hope.id}&job=${hope.job}&type=${hope.type}&city=${hope.city}&salary=${hope.salary}&otherDescription=${hope.otherDescription}&resume_id=${this.data.resume.id}`
 		})
 	}
 })

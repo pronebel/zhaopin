@@ -22,7 +22,7 @@
 	
 	<update id="updateIntership" parameterType="com.demo.model.Intership">
 		update <include refid="TableName" /> set
-			company=#{school},
+			company=#{company},
 			job=#{job},
 			start_date=#{start_date},
 			end_date=#{end_date},

@@ -6,31 +6,46 @@ Page({
 
 	},
 	onLoad: function(options) {
-		if (options.city || options.city == '') {
+		let {
+			flag,
+			city
+		} = options;
+		this.setData({
+			flag: flag
+		})
+
+		if (city == 'undefined' || city == 'null' || !city) {
 			this.setData({
-				workplaceCity: options.city,
-				flag: false //如果是个人信息的选择城市 为false
+				workplaceCity: ''
 			})
 		} else {
-			app.getWorkplace((data) => {
-				this.setData({
-					workplaceCity: data,
-					flag: true
-				})
+			this.setData({
+				workplaceCity: city
 			})
 		}
-		console.log(this.data.workplaceCity == null)
 	},
 	goBack: () => {
-		wx.navigateBack({
-			delta: 1
-		})
+		wx.navigateBack({})
 	},
 	selectPlace: function(e) {
-		if (this.data.flag) {
-			this.setData({
-				workplaceCity: e.target.dataset.place
+		this.setData({
+			workplaceCity: e.target.dataset.place
+		})
+		let {
+			flag,
+			workplaceCity
+		} = this.data;
+		if (flag == 'hope_city') {
+			event.emit('hope_city_changed', {
+				city: workplaceCity
 			})
+			console.log(1);
+			return;
+		} else if (flag == 'userInfo_city') {
+			event.emit('cityChanged', {
+				city: workplaceCity
+			})
+		} else if (flag == 'search_city') {
 			if (app.globalData.workplaceCity != this.data.workplaceCity) {
 				console.log('change place');
 				app.globalData.workplaceCity = this.data.workplaceCity;
@@ -38,13 +53,6 @@ Page({
 				app.globalData.workplaceDistrict = this.data.workplaceCity;
 				wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
 			}
-		} else {
-			this.setData({
-				workplaceCity: e.target.dataset.place
-			})
-			event.emit('cityChanged', {
-				city: this.data.workplaceCity
-			})
 		}
 	}
 })

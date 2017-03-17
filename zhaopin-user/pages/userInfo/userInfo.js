@@ -193,7 +193,7 @@ Page({
 	},
 	toWorkplace() {
 		wx.navigateTo({
-			url: `../workplace/workplace?city=${this.data.userInfo.city}`
+			url: `../workplace/workplace?city=${this.data.userInfo.city}&flag=${'userInfo_city'}`
 		})
 	}
 })

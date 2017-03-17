@@ -159,15 +159,15 @@
 			<view class="placeicon-1"></view>
 			<text>求职意向</text>
 		</view>
-		<view wx:if='{{resume.hope}}'>
+		<view wx:if='{{resume.hope.job}}'>
 			<view class="item" >
-				<view class="text-2">{{resume.hope.name}}</view>
-				<view class="text-2" style="font-size:13px; margin-top:4px;">{{resume.hope.type}}~{{resume.hope.city}}~{{resume.hope.salaryRange}}</view>
+				<view class="text-2">{{resume.hope.job}}</view>
+				<view class="text-2" style="font-size:13px; margin-top:4px;">{{resume.hope.type}}~{{resume.hope.city}}~{{resume.hope.salary}}</view>
 				<view class="text-3" wx:if='{{resume.hope.otherDescription}}'>{{resume.hope.otherDescription}}</view>
 			</view>
 		</view>
 	</view>
-	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.hope}}' bindtap='toHope'>
+	<view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.hope.job}}' bindtap='toHope'>
 		<view class="_inline-block iconfont icon-add"></view>
 		<text>新增</text>
 	</view>

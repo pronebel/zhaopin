@@ -45,4 +45,14 @@ public class ResumeDao extends BaseDao<Resume>{
 		String sn=getIbatisMapperNamespace() + ".getNewestResumeName";
 		return getSqlSessionTemplate().selectOne(sn, r);
 	}
+	
+	public boolean updateSelfAssessment(Resume r){
+		String sn=getIbatisMapperNamespace() + ".updateSelfAssessment";
+		return getSqlSessionTemplate().update(sn, r)==1?true:false;
+	}
+	
+	public boolean updateHope(Resume r){
+		String sn=getIbatisMapperNamespace() + ".updateHope";
+		return getSqlSessionTemplate().update(sn, r)==1?true:false;
+	}
 }

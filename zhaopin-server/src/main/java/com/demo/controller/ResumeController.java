@@ -27,6 +27,8 @@ public class ResumeController {
 	private ProjectService ps;
 	@Resource
 	private HonorService hs;
+	@Resource
+	private HopeService hhs;
 	@ResponseBody
 	@RequestMapping("/getResume")
 	public Resume getResume(long id,HttpServletRequest req){
@@ -45,6 +47,9 @@ public class ResumeController {
 		Honor h=new Honor();
 		h.setResume_id(id);
 		r.setHonors(hs.getHonors(h));
+		Hope hh=new Hope();
+		hh.setResume_id(id);
+		r.setHope(hhs.getHope(hh));
 		return r;
 	}
 	
@@ -91,5 +96,14 @@ public class ResumeController {
 		Resume r=new Resume();
 		r.setId(id);
 		return rs.deleteResume(r);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateSelfAssessment")
+	public boolean updateSelfAssessment(String selfAssessment,Long id){
+		Resume r=new Resume();
+		r.setId(id);
+		r.setSelfAssessment(selfAssessment);
+		return rs.updateSelfAssessment(r);
 	}
 }

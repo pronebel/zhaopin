@@ -158,7 +158,7 @@ Page({
 	},
 	toChooseWorkPlace: () => {
 		wx.navigateTo({
-			url: '../workplace/workplace'
+			url: `../workplace/workplace?flag=${'search_city'}&workplaceCity=${this.data.workplaceCity}`
 		})
 	},
 	clickBtnSearch: function(e) {

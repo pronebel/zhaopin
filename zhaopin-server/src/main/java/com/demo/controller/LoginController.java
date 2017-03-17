@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.demo.controller.SeekerController;
 import com.demo.model.*;
 import com.demo.service.*;
 import com.demo.util.HttpRequest;
@@ -30,8 +29,6 @@ public class LoginController {
 	private SeekerService ss;
 	@Resource
 	private HrService hs;
-	@Resource
-	private HrController hc;
 	
 	@RequestMapping(value = {"" , "/"})
 	public String index(){

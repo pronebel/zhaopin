@@ -1,6 +1,5 @@
 let event = require('../../../utils/event.js');
 let app = getApp();
-
 Page({
 	data: {
 		resume: {}

@@ -38,4 +38,12 @@ public class ResumeService {
 	public Resume getNewestResumeName(Resume r){
 		return rd.getNewestResumeName(r);
 	}
+	
+	public boolean updateSelfAssessment(Resume r){
+		return rd.updateSelfAssessment(r);
+	}
+	
+	public boolean updateHope(Resume r){
+		return rd.updateHope(r);
+	}
 }

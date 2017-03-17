@@ -45,13 +45,18 @@ create table resume(
 	name varchar(50),
 	seeker_id varchar(100) not null,
 	selfAssessment varchar(500),
-	hope_job varchar(20),
-	hope_job_type enum('全职','实习','兼职'),
-	hope_city varchar(10),
-	hope_salary varchar(30),
-	hope_description varchar(500),
 	report_card_url varchar(100),
 	foreign key(seeker_id) references seeker(id)
+);
+
+create table hope(
+	id bigint(11) auto_increment primary key not null,
+	resume_id bigint(11) not null,
+	job varchar(20),
+	type varchar(20),
+	city varchar(10),
+	salary varchar(30) varchar(500),
+	foreign key(resume_id) references resume(id)
 );
 
 create table education(

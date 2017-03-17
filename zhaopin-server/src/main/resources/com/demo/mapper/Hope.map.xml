@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Hope">
+	<resultMap id="Hope" type="com.demo.model.Hope">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
+		<result property="job" column="job" jdbcType="VARCHAR" />		
+		<result property="type" column="type" jdbcType="VARCHAR" />		
+		<result property="city" column="city" jdbcType="VARCHAR" />	
+		<result property="salary" column="salary" jdbcType="VARCHAR" />	
+		<result property="otherDescription" column="otherDescription" jdbcType="VARCHAR" />	
+	</resultMap>
+
+	<sql id="TableName">
+		hope
+	</sql>
+	
+	<select id="getHope" resultMap="Hope">
+		select * from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</select>
+	
+	<insert id='newHope' parameterType="com.demo.model.Hope">
+		insert into <include refid="TableName" />
+		(resume_id,job,type,city,salary,otherDescription)
+		values
+		(#{resume_id},#{job},#{type},#{city},#{salary},#{otherDescription})
+	</insert>
+	<update id="updateHope" parameterType="com.demo.model.Hope">
+		update <include refid="TableName" /> set
+			job=#{job},
+			type=#{type},
+			city=#{city},
+			salary=#{salary},
+			otherDescription=#{otherDescription}
+		where resume_id=#{resume_id}
+	</update>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->
