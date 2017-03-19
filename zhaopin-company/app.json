@@ -9,7 +9,10 @@
     "pages/userInfo/userInfo",
     "pages/companyInfo/companyInfo",
     "pages/config/config",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/addPosition/addPosition",
+    "pages/publishedPosition/publishedPosition",
+    "pages/stopedPostion/stopedPosition"
   ],
   "window":{
     "backgroundTextStyle":"light",

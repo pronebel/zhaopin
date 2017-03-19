@@ -1,2 +1,18 @@
 <!--pages/position/position.wxml-->
-<text>pages/position/position.wxml</text>
+<view>
+	<view class='box _flex'>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='addPosition' data-url='addPosition/addPosition'>
+			<view class='iconfont icon-jianli'></view>
+			<view class='text'>发布新职位</view>
+		</view>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='publishedPosition' data-url='publishedPosition/publishedPosition'>
+			<view class='iconfont icon-sey-letter-a'></view>
+			<view class='text'>已发布职位</view>
+		</view>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='stopedPosition' data-url='stopedPosition/stopedPosition'>
+			<view class='iconfont icon-preview2'></view>
+			<view class='text'>已停止职位</view>
+		</view>
+	</view>
+
+</view>

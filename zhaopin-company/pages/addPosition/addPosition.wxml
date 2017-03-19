@@ -1,70 +1,68 @@
-<!--pages/companyInfo/companyInfo.wxml-->
+<!--pages/addPosition/addPosition.wxml-->
 <view class="_relative" style="height:100%;">
 	<view class="box">	
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.name}}" placeholder="公司名" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.name}}" placeholder="职位名" placeholder-class="placeholder-class" />
 			</view>
 		</view>
-		<picker bindchange="bindScalePickerChange" range="{{scaleArray}}">
+		<picker bindchange="bindSalaryPickerChange" range="{{salaryArray}}">
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{companyInfo.scale==''}}">公司规模</view>
-					<view class="inputMsg" wx:else>{{companyInfo.scale}}</view>
+					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.salary==''}}">职位月薪</view>
+					<view class="inputMsg" wx:else>{{positionInfo.salary}}</view>
 				</view>
 			</view>
 		</picker>
-		<picker bindchange="bindFinanclePickerChange" range="{{financingstageArray}}">
+		<picker bindchange="bindStatusPickerChange" range="{{positionstatusArray}}">
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{companyInfo.financingstage==''}}">融资阶段</view>
-					<view class="inputMsg" wx:else>{{companyInfo.financingstage}}</view>
+					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.positionstatus==''}}">工作性质</view>
+					<view class="inputMsg" wx:else>{{positionInfo.positionstatus}}</view>
 				</view>
 			</view>
 		</picker>
 	</view>
 	
 	<view class='box'>
-		<!-- <view class="item">
+
+		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.school}}" placeholder="毕业院校" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.address}}" placeholder="工作地点'" placeholder-class="placeholder-class" />
 			</view>
 		</view>
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.major}}" placeholder="专业" placeholder-class="placeholder-class" />
-			</view>
-		</view> -->
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.province}}" placeholder="所在地省" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.city}}" placeholder="所在城市" placeholder-class="placeholder-class" />
 			</view>
 		</view>
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.city}}" placeholder="所在城市" placeholder-class="placeholder-class" />
+        <picker bindchange="bindDegreePickerChange" range="{{degreeArray}}">
+			<view class="item">
+				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
+					<icon class='iconfont icon-circle-edit'></icon>
+					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.degree_limit==''}}">最低学历</view>
+					<view class="inputMsg" wx:else>{{positionInfo.degree}}</view>
+				</view>
 			</view>
-		</view>
+		</picker>
 	</view>
 
 	<view class='box'>
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.district}}" placeholder="所在区县" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.welfare}}" placeholder="职位福利" placeholder-class="placeholder-class" />
 			</view>
 		</view>
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.address}}" placeholder="公司地址" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.skill}}" placeholder="技能要求" placeholder-class="placeholder-class" />
 			</view>
 		</view>
 	</view>
@@ -73,13 +71,13 @@
 		<view class='item'>
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.field}}" placeholder="所在领域" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.duty}}" placeholder="岗位职责" placeholder-class="placeholder-class" />
 			</view>
 		</view>
         <view class='item'>
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.description}}" placeholder="公司简介" placeholder-class="placeholder-class" />
+				<input value="{{positionInfo.description}}" placeholder="备注" placeholder-class="placeholder-class" />
 			</view>
 		</view>
 	</view>
@@ -87,7 +85,8 @@
 	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='save'>
 		<view class='item'>
 			<icon class="iconfont icon-baocun"></icon>
-			<text>保存</text>
+			<text>发布</text>
 		</view>
 	</view>
 </view>
+
