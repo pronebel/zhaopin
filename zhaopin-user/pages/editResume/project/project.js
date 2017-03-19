@@ -2,7 +2,8 @@ let event = require('../../../utils/event.js');
 let app = getApp();
 Page({
 	data: {
-		resume: {}
+		resume: {},
+		loading: true
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -16,6 +17,7 @@ Page({
 				this.setData({
 					'resume.projects': res.data
 				})
+				app.hiddenLoader(this);
 			}
 		})
 

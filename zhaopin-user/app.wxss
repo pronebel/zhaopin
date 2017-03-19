@@ -1,5 +1,6 @@
-/**app.wxss**/
-@import "iconfont.wxss";
+@import "common/iconfont.wxss";
+
+@import "common/loader.wxss"
 
 view,scroll-view{
 	font-family: '微软雅黑';
@@ -60,6 +61,15 @@ view,scroll-view{
 ._flex{
 	display: flex;
 }
+
+._allcenter{
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	height:100%;
+}
+
 ._left{
 	float:left;
 }

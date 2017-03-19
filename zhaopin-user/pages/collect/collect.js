@@ -5,13 +5,10 @@ let {
 let $ = require('../../utils/util.js');
 Page({
 	data: {
-
+		loading: true
 	},
 	onLoad: function() {
 		this.getCollections();
-		app.getCollectionLength((data) => {
-			console.log('length:' + data);
-		})
 	},
 	getCollections() {
 		$.ajax({
@@ -24,6 +21,7 @@ Page({
 				this.setData({
 					collections: res.data
 				})
+				app.hiddenLoader(this);
 			}
 		})
 	},

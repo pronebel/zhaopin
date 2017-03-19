@@ -8,6 +8,7 @@ let app = getApp();
 Page({
 	data: {
 		actionType: '', //0表示新建简历   1表示修改简历
+		loading: true
 	},
 	onLoad: function(options) {
 		if (options.flag == 'true') {
@@ -47,7 +48,6 @@ Page({
 		event.remove('resumeChanged', this);
 	},
 	getResume(id) {
-		let _this = this;
 		$.ajax({
 			url: `${server}/resume/getResume`,
 			data: {
@@ -55,9 +55,10 @@ Page({
 			}
 		}).then((res) => {
 			if (res.data) {
-				_this.setData({
+				this.setData({
 					resume: res.data
 				})
+				app.hiddenLoader(this);
 			}
 		})
 	},

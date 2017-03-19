@@ -6,6 +6,7 @@ const FAST_SPEED_EFF_Y = 50;
 Page({
 	data: {
 		scrollTop: 1,
+		loading: true,
 		ui: {
 			windowWidth: 0,
 			menuWidth: 0,
@@ -71,6 +72,11 @@ Page({
 		})
 	},
 	onLoad: function() {
+		// setTimeout(function() {
+		// 	this.setData({
+		// 		loading: false
+		// 	})
+		// }.bind(this), 2000)
 		var that = this
 		try {
 			let res = wx.getSystemInfoSync()

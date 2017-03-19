@@ -9,7 +9,8 @@ Page({
 	data: {
 		userInfoFromWX: {},
 		index: 0,
-		changeResumeName: false
+		changeResumeName: false,
+		loading: true
 	},
 	onLoad: function() {
 		app.getUserInfoFromWX((data) => {
@@ -34,20 +35,19 @@ Page({
 		return name;
 	},
 	getResumesName() {
-		let _this = this;
 		$.ajax({
 			url: `${server}/resume/getResumesName`,
 			data: {
 				thirdSessionKey: app.globalData.session.thirdSessionKey
 			}
 		}).then((res) => {
-			_this.setData({
+			this.setData({
 				resumes: res.data,
 			})
-			_this.setData({
-				defaultResumeName: _this.getResumeName(this.data.defaultResumeId)
+			this.setData({
+				defaultResumeName: this.getResumeName(this.data.defaultResumeId)
 			})
-
+			app.hiddenLoader(this);
 		})
 	},
 	toEditResume: function(e) {

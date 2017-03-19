@@ -29,3 +29,6 @@
 <modal bindconfirm="confirm" hidden="{{!changeResumeName}}" bindcancel='cancel' title='修改简历名称'>
 	<input class="modal-input" placeholder="{{actionResumeName}}" placeholder-class="placeholder-class" bindinput='inputNewResumeName'  data-id='{{actionResumeId}}' class='modal-input' focus value='{{newResumeName}}' max-length='20' />
 </modal>
+
+
+<include src='../../common/loader.wxml' />

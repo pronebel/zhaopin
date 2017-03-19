@@ -38,3 +38,5 @@
 		</block>
 	</view>
 </view>
+
+<include src='../../common/loader.wxml' />

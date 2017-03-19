@@ -10,3 +10,6 @@
 	</view>
 	<button type="primary" class="btn" bindtap='toEditEducation' data-flag='false'>添加更多教育经历</button>
 </view>
+
+
+<include src='../../../common/loader.wxml' />

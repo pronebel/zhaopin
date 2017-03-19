@@ -185,3 +185,5 @@
 
 	<view class='box footer'></view>
 </view>
+
+<include src='../../common/loader.wxml' />

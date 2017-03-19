@@ -69,9 +69,13 @@ App({
                     }
                 })
             }
-        }).catch(() => null).then((res) => {
+        }).catch((error) => {
+            console.log('登录失败!');
+            console.log(error);
+        }).then((res) => {
             if (res) {
                 //获取session成功 保存到globalData中并存储到本地
+                console.log('登录成功:' + res.data);
                 that.globalData.session = res.data;
                 wx.setStorageSync('session', res.data);
             }
@@ -128,6 +132,7 @@ App({
                     let {
                         thirdSessionKey
                     } = _this.globalData.session;
+                    console.log(_this.globalData.session);
                     if (!thirdSessionKey) {
                         console.log(4)
                         return;
@@ -216,11 +221,10 @@ App({
                         thirdSessionKey: thirdSessionKey
                     }
                 }).then((res) => {
-                    if (res.data) {
-                        this.globalData.collectionLength = res.data;
-                        cb(res.data);
-                        clearInterval(timer);
-                    }
+                    this.globalData.collectionLength = res.data;
+                    cb(res.data);
+                    console.log(1);
+                    clearInterval(timer);
                 })
             }.bind(this), 2000)
         }
@@ -253,6 +257,16 @@ App({
                 })
             }.bind(this), 2000)
         }
+    },
+    hiddenLoader(self) {
+        self.setData({
+            loading: false
+        })
+        setTimeout(function() {
+            self.setData({
+                hiddenLoader: true
+            })
+        }, 500)
     },
     globalData: {
         userInfoFromWX: null,

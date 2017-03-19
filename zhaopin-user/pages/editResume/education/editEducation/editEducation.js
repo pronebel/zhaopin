@@ -4,7 +4,7 @@ const degrees = require('../../../../configs/data_configs.js').degrees;
 let app = getApp();
 Page({
 	data: {
-		education: {}
+		education: {},
 	},
 	onLoad: function(options) {
 		this.setData({

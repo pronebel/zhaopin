@@ -3,7 +3,8 @@ let app = getApp();
 
 Page({
 	data: {
-		resume: {}
+		resume: {},
+		loading: true
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -17,6 +18,7 @@ Page({
 				this.setData({
 					'resume.honors': res.data
 				})
+				app.hiddenLoader(this);
 			}
 		})
 

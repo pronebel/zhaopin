@@ -15,7 +15,8 @@ Page({
 		defaultDate: '1994-01-01',
 		checkEmail: true,
 		checkMobile: true,
-		avatarChange: false
+		avatarChange: false,
+		loading: true
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -38,6 +39,9 @@ Page({
 					})
 				})
 			}
+
+			//	app.hiddenLoader.call(this);
+			app.hiddenLoader(this);
 		})
 
 		let _degree = this.data.userInfo.degree;
