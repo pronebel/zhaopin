@@ -3,13 +3,25 @@
 		<view class="item" >
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>简历公开</text>
-				<switch checked="{{config.resumeOpen}}" bindchange="resumeSwitchChange" class="_right" />
+				<switch checked="{{config.resume_open}}" bindchange="switchChange" data-key='resume_open' class="_right" />
 			</view>
 		</view>
 		<view class="item" >
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>开启默认投递</text>
-				<switch checked="{{config.defaultSend}}" bindchange="defaultSendSwitchChange" class="_right" />
+				<switch checked="{{config.default_send_open}}" bindchange="switchChange" data-key='default_send_open' class="_right" />
+			</view>
+		</view>
+		<view class="item" >
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>投递反馈短信提醒</text>
+				<switch checked="{{config.sms_accept_open}}" bindchange="switchChange" data-key='sms_accept_open' class="_right" />
+			</view>
+		</view>
+		<view class="item" >
+			<view style="border-bottom:1rpx solid rgb(239,239,244)">
+				<text>投递反馈邮箱提醒</text>
+				<switch checked="{{config.email_accept_open}}" bindchange="switchChange" data-key='email_accept_open' class="_right" />
 			</view>
 		</view>
 	</view>

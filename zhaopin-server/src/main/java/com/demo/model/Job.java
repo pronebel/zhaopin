@@ -9,9 +9,11 @@ public class Job {
 	private String degree_limit;
 	private String type;
 	private String welfare;
+	private String release_date;
 	private Long company_id;
 	private String hr_id;
 	private String job_search;
+	private Company company;
 	public String getName() {
 		return name;
 	}
@@ -60,6 +62,13 @@ public class Job {
 	public void setWelfare(String welfare) {
 		this.welfare = welfare;
 	}
+	
+	public String getRelease_date() {
+		return release_date;
+	}
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
+	}
 	public Long getCompany_id() {
 		return company_id;
 	}
@@ -77,6 +86,12 @@ public class Job {
 	}
 	public void setJob_search(String job_search) {
 		this.job_search = job_search;
+	}
+	public Company getCompany() {
+		return company;
+	}
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 	
 }

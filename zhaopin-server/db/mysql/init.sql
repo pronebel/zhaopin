@@ -25,7 +25,7 @@ create table company(
 	city varchar(10) not null,
 	district varchar(10) comment '区县',
 	field varchar(20)  not null,
-	description varchar(500) not null
+	description varchar(500) not null default ''
 );
 
 create table hr(
@@ -112,6 +112,7 @@ create table job(
 	welfare varchar(100),
 	company_id bigint(11),
 	hr_id varchar(100),
+	release_date varchar(50) not null,
 	job_search varchar(2000) not null comment '包含name company job_duty job_skill',
 	foreign key(hr_id) references hr(id),
 	foreign key(company_id) references company(id)
@@ -150,10 +151,12 @@ create table comment(
 );
 
 create table config(
-	resume_open enum('true','false') default 'true',
-	default_send_open enum('true','false') default 'false',
-	email_accept_open enum('true','false') default 'true',
-	sms_accept_open enum('true','false') default 'true'
+	seeker_id varchar(100) not null primary key,
+	resume_open boolean default 1,
+	default_send_open boolean default 0,
+	email_accept_open boolean default 1,
+	sms_accept_open boolean default 1,
+	foreign key(seeker_id) references seeker(id)
 );
 
 create table resume_deliver_status(
@@ -199,3 +202,17 @@ create table collection(
 	foreign key(job_id) references job(id)
 );
 
+
+
+/**
+ * insert into company(name,scale,financing_stage,address,province,city,district,field)
+  values('name','scale','financing_stage','address','province','city','district','field')
+ */
+
+/**
+ * insert into job(name,salary,workplace,city,degree_limit,type,welfare,hr_id,company_id,job_search)values('前端','5-10k','深圳','深圳','本科','','没有','openidhr',1,'前端')
+ */
+
+/**
+ * insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)values('openidhr','hr','',1,'','','','男')
+ */

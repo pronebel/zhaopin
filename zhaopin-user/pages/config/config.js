@@ -1,23 +1,52 @@
 const app = getApp();
-
+let $ = require('../../utils/util.js');
+let {
+	server
+} = require("../../configs/serverConfig.js");
 Page({
-	data: {
-		config: {
-			resumeOpen: true,
-			defaultSend: true
-		}
+	data: {},
+	onLoad: function() {
+		this.getConfig();
 	},
-	onload: function() {
-
-	},
-	resumeSwitchChange: function(e) {
-		this.setData({
-			'config.resumeOpen': e.detail.value
+	getConfig() {
+		app.getConfig((data) => {
+			this.setData({
+				config: data
+			})
 		})
 	},
-	defaultSendSwitchChange: function(e) {
+	switchChange(e) {
+		let {
+			key
+		} = e.currentTarget.dataset;
+		let {
+			value
+		} = e.detail;
+		let {
+			config
+		} = this.data;
+		config[key] = value;
 		this.setData({
-			'config.defaultSend': e.detail.value
+			config: config
+		})
+		this.updateConfig();
+	},
+	updateConfig() {
+		let {
+			config
+		} = this.data
+		$.ajax({
+			url: `${server}/config/updateConfig`,
+			method: 'POST',
+			data: {
+				thirdSessionKey: app.globalData.thirdSessionKey,
+				config: JSON.stringify(config)
+			}
+		}).then((res) => {
+			if (res.data) {
+				app.globalData.config = config;
+				wx.setStorageSync('config', config);
+			}
 		})
 	}
 })

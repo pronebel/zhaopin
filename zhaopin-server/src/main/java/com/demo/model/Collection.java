@@ -29,5 +29,4 @@ public class Collection {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	
 }

@@ -30,4 +30,9 @@ public class CollectionDao extends BaseDao<Collection>{
 		String sn=getIbatisMapperNamespace() + ".addCollection";
 		return getSqlSessionTemplate().insert(sn, c)==1?true:false;
 	}
+	
+	public int getCollectionLength(Collection c){
+		String sn=getIbatisMapperNamespace() + ".getCollectionLength";
+		return getSqlSessionTemplate().selectOne(sn, c);
+	}
 }

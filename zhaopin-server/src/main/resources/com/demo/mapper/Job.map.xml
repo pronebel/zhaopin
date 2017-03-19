@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Job">
+	<resultMap id="Job" type="com.demo.model.Job">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="name" column="name" jdbcType="VARCHAR" />		
+		<result property="salary" column="salary" jdbcType="VARCHAR" />	
+		<result property="workplace" column="workplace" jdbcType="VARCHAR" />	
+		<result property="city" column="city" jdbcType="VARCHAR" />
+		<result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />		
+		<result property="type" column="type" jdbcType="VARCHAR" />	
+		<result property="welfare" column="welfare" jdbcType="VARCHAR" />
+		<result property="release_date" column="release_date" jdbcType="VARCHAR" />
+		<result property="company_id" column="company_id" jdbcType="BIGINT" />	
+		<result property="hr_id" column="hr_id" jdbcType="VARCHAR" />	
+		<result property="job_search" column="job_search" jdbcType="BIGINT" />		
+	</resultMap>
+
+	<sql id="TableName">
+		job
+	</sql>
+	
+	<select id='getSearchRecommand' resultMap='Job'>
+		select name from <include refid="TableName" />
+		where name like CONCAT('%',#{name},'%') group by name
+	</select>
+	
+	<select id='searchJob' resultMap='Job'>
+		select * from <include refid='TableName' />
+		where job_search like like CONCAT('%',#{job_search},'%')
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

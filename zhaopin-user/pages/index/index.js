@@ -85,12 +85,18 @@ Page({
 		} catch (e) {}
 
 		app.getUserInfoFromWX(function(data) {
-			that.setData({
-				userInfoFromWX: data
+				that.setData({
+					userInfoFromWX: data
+				})
+			})
+			//todo 获取用户信息
+	},
+	onShow: function() {
+		app.getCollectionLength((data) => {
+			this.setData({
+				collectionLength: data
 			})
 		})
-
-		//todo 获取用户信息
 	},
 	toJobDetail: function() {
 		wx.navigateTo({

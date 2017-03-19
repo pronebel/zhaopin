@@ -26,4 +26,8 @@ public class CollectionService {
 	public boolean addCollection(Collection c){
 		return cd.addCollection(c);
 	}
+	
+	public int getCollectionLength(Collection c){
+		return cd.getCollectionLength(c);
+	}
 }

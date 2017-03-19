@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Company">
+	<resultMap id="Company" type="com.demo.model.Company">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+    	<result property="name" column="name" jdbcType="VARCHAR" />
+	    <result property="scale" column="scale" jdbcType="VARCHAR" />
+	    <result property="financing_stage" column="financing_stage" jdbcType="VARCHAR" />
+	    <result property="address" column="address" jdbcType="VARCHAR" />
+	    <result property="province" column="province" jdbcType="VARCHAR" />
+	    <result property="description" column="description" jdbcType="VARCHAR" />    
+	    <result property="city" column="city" jdbcType="VARCHAR" />
+	    <result property="district" column="district" jdbcType="VARCHAR" />      
+	    <result property="field" column="field" jdbcType="VARCHAR" />    	
+	</resultMap>
+
+	<sql id="TableName">
+		company
+	</sql>
+	
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

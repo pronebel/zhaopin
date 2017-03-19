@@ -42,6 +42,12 @@ App({
         }.bind(this))
         this.login();
 
+        let config = wx.getStorageSync('config');
+        if (config) {
+            this.globalData.config = config;
+        } else {
+            this.getConfig();
+        }
         this.getUserInfo();
 
     },
@@ -174,6 +180,80 @@ App({
             })
         }
     },
+    getConfig(cb) {
+        let config = wx.getStorageSync('config');
+        if (config) {
+            typeof cb == 'function' && cb(config);
+        } else {
+            $.ajax({
+                url: `${server}/config/getConfig`,
+                data: {
+                    thirdSessionKey: this.globalData.session.thirdSessionKey
+                }
+            }).then((res) => {
+                if (res.data) {
+                    config = res.data;
+                    wx.setStorageSync('config', config);
+                    typeof cb == 'function' && cb(config);
+                }
+            })
+        }
+    },
+    getCollectionLength(cb) {
+        if (this.globalData.collectionLength) {
+            typeof cb == 'function' && cb(this.globalData.collectionLength)
+        } else {
+            let timer = setInterval(function() {
+                let {
+                    thirdSessionKey
+                } = this.globalData.session;
+                if (!thirdSessionKey) {
+                    return;
+                }
+                $.ajax({
+                    url: `${server}/collection/getCollectionLength`,
+                    data: {
+                        thirdSessionKey: thirdSessionKey
+                    }
+                }).then((res) => {
+                    if (res.data) {
+                        this.globalData.collectionLength = res.data;
+                        cb(res.data);
+                        clearInterval(timer);
+                    }
+                })
+            }.bind(this), 2000)
+        }
+    },
+    getConfig(cb) {
+        let {
+            config
+        } = this.globalData;
+        if (config) {
+            typeof cb == 'function' && cb(config)
+        } else {
+            let timer = setInterval(function() {
+                let {
+                    thirdSessionKey
+                } = this.globalData.session;
+                if (!thirdSessionKey)
+                    return;
+                $.ajax({
+                    url: `${server}/config/getConfig`,
+                    data: {
+                        thirdSessionKey: thirdSessionKey
+                    }
+                }).then((res) => {
+                    if (res.data) {
+                        this.globalData.config = res.data;
+                        wx.setStorageSync('config', res.data);
+                        typeof cb == 'function' && cb(res.data)
+                        clearInterval(timer);
+                    }
+                })
+            }.bind(this), 2000)
+        }
+    },
     globalData: {
         userInfoFromWX: null,
         location: '',
@@ -183,6 +263,7 @@ App({
         identity: 0, //0代表seeker  1代表hr
         session: {},
         userInfo: null,
-
+        collectionLength: null,
+        config: null
     }
 })

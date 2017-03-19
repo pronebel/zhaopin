@@ -45,4 +45,12 @@ public class CollectionController {
 		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
 		return cs.addCollection(c);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/getCollectionLength"},method=RequestMethod.GET)
+	public int getCollectionLength(String thirdSessionKey,HttpServletRequest req){
+		Collection c=new Collection();
+		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		return cs.getCollectionLength(c);
+	}
 }

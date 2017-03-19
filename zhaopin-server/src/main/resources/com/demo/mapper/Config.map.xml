@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Config">
+	<resultMap id="Config" type="com.demo.model.Config">
+    	<id property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />
+		<result property="resume_open" column="resume_open" jdbcType="BOOLEAN" />		
+		<result property="default_send_open" column="default_send_open" jdbcType="BOOLEAN" />	
+		<result property="email_accept_open" column="email_accept_open" jdbcType="BOOLEAN" />	
+		<result property="sms_accept_open" column="sms_accept_open" jdbcType="BOOLEAN" />				
+	</resultMap>
+
+	<sql id="TableName">
+		config
+	</sql>
+	
+	<insert id="addConfig" parameterType='com.demo.model.Config'>
+		insert into <include refid='TableName' />
+			(seeker_id)
+		values
+			(#{seeker_id})
+	</insert>
+	
+	<select id='getConfig' resultMap='Config'>
+		select * from <include refid='TableName' />
+		where seeker_id=#{seeker_id}
+	</select>
+	
+	<update id="updateConfig" parameterType='com.demo.model.Config'>
+		update <include refid='TableName' /> set
+			resume_open=#{resume_open},
+			default_send_open=#{default_send_open},
+			email_accept_open=#{email_accept_open},
+			sms_accept_open=#{sms_accept_open}
+		where 
+			seeker_id=#{seeker_id}
+	</update>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

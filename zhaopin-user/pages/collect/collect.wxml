@@ -1,38 +1,40 @@
 <view>
 	<view class="list">
-	    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
-	   	  	<view class="logo">
-	        	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
-	      	</view>
-	      	<view class="details">
-	        	<view class="_block">
-	          		<text class="job-title">web前端</text>
-	          		<text class="job-salary">8k-10k</text>
-	          		<view style="clear:both"></view>
-	        	</view>
-	        	<text class="company-name">公司名</text>
-	        	<view class="_block translucence-msg" style="margin-top:10rpx">
-	          		<text class="work-place">深圳</text>
-	          		<text class="internship">有实习经历</text>
-	          		<text class="degree">本科</text>
-	          		<text class="_right release-date">01月11日</text>
-	        	</view>
-	        	<view class="_block translucence-msg" style="margin-top:6rpx">
-	          		<text class="scale">100-500人</text>
-	          		<text class="company-type">移动互联网</text>
-	        	</view>
-	      	</view>
-	      	<view style="clear:both;"></view>
-	    </view>
-	    <view class="handleBar">	    	
-	      	<view class="handleItem handleItem-1" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
-	      		<icon class="iconfont icon-quxiaoshoucang"></icon>
-	      		<text>取消收藏</text>
-	      	</view>
-	      	<view class="handleItem" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
-	      		<icon class="iconfont icon-send"></icon>
-	      		<text>发送简历</text>
-	      	</view>
-	    </view>
+		<block wx:for='{{collections}}'>
+		    <view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bingtap='navigateTo' data-id='{{item.job.id}}' data-url='../jobDetail/jobDetail'>
+		   	  	<view class="logo">
+		        	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+		      	</view>
+		      	<view class="details">
+		        	<view class="_block">
+		          		<text class="job-title">{{item.job.name}}</text>
+		          		<text class="job-salary">{{item.job.salary}}</text>
+		          		<view style="clear:both"></view>
+		        	</view>
+		        	<text class="company-name">{{item.job.company.name}}</text>
+		        	<view class="_block translucence-msg" style="margin-top:10rpx">
+		          		<text class="work-place">{{item.job.city}}</text>
+		          		<text class="internship"></text>
+		          		<text class="degree">{{item.job.degree_limit}}</text>
+		          		<text class="_right release-date">{{item.job.release_date}}</text>
+		        	</view>
+		        	<view class="_block translucence-msg" style="margin-top:6rpx">
+		          		<text class="scale">{{item.job.company.scale}}</text>
+		          		<text class="company-type">{{item.job.type}}</text>
+		        	</view>
+		      	</view>
+		      	<view style="clear:both;"></view>
+		    </view>
+		    <view class="handleBar">	    	
+		      	<view class="handleItem handleItem-1" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='deleteCollection' data-id='{{item.id}}' data-index='{{index}}'>
+		      		<icon class="iconfont icon-quxiaoshoucang"></icon>
+		      		<text>取消收藏</text>
+		      	</view>
+		      	<view class="handleItem" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='sendResume' data-id='{{item.job.id}}'>
+		      		<icon class="iconfont icon-send"></icon>
+		      		<text>发送简历</text>
+		      	</view>
+		    </view>
+		</block>
 	</view>
 </view>
