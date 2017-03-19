@@ -1,9 +1,6 @@
 // pages/position/position.js
 Page({
 	data: {
-		resumeMsg: [1],
-		jobInvitationMsg: ['1'],
-		seenMsg: [2, 2, 3, 3]
 	},
 	onLoad() {
 		//获取消息
@@ -15,6 +12,11 @@ Page({
 	navigateTo(e) {
 		wx.navigateTo({
 			url: e.currentTarget.dataset.url
+		})
+	},
+	addPosition: function() {
+		wx.navigateTo({
+			url: '../addPosition/addPosition'
 		})
 	}
 })

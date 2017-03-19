@@ -1,20 +1,17 @@
 <!--pages/position/position.wxml-->
 <view>
 	<view class='box _flex'>
-		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='navigateTo' data-url='resumeMsg/resumeMsg'>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='addPosition' data-url='addPosition/addPosition'>
 			<view class='iconfont icon-jianli'></view>
-			<view class='hintNum' wx:if='{{resumeMsg.length>0}}'>{{resumeMsg.length}}</view>
-			<view class='text'>简历状态</view>
+			<view class='text'>发布新职位</view>
 		</view>
-		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='navigateTo' data-url='jobInvitationMsg/jobInvitationMsg'>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='publishedPosition' data-url='publishedPosition/publishedPosition'>
 			<view class='iconfont icon-sey-letter-a'></view>
-			<view class='hintNum' wx:if='{{jobInvitationMsg.length>0}}'>{{jobInvitationMsg.length}}</view>
-			<view class='text'>职位邀请</view>
+			<view class='text'>已发布职位</view>
 		</view>
-		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='navigateTo' data-url='seenMsg/seenMsg'>
+		<view class='item _relative' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="bkg-text-click" bindtap='stopedPosition' data-url='stopedPosition/stopedPosition'>
 			<view class='iconfont icon-preview2'></view>
-			<view class='hintNum' wx:if='{{seenMsg.length>0}}'>{{seenMsg.length}}</view>
-			<view class='text'>谁看过我</view>
+			<view class='text'>已停止职位</view>
 		</view>
 	</view>
 
