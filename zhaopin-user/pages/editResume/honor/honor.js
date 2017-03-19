@@ -1,17 +1,25 @@
-var event = require('../../../utils/event.js');
+let event = require('../../../utils/event.js');
+let app = getApp();
 
 Page({
 	data: {
-		resume: {
-			honors: [{
-				id: 0,
-				date: '2011-06',
-				name: 'xx竞赛',
-				prize: '二等奖'
-			}]
-		}
+		resume: {}
 	},
-	onLoad: function() {
+	onLoad: function(options) {
+		this.setData({
+			resume_id: options.resume_id
+		});
+
+		app.resume('resume/getHonors', 'GET', {
+			resume_id: options.resume_id
+		}).then((res) => {
+			if (res.data) {
+				this.setData({
+					'resume.honors': res.data
+				})
+			}
+		})
+
 		event.on('resumeChanged', this, event.cb.bind(this));
 	},
 	onUnload: function() {
@@ -20,11 +28,11 @@ Page({
 	toEditHonor: function(e) {
 		if (e.currentTarget.dataset.flag == 'true') {
 			wx.navigateTo({
-				url: 'editHonor/editHonor?date=' + e.currentTarget.dataset.date + '&name=' + e.currentTarget.dataset.name + '&prize=' + e.currentTarget.dataset.prize + '&id=' + e.currentTarget.dataset.id
+				url: 'editHonor/editHonor?date=' + e.currentTarget.dataset.date + '&name=' + e.currentTarget.dataset.name + '&prize=' + e.currentTarget.dataset.prize + '&id=' + e.currentTarget.dataset.id + '&resume_id=' + e.currentTarget.dataset.resume_id + '&flag=' + true
 			})
 		} else {
 			wx.navigateTo({
-				url: 'editHonor/editHonor'
+				url: `editHonor/editHonor?resume_id=${this.data.resume_id}&flag=false`
 			})
 		}
 	}

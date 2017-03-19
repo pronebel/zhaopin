@@ -2,7 +2,7 @@ var event = require('../../../../utils/event.js');
 var $ = require('../../../../utils/util.js');
 const years = require('../../../../configs/data_configs.js').years;
 const degrees = require('../../../../configs/data_configs.js').degrees;
-
+let app = getApp();
 Page({
 	data: {
 		intership: {},
@@ -14,13 +14,18 @@ Page({
 			intership: options,
 			now: $.formatDate(new Date())
 		});
-		if (options.endDate == '至今') {
+		if (options.description == 'null') {
+			this.setData({
+				'intership.description': ''
+			})
+		}
+		if (options.end_date == '至今') {
 			this.setData({
 				checked: true
 			})
 		}
-		var _this = this;
-		if ($.isEmptyObject(options)) {
+		let _this = this;
+		if (options.flag === 'false') {
 			_this.setData({
 				flag: false //表示新建
 			})
@@ -32,44 +37,73 @@ Page({
 	},
 	bindEndPickerChange: function(e) {
 		this.setData({
-			'intership.endDate': e.detail.value,
+			'intership.end_date': e.detail.value,
 			checked: false
 		})
 	},
 	bindStartPickerChange: function(e) {
 		this.setData({
-			'intership.startDate': e.detail.value
+			'intership.start_date': e.detail.value
+		})
+	},
+	input(e) {
+		let {
+			key
+		} = e.currentTarget.dataset;
+		let {
+			intership
+		} = this.data;
+		intership[key] = e.detail.value
+		this.setData({
+			intership: intership
 		})
 	},
 	save: function() {
 		//wx.request
-		var _this = this;
-		if (_this.data.flag) {
-			event.emit('resumeChanged', {
-				key: 'interships',
-				value: _this.data.intership,
-				event_type: 'change'
+		if (this.data.flag) {
+			app.resume('resume/updateIntership', 'POST', {
+				intership: JSON.stringify(this.data.intership)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'interships',
+						value: this.data.intership,
+						event_type: 'change'
+					})
+					wx.navigateBack({})
+				}
 			})
 		} else {
-			event.emit('resumeChanged', {
-				key: 'interships',
-				value: _this.data.intership,
-				event_type: 'add'
+			app.resume('resume/addIntership', 'POST', {
+				intership: JSON.stringify(this.data.intership)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'interships',
+						value: this.data.intership,
+						event_type: 'add'
+					})
+					wx.navigateBack({})
+				}
 			})
 		}
-		wx.navigateBack({})
 	},
 	delete: function() {
 		//wx.request
-		var _this = this;
-		event.emit('resumeChanged', {
-			key: 'interships',
-			value: {
-				id: this.data.intership.id
-			},
-			event_type: 'delete'
+		app.resume('resume/deleteIntership', 'POST', {
+			id: this.data.intership.id
+		}).then((res) => {
+			if (res.data) {
+				event.emit('resumeChanged', {
+					key: 'interships',
+					value: {
+						id: this.data.intership.id
+					},
+					event_type: 'delete'
+				})
+				wx.navigateBack({})
+			}
 		})
-		wx.navigateBack({})
 	},
 	textareaInput: function(e) {
 		this.setData({
@@ -79,7 +113,7 @@ Page({
 	changeChecked: function() {
 		this.setData({
 			checked: true,
-			'intership.endDate': '至今'
+			'intership.end_date': '至今'
 		})
 	}
 })

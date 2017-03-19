@@ -1,8 +1,7 @@
-var event = require('../../../../utils/event.js');
-var $ = require('../../../../utils/util.js');
+let event = require('../../../../utils/event.js');
 const years = require('../../../../configs/data_configs.js').years;
 const degrees = require('../../../../configs/data_configs.js').degrees;
-
+let app = getApp();
 Page({
 	data: {
 		education: {}
@@ -11,8 +10,8 @@ Page({
 		this.setData({
 			education: options
 		});
-		var _this = this;
-		if ($.isEmptyObject(options)) {
+		let _this = this;
+		if (options.flag === 'false') {
 			_this.setData({
 				years: years,
 				yearIndex: 17,
@@ -22,7 +21,7 @@ Page({
 			})
 		} else {
 			years.forEach((val, index) => {
-				if (val == parseInt(_this.data.education.endDate)) {
+				if (val == _this.data.education.graduation_year) {
 					_this.setData({
 						years: years,
 						yearIndex: index,
@@ -42,7 +41,7 @@ Page({
 	},
 	bindYearPickerChange: function(e) {
 		this.setData({
-			'education.endDate': this.data.years[e.detail.value]
+			'education.graduation_year': this.data.years[e.detail.value]
 		})
 	},
 	bindDegreePickerChange: function(e) {
@@ -50,34 +49,65 @@ Page({
 			'education.degree': this.data.degrees[e.detail.value]
 		})
 	},
+	input(e) {
+		let {
+			key
+		} = e.currentTarget.dataset;
+		let {
+			education
+		} = this.data;
+		education[key] = e.detail.value
+		console.log(key);
+		this.setData({
+			education: education
+		})
+	},
 	save: function() {
 		//wx.request
-		var _this = this;
-		if (_this.data.flag) {
-			event.emit('resumeChanged', {
-				key: 'educations',
-				value: _this.data.education,
-				event_type: 'change'
+		if (this.data.flag) {
+			app.resume('resume/updateEducation', 'POST', {
+				education: JSON.stringify(this.data.education)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'educations',
+						value: this.data.education,
+						event_type: 'change'
+					})
+					wx.navigateBack({})
+				}
 			})
 		} else {
-			event.emit('resumeChanged', {
-				key: 'educations',
-				value: _this.data.education,
-				event_type: 'add'
+			app.resume('resume/addEducation', 'POST', {
+				education: JSON.stringify(this.data.education)
+			}).then((res) => {
+				if (res.data) {
+					event.emit('resumeChanged', {
+						key: 'educations',
+						value: this.data.education,
+						event_type: 'add'
+					})
+					wx.navigateBack({})
+				}
 			})
 		}
-		wx.navigateBack({})
 	},
 	delete: function() {
 		//wx.request
-		var _this = this;
-		event.emit('resumeChanged', {
-			key: 'educations',
-			value: {
-				id: this.data.education.id
-			},
-			event_type: 'delete'
+		let _this = this;
+		app.resume('resume/deleteEducation', 'POST', {
+			id: this.data.education.id
+		}).then((res) => {
+			if (res.data) {
+				event.emit('resumeChanged', {
+					key: 'educations',
+					value: {
+						id: this.data.education.id
+					},
+					event_type: 'delete'
+				})
+				wx.navigateBack({})
+			}
 		})
-		wx.navigateBack({})
 	}
 })

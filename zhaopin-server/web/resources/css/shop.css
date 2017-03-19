@@ -1,0 +1,351 @@
+
+
+#wrap {
+	width: 1226px;
+	height: 460px;
+	position: relative;
+	margin: 75px auto 0;
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+	border-radius: 5px;
+}
+
+#wrap ul.picList {
+	width: 1226px;
+	height: 460px;
+	position: relative;
+	overflow: hidden;
+}
+
+#wrap ul.picList li {
+	position: absolute;
+	display: none;
+	list-style: none;
+}
+
+#wrap .picList img {
+	border-radius: 5px;
+}
+
+.btnLeft {
+	width: 41px;
+	height: 69px;
+	position: absolute;
+	top: 50%;
+	margin-top: -35px;
+	background: url(../img/arrow.png) no-repeat;
+	display: none;
+	left: 240px;
+	background-position: -84px 0;
+	cursor: pointer;
+}
+
+.btnRight {
+	width: 41px;
+	height: 69px;
+	position: absolute;
+	top: 50%;
+	margin-top: -35px;
+	background: url(../img/arrow.png) no-repeat;
+	display: none;
+	background-position: -126px 0;
+	right: 0;
+	cursor: pointer;
+}
+
+#wrap ol {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+#wrap ol li {
+	list-style: none;
+	width: 6px;
+	height: 6px;
+	background: rgba(0, 0, 0, 0.6);
+	float: left;
+	margin: 0 5px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+#wrap ol li.active {
+	background: rgba(255, 255, 255, 0.4);
+	border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+
+nav {
+	position: absolute;
+	top: 0;
+	width: 19.5%;
+	background: rgba(0, 0, 0, .6);
+	height: 100%;
+	color: #fff;
+	font-family: "microsoft yahei";
+	font-size: 16px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+nav>ul>li:nth-child(1) {
+	margin-top: 100px;
+}
+
+nav>ul>li:hover {
+	background-color: #FF6700;
+}
+
+nav ul li i.left {
+	margin-left: 20px;
+	padding-right: 20px;
+	font-size: 18px;
+}
+
+nav ul li i.right {
+	position: absolute;
+	right: 20px;
+}
+
+div.goods a {
+	color: rgba(115, 0, 62, 0.9);
+}
+div.goods a.mainlink{
+	font-size:1.5em;
+	color:#ff6700;
+}
+div.goods {
+	width: 1226px;
+	margin: 20px auto 0;
+	height:370px;
+}
+div.goods ul{
+	margin-top:20px;
+}
+
+div.goods ul li {
+	float: left;
+	width: 235px;
+	margin-right: 10px;
+	border:1px solid rgba(255,100,100,0.8);
+	padding-bottom:15px;
+	border-radius:5px;
+}
+
+div.goods p{
+	text-align: center;
+	margin:5px 10px;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+	height: 21px;
+}
+
+div.goods p.price{
+	color:#ff6700;
+}
+div.goods ul li:nth-child(1){
+	margin-left:1px;
+}
+div.goods ul li:nth-child(5) {
+	margin-right: 0;
+}
+
+div.goods ul li img {
+	width: 215px;
+	height: 180px;
+	margin:10px 10px 0px 10px;
+}
+
+div.goods span.sold{
+	float:left;
+	margin-left:20px;
+}
+
+div.goods span.likecount{
+	float:right;
+	margin-right:20px;
+}
+
+div.goods ul li.scaled{
+	animation: scaled 1s ease;
+	-webkit-animation: scaled 1s ease;
+	animation-fill-mode: forwards;
+	-webkit-animation-fill-mode: forwards;
+	box-shadow:0 0 5px rgba(255,100,100,0.8);
+}
+
+div.goods ul li.slideTop{
+	animation: slidetop 1s ease;
+	-webkit-animation: slidetop 1s ease;
+	animation-fill-mode: forwards;
+	-webkit-animation-fill-mode: forwards;
+	box-shadow:0 0 5px rgba(255,100,100,0.8);
+}
+
+@-webkit-keyframes scaled{
+	from{-webkit-transform:scale(1);
+	-o-transform: scale(1);
+	-moz-transform:scale(1);
+	-ms-transform:scale(1);
+	transform: scale(1);
+	opacity:0.4;}
+	to{-webkit-transform:scale(1.02);
+	-o-transform: scale(1.02);
+	-moz-transform:scale(1.02);
+	-ms-transform:scale(1.02);
+	transform: scale(1.02);
+	opacity:1;}
+}
+
+@keyframes scaled{
+	from{-webkit-transform:scale(1);
+	-o-transform: scale(1);
+	-moz-transform:scale(1);
+	-ms-transform:scale(1);
+	transform: scale(1);
+	opacity:0.4;}
+	to{-webkit-transform:scale(1.02);
+	-o-transform: scale(1.02);
+	-moz-transform:scale(1.02);
+	-ms-transform:scale(1.02);
+	transform: scale(1.02);
+	opacity:1;}
+}
+
+@-webkit-keyframes slidetop{
+	from{margin-top:0px;opacity:0.4;}
+	to{margin-top:-8px;opacity:1;}
+}
+
+@keyframes slidetop{
+	from{margin-top:0px;opacity:0.4;}
+	to{margin-top:-8px;opacity:1;}
+}
+
+div#wine{
+	height:500px
+}
+
+div.goods .bigbox{
+	height:440px;
+	width:400px;
+	float:left;
+	border:1px solid rgba(255,100,100,0.8);
+	margin-top: 20px;
+	border-radius:7px;
+}
+
+div.goods .bigbox img{
+	width:380px;
+	margin-left:10px;
+	margin-top:10px;
+	height:300px;
+}
+
+div#wine ul{
+	float:left;
+	width:810px;
+	margin-left:14px;
+}
+
+div#wine ul li{
+	width:397px;
+	height:200px;
+	margin-bottom:10px;
+}
+div#wine ul li:nth-child(even){
+	margin-right:0px;
+}
+div#wine ul li img{
+	height:200px;
+	margin:7px 8px 0 8px;
+}
+
+div#wine ul li p{
+	float:right;
+	width:125px;
+	margin:5px 13px;
+}
+
+div#wine ul li p.description{
+	height:42px;
+	word-break:break-all;
+}
+
+div#wine ul li span{
+	margin:0;
+	display:block;
+	float:none;
+	text-align:center;
+	margin-top:10px;
+}
+
+div#wine ul li span.likecount{
+	margin-rigth:0;
+	margin-top:10px;
+}
+
+div.copyright{
+	margin-top:20px;
+	height:80px;
+	line-height:80px;
+	text-align:center;
+	background:rgba(0,0,0,0.8);
+	color:rgba(255,255,255,0.8);
+}
+
+nav ul li ul{
+	width:300px;
+	height:460px;
+	position:absolute;
+	left:239px;
+	top:0px;
+	background:rgba(255,255,255,0.8);
+	display:none;
+}
+
+nav ul li ul li{	
+	padding:5px 10px 5px 10px; 
+	border-bottom:1px dashed rgba(255,100,0,0.5);
+}
+
+nav ul li ul li:last-child{
+	border:none;
+}
+
+nav ul li ul li:nth-child(1){
+	padding-top:20px;
+}
+
+nav ul li ul li a{
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; 
+	-webkit-box-sizing:border-box;
+	display:inline-block;
+	color:rgba(100,100,100,0.8);
+	margin-right:15px;
+	text-align:center;
+	height:18px;
+	font-size:12px;
+	padding:0 10px;
+}
+
+nav ul li ul li a:hover{
+	border-radius:9px;
+	background:rgba(255,100,0,0.8);
+	color:rgba(255,255,255,0.8);
+}
+
+nav ul li ul li span{
+	text-indent:10px;
+	color:rgba(100,100,100,0.8);
+	font-size:12px;
+}
+
+form{
+	display:inline-block;
+}

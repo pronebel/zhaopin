@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Collection">
+	<resultMap id="Collection" type="com.demo.model.Collection">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
+		<result property="job_id" column="job_id" jdbcType="BIGINT" />
+		<association property="Job" javaType="com.demo.model.Job">
+        	<id property="id" column="id" jdbcType="BIGINT" />
+            <result property="name" column="name" jdbcType="VARCHAR" />
+            <result property="salary" column="salary" jdbcType="VARCHAR" />
+            <result property="workplace" column="workplace" jdbcType="VARCHAR" />
+            <result property="city" column="city" jdbcType="VARCHAR" />
+            <result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />
+            <result property="welfare" column="welfare" jdbcType="VARCHAR" />     
+            <result property="company_id" column="company_id" jdbcType="VARCHAR" />  
+            <result property="type" column="type" jdbcType="VARCHAR" />      
+            <result property="type" column="type" jdbcType="VARCHAR" />       
+        </association>		
+	</resultMap>
+
+	<sql id="TableName">
+		collection
+	</sql>
+	
+	<insert id="addCollection" parameterType='com.demo.model.Collection'>
+		insert into <include refid='TableName' />
+			(seeker_id,job_id)
+		values
+			(#{seeker_id},#{job_id})
+	</insert>
+	
+	<delete id='deleteCollection' parameterType='com.demo.model.Collection'>
+		delete from <include refid='TableName' />
+		where id=#{id}
+	</delete>
+	
+	<select id='getCollections' parameterType='com.demo.model.Collection'>
+		select collection.*,job.* from collection,job
+		where collection.job_id=job.id and collection.seeker_id=#{seeker_id}
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

@@ -3,10 +3,11 @@ const $ = require('../../../utils/util.js');
 const event = require('../../../utils/event.js');
 const types = require('../../../configs/data_configs.js').types;
 const salaryRanges = require('../../../configs/data_configs.js').salaryRanges;
-
+let {
+	server
+} = require('../../../configs/serverConfig.js');
 Page({
 	data: {
-		hope: {},
 		types: types,
 		salaryRanges: salaryRanges,
 		maxlength: 200,
@@ -14,28 +15,50 @@ Page({
 	},
 	onLoad: function(options) {
 		let _this = this;
-		if (!$.isEmptyObject(options)) {
+		if (options.job == 'undefined' || options.job == 'null') {
 			this.setData({
-				'hope.name': options.name,
-				'hope.type': options.type,
-				'hope.city': options.city,
-				'hope.salaryRange': options.salaryRange,
-				'hope.otherDescription': options.otherDescription
+				'hope.resume_id': options.resume_id
+			})
+		} else {
+			this.setData({
+				hope: options
+			})
+			if (!options.otherDescription || options.otherDescription == 'null' || options.otherDescription == 'undefined') {
+				this.setData({
+					'hope.otherDescription': ''
+				})
+			}
+			types.forEach((val, index) => {
+				if (val == _this.data.hope.type) {
+					_this.setData({
+						typeIndex: index
+					})
+				}
+			})
+			salaryRanges.forEach((val, index) => {
+				if (val == _this.data.hope.salary) {
+					_this.setData({
+						salaryIndex: index
+					})
+				}
 			})
 		}
-		types.forEach((val, index) => {
-			if (val == _this.data.hope.type) {
-				_this.setData({
-					typeIndex: index
-				})
-			}
-		})
-		salaryRanges.forEach((val, index) => {
-			if (val == _this.data.hope.salaryRange) {
-				_this.setData({
-					salaryIndex: index
-				})
-			}
+		event.on('hope_city_changed', this, (data) => {
+			_this.setData({
+				'hope.city': data.city
+			})
+		});
+	},
+	input(e) {
+		let {
+			key
+		} = e.currentTarget.dataset;
+		let {
+			hope
+		} = this.data;
+		hope[key] = e.detail.value
+		this.setData({
+			hope: hope
 		})
 	},
 	bindTypePickerChange: function(e) {
@@ -45,7 +68,7 @@ Page({
 	},
 	bindSalaryPickerChange: function(e) {
 		this.setData({
-			'hope.salaryRange': salaryRanges[e.detail.value]
+			'hope.salary': salaryRanges[e.detail.value]
 		})
 	},
 	textareaInput: function(e) {
@@ -53,14 +76,38 @@ Page({
 			'hope.otherDescription': e.detail.value
 		})
 	},
+	toWorkplace() {
+		wx.navigateTo({
+			url: `../../workplace/workplace?city=${this.data.hope.city}&flag=${'hope_city'}`
+		})
+	},
 	save: function() {
 		//wx.request
 		var _this = this;
-		event.emit('resumeChanged', {
-			key: 'hope',
-			value: this.data.hope,
-			event_type: 'change'
+		let {
+			id
+		} = this.data.hope;
+		let url = '';
+		if (id) {
+			url = 'resume/updateHope'
+		} else {
+			url = 'resume/addHope'
+		}
+		$.ajax({
+			url: `${server}/${url}`,
+			method: 'POST',
+			data: {
+				hope: JSON.stringify(this.data.hope)
+			}
+		}).then((res) => {
+			if (res.data) {
+				event.emit('resumeChanged', {
+					key: 'hope',
+					value: this.data.hope,
+					event_type: 'change'
+				})
+				wx.navigateBack({})
+			}
 		})
-		wx.navigateBack({})
 	}
 })

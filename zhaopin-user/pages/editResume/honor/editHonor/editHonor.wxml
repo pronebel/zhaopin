@@ -1,7 +1,7 @@
 <view class="box">
 	<view class="item _flex">
 		<view class="iconfont icon-circle-edit"></view>
-		<input class="input" value="{{honor.name}}" placeholder="比赛项目名称" placeholder-class="placeholder-class" />
+		<input class="input" value="{{honor.name}}" placeholder="比赛项目名称" placeholder-class="placeholder-class" bindinput='input' data-key='name' />
 	</view>
 	<picker bindchange="bindDatePickerChange" value="{{honor.date}}" mode="date" start="2000-01-01" end="{{now}}" fields='month'>
 		<view class="item _flex" style="margin-top:20px">

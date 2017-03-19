@@ -31,11 +31,37 @@ function formatNumber(n) {
     return n[1] ? n : '0' + n
 }
 
+function getLocation(app, cb) {
+    wx.getLocation({
+        success: function(res) {
+            console.log(res);
+            var location = res.latitude + ',' + res.longitude;
+            wx.request({
+                url: 'http://apis.map.qq.com/ws/geocoder/v1/',
+                data: {
+                    location: location,
+                    key: '7YHBZ-KIT3W-R5BRE-RNQUQ-NAOCE-M7BVE'
+                },
+                method: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    app.globalData.location = res.data.result.address_component.city.substring(0, res.data.result.address_component.city.length - 1);
+                    wx.setStorageSync('location', app.globalData.location);
+                    typeof cb == 'function' && cb();
+                },
+                fail: function() {
+                    typeof cb == 'function' && cb();
+                }
+            })
+        }
+    })
+}
+
 /**
  * @param  {[obj]} app
  * @return {[string]}location
  */
-function getLocationAddress(app, cb) {
+function getWorkplace(app, cb) {
     wx.getLocation({
         //      type:'gcj02',
         success: function(res) {
@@ -65,11 +91,11 @@ function getLocationAddress(app, cb) {
         fail: function() {
             //当用户拒绝授权时,采用默认地点------全国
             console.log('用户拒绝授权获取当前地址,采用默认地点---全国')
-            app.globalData.location = '全国';
+
             //默认期待工作地点为当地
             if (app.globalData.workplaceCity == '') {
-                app.globalData.workplaceCity = app.globalData.location;
-                app.globalData.workplaceDistrict = app.globalData.location;
+                app.globalData.workplaceCity = '全国';
+                app.globalData.workplaceDistrict = '全国';
                 wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
                 wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
                 typeof cb == 'function' && cb();
@@ -199,6 +225,7 @@ function ajax({
     return new Promise((resolve, reject) => {
         wx.request({
             header: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset="UTF-8"',
                 'Cookie': 'JSESSIONID=' + wx.getStorageSync('session').sessionId
             },
             url: url,
@@ -244,15 +271,39 @@ function ajaxLogin() {
     })
 }
 
+function checkMobile(phone) {
+    let reg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+    if (!phone) {
+        console.log(1);
+        return true;
+    } else {
+        return reg.test(phone) ? true : false;
+    }
+}
+
+function checkEmail(email) {
+    let reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    if (!email) {
+        console.log(1);
+        return true;
+    } else {
+        return reg.test(email) ? true : false;
+    }
+}
+
+
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
-    getLocationAddress: getLocationAddress,
+    getLocation: getLocation,
+    getWorkplace: getWorkplace,
     getCityList: getCityList,
     getDistrictByCityName: getDistrictByCityName,
     inArray: inArray,
     isEmptyObject: isEmptyObject,
     ajax: ajax,
     ajaxCheckSession: ajaxCheckSession,
-    ajaxLogin: ajaxLogin
+    ajaxLogin: ajaxLogin,
+    checkMobile: checkMobile,
+    checkEmail: checkEmail
 }

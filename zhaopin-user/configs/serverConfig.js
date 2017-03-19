@@ -1,5 +1,5 @@
 const SERVER_CONFIG = {
-	url: 'http://localhost:8080/zhaopin',
+	server: 'http://localhost:8080/zhaopin',
 	port: 8080,
 	appName: 'zhaopin',
 	serverName: 'localhost',

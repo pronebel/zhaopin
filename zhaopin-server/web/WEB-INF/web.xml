@@ -55,6 +55,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <session-config>
-	<session-timeout>120</session-timeout>
+	<session-timeout>43200</session-timeout>
 	</session-config>
 </web-app>

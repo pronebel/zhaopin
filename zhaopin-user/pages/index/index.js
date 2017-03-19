@@ -84,7 +84,7 @@ Page({
 			})
 		} catch (e) {}
 
-		app.getUserInfo(function(data) {
+		app.getUserInfoFromWX(function(data) {
 			that.setData({
 				userInfoFromWX: data
 			})

@@ -1,10 +1,10 @@
 <view>
 	<view class="box" wx:if="{{resume.interships.length>0}}">
-		<view wx:for="{{resume.interships}}" hover="true" hover-start-time="10" hover-stay-time="300"hover-class="click-view" bindtap='toEditIntership' data-start-date='{{item.startDate}}' data-end-date='{{item.endDate}}' data-campany="{{item.campany}}" data-job='{{item.job}}' data-description='{{item.description}}' data-id="{{item.id}}" data-flag='true'>
+		<view wx:for="{{resume.interships}}" hover="true" hover-start-time="10" hover-stay-time="300"hover-class="click-view" bindtap='toEditIntership' data-start_date='{{item.start_date}}' data-end_date='{{item.end_date}}' data-company="{{item.company}}" data-job='{{item.job}}' data-description='{{item.description}}' data-id="{{item.id}}" data-flag='true' data-resume_id='{{item.resume_id}}'>
 			<view class="item"> 
-				<view class="dateTop">{{item.startDate}}~{{item.endDate}}</view>
-				<view class="text-2">{{item.campany}}~{{item.job}}</view>
-				<view class="text-3">{{item.description}}</view>
+				<view class="dateTop">{{item.start_date}}~{{item.end_date}}</view>
+				<view class="text-2">{{item.company}}~{{item.job}}</view>
+				<view class="text-3" wx:if='{{item.description}}'>{{item.description}}</view>
 			</view>
 		</view>
 	</view>
