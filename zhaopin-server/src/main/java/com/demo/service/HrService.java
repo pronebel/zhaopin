@@ -17,4 +17,16 @@ public class HrService {
 		hd.newHr(sk);
 	}
 	
+	public Hr getUserInfo(Hr s){
+		return hd.getUserInfo(s);
+	}
+	
+	public boolean updateHr(Hr s){
+		return hd.updateHr(s);
+	}
+	
+	public boolean updateAvatar(Hr s){
+		return hd.updateAvatar(s);
+	}
+	
 }

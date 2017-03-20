@@ -73,7 +73,7 @@ Page({
 			'positionInfo.types': this.data.typesArray[e.detail.value]
 		})
 	},
-	save: function() {
+	publish: function() {
 		//wx.request
 		var _this = this;
 		event.emit('resumeChanged', {

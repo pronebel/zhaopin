@@ -18,6 +18,32 @@
 		company
 	</sql>
 	
+	<select id="selectFromOpenid" resultMap="Company">
+		select * from <include refid="TableName" />
+		where id = #{id}
+	</select>
+	
+	<insert id="newCompany" parameterType="com.demo.model.Company">
+		insert into <include refid="TableName" />
+		(id) values(#{id})
+	</insert>
+	
+	<update id='updateHr' parameterType="com.demo.model.Company">
+		update <include refid="TableName"/> set
+			name=#{name},
+			scale=#{scale},
+			sex=#{sex},
+			telephone=#{telephone},
+			email=#{email},
+			avatarUrl=#{avatarUrl},
+			city=#{city},
+			company=#{company},
+			job=#{job}
+		where
+			id=#{id}
+			
+	</update>
+	
 </mapper>
 
 <!-- parameterType:使用的参数类型

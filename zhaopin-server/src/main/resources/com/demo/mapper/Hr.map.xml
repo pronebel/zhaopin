@@ -26,6 +26,30 @@
 		(id) values(#{openid})
 	</insert>
 	
+	<update id='updateHr' parameterType="com.demo.model.Hr">
+		update <include refid="TableName"/> set
+			name=#{name},
+			birthday=#{birthday},
+			sex=#{sex},
+			telephone=#{telephone},
+			email=#{email},
+			avatarUrl=#{avatarUrl},
+			city=#{city},
+			company=#{company},
+			job=#{job}
+		where
+			id=#{openid}
+			
+	</update>
+	
+	<update id='updateAvatar' parameterType="com.demo.model.Hr">
+		update <include refid="TableName"/> set
+			avatarUrl=#{avatarUrl}
+		where
+			id=#{openid}
+			
+	</update>
+	
 </mapper>
 
 <!-- parameterType:使用的参数类型

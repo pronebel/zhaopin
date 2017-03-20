@@ -16,12 +16,12 @@
 				</view>
 			</view>
 		</picker>
-		<picker bindchange="bindStatusPickerChange" range="{{positionstatusArray}}">
+		<picker bindchange="bindStatusPickerChange" range="{{typesArray}}">
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.positionstatus==''}}">工作性质</view>
-					<view class="inputMsg" wx:else>{{positionInfo.positionstatus}}</view>
+					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.types==''}}">工作类型</view>
+					<view class="inputMsg" wx:else>{{positionInfo.types}}</view>
 				</view>
 			</view>
 		</picker>
@@ -45,7 +45,7 @@
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.degree_limit==''}}">最低学历</view>
+					<view class="inputMsg placeholder-class" wx:if="{{positionInfo.degree==''}}">最低学历</view>
 					<view class="inputMsg" wx:else>{{positionInfo.degree}}</view>
 				</view>
 			</view>
@@ -82,7 +82,7 @@
 		</view>
 	</view>
 
-	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='save'>
+	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='publish'>
 		<view class='item'>
 			<icon class="iconfont icon-baocun"></icon>
 			<text>发布</text>
