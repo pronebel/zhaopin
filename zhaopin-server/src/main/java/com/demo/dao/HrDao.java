@@ -24,5 +24,20 @@ public class HrDao extends BaseDao<Hr>{
 			System.out.println("插入成功");
 		}
 	}
+	
+	public Hr getUserInfo(Hr s){
+		String sn=getIbatisMapperNamespace() + ".selectFromOpenid";
+		return getSqlSessionTemplate().selectOne(sn, s);
+	}
+	
+	public boolean updateHr(Hr s){
+		String sn=getIbatisMapperNamespace() + ".updateHr";
+		return getSqlSessionTemplate().update(sn, s)==1?true : false;
+	}
+	
+	public boolean updateAvatar(Hr s){
+		String sn=getIbatisMapperNamespace() + ".updateAvatar";
+		return getSqlSessionTemplate().update(sn, s)==1?true : false;
+	}
 
 }
