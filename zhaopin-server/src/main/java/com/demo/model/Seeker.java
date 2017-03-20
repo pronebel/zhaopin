@@ -9,6 +9,7 @@ public class Seeker {
 	private String email;
 	private String avatarUrl;
 	private String city;
+	private String hope_job;
 	private String degree;
 	private String electronic_resume;
 	public String getOpenid() {
@@ -71,4 +72,11 @@ public class Seeker {
 	public void setElectronic_resume(String electronic_resume) {
 		this.electronic_resume = electronic_resume;
 	}
+	public String getHope_job() {
+		return hope_job;
+	}
+	public void setHope_job(String hope_job) {
+		this.hope_job = hope_job;
+	}
+	
 }

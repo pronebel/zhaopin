@@ -7,11 +7,11 @@ public class Job {
 	private String workplace;
 	private String city;
 	private String degree_limit;
-	private String type;
 	private String welfare;
 	private String release_date;
 	private Long company_id;
 	private String hr_id;
+	private String type;
 	private String job_search;
 	private Company company;
 	public String getName() {
@@ -50,12 +50,6 @@ public class Job {
 	public void setDegree_limit(String degree_limit) {
 		this.degree_limit = degree_limit;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	public String getWelfare() {
 		return welfare;
 	}
@@ -92,6 +86,12 @@ public class Job {
 	}
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

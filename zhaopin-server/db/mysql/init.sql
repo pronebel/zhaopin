@@ -12,6 +12,7 @@ create table seeker(
 	avatarUrl varchar(100) not null default '',
 	city varchar(10) not null default '',
 	degree varchar(10) not null default '',
+	hope_job varchar(20),
 	electronic_resume varchar(100) not null default ''
 );
 
@@ -55,7 +56,8 @@ create table hope(
 	job varchar(20),
 	type varchar(20),
 	city varchar(10),
-	salary varchar(30) varchar(500),
+	salary varchar(30),
+	description varchar(500),
 	foreign key(resume_id) references resume(id)
 );
 
@@ -108,8 +110,8 @@ create table job(
 	workplace varchar(100) not null,
 	city varchar(20) not null,
 	degree_limit varchar(10) not null,
-	type varchar(10) not null,
 	welfare varchar(100),
+	type varchar(20),
 	company_id bigint(11),
 	hr_id varchar(100),
 	release_date varchar(50) not null,
@@ -197,7 +199,7 @@ create table resume_seen(
 create table collection(
 	id bigint(11) auto_increment primary key not null,
 	seeker_id varchar(50) not null,
-	job_id varchar(50) not null,
+	job_id bigint(11) not null,
 	foreign key(seeker_id) references seeker(id),
 	foreign key(job_id) references job(id)
 );
@@ -205,12 +207,11 @@ create table collection(
 
 
 /**
- * insert into company(name,scale,financing_stage,address,province,city,district,field)
-  values('name','scale','financing_stage','address','province','city','district','field')
+ * insert into company(name,scale,financing_stage,address,province,city,district,field) values ('xx公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网')
  */
 
 /**
- * insert into job(name,salary,workplace,city,degree_limit,type,welfare,hr_id,company_id,job_search)values('前端','5-10k','深圳','深圳','本科','','没有','openidhr',1,'前端')
+ * insert into job(name,salary,workplace,city,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)values('前端','5-10k','深圳','深圳','本科','全职','没有','openidhr',1,'前端','2017-03-20')
  */
 
 /**

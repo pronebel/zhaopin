@@ -3,10 +3,15 @@ const MENU_WIDTH_SCALE = 0.82;
 const FAST_SPEED_SECOND = 300;
 const FAST_SPEED_DISTANCE = 5;
 const FAST_SPEED_EFF_Y = 50;
+let $ = require('../../utils/util.js');
+let {
+	server
+} = require('../../configs/serverConfig.js');
+let event = require('../../utils/event.js');
 Page({
 	data: {
 		scrollTop: 1,
-		loading: true,
+		loading: false,
 		ui: {
 			windowWidth: 0,
 			menuWidth: 0,
@@ -14,51 +19,8 @@ Page({
 			tStart: true,
 			offsetTop: 0,
 		},
-		jobList: [{
-			name: '前端',
-			salary: '8-10k',
-			campany: 'xxx公司',
-			city: '深圳',
-			degree: '本科',
-			scale: '100-500人',
-			type: '移动互联网',
-			releaseDate: '01月11日'
-		}, {
-			name: '前端',
-			salary: '8-10k',
-			campany: 'xxx公司',
-			city: '深圳',
-			degree: '本科',
-			scale: '100-500人',
-			type: '移动互联网',
-			releaseDate: '01月11日'
-		}, {
-			name: '前端',
-			salary: '8-10k',
-			campany: 'xxx公司',
-			city: '深圳',
-			degree: '本科',
-			scale: '100-500人',
-			type: '移动互联网',
-			releaseDate: '01月11日'
-		}, {
-			name: '前端',
-			salary: '8-10k',
-			campany: 'xxx公司',
-			city: '深圳',
-			degree: '本科',
-			scale: '100-500人',
-			type: '移动互联网',
-			releaseDate: '01月11日'
-		}],
-		userInfo: {
-			imgUrl: '',
-			name: '林锐'
-		},
-		hope: {
-			city: '深圳',
-			job: '前端开发'
-		}
+		setHope_job: false,
+		hiddenLoader: true
 	},
 	navigateTo(e) {
 		console.log(e.currentTarget.dataset.url);
@@ -72,11 +34,6 @@ Page({
 		})
 	},
 	onLoad: function() {
-		// setTimeout(function() {
-		// 	this.setData({
-		// 		loading: false
-		// 	})
-		// }.bind(this), 2000)
 		var that = this
 		try {
 			let res = wx.getSystemInfoSync()
@@ -91,11 +48,76 @@ Page({
 		} catch (e) {}
 
 		app.getUserInfoFromWX(function(data) {
-				that.setData({
-					userInfoFromWX: data
-				})
+			that.setData({
+				userInfoFromWX: data
 			})
-			//todo 获取用户信息
+		})
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfo: data
+			})
+			if (data.hope_job == 'null' || data.hope_job == 'undefined' || !data.hope_job) {
+				this.setHope_job();
+			} else {
+				this.getIndexSearch();
+			}
+		})
+	},
+	confirm() {
+		let {
+			hope_job
+		} = this.data.userInfo;
+		if (hope_job == 'null' || hope_job == 'undefined' || !hope_job) {
+			return;
+		}
+		$.ajax({
+			url: `${server}/seeker/updateHope_job`,
+			method: 'POST',
+			data: {
+				thirdSessionKey: app.globalData.session.thirdSessionKey,
+				hope_job: hope_job
+			}
+		}).then((res) => {
+			if (res.data) {
+				this.setData({
+					setHope_job: false,
+				})
+				wx.setStorageSync('userInfo', this.data.userInfo);
+				app.globalData.userInfo = this.data.userInfo;
+				this.getIndexSearch();
+			}
+		}).catch((error) => {
+			console.log(error);
+		})
+	},
+	input(e) {
+		this.setData({
+			'userInfo.hope_job': e.detail.value
+		})
+	},
+	setHope_job() {
+		this.setData({
+			setHope_job: true
+		})
+	},
+	getIndexSearch() {
+		this.setData({
+			loading: true,
+			hiddenLoader: false
+		})
+		setTimeout(function() {
+			$.ajax({
+				url: `${server}/job/getIndexSearch`,
+				data: {
+					key: this.data.userInfo.hope_job
+				}
+			}).then((res) => {
+				this.setData({
+					jobList: res.data
+				})
+				app.hiddenLoader(this);
+			})
+		}.bind(this), 300)
 	},
 	onShow: function() {
 		app.getCollectionLength((data) => {

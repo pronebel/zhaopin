@@ -1,8 +1,10 @@
-var app = getApp();
+let app = getApp();
 
-var $ = require('../../utils/util.js');
-
-var items = require('../../configs/data_configs.js').items
+let $ = require('../../utils/util.js');
+let {
+	server
+} = require('../../configs/serverConfig.js');
+let items = require('../../configs/data_configs.js').items
 Page({
 	data: {
 		workplaceCity: '',
@@ -144,7 +146,7 @@ Page({
 		}.bind(this), 400)
 		this.animate1(-400);
 	},
-	cancle: function() {
+	cancle() {
 		if (this.data.jobList.length == 0) {
 			wx.navigateBack({
 				delta: 1
@@ -156,12 +158,12 @@ Page({
 		}
 
 	},
-	toChooseWorkPlace: () => {
+	toChooseWorkPlace() {
 		wx.navigateTo({
-			url: `../workplace/workplace?flag=${'search_city'}&workplaceCity=${this.data.workplaceCity}`
+			url: `../workplace/workplace?flag=${'search_city'}&city=${this.data.workplaceCity}`
 		})
 	},
-	clickBtnSearch: function(e) {
+	clickBtnSearch(e) {
 		const val = e.target.dataset.value;
 		this.setData({
 			searchMsg: val
@@ -170,7 +172,7 @@ Page({
 		// ajax 更新list
 		this.ajaxData();
 	},
-	toSearch: function(e) {
+	toSearch(e) {
 		const val = e.detail.value;
 		var str = val;
 		if (str.replace(/\s/g, '') == '') {
@@ -218,10 +220,23 @@ Page({
 			this.setData({
 				searchSuggestions: []
 			})
+			return;
 		}
 		//ajax get searchSuggestions
-		this.setData({
-			searchSuggestions: ['java', '前端']
+		$.ajax({
+			url: `${server}/job/getSearchRecommand`,
+			data: {
+				job: JSON.stringify({
+					keys: ['java'],
+					workplaces: ['city', '']
+				})
+			}
+		}).then((res) => {
+			this.setData({
+				searchSuggestions: res.data
+			})
+		}).catch((error) => {
+			console.log(error);
 		})
 	},
 	showSuggestions: function() {

@@ -13,10 +13,10 @@
             <result property="city" column="city" jdbcType="VARCHAR" />
             <result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />
             <result property="welfare" column="welfare" jdbcType="VARCHAR" />     
-            <result property="company_id" column="company_id" jdbcType="VARCHAR" />  
-            <result property="type" column="type" jdbcType="VARCHAR" />
+            <result property="company_id" column="company_id" jdbcType="VARCHAR" />
             <result property="hr_id" column="hr_id" jdbcType="VARCHAR" />   
             <result property="release_date" column="release_date" jdbcType="VARCHAR" />
+            <result property="type" column="type" jdbcType="VARCHAR" />	    
 	        <association property="company" javaType="com.demo.model.Company">
 	        	<id property="id" column="id" jdbcType="BIGINT" />
 	            <result property="name" column="name" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
 	            <result property="city" column="city" jdbcType="VARCHAR" />     
 	            <result property="description" column="description" jdbcType="VARCHAR" />  
 	            <result property="district" column="district" jdbcType="VARCHAR" />      
-	            <result property="field" column="field" jdbcType="VARCHAR" />       
+	            <result property="field" column="field" jdbcType="VARCHAR" />  
 	        </association>	    
         </association>		
 	</resultMap>

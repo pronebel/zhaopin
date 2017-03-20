@@ -55,4 +55,13 @@ public class SeekerController {
 		s.setOpenid(lc.getOpenid(thirdSessionKey, req));
 		return ss.updateSeeker(s);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/updateHope_job"},method=RequestMethod.POST)
+	public boolean updateHope_job(String hope_job,String thirdSessionKey,HttpServletRequest req){
+		Seeker s=new Seeker();
+		s.setOpenid(lc.getOpenid(thirdSessionKey, req));
+		s.setHope_job(hope_job);
+		return ss.updateHope_job(s);
+	}
 }

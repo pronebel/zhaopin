@@ -53,6 +53,7 @@ public class LoginController {
 		s.setThirdSessionKey(RandomStringUtils.randomAlphanumeric(128));
 		System.out.println(s.getThirdSessionKey());
 		req.getSession().setAttribute(s.getThirdSessionKey(),jsonobject.get("openid").toString());
+		req.getSession().setMaxInactiveInterval(60*60*24*30);
 		//检测用户是否已经存储到数据库中
 		if(identity==0){
 			//seeker
@@ -75,6 +76,7 @@ public class LoginController {
 	 * @return openid
 	 */
 	public String getOpenid(String thirdSessionKey,HttpServletRequest req){
+		System.out.println("thirdSessionKey:"+thirdSessionKey);
 		return req.getSession().getAttribute(thirdSessionKey).toString();		
 	}
 	

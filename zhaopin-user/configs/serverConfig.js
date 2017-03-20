@@ -1,8 +1,8 @@
 const SERVER_CONFIG = {
-	server: 'https://zwill.space/zhaopin',
-	port: 80,
+	server: 'http://zwill.space:8080/zhaopin',
+	port: 8080,
 	appName: 'zhaopin',
-	serverName: 'www.zwill.space',
+	serverName: 'zwill.space',
 }
 
 module.exports = SERVER_CONFIG;

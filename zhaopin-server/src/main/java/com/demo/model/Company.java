@@ -71,5 +71,5 @@ public class Company {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

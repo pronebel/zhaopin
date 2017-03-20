@@ -10,7 +10,7 @@
 	    <result property="province" column="province" jdbcType="VARCHAR" />
 	    <result property="description" column="description" jdbcType="VARCHAR" />    
 	    <result property="city" column="city" jdbcType="VARCHAR" />
-	    <result property="district" column="district" jdbcType="VARCHAR" />      
+	    <result property="district" column="district" jdbcType="VARCHAR" />
 	    <result property="field" column="field" jdbcType="VARCHAR" />    	
 	</resultMap>
 

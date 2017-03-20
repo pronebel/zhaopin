@@ -48,7 +48,7 @@ App({
         } else {
             this.getConfig();
         }
-        this.getUserInfo();
+        //   this.getUserInfo();
 
     },
     onShow: function() {
@@ -205,8 +205,9 @@ App({
         }
     },
     getCollectionLength(cb) {
-        if (this.globalData.collectionLength) {
-            typeof cb == 'function' && cb(this.globalData.collectionLength)
+        let collectionLength = this.globalData.collectionLength || wx.getStorageSync('collectionLength');
+        if (collectionLength) {
+            typeof cb == 'function' && cb(collectionLength)
         } else {
             let timer = setInterval(function() {
                 let {
@@ -222,8 +223,10 @@ App({
                     }
                 }).then((res) => {
                     this.globalData.collectionLength = res.data;
+                    wx.setStorageSync('collectionLength', res.data);
                     cb(res.data);
-                    console.log(1);
+                    clearInterval(timer);
+                }).catch((error) => {
                     clearInterval(timer);
                 })
             }.bind(this), 2000)
@@ -266,7 +269,7 @@ App({
             self.setData({
                 hiddenLoader: true
             })
-        }, 500)
+        }, 600)
     },
     globalData: {
         userInfoFromWX: null,

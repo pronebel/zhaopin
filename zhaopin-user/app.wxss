@@ -145,3 +145,14 @@ view,scroll-view{
     -webkit-box-shadow: 0 0px 3px #145ccd;
     box-shadow: 0 0px 3px #145ccd;
 }
+
+.empty{
+	height: 150px;
+	width: 210px;
+	position: absolute;
+	margin:auto;
+	left: 0;
+	right: 0;
+	top:0;
+	bottom: 0;
+}

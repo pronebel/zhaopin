@@ -29,4 +29,8 @@ public class SeekerService {
 	public boolean updateAvatar(Seeker s){
 		return sd.updateAvatar(s);
 	}
+	
+	public boolean updateHope_job(Seeker s){
+		return sd.updateHope_job(s);
+	}
 }

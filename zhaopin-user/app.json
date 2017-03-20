@@ -62,5 +62,9 @@
       "text": "我"
     }]
   },
+  "networkTimeout": {
+    "request": 15000,
+    "downloadFile": 20000
+  },
   "debug": true
 }

@@ -35,10 +35,11 @@ public class PcCodeLoginController {
 		String imgPath = request.getServletContext().getRealPath("/")+"resources/pc/QrCode/" + imgName;
 		TwoDimensionCode handler = new TwoDimensionCode();
 		handler.encoderQRCode(content, imgPath, "png",null);
-		System.out.println(imgPath);
-		
+		System.out.println(" request.getServerName()"+ request.getServerName());
+		System.out.println("httpRequest.getContextPath()"+request.getContextPath());
+		System.out.println("httpRequest.getServletPath()"+request.getServletPath());
 		//生成的图片访问地址
-		String qrCodeImg = "/zhaopin/resources/pc/QrCode/" + imgName;
+		String qrCodeImg = request.getContextPath()+"/resources/pc/QrCode/" + imgName;
 		String jsonStr = "{\"uuid\":" + uuid + ",\"qrCodeImg\":\"" + qrCodeImg + "\"}";
 		return jsonStr;
 	}

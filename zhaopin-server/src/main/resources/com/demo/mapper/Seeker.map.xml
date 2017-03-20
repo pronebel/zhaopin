@@ -11,7 +11,8 @@
 		<result property="avatarUrl" column="avatarUrl" jdbcType="VARCHAR" />	
 		<result property="city" column="city" jdbcType="VARCHAR" />
 		<result property="degree" column="degree" jdbcType="VARCHAR" />	
-		<result property="electronic_resume" column="electronic_resume" jdbcType="VARCHAR" />	
+		<result property="electronic_resume" column="electronic_resume" jdbcType="VARCHAR" />
+		<result property="hope_job" column="hope_job" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="TableName">
@@ -48,8 +49,14 @@
 		update <include refid="TableName"/> set
 			avatarUrl=#{avatarUrl}
 		where
+			id=#{openid}			
+	</update>
+	
+	<update id='updateHope_job' parameterType="com.demo.model.Seeker">
+		update <include refid="TableName"/> set
+			hope_job=#{hope_job}
+		where
 			id=#{openid}
-			
 	</update>
 	
 </mapper>
