@@ -17,7 +17,7 @@ public class JobDao extends BaseDao<Job>{
 		return Job.class;
 	}
 
-	public List<Job> getSearchRecommand(JSON json){
+	public List<String> getSearchRecommand(JSON json){
 		String sn=getIbatisMapperNamespace()+".getSearchRecommand";
 		return getSqlSessionTemplate().selectList(sn, json);
 	}

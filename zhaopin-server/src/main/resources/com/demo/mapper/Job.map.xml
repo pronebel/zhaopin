@@ -4,7 +4,9 @@
 	<resultMap id="Job" type="com.demo.model.Job">
     	<id property="id" column="id" jdbcType="BIGINT" />
 		<result property="name" column="name" jdbcType="VARCHAR" />		
-		<result property="salary" column="salary" jdbcType="VARCHAR" />	
+		<result property="salary_upper" column="salary_upper" jdbcType="INTEGER" />
+		<result property="salary_lower" column="salary_lower" jdbcType="INTEGER" />	
+		<result property="status" column="status" jdbcType="BOOLEAN" />	
 		<result property="workplace" column="workplace" jdbcType="VARCHAR" />	
 		<result property="city" column="city" jdbcType="VARCHAR" />
 		<result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />		
@@ -32,8 +34,8 @@
 		job
 	</sql>
 	
-	<select id='getSearchRecommand' resultMap='Job'>
-		select * from <include refid="TableName" />
+	<select id='getSearchRecommand' resultType='String'>
+		select name from <include refid="TableName" />
 		where 
 		<foreach collection="keys" item="key" index="index" open="" close=" " separator="and">
 			name like CONCAT('%',#{key},'%')

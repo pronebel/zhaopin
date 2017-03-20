@@ -21,7 +21,7 @@ public class JobService {
 		return jd.getIndexSearch(key);
 	}
 
-	public List<Job> getSearchRecommand(JSON json) {
+	public List<String> getSearchRecommand(JSON json) {
 		return jd.getSearchRecommand(json);
 	}
 }

@@ -32,8 +32,9 @@ public class JobController {
 	
 	@ResponseBody
 	@RequestMapping("/getSearchRecommand")
-	public List<Job> getSearchRecommand(String job){
+	public List<String> getSearchRecommand(String job){
 		JSON jsStr = JSONObject.fromObject(job);
+		System.out.println(jsStr);
 		return js.getSearchRecommand(jsStr);
 	}
 	

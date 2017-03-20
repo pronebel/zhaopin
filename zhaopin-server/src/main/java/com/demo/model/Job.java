@@ -3,7 +3,9 @@ package com.demo.model;
 public class Job {
 	private String name;
 	private Long id;
-	private String salary;
+	private int salary_upper;
+	private int salary_lower;
+	private boolean status;
 	private String workplace;
 	private String city;
 	private String degree_limit;
@@ -25,12 +27,6 @@ public class Job {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getSalary() {
-		return salary;
-	}
-	public void setSalary(String salary) {
-		this.salary = salary;
 	}
 	public String getWorkplace() {
 		return workplace;
@@ -92,6 +88,24 @@ public class Job {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public int getSalary_upper() {
+		return salary_upper;
+	}
+	public void setSalary_upper(int salary_upper) {
+		this.salary_upper = salary_upper;
+	}
+	public int getSalary_lower() {
+		return salary_lower;
+	}
+	public void setSalary_lower(int salary_lower) {
+		this.salary_lower = salary_lower;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 }

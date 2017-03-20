@@ -225,10 +225,11 @@ Page({
 		//ajax get searchSuggestions
 		$.ajax({
 			url: `${server}/job/getSearchRecommand`,
+			method: 'POST', //get请求乱码
 			data: {
 				job: JSON.stringify({
-					keys: ['java'],
-					workplaces: ['city', '']
+					keys: ['前端'],
+					workplaces: ['深圳', '南山区']
 				})
 			}
 		}).then((res) => {
