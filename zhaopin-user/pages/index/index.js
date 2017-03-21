@@ -10,7 +10,6 @@ let {
 let event = require('../../utils/event.js');
 Page({
 	data: {
-		scrollTop: 1,
 		loading: false,
 		ui: {
 			windowWidth: 0,
@@ -23,14 +22,8 @@ Page({
 		hiddenLoader: true
 	},
 	navigateTo(e) {
-		console.log(e.currentTarget.dataset.url);
 		wx.navigateTo({
 			url: e.currentTarget.dataset.url
-		})
-	},
-	toSearch: () => {
-		wx.navigateTo({
-			url: '../search/search'
 		})
 	},
 	onLoad: function() {

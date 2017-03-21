@@ -1,32 +1,51 @@
 let app = getApp();
 
 let $ = require('../../utils/util.js');
+let event = require('../../utils/event.js');
+let loop = require('../../utils/event-loop.js');
 let {
 	server
 } = require('../../configs/serverConfig.js');
 let items = require('../../configs/data_configs.js').items
 Page({
 	data: {
-		workplaceCity: '',
-		workplaceDistrict: '',
-		searchHistory: [],
-		jobList: [],
 		animationData: {},
+		searched: false,
 		handleHeight: '',
 		active: ['#353535', '#353535', '#353535'],
-		citycidx: [],
 		hidden: [false, false, false],
 		searchMsg: '',
 		pickerViewValue: 0,
+		searchConfig: {},
+		salary: {
+			lower: 1,
+			upper: 50
+		},
+		jobList: [],
+		dataLimit: false,
 		searchSuggestions: [],
-		showSuggestions: false,
-		lower: 1,
-		upper: 50,
+		showSuggestions: true,
 		items: items,
 		checkedValues: {
 			educations: [],
 			types: [],
-			industry: []
+			industry: [],
+			financle: []
+		},
+		limitCount: 10,
+		loading: false,
+		searchConfig: {
+			checkedValues: {
+				educations: [],
+				types: [],
+				industry: [],
+				financle: []
+			},
+			workplace: {},
+			salary: {
+				lower: 1,
+				upper: 50
+			}
 		}
 	},
 	onLoad: function() {
@@ -38,16 +57,38 @@ Page({
 				userInfoFromWX: data
 			})
 		})
+		let searchConfig = wx.getStorageSync('searchConfig');
+		if (searchConfig) {
+			this.setData({
+				searchConfig: searchConfig,
+				salary: searchConfig.salary,
+				checkedValues: searchConfig.checkedValues,
+				workplace: searchConfig.workplace
+			})
+			$.getDistrictByCityName(searchConfig.workplace.city, app.globalData.cityList, this);
+		} else {
+			app.getWorkplace((data) => {
+				this.setData({
+					workplace: data
+				})
+				$.getDistrictByCityName(data.city, app.globalData.cityList, this);
+			})
+		}
+		event.on('search_city_changed', this, (data) => {
+			let workplace = {
+				city: data.city,
+				district: data.city
+			}
+			app.globalData.workplace = workplace
+			this.setData({
+				workplace: workplace
+			})
+			wx.setStorageSync('workplace', workplace);
+			//获取城市区县
+			$.getDistrictByCityName(res.data, app.globalData.cityList, this);
+		})
 	},
 	onShow: function() { //这里用es6的箭头函数 this是window
-		this.setData({
-			workplaceCity: app.globalData.workplaceCity,
-			workplaceDistrict: app.globalData.workplaceDistrict
-		})
-
-		//获取城市区县
-		$.getDistrictByCityName(this.data.workplaceCity, app.globalData.cityList, this);
-
 		var res = wx.getSystemInfoSync();
 		this.setData({
 			handleHeight: res.windowHeight - 48 - 38,
@@ -56,26 +97,14 @@ Page({
 		})
 	},
 	changeDistrict: function(e) {
-		// const val = e.detail.value;
-		// if (val == 0) { //选择是默认的全城市
-		// 	this.setData({
-		// 		workplaceDistrict: ''
-		// 	})
-		// 	return;
-		// }
-		// this.setData({
-		// 	workplaceDistrict: this.data.citycidx[val - 1].fullname
-		// })
-
 		this.setData({
-			pickerViewValue: e.detail.value
+			pickerViewValue: e.detail.value[0]
 		})
-
 	},
 	handleAnimate: function(e) {
 		const index = e.target.dataset.index;
 		if (index == 1) {
-			if (this.data.workplaceCity == '全国') {
+			if (this.data.workplace.city == '全国') {
 				this.toChooseWorkPlace();
 				return;
 			}
@@ -113,31 +142,6 @@ Page({
 		})
 	},
 	hideHandle: function() {
-		const val = this.data.pickerViewValue - 1;
-		var workplace = '';
-		if (val == -1) {
-			workplace = this.data.workplaceCity;
-		} else {
-			workplace = this.data.citycidx[val].fullname;
-		}
-
-		if (workplace != this.data.workplaceDistrict) {
-
-			this.setData({
-				workplaceDistrict: workplace
-			})
-
-			wx.setStorageSync('workplaceDistrict', workplace);
-			app.globalData.workplaceDistrict = workplace;
-
-			// ajax 更新list
-			this.ajaxData();
-		} else {
-			this.setData({
-				workplaceDistrict: workplace
-			})
-		}
-
 		setTimeout(function() {
 			this.setData({
 				hidden: [false, false, false],
@@ -145,9 +149,11 @@ Page({
 			})
 		}.bind(this), 400)
 		this.animate1(-400);
+
+		this.checkUpdateSearchConfig();
 	},
 	cancle() {
-		if (this.data.jobList.length == 0) {
+		if (!this.data.jobList || this.data.jobList.length == 0) {
 			wx.navigateBack({
 				delta: 1
 			})
@@ -156,12 +162,6 @@ Page({
 				showSuggestions: false,
 			})
 		}
-
-	},
-	toChooseWorkPlace() {
-		wx.navigateTo({
-			url: `../workplace/workplace?flag=${'search_city'}&city=${this.data.workplaceCity}`
-		})
 	},
 	clickBtnSearch(e) {
 		const val = e.target.dataset.value;
@@ -169,22 +169,122 @@ Page({
 			searchMsg: val
 		})
 
-		// ajax 更新list
-		this.ajaxData();
+		this.searchJob();
 	},
-	toSearch(e) {
-		const val = e.detail.value;
-		var str = val;
-		if (str.replace(/\s/g, '') == '') {
+	checkUpdateSearchConfig() {
+		//判断是否设置有变化 没有不刷新
+		let {
+			searchConfig,
+			checkedValues,
+			workplace,
+			salary
+		} = this.data;
+		if (checkedValues.educations.sort().toString() != searchConfig.checkedValues.educations.sort().toString() || checkedValues.industry.sort().toString() != searchConfig.checkedValues.industry.sort().toString() || checkedValues.financle.sort().toString() != searchConfig.checkedValues.financle.sort().toString() || checkedValues.types.sort().toString() != searchConfig.checkedValues.types.sort().toString()) {
+			console.log('checkedValues不同');
+			this.searchJob();
+			return;
+		} else if (workplace.city !== searchConfig.workplace.city || workplace.district !== searchConfig.workplace.district) {
+			console.log('城市不同');
+			this.searchJob();
+			return;
+		} else if (salary.upper !== searchConfig.salary.upper || salary.lower !== searchConfig.salary.lower) {
+			console.log('薪水不同');
+			this.searchJob();
 			return;
 		}
-
+		console.log('全部相同');
+	},
+	searchJob(flag, cb) { //flag为true时表示结果要concat
 		this.setData({
-			searchMsg: val
+			dataLimit: false
 		})
-
-		// ajax 更新list
-		this.ajaxData();
+		let keys = $.regStrToArr(this.data.searchMsg);
+		if (keys.length == 0) return;
+		this.setData({
+			loading: true,
+			hiddenLoader: false
+		})
+		let {
+			searchConfig,
+			checkedValues,
+			workplace,
+			salary
+		} = this.data;
+		searchConfig = {
+			checkedValues,
+			workplace,
+			salary
+		}
+		$.ajax({
+			url: `${server}/job/searchJob`,
+			method: 'POST',
+			data: {
+				searchConfig: JSON.stringify({
+					keys: keys,
+					workplaces: [workplace.city, workplace.district],
+					educations: checkedValues.educations,
+					types: checkedValues.types,
+					industry: checkedValues.industry,
+					financle: checkedValues.financle,
+					salary: [salary.lower, salary.upper]
+				}),
+				startIndex: flag ? (this.data.jobList || []).length : 0,
+				limitCount: parseInt(this.data.limitCount)
+			}
+		}).then((res) => {
+			if (res.statusCode == 200) {
+				if (flag) {
+					let {
+						jobList
+					} = this.data;
+					this.setData({
+						jobList: jobList.concat(res.data)
+					})
+				} else {
+					this.setData({
+						jobList: res.data
+					})
+				}
+				let arr = wx.getStorageSync('searchHistory') || [];
+				let val = this.data.searchMsg;
+				if ($.inArray(val, arr) == -1) {
+					arr.unshift(this.data.searchMsg);
+					wx.setStorageSync('searchHistory', arr);
+				}
+				this.setData({
+					showSuggestions: false,
+					searchHistory: arr,
+					searched: true,
+					searchConfig: searchConfig
+				})
+				wx.setStorageSync('searchConfig', searchConfig);
+				typeof cb == 'function' && cb();
+				if (res.data.length < this.data.limitCount) {
+					this.setData({
+						dataLimit: true
+					})
+				}
+				app.hiddenLoader(this);
+			}
+		}).catch((error) => {
+			console.log(`${'searchJob-fail:'}error`);
+		})
+	},
+	onPullDownRefresh: function() {
+		if (!this.data.searched || this.data.searchMsg == '') {
+			wx.stopPullDownRefresh();
+			return;
+		} else {
+			this.searchJob(false, () => {
+				wx.stopPullDownRefresh();
+			});
+		}
+	},
+	loadMore() {
+		if (this.data.dataLimit || !this.data.searched || this.data.searchMsg == '') {
+			return;
+		}
+		this.searchJob(true);
 	},
 	ajaxData: function() {
 		var arr = wx.getStorageSync('searchHistory') || [];
@@ -209,35 +309,44 @@ Page({
 		})
 
 		// ajax 更新list
-		this.ajaxData();
+		this.searchJob();
 	},
 	keyInput: function(e) {
+		let value = e.detail.value;
 		this.setData({
-			searchMsg: e.detail.value
+			searchMsg: value
 		})
 
-		if (e.detail.value == '') {
-			this.setData({
-				searchSuggestions: []
-			})
-			return;
-		}
-		//ajax get searchSuggestions
-		$.ajax({
-			url: `${server}/job/getSearchRecommand`,
-			method: 'POST', //get请求乱码
-			data: {
-				job: JSON.stringify({
-					keys: ['前端'],
-					workplaces: ['深圳', '南山区']
+		//通过loop 默认延迟1s后执行最后的函数
+		loop.push('getSearchRecommand', this, value, (value) => {
+			console.log(value);
+			if (value == '') {
+				this.setData({
+					searchSuggestions: []
 				})
+				return;
 			}
-		}).then((res) => {
-			this.setData({
-				searchSuggestions: res.data
+			let {
+				city,
+				district
+			} = this.data.workplace;
+			//ajax get searchSuggestions
+			$.ajax({
+				url: `${server}/job/getSearchRecommand`,
+				method: 'POST', //get请求乱码
+				data: {
+					job: JSON.stringify({
+						keys: $.regStrToArr(value),
+						workplaces: [city, district]
+					})
+				}
+			}).then((res) => {
+				this.setData({
+					searchSuggestions: res.data
+				})
+			}).catch((error) => {
+				console.log(error);
 			})
-		}).catch((error) => {
-			console.log(error);
 		})
 	},
 	showSuggestions: function() {
@@ -290,9 +399,19 @@ Page({
 			checkedValues: checkedValues
 		});
 	},
-	toJobDetail: function() {
-		wx.navigateTo({
-			url: '../jobDetail/jobDetail'
-		})
+	navigateTo(e) {
+		let {
+			url,
+			id
+		} = e.currentTarget.dataset;
+		if (id) {
+			wx.navigateTo({
+				url: `${url}?id=${id}`
+			})
+		} else {
+			wx.navigateTo({
+				url: `${url}?flag=${'search_city'}&city=${this.data.workplace.city}`
+			})
+		}
 	}
 })

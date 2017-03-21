@@ -10,6 +10,11 @@ view{
 	font-size:15px;
 }
 
+icon{
+	margin-right:4px;
+	vertical-align: middle;
+}
+
 .search-hot view view,.search-hot view text,.search-history view view,.search-history view text{
 	vertical-align: middle;
 }
@@ -142,6 +147,7 @@ view{
 	box-sizing: border-box;
 	padding:0 80rpx;
 	height: 38px;
+	z-index: 10;
 }
 
 .handleItem{
@@ -153,7 +159,7 @@ view{
 	position: fixed;
 	margin-top:38px;
 	overflow: hidden;
-	
+	z-index: 10;
 	width:100%;
 }
 
@@ -353,4 +359,18 @@ view{
 .jobList{
 	background: #fff;
 	margin-top: 38px;
+}
+
+.nomore{
+	height:50px;
+	box-sizing: border-box;
+	background: rgb(239,239,244);
+	text-align: center;
+}
+
+.img-nomore{
+	width: 65px;
+	height:50px;
+	vertical-align: middle;
+	margin-right: 15px;
 }

@@ -106,4 +106,11 @@ public class ResumeController {
 		r.setSelfAssessment(selfAssessment);
 		return rs.updateSelfAssessment(r);
 	}
+	
+	@ResponseBody
+	@RequestMapping("/test")
+	public void test(String id,HttpServletRequest req){
+		System.out.println(req.getSession().getId());
+		System.out.println(id);
+	}
 }

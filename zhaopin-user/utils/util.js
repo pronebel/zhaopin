@@ -78,11 +78,12 @@ function getWorkplace(app, cb) {
                     console.log(res);
                     app.globalData.location = res.data.result.address_component.city.substring(0, res.data.result.address_component.city.length - 1);
                     //默认期待工作地点为当地
-                    if (app.globalData.workplaceCity == '') {
-                        app.globalData.workplaceCity = app.globalData.location;
-                        app.globalData.workplaceDistrict = app.globalData.location;
-                        wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
-                        wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+                    if (!app.globalData.workplace) {
+                        app.globalData.workplace = {
+                            city: app.globalData.location,
+                            district: app.globalData.location
+                        }
+                        wx.setStorageSync('workplace', app.globalData.workplace);
                         typeof cb == 'function' && cb();
                     }
                 }
@@ -93,11 +94,12 @@ function getWorkplace(app, cb) {
             console.log('用户拒绝授权获取当前地址,采用默认地点---全国')
 
             //默认期待工作地点为当地
-            if (app.globalData.workplaceCity == '') {
-                app.globalData.workplaceCity = '全国';
-                app.globalData.workplaceDistrict = '全国';
-                wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
-                wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+            if (!app.globalData.workplace) {
+                app.globalData.workplace = {
+                    city: app.globalData.location,
+                    district: app.globalData.location
+                }
+                wx.setStorageSync('workplace', app.globalData.workplace);
                 typeof cb == 'function' && cb();
             }
         }
@@ -291,7 +293,16 @@ function checkEmail(email) {
     }
 }
 
-
+/**
+ * [regStrToArr description] 将字符串转化成数组 ',.:"/?'等符号视为停顿
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description] array
+ */
+function regStrToArr(str) {
+    let regex = /[\！|\……|\—|\？|\、|\。|\】|\【|\，|\；|\’|\‘|\：|\~|\`|\!|\@|\$|\%|\^|\&|\*|\(|\)|\-|\_|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
+    str = str.replace(regex, ' '); //将特殊符号转化成空格
+    return str.split(/\s+/);
+}
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
@@ -305,5 +316,6 @@ module.exports = {
     ajaxCheckSession: ajaxCheckSession,
     ajaxLogin: ajaxLogin,
     checkMobile: checkMobile,
-    checkEmail: checkEmail
+    checkEmail: checkEmail,
+    regStrToArr: regStrToArr
 }

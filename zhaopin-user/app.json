@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/search/search",
     "pages/index/index",
     "pages/user/user",
     "pages/resume/resume",
@@ -19,7 +20,6 @@
     "pages/editResume/project/project",
     "pages/editResume/project/editProject/editProject",
     "pages/logs/logs",
-    "pages/search/search",
     "pages/searchResult/searchResult",
     "pages/workplace/workplace",
     "pages/discover/discover",

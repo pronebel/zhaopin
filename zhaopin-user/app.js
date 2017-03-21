@@ -5,14 +5,6 @@ const {
 let event = require('utils/event.js');
 App({
     onLaunch: function() {
-        //获取本地存储的workplaceCity,如为空,采用当地为workplaceCity,如果拒绝,采用'全国'
-        let workplaceCity = wx.getStorageSync('workplaceCity');
-        if (!workplaceCity) {
-            $.getWorkplace(this);
-        } else {
-            this.globalData.workplaceCity = workplaceCity;
-        }
-
         let location = wx.getStorageSync('location');
         if (!location) {
             $.getLocation(this);
@@ -27,8 +19,6 @@ App({
             this.globalData.cityList = cityList;
         }
 
-        this.globalData.workplaceDistrict = wx.getStorageSync('workplaceDistrict');
-
         //如果本地不存在session 调用登录
         let session = wx.getStorageSync('session');
         if (!session) {
@@ -40,7 +30,6 @@ App({
         event.on('userInfoChanged', this, function(data) {
             this.globalData.userInfo = data.userInfo
         }.bind(this))
-        this.login();
 
         let config = wx.getStorageSync('config');
         if (config) {
@@ -161,11 +150,13 @@ App({
         }
     },
     getWorkplace(cb) {
-        if (this.globalData.workplaceCity) {
-            typeof cb == 'function' && cb(this.globalData.workplaceCity)
+        let workplace = this.globalData.workplace || wx.getStorageSync('workplace');
+        let _this = this;
+        if (workplace) {
+            typeof cb == 'function' && cb(workplace)
         } else {
             $.getWorkplace(this, function() {
-                typeof cb == "function" && cb(this.globalData.workplaceCity);
+                typeof cb == "function" && cb(_this.globalData.workplace);
             });
         }
     },
@@ -177,30 +168,12 @@ App({
         })
     },
     getLocation(cb) {
+        let _this = this;
         if (this.globalData.location) {
             typeof cb == 'function' && cb(this.globalData.location);
         } else {
             $.getLocation(this, function() {
-                typeof cb == "function" && cb(this.globalData.location);
-            })
-        }
-    },
-    getConfig(cb) {
-        let config = wx.getStorageSync('config');
-        if (config) {
-            typeof cb == 'function' && cb(config);
-        } else {
-            $.ajax({
-                url: `${server}/config/getConfig`,
-                data: {
-                    thirdSessionKey: this.globalData.session.thirdSessionKey
-                }
-            }).then((res) => {
-                if (res.data) {
-                    config = res.data;
-                    wx.setStorageSync('config', config);
-                    typeof cb == 'function' && cb(config);
-                }
+                typeof cb == "function" && cb(_this.globalData.location);
             })
         }
     },
@@ -273,9 +246,8 @@ App({
     },
     globalData: {
         userInfoFromWX: null,
-        location: '',
-        workplaceCity: '',
-        workplaceDistrict: '',
+        location: null,
+        workplace: null,
         cityList: [],
         identity: 0, //0代表seeker  1代表hr
         session: {},

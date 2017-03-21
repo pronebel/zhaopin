@@ -24,4 +24,8 @@ public class JobService {
 	public List<String> getSearchRecommand(JSON json) {
 		return jd.getSearchRecommand(json);
 	}
+	
+	public List<Job> searchJob(JSON json,int startIndex,int limitCount){
+		return jd.searchJob(json, startIndex, limitCount);
+	}
 }

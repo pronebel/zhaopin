@@ -38,4 +38,11 @@ public class JobController {
 		return js.getSearchRecommand(jsStr);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/searchJob")
+	public List<Job> searchJob(String searchConfig,int startIndex,int limitCount){
+		JSON json = JSONObject.fromObject(searchConfig);
+		System.out.println(json);
+		return js.searchJob(json, startIndex, limitCount);
+	}
 }

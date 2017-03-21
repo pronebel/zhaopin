@@ -1,4 +1,4 @@
-<view wx:if="{{ui.offsetLeft!=0}}" style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px;opacity: {{ui.offsetLeft*0.002}}' class="shadow {{!ui.tStart? 'withAnimate': ''}}" catchtouchmove='shadowcatch' catchtouchstart='shadowcatch' catchtouchend='shadowcatch' catchtouchcancle='shadowcatch' catchtap='handlerPageTap'> 
+<view wx:if="{{ui.offsetLeft!=0}}" style='left:{{ui.offsetLeft}}px;width: {{ui.windowWidth}}px;opacity: {{ui.offsetLeft*0.002}}' class="shadow {{!ui.tStart? 'withAnimate': ''}}" bindtouchmove='handlerMove' bindtouchstart='handlerStart' bindtouchend='handlerEnd' catchtouchcancle='shadowcatch' catchtap='handlerPageTap'> 
 </view> 
 
 
@@ -6,7 +6,7 @@
 
     <view class="header _flex _fixed"  >
         <icon class='iconfont icon-bars' bindtap='showBars'></icon>
-        <view class='search-box' bindtap='toSearch'>
+        <view class='search-box' bindtap='navigateTo' data-url='../search/search'>
             <icon class='iconfont icon-search'></icon>
             <text class='search'>搜索职位/公司</text>
         </view>

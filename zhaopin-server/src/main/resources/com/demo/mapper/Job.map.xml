@@ -43,17 +43,40 @@
 		<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
 			workplace like CONCAT('%',#{workplace},'%')
 		</foreach>
-		group by name
-	</select>
-	
-	<select id='searchJob' resultMap='Job'>
-		select job.*,company.* from <include refid='TableName' />,company
-		where job.company_id=company.id and job_search like CONCAT('%',#{job_search},'%') and city like concat('%',#{city},'%')
+		and status=1 group by name
 	</select>
 	
 	<select id='getIndexSearch' resultMap='Job'>
 		select job.*,company.* from <include refid='TableName' />,company
-		where job.company_id=company.id and job_search like concat('%',#{key},'%')
+		where job.company_id=company.id and job_search like concat('%',#{key},'%') and job.status=1
+	</select>
+	
+	<select id='searchJob' resultMap='Job'>
+		select job.*,company.* from <include refid='TableName' />,company
+		<where>
+			job.company_id=company.id and job.status=1 and salary_lower &gt;=#{salary[0]} and salary_upper &lt;=#{salary[1]}
+			<foreach collection="keys" item="key" index="index" open="and" close=" " separator="and">
+				job.job_search like CONCAT('%',#{key},'%')
+			</foreach>
+			<foreach collection="workplaces" item="key" index="index" open="" close=" " separator="">
+				<if test='key != "全国"'>
+					and job.workplace like CONCAT('%',#{key},'%')
+				</if>
+			</foreach>
+			<foreach collection="educations" item="key" index="index" open="" close=" " separator="">
+				and job.degree_limit like CONCAT('%',#{key},'%')
+			</foreach>
+			<foreach collection="types" item="key" index="index" open="" close=" " separator="">
+				and job.type like CONCAT('%',#{key},'%')
+			</foreach>
+			<foreach collection="industry" item="key" index="index" open="" close=" " separator="">
+				and company.field like CONCAT('%',#{key},'%')
+			</foreach>
+			<foreach collection="financle" item="key" index="index" open="" close=" " separator="">
+				and company.financing_stage like CONCAT('%',#{key},'%')
+			</foreach>
+
+		</where>
 	</select>
 	
 </mapper>
