@@ -8,6 +8,7 @@ public class Job {
 	private boolean status;
 	private String workplace;
 	private String city;
+	private String district;
 	private String degree_limit;
 	private String welfare;
 	private String release_date;
@@ -106,6 +107,12 @@ public class Job {
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 	
 }

@@ -26,8 +26,8 @@ public class JobController {
 	
 	@ResponseBody
 	@RequestMapping("/getIndexSearch")
-	public List<Job> getIndexSearch(String key){
-		return js.getIndexSearch(key);
+	public List<Job> getIndexSearch(String key,int startIndex,int limitCount){
+		return js.getIndexSearch(key,startIndex,limitCount);
 	}
 	
 	@ResponseBody

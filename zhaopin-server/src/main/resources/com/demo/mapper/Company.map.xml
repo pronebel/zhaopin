@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.Company">
 	<resultMap id="Company" type="com.demo.model.Company">
-    	<id property="id" column="id" jdbcType="BIGINT" />
-    	<result property="name" column="name" jdbcType="VARCHAR" />
+    	<id property="id" column="c_id" jdbcType="BIGINT" />
+    	<result property="name" column="c_name" jdbcType="VARCHAR" />
 	    <result property="scale" column="scale" jdbcType="VARCHAR" />
 	    <result property="financing_stage" column="financing_stage" jdbcType="VARCHAR" />
 	    <result property="address" column="address" jdbcType="VARCHAR" />
 	    <result property="province" column="province" jdbcType="VARCHAR" />
 	    <result property="description" column="description" jdbcType="VARCHAR" />    
-	    <result property="city" column="city" jdbcType="VARCHAR" />
-	    <result property="district" column="district" jdbcType="VARCHAR" />
+	    <result property="city" column="c_city" jdbcType="VARCHAR" />
+	    <result property="district" column="c_district" jdbcType="VARCHAR" />
 	    <result property="field" column="field" jdbcType="VARCHAR" />    	
 	</resultMap>
 

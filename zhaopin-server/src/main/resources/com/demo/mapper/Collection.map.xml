@@ -6,13 +6,14 @@
 		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
 		<result property="job_id" column="job_id" jdbcType="BIGINT" />
 		<association property="job" javaType="com.demo.model.Job">
-        	<id property="id" column="id" jdbcType="BIGINT" />
-            <result property="name" column="name" jdbcType="VARCHAR" />
+        	<id property="id" column="j_id" jdbcType="BIGINT" />
+            <result property="name" column="j_name" jdbcType="VARCHAR" />
             <result property="salary_upper" column="salary_upper" jdbcType="INTEGER" />
 			<result property="salary_lower" column="salary_lower" jdbcType="INTEGER" />	
 			<result property="status" column="status" jdbcType="BOOLEAN" />	
             <result property="workplace" column="workplace" jdbcType="VARCHAR" />
-            <result property="city" column="city" jdbcType="VARCHAR" />
+            <result property="city" column="j_city" jdbcType="VARCHAR" />
+            <result property="district" column="j_district" jdbcType="VARCHAR" />
             <result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />
             <result property="welfare" column="welfare" jdbcType="VARCHAR" />     
             <result property="company_id" column="company_id" jdbcType="VARCHAR" />
@@ -20,15 +21,15 @@
             <result property="release_date" column="release_date" jdbcType="VARCHAR" />
             <result property="type" column="type" jdbcType="VARCHAR" />	    
 	        <association property="company" javaType="com.demo.model.Company">
-	        	<id property="id" column="id" jdbcType="BIGINT" />
-	            <result property="name" column="name" jdbcType="VARCHAR" />
+	        	<id property="id" column="c_id" jdbcType="BIGINT" />
+	            <result property="name" column="c_name" jdbcType="VARCHAR" />
 	            <result property="scale" column="scale" jdbcType="VARCHAR" />
 	            <result property="financing_stage" column="financing_stage" jdbcType="VARCHAR" />
 	            <result property="address" column="address" jdbcType="VARCHAR" />
 	            <result property="province" column="province" jdbcType="VARCHAR" />
-	            <result property="city" column="city" jdbcType="VARCHAR" />     
+	            <result property="city" column="c_city" jdbcType="VARCHAR" />     
 	            <result property="description" column="description" jdbcType="VARCHAR" />  
-	            <result property="district" column="district" jdbcType="VARCHAR" />      
+	            <result property="district" column="c_district" jdbcType="VARCHAR" />      
 	            <result property="field" column="field" jdbcType="VARCHAR" />  
 	        </association>	    
         </association>		
@@ -52,7 +53,7 @@
 	
 	<select id='getCollections' resultMap='Collection'>
 		select collection.*,job.*,company.* from collection,job,company
-		where collection.job_id=job.id and collection.seeker_id=#{seeker_id} and job.company_id=company.id
+		where collection.job_id=job.j_id and collection.seeker_id=#{seeker_id} and job.company_id=company.c_id
 	</select>
 	
 	<select id='getCollectionLength' resultType='java.lang.Integer'>

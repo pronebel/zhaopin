@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.Job">
 	<resultMap id="Job" type="com.demo.model.Job">
-    	<id property="id" column="id" jdbcType="BIGINT" />
-		<result property="name" column="name" jdbcType="VARCHAR" />		
+    	<id property="id" column="j_id" jdbcType="BIGINT" />
+		<result property="name" column="j_name" jdbcType="VARCHAR" />		
 		<result property="salary_upper" column="salary_upper" jdbcType="INTEGER" />
 		<result property="salary_lower" column="salary_lower" jdbcType="INTEGER" />	
 		<result property="status" column="status" jdbcType="BOOLEAN" />	
 		<result property="workplace" column="workplace" jdbcType="VARCHAR" />	
-		<result property="city" column="city" jdbcType="VARCHAR" />
+		<result property="city" column="j_city" jdbcType="VARCHAR" />
+		<result property="district" column="j_district" jdbcType="VARCHAR" />
 		<result property="degree_limit" column="degree_limit" jdbcType="VARCHAR" />		
 		<result property="welfare" column="welfare" jdbcType="VARCHAR" />
 		<result property="release_date" column="release_date" jdbcType="VARCHAR" />
@@ -16,45 +17,58 @@
 		<result property="hr_id" column="hr_id" jdbcType="VARCHAR" />	
 		<result property="job_search" column="job_search" jdbcType="BIGINT" />
 		<result property="type" column="type" jdbcType="VARCHAR" />	    	
-		<association property="company" javaType="com.demo.model.Company">
-			<id property="id" column="id" jdbcType="BIGINT" />
-	        <result property="name" column="name" jdbcType="VARCHAR" />
-	        <result property="scale" column="scale" jdbcType="VARCHAR" />
-	        <result property="financing_stage" column="financing_stage" jdbcType="VARCHAR" />	
-	        <result property="address" column="address" jdbcType="VARCHAR" />
-	       	<result property="province" column="province" jdbcType="VARCHAR" />
-	       	<result property="city" column="city" jdbcType="VARCHAR" />     
-	        <result property="description" column="description" jdbcType="VARCHAR" />  
-	        <result property="district" column="district" jdbcType="VARCHAR" />      
-	        <result property="field" column="field" jdbcType="VARCHAR" />       
+		<association property="company" javaType="com.demo.model.Company" resultMap='Company'>    
 	   	</association>
 	</resultMap>
-
+	
+	<resultMap id='Company' type='com.demo.model.Company'>
+		<id property="id" column="c_id" jdbcType="BIGINT" />
+	    <result property="name" column="c_name" jdbcType="VARCHAR" />
+	    <result property="scale" column="scale" jdbcType="VARCHAR" />
+	    <result property="financing_stage" column="financing_stage" jdbcType="VARCHAR" />	
+	    <result property="address" column="address" jdbcType="VARCHAR" />
+	    <result property="province" column="province" jdbcType="VARCHAR" />
+	    <result property="city" column="c_city" jdbcType="VARCHAR" />     
+	    <result property="description" column="description" jdbcType="VARCHAR" />  
+	    <result property="district" column="c_district" jdbcType="VARCHAR" />      
+	    <result property="field" column="field" jdbcType="VARCHAR" />   
+	</resultMap>
 	<sql id="TableName">
 		job
 	</sql>
 	
 	<select id='getSearchRecommand' resultType='String'>
-		select name from <include refid="TableName" />
+		select j_name from <include refid="TableName" />
 		where 
 		<foreach collection="keys" item="key" index="index" open="" close=" " separator="and">
-			name like CONCAT('%',#{key},'%')
+			j_name like CONCAT('%',#{key},'%')
 		</foreach> 
 		<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
 			workplace like CONCAT('%',#{workplace},'%')
 		</foreach>
-		and status=1 group by name
+		and status=1 group by j_name
+	</select>
+	
+	<select id='getSearchRecommandCompany' resultType='String'>
+		select c_name from company where
+		<foreach collection="keys" item="key" index="index" open="" close=" " separator="and">
+			c_name like CONCAT('%',#{key},'%')
+		</foreach> 
+		<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
+			address like CONCAT('%',#{workplace},'%')
+		</foreach>
+		group by c_name
 	</select>
 	
 	<select id='getIndexSearch' resultMap='Job'>
-		select job.*,company.* from <include refid='TableName' />,company
-		where job.company_id=company.id and job_search like concat('%',#{key},'%') and job.status=1
+		select job.*,company.* from job,company
+		where job.company_id=company.c_id and job_search like concat('%',#{key},'%') and job.status=1
 	</select>
 	
 	<select id='searchJob' resultMap='Job'>
 		select job.*,company.* from <include refid='TableName' />,company
 		<where>
-			job.company_id=company.id and job.status=1 and salary_lower &gt;=#{salary[0]} and salary_upper &lt;=#{salary[1]}
+			job.company_id=company.c_id and job.status=1 and salary_lower &gt;=#{salary[0]} and salary_upper &lt;=#{salary[1]}
 			<foreach collection="keys" item="key" index="index" open="and" close=" " separator="and">
 				job.job_search like CONCAT('%',#{key},'%')
 			</foreach>
@@ -75,10 +89,13 @@
 			<foreach collection="financle" item="key" index="index" open="" close=" " separator="">
 				and company.financing_stage like CONCAT('%',#{key},'%')
 			</foreach>
-
 		</where>
 	</select>
 	
+	<select id='getJobDetailById' resultMap='Job'>
+		select job.*,company.* from job,company
+		where job.company_id=company.c_id and job.j_id=#{id}
+	</select>
 </mapper>
 
 <!-- parameterType:使用的参数类型

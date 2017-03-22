@@ -20,12 +20,19 @@ public class JobDao extends BaseDao<Job>{
 
 	public List<String> getSearchRecommand(JSON json){
 		String sn=getIbatisMapperNamespace()+".getSearchRecommand";
-		return getSqlSessionTemplate().selectList(sn, json);
+		List<String> jl=getSqlSessionTemplate().selectList(sn, json);
+		sn=getIbatisMapperNamespace()+".getSearchRecommandCompany";
+		List<String> cl=getSqlSessionTemplate().selectList(sn,json);
+		for(int i=0;i<cl.size();i++){
+			jl.add(cl.get(i));
+		}
+		return jl;
 	}
 	
-	public List<Job> getIndexSearch(String key){
+	public List<Job> getIndexSearch(String key,int startIndex,int limitCount){
 		String sn=getIbatisMapperNamespace()+".getIndexSearch";
-		return getSqlSessionTemplate().selectList(sn,key);
+		RowBounds rb=new RowBounds(startIndex,limitCount);
+		return getSqlSessionTemplate().selectList(sn,key,rb);
 	}
 	
 	public List<Job> searchJob(JSON json,int startIndex,int limitCount){

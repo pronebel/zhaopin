@@ -1,3 +1,5 @@
+drop database zhaopin;
+
 create database zhaopin;
 
 use zhaopin;
@@ -17,14 +19,14 @@ create table seeker(
 );
 
 create table company(
-	id bigint(11) auto_increment primary key not null,
-	name varchar(50) not null,
+	c_id bigint(11) auto_increment primary key not null,
+	c_name varchar(50) not null,
 	scale varchar(20) not null,
 	financing_stage varchar(20) not null,
 	address varchar(100) not null,
 	province varchar(10) not null,
-	city varchar(10) not null,
-	district varchar(10) comment '区县',
+	c_city varchar(10) not null,
+	c_district varchar(10) comment '区县',
 	field varchar(20)  not null,
 	description varchar(500) not null default ''
 );
@@ -38,7 +40,7 @@ create table hr(
 	telephone varchar(11),
 	avatarUrl varchar(100),
 	sex enum('男','女'),
-	foreign key(company_id) references company(id)
+	foreign key(company_id) references company(c_id)
 );
 
 create table resume(
@@ -68,7 +70,7 @@ create table education(
 	major varchar(20) not null,
 	graduation_year varchar(10) not null,
 	degree varchar(6) not null,
-	foreign key(resume_id) references resume(id)
+	 foreign key(resume_id) references resume(id)
 );
 
 create table intership(
@@ -104,14 +106,14 @@ create table honor(
 );
 
 create table job(
-	id bigint(11) auto_increment primary key not null,
-	name varchar(50) not null,
-	salaryLower int not null,
-	salaryUpper int not null,
+	j_id bigint(11) auto_increment primary key not null,
+	j_name varchar(50) not null,
+	salary_lower int not null,
+	salary_upper int not null,
 	status boolean not null default 1 comment '职位状态',
 	workplace varchar(100) not null comment '详细地址',
-	city varchar(20) not null,
-	district varchar(20) not null,
+	j_city varchar(20) not null,
+	j_district varchar(20),
 	degree_limit varchar(10) not null,
 	welfare varchar(100),
 	type varchar(20),
@@ -120,21 +122,21 @@ create table job(
 	release_date varchar(50) not null,
 	job_search varchar(2000) not null comment '包含name company job_duty job_skill',
 	foreign key(hr_id) references hr(id),
-	foreign key(company_id) references company(id)
+	foreign key(company_id) references company(c_id)
 );
 
 create table job_duty(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	description varchar(100) not null,
-	foreign key(job_id) references job(id)
+	foreign key(job_id) references job(j_id)
 );
 
 create table job_skill(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	description varchar(100) not null,
-	foreign key(job_id) references job(id)
+	foreign key(job_id) references job(j_id)
 );
 
 create table campus_talk(
@@ -142,7 +144,7 @@ create table campus_talk(
 	job_id bigint(11) not null,
 	scholl varchar(50) not null,
 	date_time varchar(50) not null,
-	foreign key(job_id) references job(id)
+	foreign key(job_id) references job(j_id)
 );
 
 create table comment(
@@ -151,7 +153,7 @@ create table comment(
 	seeker_id varchar(50) not null,
 	date_time varchar(50) not null,
 	description varchar(200) not null,
-	foreign key(job_id) references job(id),
+	foreign key(job_id) references job(j_id),
 	foreign key(seeker_id) references seeker(id)
 );
 
@@ -171,7 +173,7 @@ create table resume_deliver_status(
 	date_time varchar(50) not null,
 	status enum('未查看','待沟通','面试','不合适') not null default '未查看',
 	_read enum('true','false') not null default 'false',
-	foreign key(job_id) references job(id),
+	foreign key(job_id) references job(j_id),
 	foreign key(seeker_id) references seeker(id)
 );
 
@@ -184,7 +186,7 @@ create table job_invication(
 	description varchar(500) not null,
 	status enum('未处理','已处理') not null default '未处理',
 	_read enum('true','false') not null default 'false',
-	foreign key(job_id) references job(id),
+	foreign key(job_id) references job(j_id),
 	foreign key(seeker_id) references seeker(id),
 	foreign key(hr_id) references hr(id)
 );
@@ -204,19 +206,17 @@ create table collection(
 	seeker_id varchar(50) not null,
 	job_id bigint(11) not null,
 	foreign key(seeker_id) references seeker(id),
-	foreign key(job_id) references job(id)
+	foreign key(job_id) references job(j_id)
 );
 
 
+insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)
+ 	values('openidhr','hr','',1,'','','','男');
 
-/**
- * insert into company(name,scale,financing_stage,address,province,city,district,field) values ('xx公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网')
- */
 
-/**
- * insert into job(name,salary,workplace,city,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)values('前端','5-10k','深圳','深圳','本科','全职','没有','openidhr',1,'前端','2017-03-20')
- */
+ insert into company(c_name,scale,financing_stage,address,province,c_city,c_district,field)
+  values ('xx公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网');
 
-/**
- * insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)values('openidhr','hr','',1,'','','','男')
- */
+
+ insert into job(j_name,salary_lower,salary_upper,status,workplace,j_city,j_district,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)
+ 	values('前端',5,10,1,'深圳南山区','深圳','南山区','本科','全职','没有','openidhr',1,'前端','2017-03-20');
