@@ -3,6 +3,8 @@ const {
     server
 } = require('configs/serverConfig.js');
 let event = require('utils/event.js');
+import Websocket from './utils/websocket';
+let ws = new Websocket();
 App({
     onLaunch: function() {
         let location = wx.getStorageSync('location');
@@ -22,9 +24,12 @@ App({
         //如果本地不存在session 调用登录
         let session = wx.getStorageSync('session');
         if (!session) {
-            this.login();
+            this.login(() => {
+                this.connectSocket();
+            });
         } else {
             this.globalData.session = session;
+            this.connectSocket();
         }
 
         event.on('userInfoChanged', this, function(data) {
@@ -37,14 +42,15 @@ App({
         } else {
             this.getConfig();
         }
-        //   this.getUserInfo();
+        //    this.login();
+        //this.getUserInfo();
 
     },
-    onShow: function() {
-        //checkSession
-        this.checkSession();
-    },
-    login() {
+    // onShow: function() {
+    //     //checkSession
+    //     this.checkSession();
+    // },
+    login(cb) {
         console.log('登录');
         let that = this;
         $.ajaxLogin().then((res) => {
@@ -62,13 +68,22 @@ App({
             console.log('登录失败!');
             console.log(error);
         }).then((res) => {
-            if (res) {
+            if (res.statusCode == 200) {
                 //获取session成功 保存到globalData中并存储到本地
                 console.log('登录成功:' + res.data);
                 that.globalData.session = res.data;
                 wx.setStorageSync('session', res.data);
             }
+            typeof cb == 'function' && cb();
         })
+    },
+    connectSocket() {
+        ws.open({
+            openid: this.globalData.session.openid
+        });
+        ws.on((res) => {
+            console.log(res);
+        });
     },
     checkSession() {
         let that = this;
@@ -133,11 +148,14 @@ App({
                             thirdSessionKey: thirdSessionKey
                         }
                     }).then((res) => {
-                        console.log(6);
-                        clearInterval(timer);
-                        _this.globalData.userInfo = res.data;
-                        wx.setStorageSync('userInfo', res.data);
-                        typeof cb == "function" && cb(_this.globalData.userInfo)
+                        if (res.statusCode == 200) {
+                            clearInterval(timer);
+                            _this.globalData.userInfo = res.data;
+                            wx.setStorageSync('userInfo', res.data);
+                            typeof cb == "function" && cb(_this.globalData.userInfo)
+                        } else {
+                            clearInterval(timer);
+                        }
                     }).catch((res) => {
                         console.log(7);
                         clearInterval(timer)
@@ -195,10 +213,14 @@ App({
                         thirdSessionKey: thirdSessionKey
                     }
                 }).then((res) => {
-                    this.globalData.collectionLength = res.data;
-                    wx.setStorageSync('collectionLength', res.data);
-                    cb(res.data);
-                    clearInterval(timer);
+                    if (res.statusCode == 200) {
+                        this.globalData.collectionLength = res.data;
+                        wx.setStorageSync('collectionLength', res.data);
+                        cb(res.data);
+                        clearInterval(timer);
+                    } else {
+                        clearInterval(timer);
+                    }
                 }).catch((error) => {
                     clearInterval(timer);
                 })
@@ -224,12 +246,14 @@ App({
                         thirdSessionKey: thirdSessionKey
                     }
                 }).then((res) => {
-                    if (res.data) {
+                    if (res.statusCode == 200) {
                         this.globalData.config = res.data;
                         wx.setStorageSync('config', res.data);
                         typeof cb == 'function' && cb(res.data)
                         clearInterval(timer);
                     }
+                }).catch((error) => {
+                    clearInterval(timer);
                 })
             }.bind(this), 2000)
         }

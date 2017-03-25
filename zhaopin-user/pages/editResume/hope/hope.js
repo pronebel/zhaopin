@@ -11,7 +11,13 @@ Page({
 		types: types,
 		salaryRanges: salaryRanges,
 		maxlength: 200,
-		salaryIndex: 2
+		salaryIndex: 2,
+		check: {
+			job: true,
+			city: true,
+			salary: true,
+			type: true
+		}
 	},
 	onLoad: function(options) {
 		let _this = this;
@@ -45,7 +51,8 @@ Page({
 		}
 		event.on('hope_city_changed', this, (data) => {
 			_this.setData({
-				'hope.city': data.city
+				'hope.city': data.city,
+				'check.city': true
 			})
 		});
 	},
@@ -54,21 +61,26 @@ Page({
 			key
 		} = e.currentTarget.dataset;
 		let {
-			hope
+			hope,
+			check
 		} = this.data;
-		hope[key] = e.detail.value
+		hope[key] = e.detail.value;
+		check[key] = true
 		this.setData({
-			hope: hope
+			hope: hope,
+			check: check
 		})
 	},
 	bindTypePickerChange: function(e) {
 		this.setData({
-			'hope.type': types[e.detail.value]
+			'hope.type': types[e.detail.value],
+			'check.type': true
 		})
 	},
 	bindSalaryPickerChange: function(e) {
 		this.setData({
-			'hope.salary': salaryRanges[e.detail.value]
+			'hope.salary': salaryRanges[e.detail.value],
+			'check.salary': true
 		})
 	},
 	textareaInput: function(e) {
@@ -82,6 +94,14 @@ Page({
 		})
 	},
 	save: function() {
+		this.check('city');
+		this.check('type');
+		this.check('job');
+		this.check('salary');
+		let check = this.data.check;
+		let flag = check.city && check.type && check.job && check.salary;
+		if (!flag)
+			return;
 		//wx.request
 		var _this = this;
 		let {
@@ -109,5 +129,19 @@ Page({
 				wx.navigateBack({})
 			}
 		})
+	},
+	check(key) {
+		let check = this.data.check;
+		if (!this.data.hope[key] || this.data.hope[key] == 'null' || this.data.hope[key] == 'undefined') {
+			check[key] = false
+			this.setData({
+				check: check
+			})
+		} else {
+			check[key] = true
+			this.setData({
+				check: check
+			})
+		}
 	}
 })

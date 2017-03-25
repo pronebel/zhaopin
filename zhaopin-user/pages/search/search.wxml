@@ -1,6 +1,6 @@
 <view class='_relative searchBar' >
 	<view class="container-row _fixed searchBar" >
-		<view class="work-place _nowrap _relative" bindtap="navigateTo" wx:if="{{!searched || showSuggestions}}">
+		<view class="work-place _nowrap _relative" bindtap="navigateTo" wx:if="{{!searched || showSuggestions}}" data-url='../workplace/workplace?flag=search_city&city={{workplace.city}}'>
 			<text class='_nowrap'>{{workplace.district || workplace.city}}</text>
 			<view class="arrows-down "></view> 
 		</view>
@@ -91,15 +91,15 @@
 			<view class="itemArea-item">
 				<view style="margin-bottom:10px;">
 					<text class="title">月薪范围</text>			
-					<text class="title" style="color:#1aad19; margin-left:10px">({{lower}} - {{upper}}k)</text>
+					<text class="title" style="color:#1aad19; margin-left:10px">({{salary.lower}} - {{salary.upper}}k)</text>
 				</view>
 				<view>
 					<text>最低月薪</text>
-					<slider min="1" max="{{upper}}" value="{{lower}}" show-value="true" bindchange="changeLower"></slider>
+					<slider min="1" max="{{salary.upper}}" value="{{salary.lower}}" show-value="true" bindchange="changeLower"></slider>
 				</view>
 				<view>
 					<text>最高月薪</text>
-					<slider min="{{lower}}" max="50" value="{{upper}}" show-value="true" bindchange="changeUpper"></slider>
+					<slider min="{{salary.lower}}" max="50" value="{{salary.upper}}" show-value="true" bindchange="changeUpper"></slider>
 				</view>
 			</view>
 			<view class="itemArea-item">
@@ -162,13 +162,13 @@
 
 	<scroll-view scroll-y style="height:{{windowHeight-48-38}}px" wx:if="{{searched && !showSuggestions}}" class="jobList" lower-threshold='20' bindscrolltolower='loadMore'>
 		<view class='list'>
-			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="navigateTo" wx:for='{{jobList}}' data-id='{{item.id}}'>
+			<view class="item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="navigateTo" wx:for='{{jobList}}' data-url='../jobDetail/jobDetail?id={{item.id}}' data-id='{{item.id}}'>
 			    <view class="logo">
 			    	<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
 			    </view>
 	      		<view class="details">
 	        		<view class="_block">
-				        <text class="job-title">{{item.job}}</text>
+				        <text class="job-title">{{item.name}}</text>
 				        <text class="job-salary">{{item.salary_lower}}-{{item.salary_upper}}</text>
 				        <view style="clear:both"></view>
 			        </view>
@@ -181,13 +181,15 @@
 			        <view class="_block translucence-msg" style="margin-top:6rpx">
 			        	<text class="scale">{{item.company.scale}}</text>
 			         	<text class="company-type">{{item.company.field}}</text>
+			         	<text class="company-financing-stage">{{item.company.financing_stage}}</text>
 			        </view>
 	      		</view>
 	      		<view style="clear:both;"></view>
 	    	</view>    	
 	    </view>
-	    <view class='nomore' wx:if='{{searched && dataLimit && !showSuggestions}}'>
-	    	<image src='../../images/nomore.png' class='img-nomore'></image>
+	    <view class='nomore' wx:if='{{searched && dataLimit && !showSuggestions && jobList.length>5}}'>
+	    	<!-- <image src='../../images/nomore.png' class='img-nomore'></image> -->
+	    	<view class='iconfont icon-meiyougengduoliao icon-nomore'></view>
 	    	<text>没有更多了~</text>
 	    </view>
 	</scroll-view>

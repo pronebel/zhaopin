@@ -17,7 +17,7 @@ Page({
 				thirdSessionKey: app.globalData.session.thirdSessionKey
 			}
 		}).then((res) => {
-			if (res.data) {
+			if (res.statusCode == 200 && res.data) {
 				this.setData({
 					collections: res.data
 				})
@@ -46,7 +46,7 @@ Page({
 			},
 			method: 'POST'
 		}).then((res) => {
-			if (res.data) {
+			if (res.statusCode == 200 && res.data) {
 				wx.showToast({
 					title: '删除成功!'
 				})

@@ -1,0 +1,12 @@
+<view class='_flex _allcenter'>
+	<icon type='info' size="130" style='margin-bottom: 30px' wx:if='{{!scaned}}'></icon>
+	<icon type='warn' size='130' style='margin-bottom: 30px' wx:if='{{scaned && !logined}}'></icon>
+	<icon type='safe_success' size='130' style='margin-bottom: 30px' wx:if='{{logined}}'></icon>
+	<view wx:if='{{!scaned}}'>请用pc登录以下网址</view>
+	<view wx:if='{{!scaned}}'>www.zwill.space/campus/pc</view>
+	<view wx:if='{{scaned && !logined}}'>你确认要登录到pc端吗？</view>
+	<view wx:if='{{logined}}'>已成功登录pc端</view>
+	<button type="primary" class='btn' bindtap="showScan" wx:if='{{!scaned}}'>点我扫码</button>
+	<button type="primary" class='btn' bindtap="loginPc" wx:if='{{scaned && !logined}}'>登录</button>
+	<button type="default" class='btn' bindtap='cancel' wx:if='{{!logined}}'>取消</button>
+</view>

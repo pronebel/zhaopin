@@ -43,7 +43,7 @@ Page({
 				config: JSON.stringify(config)
 			}
 		}).then((res) => {
-			if (res.data) {
+			if (res.statusCode == 200 && res.data) {
 				app.globalData.config = config;
 				wx.setStorageSync('config', config);
 			}

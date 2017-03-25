@@ -2,23 +2,24 @@
 	<view class="box">
 		<view class="item-2 line">
 			<view class="title">
-				<text class="jobName">{{job.jobName}}</text>
-				<text class="salary">[{{job.salary}}]</text>
+				<text class="jobName">{{jobDetail.name}}</text>
+				<text class="salary">[{{jobDetail.salary_lower}}-{{jobDetail.salary_upper}}k]</text>
+				<text class="status" wx:if='{{!jobDetail.status}}'>[已下线]</text>
 				<icon wx:if="{{star}}" class="icon-star-fill iconfont iconMR0" bindtap="star"></icon>
 				<icon wx:else class="icon-star iconfont iconMR0" bindtap="star"></icon>
 			</view>
 			<view class="icon-text">
 				<view>
 					<icon class="iconfont icon-place"></icon>
-					<text>{{job.workplace.city}}</text>
+					<text>{{jobDetail.city}}</text>
 				</view>
 				<view>
 					<icon class='iconfont icon-degree'></icon>
-					<text>{{job.degreeLimit}}</text>
+					<text>{{jobDetail.degree_limit}}</text>
 				</view>
 				<view>
 					<icon class="iconfont icon-time"></icon>
-					<text>{{job.workType}}</text>
+					<text>{{jobDetail.type}}</text>
 				</view>
 			</view>
 			<view class="welfarebox">
@@ -26,20 +27,20 @@
 					<text>职位诱惑:</text>
 				</view>
 				<view class="welfareList">
-					<text class="" wx:for="{{job.welfare}}" wx:if="{{index!==job.welfare.length-1}}">{{item}},</text>
-					<text class="" wx:for="{{job.welfare}}" wx:if="{{index==job.welfare.length-1}}">{{item}}</text>
+					<!-- <text class="" wx:for="{{job.welfare}}" wx:if="{{index!==job.welfare.length-1}}">{{item}},</text> -->
+					<text>{{jobDetail.welfare}}</text>
 				</view>
 			</view>
 		</view>
 		<view class="item-2 flexbox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
 			<view class="logo">
-        		<image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+        		<image src="{{jobDetail.company.logo || '../../images/_logo.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
       		</view>
       		<view class="companyMsg">
-      			<view style="color:#353535;font-size:14px;">{{job.company.short}}</view>
-      				<text>{{job.company.type}}/</text>
-      				<text>{{job.company.financle}}/</text>
-      				<text>{{job.company.scale}}</text>
+      			<view style="color:#353535;font-size:14px;">{{jobDetail.company.c_name_short}}</view>
+      				<text>{{jobDetail.company.field}}/</text>
+      				<text>{{jobDetail.company.financing_stage}}/</text>
+      				<text>{{jobDetail.company.scale}}</text>
       				<text></text>  			
       		</view>	
       		<icon class="iconfont icon-right iconH iconMR0"></icon>
@@ -68,7 +69,7 @@
 				</view>
 			</view>
 			<view class="flexbox" style="justify-content:space-between" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='openMap'>
-				<view style="flex-grow:1;font-size:12px;">{{job.workplace.full}}</view>
+				<view style="flex-grow:1;font-size:12px;">{{jobDetail.workplace}}</view>
 				<view class="iconfont icon-right iconMR0" style="font-size:15px"></view>
 			</view>
 		</view>
@@ -120,3 +121,5 @@
 		</view>
 	</view>
 </view>
+
+<include src='../../common/loader.wxml' />

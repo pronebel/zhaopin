@@ -342,14 +342,16 @@ icon{
 
 .translucence-msg{
 	color: #888888;
+	font-size: 13px;
 }
 
 .work-place{
 
 }
 
-.internship,.degree,.company-type{
+.internship,.degree,.company-type,.company-financing-stage{
 	margin-left:15rpx;
+
 }
 
 .release-date{
@@ -359,18 +361,4 @@ icon{
 .jobList{
 	background: #fff;
 	margin-top: 38px;
-}
-
-.nomore{
-	height:50px;
-	box-sizing: border-box;
-	background: rgb(239,239,244);
-	text-align: center;
-}
-
-.img-nomore{
-	width: 65px;
-	height:50px;
-	vertical-align: middle;
-	margin-right: 15px;
 }

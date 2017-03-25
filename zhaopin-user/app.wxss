@@ -119,6 +119,10 @@ view,scroll-view{
 	/*background:rgb(239,239,244) !important;*/
 }
 
+click-view-2{
+	background: #2176f3 !important;
+}
+
 .btn-default{
 	display: inline-block;
 	padding-left:15rpx;
@@ -155,4 +159,36 @@ view,scroll-view{
 	right: 0;
 	top:0;
 	bottom: 0;
+}
+
+.nomore{
+	height:40px;
+	box-sizing: border-box;
+	background: rgb(239,239,244);
+	text-align: center;
+}
+
+.icon-nomore{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	margin-right: 5px;
+	display: inline-block;
+	font-size:17px;
+	color:#1296db;
+}
+
+.nomore text{
+	font-size: 13px;
+}
+
+.icon-warn{
+	position:absolute;
+	right: 0px;
+	top:10px;
+}
+
+.item.unread{
+	background: rgb(220,220,230);
 }

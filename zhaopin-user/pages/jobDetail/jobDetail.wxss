@@ -72,7 +72,7 @@ view{
 	color:#353535;
 }
 
-.jobName,.salary{
+.jobName,.salary,.status{
 	float: left;
 	height: 32px;
 	line-height: 32px;
@@ -190,4 +190,9 @@ view{
 
 .box-workplace .flexbox{
 	padding:12px 30rpx;
+}
+
+.status{
+	color:red;
+	margin-left: 20rpx;
 }

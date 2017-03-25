@@ -19,7 +19,9 @@ Page({
 			offsetTop: 0,
 		},
 		setHope_job: false,
-		hiddenLoader: true
+		no_hope_job: false,
+		hiddenLoader: true,
+		limitCount: 10
 	},
 	navigateTo(e) {
 		wx.navigateTo({
@@ -71,9 +73,10 @@ Page({
 				hope_job: hope_job
 			}
 		}).then((res) => {
-			if (res.data) {
+			if (res.statusCode == 200) {
 				this.setData({
 					setHope_job: false,
+					no_hope_job: false
 				})
 				wx.setStorageSync('userInfo', this.data.userInfo);
 				app.globalData.userInfo = this.data.userInfo;
@@ -83,6 +86,11 @@ Page({
 			console.log(error);
 		})
 	},
+	cancel() {
+		this.setData({
+			setHope_job: false
+		})
+	},
 	input(e) {
 		this.setData({
 			'userInfo.hope_job': e.detail.value
@@ -90,10 +98,15 @@ Page({
 	},
 	setHope_job() {
 		this.setData({
-			setHope_job: true
+			setHope_job: true,
 		})
+		if (this.data.userInfo.hope_job == 'null' || this.data.userInfo.hope_job == 'undefined' || !this.data.userInfo.hope_job) {
+			this.setData({
+				no_hope_job: true
+			})
+		}
 	},
-	getIndexSearch() {
+	getIndexSearch(flag, cb) {
 		this.setData({
 			loading: true,
 			hiddenLoader: false
@@ -101,27 +114,62 @@ Page({
 		setTimeout(function() {
 			$.ajax({
 				url: `${server}/job/getIndexSearch`,
+				method: 'POST',
 				data: {
-					key: this.data.userInfo.hope_job
+					key: this.data.userInfo.hope_job,
+					startIndex: flag ? (this.data.jobList || []).length : 0,
+					limitCount: parseInt(this.data.limitCount)
 				}
 			}).then((res) => {
-				this.setData({
-					jobList: res.data
-				})
+				if (res.statusCode == 200) {
+					if (flag) {
+						let {
+							jobList
+						} = this.data;
+						this.setData({
+							jobList: jobList.concat(res.data)
+						})
+					} else {
+						this.setData({
+							jobList: res.data
+						})
+					}
+					this.setData({
+						searched: true
+					})
+					if (res.data.length < 10) {
+						this.setData({
+							dataLimit: true
+						})
+					}
+					typeof cb == 'function' && cb();
+				}
 				app.hiddenLoader(this);
 			})
 		}.bind(this), 300)
+
+	},
+	onPullDownRefresh: function() {
+		if (this.data.ui.offsetLeft != 0) {
+			wx.stopPullDownRefresh();
+			return;
+		} else {
+			this.getIndexSearch(false, () => {
+				wx.stopPullDownRefresh();
+			});
+		}
+	},
+	loadMore() {
+		if (this.data.dataLimit || this.data.ui.offsetLeft != 0) {
+			return;
+		}
+		this.getIndexSearch(true);
 	},
 	onShow: function() {
 		app.getCollectionLength((data) => {
 			this.setData({
 				collectionLength: data
 			})
-		})
-	},
-	toJobDetail: function() {
-		wx.navigateTo({
-			url: '../jobDetail/jobDetail'
 		})
 	},
 	longtapHandle: function() {
@@ -224,7 +272,21 @@ Page({
 	showScan: function() {
 		wx.scanCode({
 			success: function(res) {
-				console.log(res);
+				if (res.result) {
+					try {
+						let {
+							uid,
+							action
+						} = JSON.parse(res.result);
+						if (action == 'pc') {
+							wx.navigateTo({
+								url: `../editResume/scanCode/scanCode?uid=${uid}`
+							})
+						}
+					} catch (e) {
+						console.log(e);
+					}
+				}
 			}
 		})
 	},

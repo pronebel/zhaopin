@@ -85,7 +85,7 @@ Page({
 			})
 			wx.setStorageSync('workplace', workplace);
 			//获取城市区县
-			$.getDistrictByCityName(res.data, app.globalData.cityList, this);
+			$.getDistrictByCityName(data.city, app.globalData.cityList, this);
 		})
 	},
 	onShow: function() { //这里用es6的箭头函数 this是window
@@ -341,9 +341,11 @@ Page({
 					})
 				}
 			}).then((res) => {
-				this.setData({
-					searchSuggestions: res.data
-				})
+				if (res.statusCode == 200) {
+					this.setData({
+						searchSuggestions: res.data
+					})
+				}
 			}).catch((error) => {
 				console.log(error);
 			})
@@ -356,12 +358,12 @@ Page({
 	},
 	changeLower: function(e) {
 		this.setData({
-			lower: e.detail.value
+			'salary.lower': e.detail.value
 		})
 	},
 	changeUpper: function(e) {
 		this.setData({
-			upper: e.detail.value
+			'salary.upper': e.detail.value
 		})
 	},
 	bindCheckbox: function(e) {

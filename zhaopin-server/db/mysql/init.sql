@@ -175,9 +175,25 @@ create table resume_deliver_status(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
-	date_time varchar(50) not null,
+	deliver_date_time varchar(50) not null comment '简历投递的时间',
+	read_date_time varchar(50) comment '企业查看该简历时的时间，插入值后要将status改为待沟通 _read改为未读',
+	interview_date_time varchar(50) comment '企业邀请面试时的时间，插入值后要将status改为面试 _read改为未读 并且在table interview 中插入一条新数据',
 	status enum('未查看','待沟通','面试','不合适') not null default '未查看',
-	_read enum('true','false') not null default 'false',
+	seeker_read boolean not null default 0 comment '投递者是否已读',
+	hr_read boolean not null default 0 comment 'hr是否已读 在发出面试邀请后 seeker方可能同意也可能拒绝',
+	foreign key(job_id) references job(j_id),
+	foreign key(seeker_id) references seeker(id)
+);
+
+create table interview(
+	id bigint(11) auto_increment primary key not null,
+	job_id bigint(11) not null,
+	seeker_id varchar(50) not null,
+	date_time varchar(50) not null comment '面试时间',
+	seeker_anwser boolean comment 'seeker是否同意面试',
+	result boolean comment '面试结果 通过和不通过 都要修改resume_deliver_status表对应的seeker_read为false',
+	address varchar(50) comment '面试地点',
+	other varchar(200) comment '其他特殊说明,如邀请面试的场面话等',
 	foreign key(job_id) references job(j_id),
 	foreign key(seeker_id) references seeker(id)
 );
@@ -187,10 +203,12 @@ create table job_invication(
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
 	hr_id varchar(50) not null,
-	date_time varchar(50) not null,
+	invicate_date_time varchar(50) not null comment '企业发出邀请时的时间 企业发出邀请后要在intreview表中插入一条新数据',
+	result boolean comment '被邀请者处理后 同意或者拒绝 ',
 	description varchar(500) not null,
 	status enum('未处理','已处理') not null default '未处理',
-	_read enum('true','false') not null default 'false',
+	seeker_read boolean not null default 0,
+	hr_read boolean not null default 0,
 	foreign key(job_id) references job(j_id),
 	foreign key(seeker_id) references seeker(id),
 	foreign key(hr_id) references hr(id)
@@ -225,3 +243,9 @@ insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)
 
  insert into job(j_name,salary_lower,salary_upper,status,workplace,j_city,j_district,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)
  	values('前端',5,10,1,'深圳南山区','深圳','南山区','本科','全职','没有','openidhr',1,'前端','2017-03-20');
+
+INSERT INTO resume_deliver_status(job_id,seeker_id,deliver_date_time)
+VALUES (10,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','2017-03-25 10:10:00')
+
+INSERT INTO job_invication(seeker_id,job_id,hr_id,invicate_date_time,description)
+VALUES('oUE_60BwG0F_Dna5NIsSvFz_YlRQ',10,'openidhr','2017-03-25 10:10','asdas')

@@ -1,18 +1,19 @@
 {
   "pages": [
-    "pages/search/search",
+    "pages/msg/msg",
+    "pages/editResume/editResume",
     "pages/index/index",
-    "pages/user/user",
     "pages/resume/resume",
+    "pages/editResume/scanCode/scanCode",
+    "pages/editResume/education/editEducation/editEducation",
+    "pages/search/search",
+    "pages/user/user",
     "pages/msg/seenMsg/seenMsg",
     "pages/msg/jobInvitationMsg/jobInvitationMsg",
-    "pages/msg/msg",
     "pages/msg/resumeMsg/resumeMsg",
-    "pages/editResume/editResume",
     "pages/editResume/selfAssessment/selfAssessment",
     "pages/editResume/hope/hope",
     "pages/editResume/education/education",
-    "pages/editResume/education/editEducation/editEducation",
     "pages/editResume/honor/honor",
     "pages/editResume/honor/editHonor/editHonor",
     "pages/editResume/intership/intership",
@@ -42,23 +43,18 @@
     "backgroundColor": "#ffffff",
     "list": [{
       "pagePath": "pages/index/index",
-      "iconPath": "icons/home.png",
-      "selectedIconPath": "icons/home-2.png",
+      "iconPath": "icons/home_3.png",
+      "selectedIconPath": "icons/home_4.png",
       "text": "首页"
     }, {
       "pagePath": "pages/msg/msg",
-      "iconPath": "icons/msg.png",
-      "selectedIconPath": "icons/msg-2.png",
+      "iconPath": "icons/msg_1.png",
+      "selectedIconPath": "icons/msg_2.png",
       "text": "消息"
     }, {
-      "pagePath": "pages/discover/discover",
-      "iconPath": "icons/discover.png",
-      "selectedIconPath": "icons/discover-2.png",
-      "text": "发现"
-    }, {
       "pagePath": "pages/user/user",
-      "iconPath": "icons/user.png",
-      "selectedIconPath": "icons/user-2.png",
+      "iconPath": "icons/user_3.png",
+      "selectedIconPath": "icons/user_4.png",
       "text": "我"
     }]
   },

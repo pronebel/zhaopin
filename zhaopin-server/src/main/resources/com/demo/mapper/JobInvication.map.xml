@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.JobInvication">
+	<resultMap id="JobInvication" type="com.demo.model.JobInvication">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="job_id" column="job_id" jdbcType="BIGINT" />		
+		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
+		<result property="hr_id" column="hr_id" jdbcType="VARCHAR" />	
+		<result property="invicate_date_time" column="invicate_date_time" jdbcType="VARCHAR" />		
+		<result property="result" column="result" jdbcType="BOOLEAN" />	
+		<result property="description" column="description" jdbcType="VARCHAR" />	
+		<result property="status" column="status" jdbcType="VARCHAR" />	
+		<result property="seeker_read" column="seeker_read" jdbcType="BOOLEAN" />
+		<result property="hr_read" column="hr_read" jdbcType="BOOLEAN" />
+	</resultMap>
+
+	<sql id="TableName">
+		job_invication
+	</sql>
+	
+	<select id="getUnReadLength" resultType='int'>
+		select count(*) from <include refid="TableName" />
+		where seeker_read=false and seeker_id=#{seeker_id}
+	</select>
+	
+	<select id='getUnRead' resultMap='JobInvication'>
+		select * from <include refid="TableName" />
+		where seeker_read=false and seeker_id=#{seeker_id}
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

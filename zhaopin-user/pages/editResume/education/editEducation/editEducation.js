@@ -5,6 +5,12 @@ let app = getApp();
 Page({
 	data: {
 		education: {},
+		check: {
+			degree: true,
+			school: true,
+			major: true,
+			graduation_year: true
+		}
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -41,12 +47,14 @@ Page({
 	},
 	bindYearPickerChange: function(e) {
 		this.setData({
-			'education.graduation_year': this.data.years[e.detail.value]
+			'education.graduation_year': this.data.years[e.detail.value],
+			'check.graduation_year': true
 		})
 	},
 	bindDegreePickerChange: function(e) {
 		this.setData({
-			'education.degree': this.data.degrees[e.detail.value]
+			'education.degree': this.data.degrees[e.detail.value],
+			'check.degree': true
 		})
 	},
 	input(e) {
@@ -54,15 +62,27 @@ Page({
 			key
 		} = e.currentTarget.dataset;
 		let {
-			education
+			education,
+			check
 		} = this.data;
-		education[key] = e.detail.value
+		education[key] = e.detail.value;
+		check[key] = true
 		console.log(key);
 		this.setData({
-			education: education
+			education: education,
+			check: check
 		})
 	},
 	save: function() {
+		this.check('degree');
+		this.check('school');
+		this.check('major');
+		this.check('graduation_year');
+		let check = this.data.check;
+		let flag = check.degree && check.school && check.major && check.graduation_year;
+		if (!flag) {
+			return;
+		}
 		//wx.request
 		if (this.data.flag) {
 			app.resume('resume/updateEducation', 'POST', {
@@ -109,5 +129,19 @@ Page({
 				wx.navigateBack({})
 			}
 		})
+	},
+	check(key) {
+		let check = this.data.check;
+		if (!this.data.education[key] || this.data.education[key] == 'null' || this.data.education[key] == 'undefined') {
+			check[key] = false
+			this.setData({
+				check: check
+			})
+		} else {
+			check[key] = true
+			this.setData({
+				check: check
+			})
+		}
 	}
 })

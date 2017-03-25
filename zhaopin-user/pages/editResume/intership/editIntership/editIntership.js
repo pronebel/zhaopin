@@ -7,7 +7,13 @@ Page({
 	data: {
 		intership: {},
 		maxlength: 1000,
-		checked: false,
+		check: {
+			company: true,
+			job: true,
+			start_date: true,
+			end_date: true
+		},
+		checked: false
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -38,12 +44,14 @@ Page({
 	bindEndPickerChange: function(e) {
 		this.setData({
 			'intership.end_date': e.detail.value,
-			checked: false
+			checked: false,
+			'check.end_date': true
 		})
 	},
 	bindStartPickerChange: function(e) {
 		this.setData({
-			'intership.start_date': e.detail.value
+			'intership.start_date': e.detail.value,
+			'check.start_date': true
 		})
 	},
 	input(e) {
@@ -51,14 +59,25 @@ Page({
 			key
 		} = e.currentTarget.dataset;
 		let {
-			intership
+			intership,
+			check
 		} = this.data;
 		intership[key] = e.detail.value
+		check[key] = true
 		this.setData({
-			intership: intership
+			intership: intership,
+			check: check
 		})
 	},
 	save: function() {
+		this.check('company');
+		this.check('start_date');
+		this.check('end_date');
+		this.check('job');
+		let check = this.data.check;
+		let flag = check.company && check.job && check.end_date && check.start_date
+		if (!flag)
+			return;
 		//wx.request
 		if (this.data.flag) {
 			app.resume('resume/updateIntership', 'POST', {
@@ -115,5 +134,19 @@ Page({
 			checked: true,
 			'intership.end_date': '至今'
 		})
+	},
+	check(key) {
+		let check = this.data.check;
+		if (!this.data.intership[key] || this.data.intership[key] == 'null' || this.data.intership[key] == 'undefined') {
+			check[key] = false
+			this.setData({
+				check: check
+			})
+		} else {
+			check[key] = true
+			this.setData({
+				check: check
+			})
+		}
 	}
 })

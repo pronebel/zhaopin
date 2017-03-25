@@ -8,7 +8,7 @@
 		      	<view class="details">
 		        	<view class="_block">
 		          		<text class="job-title">{{item.job.name}}</text>
-		          		<text class="job-salary">{{item.job.salary}}</text>
+		          		<text class="job-salary">{{item.job.salary_lower}}-{{item.job.salary_upper}}k</text>
 		          		<view style="clear:both"></view>
 		        	</view>
 		        	<text class="company-name">{{item.job.company.name}}</text>
@@ -37,6 +37,7 @@
 		    </view>
 		</block>
 	</view>
+	<image wx:if='{{collections.length==0}}' src='../../images/empty.png' class='empty'></image>
 </view>
 
 <include src='../../common/loader.wxml' />

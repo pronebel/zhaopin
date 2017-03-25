@@ -7,7 +7,7 @@
 
 let loop = [];
 
-function push(name, self, data, cb, timeout = 500) {
+function push(name, self, data, cb, delay = 500) {
 	let index = loop.push({
 		name: name,
 		self: self,
@@ -16,7 +16,7 @@ function push(name, self, data, cb, timeout = 500) {
 	}) - 1;
 	setTimeout(function() {
 		run(index);
-	}, timeout)
+	}, delay)
 }
 
 function run(index) {

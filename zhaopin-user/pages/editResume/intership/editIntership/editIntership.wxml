@@ -1,20 +1,23 @@
 <view class="box">
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<input class="input" value="{{intership.company}}" placeholder="公司名称" placeholder-class="placeholder-class" bindinput='input' data-key='company' />
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.company}}'></icon>
 	</view>
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<input class="input" value="{{intership.job}}" placeholder="你的职位" placeholder-class="placeholder-class" bindinput='input' data-key='job' />
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.job}}'></icon>
 	</view>
 	<picker bindchange="bindStartPickerChange" value="{{intership.start_date}}" mode="date" start="2000-01-01" end="{{now}}" fields='month'>
-		<view class="item _flex" style="margin-top:20px">
+		<view class="item _flex _relative" style="margin-top:20px">
 			<view class="iconfont icon-circle-edit"></view>
 			<view class="input" wx:if="{{intership.start_date}}">{{intership.start_date}}入职</view>
 			<view class="input placeholder-class" wx:else>入职时间</view>
+			<icon type='warn' class='icon-warn' size='20' hidden='{{check.start_date}}'></icon>
 		</view>
 	</picker>
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<picker bindchange="bindEndPickerChange" value="{{intership.end_date}}" mode="date" star="2000-01-01" end="{{now}}" fields='month' style="flex-grow:1">
 			<view class="input" wx:if="{{intership.end_date&&!checked}}">{{intership.end_date}}离职</view>
@@ -25,6 +28,7 @@
 			<icon type="{{checked?'success_circle':'circle'}}" size="20" style='position: absolute;right:34px;top:7px;'/>
 			<text>至今</text>
 		</view>
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.end_date}}'></icon>
 	</view>
 	<view class="item _flex" style="margin-top:20px">
 		<view class="iconfont icon-circle-edit"></view>

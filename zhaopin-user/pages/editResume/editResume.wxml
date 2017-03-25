@@ -1,4 +1,9 @@
 <view>
+	<view class='pc-msg' bindtap='toScanCode' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view-2">
+		<view class='iconfont icon-jianli'></view>
+		<text>用电脑编辑简历,体验更好更流畅</text>
+		<view class='iconfont icon-right'></view>
+	</view>
 	<view class="box box-top _relative" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toUserInfo'>
 		<view class="title">
 			<view class="placeicon-1"></view>
@@ -13,7 +18,7 @@
 			<view class='item'>
 				<text>性</text>
 				<text style="margin-left:26px;">别 :</text>
-				<text> {{userInfo.sex}}</text>
+				<text wx:if='{{userInfo.sex}}'> {{userInfo.sex}}</text>
 			</view>
 			<view class='item'>
 				<text>最高学历 :</text>

@@ -1,72 +1,123 @@
 const app = getApp();
-
+let {
+	server
+} = require('../../configs/serverConfig');
+let $ = require('../../utils/util.js');
+let event = require('../../utils/util.js');
+let loop = require('../../utils/event-loop.js');
 Page({
 	data: {
 		job: {
-			jobName: 'C++开发工程师',
-			salary: '15k-20k',
-			company: {
-				short: '爱奇艺',
-				full: '北京爱奇艺科技有限公司',
-				type: '金融',
-				financle: '不需要融资',
-				scale: '2000人以上'
-			},
-			workplace: {
-				province: '广东',
-				city: '深圳',
-				county: '南山区',
-				full: '广东省深圳市南山区高新科技园创维半导体大厦',
-				location: {
-					latitude: 23.55788,
-					longitude: 116.32807
-				}
-			},
 			careertalk: [{
 				school: '深圳大学',
 				date: '2017-02-20',
 				time: '13:00'
 			}],
 			duties: ['负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优', '负责基于TCP/IP协议的数据上报server实现和调优'],
-			internshipLimit: '没要求',
-			degreeLimit: '本科',
-			campanyScale: '2000人以上',
-			companyType: 'D轮及以上',
-			releaseDate: '2017-02-18',
-			workType: '全职',
-			welfare: ['六险一金', '免费下午茶', '免费下午茶', '免费下午茶', '免费下午茶', '免费下午茶', '免费下午茶']
 		},
-		star: false
+		star: false,
+		STAR: false
 	},
-	onLoad: function() {
-		//getDetail
-
-		app.getUserInfo((data) => {
+	onLoad: function(options) {
+		let {
+			id
+		} = options;
+		if (id == 'null' || id == 'undefined' || !id) {
+			console.log('没有拿到id');
+			return;
+		}
+		this.getJobDetail(id);
+		this.isStar(id);
+		app.getUserInfoFromWX((data) => {
 			this.setData({
 				userInfoFromWX: data
 			})
 		})
+
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfo: data
+			})
+		})
+	},
+	getJobDetail(id) {
+		this.setData({
+			loading: true,
+			hiddenLoader: false
+		})
+		$.ajax({
+			url: `${server}/job/getJobDetail`,
+			data: {
+				id: parseInt(id)
+			}
+		}).then((res) => {
+			if (res.statusCode == 200) {
+				this.setData({
+					jobDetail: res.data
+				})
+			}
+			app.hiddenLoader(this);
+		})
+	},
+	isStar(id) {
+		$.ajax({
+			url: `${server}/collection/isStar`,
+			data: {
+				job_id: id,
+				openid: app.globalData.session.openid
+			},
+			method: 'GET'
+		}).then((res) => {
+			if (res.statusCode && res.statusCode == 200) {
+				this.setData({
+					star: res.data,
+					STAR: res.data
+				})
+			}
+		})
 	},
 	star: function() {
-		var star = this.data.star;
+		let {
+			star,
+			STAR
+		} = this.data;
 		this.setData({
 			star: !star
 		})
-		var title = star ? '取消收藏成功!' : '收藏成功!';
-		wx.showToast({
-			title: title,
-			icon: 'success',
-			duration: 1500
-		})
+		loop.push('toggleStar', this, STAR, (STAR) => {
+			if (this.data.star == STAR) {
+				console.log('没有改变');
+				return;
+			}
+			$.ajax({
+				url: `${server}/collection/toggleStar`,
+				data: {
+					job_id: this.data.jobDetail.id,
+					openid: app.globalData.session.openid,
+					star: this.data.star
+				},
+				method: 'POST'
+			}).then((res) => {
+				if (res.statusCode && res.statusCode == 200) {
+					let title = this.data.star ? '收藏成功' : '取消收藏成功';
+					wx.showToast({
+						title: title
+					})
+					this.setData({
+						STAR: !STAR
+					})
+				}
+			})
+		}, 300)
 	},
 	openMap: function() {
-		const latitude = parseFloat(this.data.job.workplace.location.latitude);
-		const longitude = parseFloat(this.data.job.workplace.location.longitude);
-		wx.openLocation({
-			latitude: latitude,
-			longitude: longitude,
-			scale: 16
-		})
+		// const latitude = parseFloat(this.data.job.workplace.location.latitude);
+		// const longitude = parseFloat(this.data.job.workplace.location.longitude);
+		// wx.openLocation({
+		// 	latitude: latitude,
+		// 	longitude: longitude,
+		// 	scale: 16
+		// })
 	}
 
 })

@@ -102,5 +102,10 @@ Page({
 		wx.navigateTo({
 			url: `hope/hope?id=${hope.id}&job=${hope.job}&type=${hope.type}&city=${hope.city}&salary=${hope.salary}&otherDescription=${hope.otherDescription}&resume_id=${this.data.resume.id}`
 		})
+	},
+	toScanCode() {
+		wx.navigateTo({
+			url: `scanCode/scanCode`
+		})
 	}
 })

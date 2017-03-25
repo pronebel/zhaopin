@@ -9,7 +9,7 @@
         <swiper  current='{{current}}' bindchange='currentChanged' style='height:{{windowHeight-40}}px'>
             <block wx:for="{{pages}}">
                 <swiper-item class='_flex' style='align-items:center; justify-content: center;'>
-                    <image src='../../../images/nothing.png' style='width:320px;height:360px' mode='aspectFit'></image>
+                    <image src='../../../images/empty.png' class='empty'></image>
                 </swiper-item>
             </block>
         </swiper>

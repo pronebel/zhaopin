@@ -5,7 +5,12 @@ let app = getApp();
 Page({
 	data: {
 		honor: {},
-		prizeIndex: 3
+		prizeIndex: 3,
+		check: {
+			name: true,
+			prize: true,
+			date: true
+		}
 	},
 	onLoad: function(options) {
 		this.setData({
@@ -35,24 +40,38 @@ Page({
 			key
 		} = e.currentTarget.dataset;
 		let {
-			honor
+			honor,
+			check
 		} = this.data;
 		honor[key] = e.detail.value
+		check[key] = true
 		this.setData({
-			honor: honor
+			honor: honor,
+			check: check
 		})
 	},
 	bindDatePickerChange: function(e) {
 		this.setData({
-			'honor.date': e.detail.value
+			'honor.date': e.detail.value,
+			'check.date': true
 		})
 	},
 	bindPrizePickerChange: function(e) {
 		this.setData({
-			'honor.prize': prizes[e.detail.value]
+			'honor.prize': prizes[e.detail.value],
+			'check.prize': true
 		})
 	},
 	save: function() {
+		this.check('name');
+		this.check('prize');
+		this.check('date');
+		let check = this.data.check;
+
+		let flag = check.date && check.prize && check.name;
+		if (!flag) {
+			return;
+		}
 		if (this.data.flag) {
 			app.resume('resume/updateHonor', 'POST', {
 				honor: JSON.stringify(this.data.honor)
@@ -98,4 +117,18 @@ Page({
 			}
 		})
 	},
+	check(key) {
+		let check = this.data.check;
+		if (!this.data.honor[key] || this.data.honor[key] == 'null' || this.data.honor[key] == 'undefined') {
+			check[key] = false
+			this.setData({
+				check: check
+			})
+		} else {
+			check[key] = true
+			this.setData({
+				check: check
+			})
+		}
+	}
 })

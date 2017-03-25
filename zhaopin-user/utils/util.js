@@ -37,7 +37,7 @@ function getLocation(app, cb) {
             console.log(res);
             var location = res.latitude + ',' + res.longitude;
             wx.request({
-                url: 'http://apis.map.qq.com/ws/geocoder/v1/',
+                url: 'https://apis.map.qq.com/ws/geocoder/v1/',
                 data: {
                     location: location,
                     key: '7YHBZ-KIT3W-R5BRE-RNQUQ-NAOCE-M7BVE'
@@ -68,7 +68,7 @@ function getWorkplace(app, cb) {
             console.log(res);
             var location = res.latitude + ',' + res.longitude;
             wx.request({
-                url: 'http://apis.map.qq.com/ws/geocoder/v1/',
+                url: 'https://apis.map.qq.com/ws/geocoder/v1/',
                 data: {
                     location: location,
                     key: '7YHBZ-KIT3W-R5BRE-RNQUQ-NAOCE-M7BVE'
@@ -236,7 +236,8 @@ function ajax({
             success: function(res) {
                 resolve(res)
             },
-            fail: function(res) {
+            fail: function(error) {
+                console.log('reject' + JSON.stringify(error));
                 reject(res)
             }
         })
@@ -301,8 +302,15 @@ function checkEmail(email) {
 function regStrToArr(str) {
     let regex = /[\！|\……|\—|\？|\、|\。|\】|\【|\，|\；|\’|\‘|\：|\~|\`|\!|\@|\$|\%|\^|\&|\*|\(|\)|\-|\_|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
     str = str.replace(regex, ' '); //将特殊符号转化成空格
-    return str.split(/\s+/);
+    let arr = str.split(/\s+/);
+    return arr.filter((val) => {
+        return val != '';
+    })
 }
+
+String.prototype.dateFilter = function() {
+    return this.substring(5, 10);
+};
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,

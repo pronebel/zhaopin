@@ -1,20 +1,23 @@
 <view class="box">
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<input class="input" value="{{project.name}}" placeholder="项目名称" placeholder-class="placeholder-class" bindinput='input' data-key='name' />
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.name}}'></icon>
 	</view>
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<input class="input" value="{{project.duty}}" placeholder="你的职责" placeholder-class="placeholder-class" bindinput='input' data-key='duty' />
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.duty}}'></icon>
 	</view>
 	<picker bindchange="bindStartPickerChange" value="{{project.start_date}}" mode="date" start="2000-01-01" end="{{now}}" fields='month'>
-		<view class="item _flex" style="margin-top:20px">
+		<view class="item _flex _relative" style="margin-top:20px">
 			<view class="iconfont icon-circle-edit"></view>
 			<view class="input" wx:if="{{project.start_date}}">{{project.start_date}}项目开始</view>
 			<view class="input placeholder-class" wx:else>项目开始时间</view>
+			<icon type='warn' class='icon-warn' size='20' hidden='{{check.start_date}}'></icon>
 		</view>
 	</picker>
-	<view class="item _flex">
+	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<picker bindchange="bindEndPickerChange" value="{{project.end_date}}" mode="date" star="2000-01-01" end="{{now}}" fields='month' style="flex-grow:1">
 			<view class="input" wx:if="{{project.end_date&&!checked}}">{{project.end_date}}项目结束</view>
@@ -25,6 +28,7 @@
 			<icon type="{{checked?'success_circle':'circle'}}" size="20" style='position: absolute;right:34px;top:7px;'/>
 			<text>至今</text>
 		</view>
+		<icon type='warn' class='icon-warn' size='20' hidden='{{check.end_date}}'></icon>
 	</view>
 	<view class="item _flex" style="margin-top:20px">
 		<view class="iconfont icon-circle-edit"></view>
