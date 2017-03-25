@@ -77,6 +77,7 @@ public class LoginController {
 	 */
 	public String getOpenid(String thirdSessionKey,HttpServletRequest req){
 		System.out.println("thirdSessionKey:"+thirdSessionKey);
+		System.out.println("sessionId:"+req.getSession().getId());
 		return req.getSession().getAttribute(thirdSessionKey).toString();		
 	}
 	

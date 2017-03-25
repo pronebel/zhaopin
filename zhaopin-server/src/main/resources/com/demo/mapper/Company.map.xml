@@ -11,7 +11,12 @@
 	    <result property="description" column="description" jdbcType="VARCHAR" />    
 	    <result property="city" column="c_city" jdbcType="VARCHAR" />
 	    <result property="district" column="c_district" jdbcType="VARCHAR" />
-	    <result property="field" column="field" jdbcType="VARCHAR" />    	
+	    <result property="field" column="field" jdbcType="VARCHAR" /> 
+	    <result property="logo" column="logo" jdbcType="VARCHAR" />
+	    <result property="poster" column="poster" jdbcType="VARCHAR" />    
+	    <result property="longitude" column="longitude" jdbcType="VARCHAR" />
+	    <result property="latitude" column="latitude" jdbcType="VARCHAR" />
+	    <result property="c_name_short" column="c_name_short" jdbcType="VARCHAR" />   	
 	</resultMap>
 
 	<sql id="TableName">

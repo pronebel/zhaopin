@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.util.TwoDimensionCode;
 
-
+import org.json.JSONObject;
+import org.json.JSONException;  
 
 @Controller
 @RequestMapping("pc")
@@ -25,10 +26,14 @@ public class PcCodeLoginController {
 	
 	@ResponseBody
 	@RequestMapping("/getCode")
-	public String getCode(HttpServletRequest request,HttpServletResponse response){		
+	public String getCode(HttpServletRequest request,HttpServletResponse response) throws JSONException{		
 		//生成唯一ID
 		int uuid = (int) (Math.random() * 100000);
 		//二维码内容
+		JSONObject json=new JSONObject();
+		json.put("uid","uid"+uuid);
+		json.put("action", "pc");
+		System.out.println(json);
 		String content = "123";
 		//生成二维码
 		String imgName =  uuid + "_" + (int) (new Date().getTime() / 1000) + ".png";

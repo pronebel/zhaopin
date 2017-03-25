@@ -28,4 +28,8 @@ public class JobService {
 	public List<Job> searchJob(JSON json,int startIndex,int limitCount){
 		return jd.searchJob(json, startIndex, limitCount);
 	}
+	
+	public Job getJobDetailById(Long id){
+		return jd.getJobDetailById(id);
+	}
 }

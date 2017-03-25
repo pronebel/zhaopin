@@ -40,4 +40,9 @@ public class JobDao extends BaseDao<Job>{
 		RowBounds rb=new RowBounds(startIndex,limitCount);
 		return getSqlSessionTemplate().selectList(sn, json, rb);
 	}
+	
+	public Job getJobDetailById(Long id){
+		String sn=getIbatisMapperNamespace()+".getJobDetailById";
+		return getSqlSessionTemplate().selectOne(sn,id);
+	}
 }

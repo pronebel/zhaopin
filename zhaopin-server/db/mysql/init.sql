@@ -20,7 +20,8 @@ create table seeker(
 
 create table company(
 	c_id bigint(11) auto_increment primary key not null,
-	c_name varchar(50) not null,
+	c_name varchar(50) not null comment '全称',
+	c_name_short varchar(20) not null comment '简称',
 	scale varchar(20) not null,
 	financing_stage varchar(20) not null,
 	address varchar(100) not null,
@@ -28,7 +29,11 @@ create table company(
 	c_city varchar(10) not null,
 	c_district varchar(10) comment '区县',
 	field varchar(20)  not null,
-	description varchar(500) not null default ''
+	description varchar(500) not null default '',
+	longitude varchar(40) not null default '' comment '经度',
+	latitude varchar(40) not null default '' comment '纬度',
+	logo  varchar(200) comment '小图',
+	poster  varchar(200) comment '大图'
 );
 
 create table hr(
@@ -214,8 +219,8 @@ insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)
  	values('openidhr','hr','',1,'','','','男');
 
 
- insert into company(c_name,scale,financing_stage,address,province,c_city,c_district,field)
-  values ('xx公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网');
+ insert into company(c_name_short,c_name,scale,financing_stage,address,province,c_city,c_district,field)
+  values ('爱奇艺','爱奇艺公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网');
 
 
  insert into job(j_name,salary_lower,salary_upper,status,workplace,j_city,j_district,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)

@@ -11,6 +11,11 @@ public class Company {
 	private String city;
 	private String district;
 	private String field;
+	private String c_name_short;
+	private String poster;
+	private String logo;
+	private String latitude;
+	private String longitude;
 	public Long getId() {
 		return id;
 	}
@@ -71,5 +76,35 @@ public class Company {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public String getC_name_short() {
+		return c_name_short;
+	}
+	public void setC_name_short(String c_name_short) {
+		this.c_name_short = c_name_short;
+	}
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	
 }

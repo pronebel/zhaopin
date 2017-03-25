@@ -30,4 +30,16 @@ public class CollectionService {
 	public int getCollectionLength(Collection c){
 		return cd.getCollectionLength(c);
 	}
+	
+	public boolean isStar(Collection c){
+		return cd.isStar(c)==1?true:false;
+	}
+	
+	public boolean toggleStar(Collection c,boolean star){
+		if(star){
+			return cd.addCollection(c);
+		}else{
+			return cd.unStar(c);
+		}
+	}
 }

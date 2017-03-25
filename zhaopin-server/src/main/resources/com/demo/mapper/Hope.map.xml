@@ -8,7 +8,7 @@
 		<result property="type" column="type" jdbcType="VARCHAR" />		
 		<result property="city" column="city" jdbcType="VARCHAR" />	
 		<result property="salary" column="salary" jdbcType="VARCHAR" />	
-		<result property="otherDescription" column="otherDescription" jdbcType="VARCHAR" />	
+		<result property="otherDescription" column="description" jdbcType="VARCHAR" />	
 	</resultMap>
 
 	<sql id="TableName">
@@ -22,7 +22,7 @@
 	
 	<insert id='newHope' parameterType="com.demo.model.Hope">
 		insert into <include refid="TableName" />
-		(resume_id,job,type,city,salary,otherDescription)
+		(resume_id,job,type,city,salary,description)
 		values
 		(#{resume_id},#{job},#{type},#{city},#{salary},#{otherDescription})
 	</insert>
@@ -32,7 +32,7 @@
 			type=#{type},
 			city=#{city},
 			salary=#{salary},
-			otherDescription=#{otherDescription}
+			description=#{otherDescription}
 		where resume_id=#{resume_id}
 	</update>
 </mapper>

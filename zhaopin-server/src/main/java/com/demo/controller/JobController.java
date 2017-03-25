@@ -45,4 +45,10 @@ public class JobController {
 		System.out.println(json);
 		return js.searchJob(json, startIndex, limitCount);
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getJobDetail")
+	public Job getJobDetail(Long id){
+		return js.getJobDetailById(id);
+	}
 }

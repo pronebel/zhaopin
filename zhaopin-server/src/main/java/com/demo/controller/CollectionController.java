@@ -53,4 +53,22 @@ public class CollectionController {
 		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
 		return cs.getCollectionLength(c);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/isStar"},method=RequestMethod.GET)
+	public boolean isStar(String openid,Long job_id,HttpServletRequest req){
+		Collection c=new Collection();
+		c.setSeeker_id(openid);
+		c.setJob_id(job_id);
+		return cs.isStar(c);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/toggleStar"},method=RequestMethod.POST)
+	public boolean star(String openid,Long job_id,boolean star,HttpServletRequest req){
+		Collection c=new Collection();
+		c.setSeeker_id(openid);
+		c.setJob_id(job_id);
+		return cs.toggleStar(c, star);
+	}
 }
