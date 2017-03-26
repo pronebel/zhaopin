@@ -4,6 +4,7 @@ public class ResumeDeliverStatus {
 	private Long id;
 	private Long job_id;
 	private String seeker_id;
+	private Long resume_id;
 	private String deliver_date_time;
 	private String read_date_time;
 	private String interview_date_time;
@@ -70,6 +71,12 @@ public class ResumeDeliverStatus {
 	}
 	public void setJob(Job job) {
 		this.job = job;
+	}
+	public Long getResume_id() {
+		return resume_id;
+	}
+	public void setResume_id(Long resume_id) {
+		this.resume_id = resume_id;
 	}
 	
 	

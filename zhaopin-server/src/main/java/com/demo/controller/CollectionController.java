@@ -23,9 +23,9 @@ public class CollectionController {
 	
 	@ResponseBody
 	@RequestMapping("/getCollections")
-	public List<Collection> getCollections(String thirdSessionKey,HttpServletRequest req){
+	public List<Collection> getCollections(String openid,HttpServletRequest req){
 		Collection c=new Collection();
-		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		c.setSeeker_id(openid);
 		return cs.getCollections(c);
 	}
 	
@@ -39,18 +39,18 @@ public class CollectionController {
 	
 	@ResponseBody
 	@RequestMapping(value={"/addCollection"},method=RequestMethod.POST)
-	public boolean addCollection(String thirdSessionKey,Long job_id,HttpServletRequest req){
+	public boolean addCollection(String openid,Long job_id,HttpServletRequest req){
 		Collection c=new Collection();
 		c.setJob_id(job_id);
-		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		c.setSeeker_id(openid);
 		return cs.addCollection(c);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value={"/getCollectionLength"},method=RequestMethod.GET)
-	public int getCollectionLength(String thirdSessionKey,HttpServletRequest req){
+	public int getCollectionLength(String openid,HttpServletRequest req){
 		Collection c=new Collection();
-		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		c.setSeeker_id(openid);
 		return cs.getCollectionLength(c);
 	}
 	

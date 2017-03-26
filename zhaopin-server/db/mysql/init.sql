@@ -175,6 +175,7 @@ create table resume_deliver_status(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
+	resume_id bigint(11) not null comment '简历投递的id',
 	deliver_date_time varchar(50) not null comment '简历投递的时间',
 	read_date_time varchar(50) comment '企业查看该简历时的时间，插入值后要将status改为待沟通 _read改为未读',
 	interview_date_time varchar(50) comment '企业邀请面试时的时间，插入值后要将status改为面试 _read改为未读 并且在table interview 中插入一条新数据',
@@ -182,6 +183,7 @@ create table resume_deliver_status(
 	seeker_read boolean not null default 0 comment '投递者是否已读',
 	hr_read boolean not null default 0 comment 'hr是否已读 在发出面试邀请后 seeker方可能同意也可能拒绝',
 	foreign key(job_id) references job(j_id),
+	foreign key(resume_id) references resume(id),
 	foreign key(seeker_id) references seeker(id)
 );
 

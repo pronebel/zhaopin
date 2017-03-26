@@ -37,4 +37,32 @@ public class ResumeDeliverStatusController {
 		return rdss.getUnRead(rds);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getDeliverRecodeById")
+	public ResumeDeliverStatus getDeliverRecodeById(Long id){
+		return rdss.getDeliverRecodeById(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/setRead")
+	public boolean setRead(Long id){
+		return rdss.setRead(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deliver")
+	public boolean deliver(String deliver){
+		JSONObject jsStr = JSONObject.fromObject(deliver);
+		ResumeDeliverStatus rds=(ResumeDeliverStatus)JSONObject.toBean(jsStr,ResumeDeliverStatus.class);
+		return rdss.deliver(rds);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/hadDelivered")
+	public boolean hadDelivered(Long job_id,String openid){
+		ResumeDeliverStatus rds=new ResumeDeliverStatus();
+		rds.setSeeker_id(openid);
+		rds.setJob_id(job_id);
+		return rdss.hadDelivered(rds);
+	}
 }

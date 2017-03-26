@@ -3,7 +3,8 @@
 <mapper namespace="com.demo.model.ResumeDeliverStatus">
 	<resultMap id="ResumeDeliverStatus" type="com.demo.model.ResumeDeliverStatus">
     	<id property="id" column="id" jdbcType="BIGINT" />
-		<result property="job_id" column="job_id" jdbcType="BIGINT" />		
+		<result property="job_id" column="job_id" jdbcType="BIGINT" />	
+		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
 		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
 		<result property="deliver_date_time" column="deliver_date_time" jdbcType="VARCHAR" />		
 		<result property="read_date_time" column="read_date_time" jdbcType="VARCHAR" />	
@@ -40,6 +41,29 @@
 	<select id='getUnRead' resultMap='ResumeDeliverStatus'>
 		select resume_deliver_status.*,job.*,company.* from <include refid="TableName" />, job,company
 		where seeker_read=false and seeker_id=#{seeker_id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
+	</select>
+	
+	<select id='getDeliverRecodeById' resultMap='ResumeDeliverStatus'>
+		select resume_deliver_status.*,job.*,company.* from <include refid='TableName' />,job,company
+		where id=#{id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
+	</select>
+	
+	<update id='setRead'>
+		update <include refid='TableName' /> set
+		seeker_read=true 
+		where id=#{id}
+	</update>
+	
+	<insert id='deliver' parameterType='com.demo.model.ResumeDeliverStatus'>
+		insert into <include refid='TableName' />
+		(seeker_id,job_id,resume_id,deliver_date_time)
+		values
+		(#{seeker_id},#{job_id},#{resume_id},#{deliver_date_time})
+	</insert>
+	
+	<select id='hadDelivered' resultType='int'>
+		select count(*) from <include refid='TableName' />
+		where job_id=#{job_id} and seeker_id=#{seeker_id}
 	</select>
 </mapper>
 

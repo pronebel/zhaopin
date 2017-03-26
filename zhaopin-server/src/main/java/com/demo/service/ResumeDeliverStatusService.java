@@ -22,4 +22,20 @@ public class ResumeDeliverStatusService {
 	public List<ResumeDeliverStatus> getUnRead(ResumeDeliverStatus rds){
 		return rdsd.getUnRead(rds);
 	}
+	
+	public ResumeDeliverStatus getDeliverRecodeById(Long id){
+		return rdsd.getDeliverRecodeById(id);
+	}
+	
+	public boolean setRead(Long id){
+		return rdsd.setRead(id);
+	}
+	
+	public boolean deliver(ResumeDeliverStatus rds){
+		return rdsd.deliver(rds);
+	}
+	
+	public boolean hadDelivered(ResumeDeliverStatus rds){
+		return rdsd.hadDelivered(rds)>0?true:false;
+	}
 }
