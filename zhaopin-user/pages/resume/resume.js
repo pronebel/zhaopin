@@ -38,7 +38,7 @@ Page({
 		$.ajax({
 			url: `${server}/resume/getResumesName`,
 			data: {
-				thirdSessionKey: app.globalData.session.thirdSessionKey
+				openid: app.globalData.session.openid
 			}
 		}).then((res) => {
 			this.setData({
@@ -132,7 +132,7 @@ Page({
 			url: `${server}/resume/addResume`,
 			method: 'POST',
 			data: {
-				thirdSessionKey: app.globalData.session.thirdSessionKey,
+				openid: app.globalData.session.openid,
 				name: '简历'
 			}
 		}).then((res) => {

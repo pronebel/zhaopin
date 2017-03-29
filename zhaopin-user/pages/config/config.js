@@ -39,7 +39,6 @@ Page({
 			url: `${server}/config/updateConfig`,
 			method: 'POST',
 			data: {
-				thirdSessionKey: app.globalData.thirdSessionKey,
 				config: JSON.stringify(config)
 			}
 		}).then((res) => {

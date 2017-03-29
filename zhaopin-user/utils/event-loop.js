@@ -1,4 +1,4 @@
-/**
+/*!
  * event-loop.js
  * lazy化input触发的ajax 只执行最后的input触发的ajax 默认0.5s
  * @date 2017-03-20

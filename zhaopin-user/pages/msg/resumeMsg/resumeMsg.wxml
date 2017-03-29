@@ -11,14 +11,14 @@
                 <swiper-item>
                     <block wx:if='{{page.key=="全部"}}'>
                         <view wx:for='{{resumeStatusList}}'>
-                            <view hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" class="item {{item.seeker_read?'read':'unread'}}">
+                            <view hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" class="item {{item.seeker_read?'read':'unread'}}" bindtap='navigateTo' data-id='{{item.id}}'>
                                 <view class="logo">
                                     <image src="../../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
                                 </view>
                                 <view class="details">
                                     <view class="_block">
                                         <text class="job-title">{{item.job.name}}</text>
-                                        <text class='deliver-date'>{{item.date_filter}}</text>
+                                        <text class='deliver-date'>{{item.deliver_date_time_filter}}</text>
                                         <view style="clear:both"></view>
                                     </view>
                                     <text class="work-place">{{item.job.city}}</text>
@@ -35,14 +35,14 @@
                     </block>
                     <block wx:else>
                         <view wx:for='{{resumeStatusList}}'>
-                            <view class="item {{item.seeker_read?'read':'unread'}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{item.status==page.key}}'>
+                            <view class="item {{item.seeker_read?'read':'unread'}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{item.status==page.key}}' bindtap='navigateTo' data-id='{{item.id}}'>
                                 <view class="logo">
                                     <image src="../../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
                                 </view>
                                 <view class="details">
                                     <view class="_block">
                                         <text class="job-title">{{item.job.name}}</text>
-                                        <text class='deliver-date'>{{item.date_filter}}</text>
+                                        <text class='deliver-date'>{{item.deliver_date_time_filter}}</text>
                                         <view style="clear:both"></view>
                                     </view>
                                     <text class="work-place">{{item.job.city}}</text>
@@ -62,5 +62,4 @@
         </swiper>
     </view>
 </view>
-
 <include src='../../../common/loader.wxml' />

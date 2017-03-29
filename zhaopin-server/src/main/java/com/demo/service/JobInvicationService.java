@@ -22,4 +22,16 @@ public class JobInvicationService {
 	public List<JobInvication> getUnRead(JobInvication ji){
 		return jid.getUnRead(ji);
 	}
+	
+	public JobInvication getInvication(Long id){
+		return jid.getInvication(id);
+	}
+	
+	public boolean setResult(JobInvication ji){
+		return jid.setResult(ji);
+	}
+	
+	public boolean setSeekerRead(Long id){
+		return jid.setSeekerRead(id);
+	}
 }

@@ -12,8 +12,20 @@
 		<result property="status" column="status" jdbcType="VARCHAR" />	
 		<result property="seeker_read" column="seeker_read" jdbcType="BOOLEAN" />
 		<result property="hr_read" column="hr_read" jdbcType="BOOLEAN" />
+		<result property="set_resule_date_time" column="set_resule_date_time" jdbcType='VARCHAR' />
+		<association property="job" javaType="com.demo.model.Job" resultMap='Job'></association>
+		<association property="hr" javaType="com.demo.model.Hr" resultMap='Hr'></association>
 	</resultMap>
-
+	<resultMap id='Job' type="com.demo.model.Job">
+		<id property="id" column="j_id" jdbcType="BIGINT" />
+		<result property="name" column="j_name" jdbcType="VARCHAR" />
+		<result property="type" column="type" jdbcType='VARCHAR' />
+	</resultMap>
+	<resultMap id='Hr' type="com.demo.model.Hr">
+		<id property="id" column="j_id" jdbcType="BIGINT" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="job" column="job" jdbcType='VARCHAR' />
+	</resultMap>
 	<sql id="TableName">
 		job_invication
 	</sql>
@@ -24,9 +36,27 @@
 	</select>
 	
 	<select id='getUnRead' resultMap='JobInvication'>
-		select * from <include refid="TableName" />
-		where seeker_read=false and seeker_id=#{seeker_id}
+		select job_invication.*,job.j_name,job.type,hr.name,hr.job from <include refid="TableName" />,job,hr
+		where seeker_read=false and seeker_id=#{seeker_id} and job_invication.job_id=job.j_id and job_invication.hr_id=hr.id
 	</select>
+	
+	<select id='getInvication' resultMap='JobInvication'>
+		select job_invication.*,hr.name,hr.job from  <include refid="TableName" />,hr
+		where job_invication.id=#{id} and job_invication.hr_id=hr.id
+	</select>
+	
+	<update id='setSeekerRead'>
+		update <include refid="TableName" /> set
+		seeker_read=true
+		where id=#{id}
+	</update>
+	<update id='setResult' parameterType='com.demo.model.JobInvication'>
+		update <include refid="TableName" /> set
+		result=#{result},
+		status='已处理',
+		set_resule_date_time=#{set_resule_date_time}
+		where id=#{id}
+	</update>
 </mapper>
 
 <!-- parameterType:使用的参数类型

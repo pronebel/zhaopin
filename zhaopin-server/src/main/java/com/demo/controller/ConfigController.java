@@ -25,9 +25,9 @@ public class ConfigController {
 	
 	@ResponseBody
 	@RequestMapping("/getConfig")
-	public Config getConfig(String thirdSessionKey,HttpServletRequest req){
+	public Config getConfig(String openid){
 		Config c=new Config();
-		c.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		c.setSeeker_id(openid);
 		return cs.getConfig(c);
 	}
 	

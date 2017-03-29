@@ -206,7 +206,7 @@ create table job_invication(
 	seeker_id varchar(50) not null,
 	hr_id varchar(50) not null,
 	invicate_date_time varchar(50) not null comment '企业发出邀请时的时间 企业发出邀请后要在intreview表中插入一条新数据',
-	result boolean comment '被邀请者处理后 同意或者拒绝 ',
+	result boolean comment '被邀请者处理后 同意或者拒绝',
 	description varchar(500) not null,
 	status enum('未处理','已处理') not null default '未处理',
 	seeker_read boolean not null default 0,

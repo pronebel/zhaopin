@@ -69,7 +69,7 @@ Page({
 			url: `${server}/seeker/updateHope_job`,
 			method: 'POST',
 			data: {
-				thirdSessionKey: app.globalData.session.thirdSessionKey,
+				openid: app.globalData.session.openid,
 				hope_job: hope_job
 			}
 		}).then((res) => {

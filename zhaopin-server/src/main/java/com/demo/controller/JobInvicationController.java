@@ -37,4 +37,25 @@ public class JobInvicationController {
 		return jis.getUnRead(ji);
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getInvication")
+	public JobInvication getInvication(Long id){
+		return jis.getInvication(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/setResult")
+	public boolean setResult(Long id,boolean result,String set_resule_date_time){
+		JobInvication ji=new JobInvication();
+		ji.setResult(result);
+		ji.setId(id);
+		ji.setSet_resule_date_time(set_resule_date_time);
+		return jis.setResult(ji);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/setSeekerRead")
+	public boolean setSeekerRead(Long id){
+		return jis.setSeekerRead(id);
+	}
 }

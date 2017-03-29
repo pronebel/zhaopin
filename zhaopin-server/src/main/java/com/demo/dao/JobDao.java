@@ -2,6 +2,8 @@ package com.demo.dao;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +13,15 @@ import net.sf.json.JSON;
 
 @Repository
 public class JobDao extends BaseDao<Job>{
-
+	
+	@Resource
+	private JobDutyDao jdd;
+	@Resource
+	private JobSkillDao jsd;
+	@Resource
+	private CampusTalkDao ctd;
+	@Resource
+	private HrDao hd;
 	@Override
 	public Class<Job> getEntityClass() {
 		// TODO Auto-generated method stub
@@ -43,6 +53,15 @@ public class JobDao extends BaseDao<Job>{
 	
 	public Job getJobDetailById(Long id){
 		String sn=getIbatisMapperNamespace()+".getJobDetailById";
-		return getSqlSessionTemplate().selectOne(sn,id);
+		Job j= getSqlSessionTemplate().selectOne(sn,id);
+		System.out.println("id:"+id);
+		System.out.println(j);
+		Hr h=new Hr();
+		h.setOpenid(j.getHr_id());
+		j.setHr(hd.getUserInfo(h));
+		j.setJobduty(jdd.getJobDuty(id));
+		j.setJobskill(jsd.getJobSkill(id));
+		j.setCampustalk(ctd.getCampusTalk(id));
+		return j;
 	}
 }

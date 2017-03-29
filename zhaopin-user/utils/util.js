@@ -1,3 +1,5 @@
+let Promise = require('../lib/es6-promise.min.js').Promise;
+
 var QQMapWX = require('qqmap-wx-jssdk.min.js');
 
 // 实例划API核心类
@@ -234,11 +236,16 @@ function ajax({
             method: method,
             data: data,
             success: function(res) {
-                resolve(res)
+                if (res.statusCode > 400) {
+                    console.log('reject' + JSON.stringify(res));
+                    reject(res)
+                } else {
+                    resolve(res)
+                }
             },
             fail: function(error) {
                 console.log('reject' + JSON.stringify(error));
-                reject(res)
+                reject(error)
             }
         })
     })
@@ -251,8 +258,8 @@ function ajax({
 function ajaxCheckSession() {
     return new Promise((resolve, reject) => {
         wx.checkSession({
-            success: resolve(),
-            fail: reject()
+            success: () => resolve(),
+            fail: () => reject()
         })
     })
 }
@@ -309,7 +316,11 @@ function regStrToArr(str) {
 }
 
 String.prototype.dateFilter = function() {
-    return this.substring(5, 10);
+    let date = this.substring(0, 10);
+    let time = this.substring(11, this.length);
+    let now_date = formatDate(new Date());
+    return date == now_date ?
+        time : date.substring(5, 10)
 };
 module.exports = {
     formatTime: formatTime,

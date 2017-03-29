@@ -20,7 +20,6 @@
 		<association property="company" javaType="com.demo.model.Company" resultMap='Company'>    
 	   	</association>
 	</resultMap>
-	
 	<resultMap id='Company' type='com.demo.model.Company'>
 		<id property="id" column="c_id" jdbcType="BIGINT" />
 	    <result property="name" column="c_name" jdbcType="VARCHAR" />

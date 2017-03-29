@@ -1,5 +1,7 @@
 package com.demo.model;
 
+import java.util.List;
+
 public class Job {
 	private String name;
 	private Long id;
@@ -17,6 +19,10 @@ public class Job {
 	private String type;
 	private String job_search;
 	private Company company;
+	private List<JobDuty> jobduty;
+	private List<JobSkill> jobskill;
+	private List<CampusTalk> campustalk;
+	private Hr hr;
 	public String getName() {
 		return name;
 	}
@@ -113,6 +119,30 @@ public class Job {
 	}
 	public void setDistrict(String district) {
 		this.district = district;
+	}
+	public List<JobDuty> getJobduty() {
+		return jobduty;
+	}
+	public void setJobduty(List<JobDuty> jobduty) {
+		this.jobduty = jobduty;
+	}
+	public List<JobSkill> getJobskill() {
+		return jobskill;
+	}
+	public void setJobskill(List<JobSkill> jobskill) {
+		this.jobskill = jobskill;
+	}
+	public List<CampusTalk> getCampustalk() {
+		return campustalk;
+	}
+	public void setCampustalk(List<CampusTalk> campustalk) {
+		this.campustalk = campustalk;
+	}
+	public Hr getHr() {
+		return hr;
+	}
+	public void setHr(Hr hr) {
+		this.hr = hr;
 	}
 	
 }

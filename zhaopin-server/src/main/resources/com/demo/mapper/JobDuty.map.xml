@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.JobDuty">
+	<resultMap id='JobDuty' type='com.demo.model.JobDuty'>
+		<id property="id" column="id" jdbcType="BIGINT" />
+		<result property='job_id' column='job_id' jdbcType='BIGINT'/>
+		<result property='description' column='description' jdbcType='VARCHAR' />
+	</resultMap>
+	<sql id="TableName">
+		job_duty
+	</sql>
+	
+	<select id='getJobDuty' resultMap='JobDuty'>
+		select * from <include refid="TableName" />
+		where job_id=#{job_id}
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

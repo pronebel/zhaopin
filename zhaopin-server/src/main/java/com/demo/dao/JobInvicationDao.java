@@ -25,4 +25,19 @@ public class JobInvicationDao extends BaseDao<JobInvication>{
 		String sm=getIbatisMapperNamespace()+".getUnRead";
 		return getSqlSessionTemplate().selectList(sm, ji);
 	}
+	
+	public JobInvication getInvication(Long id){
+		String sm=getIbatisMapperNamespace()+".getInvication";
+		return getSqlSessionTemplate().selectOne(sm, id);
+	}
+	
+	public boolean setResult(JobInvication ji){
+		String sm=getIbatisMapperNamespace()+".setResult";
+		return getSqlSessionTemplate().update(sm, ji)==1?true:false;
+	}
+	
+	public boolean setSeekerRead(Long id){
+		String sm=getIbatisMapperNamespace()+".setSeekerRead";
+		return getSqlSessionTemplate().update(sm, id)==1?true:false;
+	}
 }

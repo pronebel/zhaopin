@@ -46,7 +46,7 @@ public class UploadController {
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8"); 
         List<FileItem> list = upload.parseRequest(request);
-        String thirdSessionKey="";
+        String openid="";
         String saveName="avatar";
         for(FileItem item : list){
             if(item.isFormField()){
@@ -83,8 +83,8 @@ public class UploadController {
             }
         }
         Seeker s=new Seeker();
-        thirdSessionKey=request.getAttribute("thirdSessionKey").toString();
-        s.setOpenid(lc.getOpenid(thirdSessionKey, request));
+        openid=request.getAttribute("openid").toString();
+        s.setOpenid(openid);
         String url="http://localhost:8080/zhaopin/resources/avatars/"+saveName;
         s.setAvatarUrl(url);
         if(ss.updateAvatar(s)){

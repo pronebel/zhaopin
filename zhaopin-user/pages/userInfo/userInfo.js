@@ -131,7 +131,7 @@ Page({
 			method: 'POST',
 			data: {
 				userInfo: JSON.stringify(userInfo),
-				thirdSessionKey: app.globalData.session.thirdSessionKey
+				openid: app.globalData.session.openid
 			}
 		}).then((res) => {
 			if (res.data === true) {
@@ -166,7 +166,7 @@ Page({
 				},
 				name: 'avatar',
 				formData: {
-					thirdSessionKey: app.globalData.session.thirdSessionKey
+					openid: app.globalData.session.openid
 				},
 				success: (res) => {
 					if (res.data != 'false') {

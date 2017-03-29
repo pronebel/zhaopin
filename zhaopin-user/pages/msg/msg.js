@@ -3,7 +3,7 @@ let {
 	server
 } = require('../../configs/serverConfig.js');
 let $ = require('../../utils/util.js');
-
+let event = require('../../utils/event.js');
 Page({
 	data: {
 		loading: true,
@@ -12,6 +12,16 @@ Page({
 	onLoad() {
 		//获取消息
 		this.getMsg();
+		event.on('length--', this, (data) => {
+			let msg = this.data.msg;
+			msg[data.key]--;
+			this.setData({
+				msg: msg
+			})
+		})
+	},
+	onUnload() {
+		event.remove('length--', this);
 	},
 	getMsg() {
 		//wx.request

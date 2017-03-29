@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.CampusTalk">
+	<resultMap id='CampusTalk' type='com.demo.model.CampusTalk'>
+		<id property="id" column="id" jdbcType="BIGINT" />
+		<result property='job_id' column='job_id' jdbcType='BIGINT'/>
+		<result property='school' column='school' jdbcType='VARCHAR' />
+		<result property='date_time' column='date_time' jdbcType='VARCHAR' />
+	</resultMap>
+	<sql id="TableName">
+		campus_talk
+	</sql>
+	
+	<select id='getCampusTalk' resultMap='CampusTalk'>
+		select * from <include refid="TableName" />
+		where job_id=#{job_id}
+	</select>
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

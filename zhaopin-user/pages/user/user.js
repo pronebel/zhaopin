@@ -1,10 +1,18 @@
 var app = getApp();
 let event = require('../../utils/event.js');
-
+let {
+	ripple
+} = require('../../utils/ripple.js');
 Page({
 	data: {
 		userInfoFromWX: {},
-		userInfo: null
+		userInfo: null,
+		ripple: {
+			s1: '',
+			s2: '',
+			s3: '',
+			s4: ''
+		}
 	},
 	onLoad: function() {
 		app.getUserInfoFromWX((data) => {
@@ -26,24 +34,10 @@ Page({
 	onUnolad: function() {
 		event.remove('userInfoChanged', this)
 	},
-	toResume: function() {
+	navigateTo(e) {
+		ripple.call(this, e);
 		wx.navigateTo({
-			url: '../resume/resume'
-		})
-	},
-	toUserInfo: function() {
-		wx.navigateTo({
-			url: '../userInfo/userInfo'
-		})
-	},
-	toCollect: function() {
-		wx.navigateTo({
-			url: '../collect/collect'
-		})
-	},
-	toConfig: function() {
-		wx.navigateTo({
-			url: '../config/config'
+			url: e.currentTarget.dataset.url
 		})
 	}
 })

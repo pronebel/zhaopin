@@ -55,11 +55,9 @@ public class ResumeController {
 	
 	@ResponseBody
 	@RequestMapping("/getResumesName")
-	public List<Resume> getResumesName(String thirdSessionKey,HttpServletRequest req){
+	public List<Resume> getResumesName(String openid){
 		Resume r=new Resume();
-		System.out.println(thirdSessionKey);
-		System.out.println(req.getSession().getId());
-		r.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		r.setSeeker_id(openid);
 		return rs.getResumesName(r);
 	}
 	
@@ -71,9 +69,9 @@ public class ResumeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/addResume")
-	public Resume addResume(String thirdSessionKey,String name,HttpServletRequest req){
+	public Resume addResume(String openid,String name,HttpServletRequest req){
 		Resume r=new Resume();
-		r.setSeeker_id(lc.getOpenid(thirdSessionKey, req));
+		r.setSeeker_id(openid);
 		r.setName(name);
 		if(rs.addNewResume(r)){
 			return rs.getNewestResumeName(r);

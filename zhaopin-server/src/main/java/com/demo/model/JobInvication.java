@@ -11,6 +11,9 @@ public class JobInvication {
 	private String status;
 	private boolean seeker_read;
 	private boolean hr_read;
+	private Job job;
+	private Hr hr;
+	private String set_resule_date_time;
 	public Long getId() {
 		return id;
 	}
@@ -70,6 +73,24 @@ public class JobInvication {
 	}
 	public void setHr_read(boolean hr_read) {
 		this.hr_read = hr_read;
+	}
+	public Job getJob() {
+		return job;
+	}
+	public void setJob(Job job) {
+		this.job = job;
+	}
+	public Hr getHr() {
+		return hr;
+	}
+	public void setHr(Hr hr) {
+		this.hr = hr;
+	}
+	public String getSet_resule_date_time() {
+		return set_resule_date_time;
+	}
+	public void setSet_resule_date_time(String set_resule_date_time) {
+		this.set_resule_date_time = set_resule_date_time;
 	}
 	
 	

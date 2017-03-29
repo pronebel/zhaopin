@@ -42,14 +42,12 @@ App({
         } else {
             this.getConfig();
         }
-        //    this.login();
-        //this.getUserInfo();
 
     },
-    // onShow: function() {
-    //     //checkSession
-    //     this.checkSession();
-    // },
+    onShow: function() {
+        //checkSession
+        this.checkSession();
+    },
     login(cb) {
         console.log('登录');
         let that = this;
@@ -134,10 +132,10 @@ App({
                 console.log(3);
                 let timer = setInterval(function() {
                     let {
-                        thirdSessionKey
+                        openid
                     } = _this.globalData.session;
                     console.log(_this.globalData.session);
-                    if (!thirdSessionKey) {
+                    if (!openid) {
                         console.log(4)
                         return;
                     }
@@ -145,7 +143,7 @@ App({
                     $.ajax({
                         url: `${server}/seeker/getUserInfo`,
                         data: {
-                            thirdSessionKey: thirdSessionKey
+                            openid: openid
                         }
                     }).then((res) => {
                         if (res.statusCode == 200) {
@@ -202,15 +200,15 @@ App({
         } else {
             let timer = setInterval(function() {
                 let {
-                    thirdSessionKey
+                    openid
                 } = this.globalData.session;
-                if (!thirdSessionKey) {
+                if (!openid) {
                     return;
                 }
                 $.ajax({
                     url: `${server}/collection/getCollectionLength`,
                     data: {
-                        thirdSessionKey: thirdSessionKey
+                        openid: openid
                     }
                 }).then((res) => {
                     if (res.statusCode == 200) {
@@ -236,14 +234,14 @@ App({
         } else {
             let timer = setInterval(function() {
                 let {
-                    thirdSessionKey
+                    openid
                 } = this.globalData.session;
-                if (!thirdSessionKey)
+                if (!openid)
                     return;
                 $.ajax({
                     url: `${server}/config/getConfig`,
                     data: {
-                        thirdSessionKey: thirdSessionKey
+                        openid: openid
                     }
                 }).then((res) => {
                     if (res.statusCode == 200) {
