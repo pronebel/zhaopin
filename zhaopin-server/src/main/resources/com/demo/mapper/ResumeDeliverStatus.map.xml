@@ -8,6 +8,7 @@
 		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
 		<result property="deliver_date_time" column="deliver_date_time" jdbcType="VARCHAR" />		
 		<result property="read_date_time" column="read_date_time" jdbcType="VARCHAR" />	
+		<result property='reject_date_time' column='reject_date_time' jdbcType='VARCHAR' />
 		<result property="interview_date_time" column="interview_date_time" jdbcType="VARCHAR" />	
 		<result property="status" column="status" jdbcType="VARCHAR" />	
 		<result property="seeker_read" column="seeker_read" jdbcType="BOOLEAN" />
@@ -45,7 +46,7 @@
 	
 	<select id='getDeliverRecodeById' resultMap='ResumeDeliverStatus'>
 		select resume_deliver_status.*,job.*,company.* from <include refid='TableName' />,job,company
-		where id=#{id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
+		where resume_deliver_status.id=#{id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
 	</select>
 	
 	<update id='setRead'>

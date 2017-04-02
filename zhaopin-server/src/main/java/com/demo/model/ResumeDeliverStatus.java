@@ -7,6 +7,7 @@ public class ResumeDeliverStatus {
 	private Long resume_id;
 	private String deliver_date_time;
 	private String read_date_time;
+	private String reject_date_time;
 	private String interview_date_time;
 	private String status;
 	private boolean seeker_read;
@@ -77,6 +78,12 @@ public class ResumeDeliverStatus {
 	}
 	public void setResume_id(Long resume_id) {
 		this.resume_id = resume_id;
+	}
+	public String getReject_date_time() {
+		return reject_date_time;
+	}
+	public void setReject_date_time(String reject_date_time) {
+		this.reject_date_time = reject_date_time;
 	}
 	
 	

@@ -27,6 +27,8 @@ public class msgController {
 	@Resource
 	private JobInvicationService jis;
 	@Resource
+	private InterviewService is;
+	@Resource
 	private LoginController lc;
 	
 	@ResponseBody
@@ -34,13 +36,11 @@ public class msgController {
 	public Map<String,Integer> getUnReadLength(String openid) throws JSONException{
 		int resumeStatusLength=rdss.getUnReadLength(openid);
 		int jobInvicationLength=jis.getUnReadLength(openid);
+		int interviewLength=is.getUnReadLength(openid);
 		Map<String,Integer> map=new HashMap<String,Integer>();
 		map.put("resumeStatusLength", resumeStatusLength);
 		map.put("jobInvicationLength", jobInvicationLength);
-	//	JSONObject json=new JSONObject();
-	//	json.put("resumeStatusLength", resumeStatusLength);
-	//	json.put("jobInvicationLength", jobInvicationLength);
-	//	return json;
+		map.put("interviewLength", interviewLength);
 		return map;
 	}
 	

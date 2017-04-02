@@ -110,8 +110,8 @@
                     <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
                 </view>
                 <view class="publisherDetail">
-                    <text class="_block publisherName">it-hr</text>
-                    <text class="_block">所属部门</text>
+                    <text class="_block publisherName">{{jobDetail.hr.name}}</text>
+                    <text class="_block">{{jobDetail.hr.job}}</text>
                 </view>
             </view>
         </view>
@@ -127,14 +127,14 @@
     <view class='box box-last' style='background: rgb(239,239,244)'>
     </view>
     <view class='box box-last box-fixed'>
-    	<view class='r-content' data-target='s1' bindtap='judge' wx:if='{{!hadDelivered}}'>
-	        <view class="item footer" >
-	            <icon class="iconfont icon-send flyaway {{sending?'popUp':''}}"></icon>
-	            发送简历
-	        </view>
-	        <view class="ripple" style="{{ripple.s1}}"></view>
-	    </view>
-        <view class="item footer disable" wx:if='{{hadDelivered}}' >
+        <view class='r-content' data-target='s1' bindtap='judge' wx:if='{{!hadDelivered}}'>
+            <view class="item footer">
+                <icon class="iconfont icon-send flyaway {{sending?'popUp':''}}"></icon>
+                发送简历
+            </view>
+            <view class="ripple" style="{{ripple.s1}}"></view>
+        </view>
+        <view class="item footer disable" wx:if='{{hadDelivered}}'>
             已投递
         </view>
     </view>

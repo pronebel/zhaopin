@@ -5,6 +5,7 @@ public class Hr {
 	private String name;
 	private String birthday;
 	private Long company_id;
+	private String email;
 	private String job;
 	private String telephone;
 	private String avatarUrl;
@@ -57,4 +58,11 @@ public class Hr {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }
