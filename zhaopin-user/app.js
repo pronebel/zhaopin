@@ -194,7 +194,8 @@ App({
         }
     },
     getCollectionLength(cb) {
-        let collectionLength = this.globalData.collectionLength || wx.getStorageSync('collectionLength');
+        this.globalData.collectionLength = wx.getStorageSync('collectionLength');
+        let collectionLength = this.globalData.collectionLength;
         if (collectionLength) {
             typeof cb == 'function' && cb(collectionLength)
         } else {

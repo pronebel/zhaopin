@@ -1,17 +1,30 @@
 <!--pages/companyInfo/companyInfo.wxml-->
 <view class="_relative" style="height:100%;">
+<view class="box-top" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='chooseImg'>
+		<view class="item">
+			<image mode="aspectFit" src="{{companyInfo.logo}}" class="img"></image>
+		</view>
+		<text>{"logo"}</text>
+			<icon class="iconfont icon-right"></icon>
+	</view>
 	<view class="box">	
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.name}}" placeholder="公司名" placeholder-class="placeholder-class" />
+				<input value="{{companyInfo.c_name}}" placeholder="公司名" placeholder-class="placeholder-class" bindinput="c_nameInput"/>
+			</view>
+		</view>
+		<view class="item">
+			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
+				<icon class='iconfont icon-circle-edit'></icon>
+				<input value="{{companyInfo.c_shortname}}" placeholder="公司简称" placeholder-class="placeholder-class" bindinput="c_shortnameInput"/>
 			</view>
 		</view>
 		<picker bindchange="bindScalePickerChange" range="{{scaleArray}}">
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{companyInfo.scale==''}}">公司规模</view>
+					<view class="inputMsg placeholder-class" wx:if="{{!companyInfo.scale}}">公司规模</view>
 					<view class="inputMsg" wx:else>{{companyInfo.scale}}</view>
 				</view>
 			</view>
@@ -20,7 +33,7 @@
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 					<icon class='iconfont icon-circle-edit'></icon>
-					<view class="inputMsg placeholder-class" wx:if="{{companyInfo.financingstage==''}}">融资阶段</view>
+					<view class="inputMsg placeholder-class" wx:if="{{!companyInfo.financingstage}}">融资阶段</view>
 					<view class="inputMsg" wx:else>{{companyInfo.financingstage}}</view>
 				</view>
 			</view>
@@ -28,60 +41,40 @@
 	</view>
 	
 	<view class='box'>
-		<!-- <view class="item">
+		<view class='item'>
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.school}}" placeholder="毕业院校" placeholder-class="placeholder-class" />
+				<view class="inputMsg placeholder-class" wx:if="{{!companyInfo.city}}" bindtap='toWorkplace'>所在城市</view>
+				<view class="inputMsg" wx:else bindtap='toWorkplace'>{{companyInfo.city}}</view>
 			</view>
 		</view>
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.major}}" placeholder="专业" placeholder-class="placeholder-class" />
-			</view>
-		</view> -->
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.province}}" placeholder="所在地省" placeholder-class="placeholder-class" />
-			</view>
-		</view>
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.city}}" placeholder="所在城市" placeholder-class="placeholder-class" />
-			</view>
-		</view>
-	</view>
 
-	<view class='box'>
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.district}}" placeholder="所在区县" placeholder-class="placeholder-class" />
+				<input value="{{companyInfo.district}}" placeholder="所在区县" placeholder-class="placeholder-class" bindinput="districtInput"/>
 			</view>
 		</view>
 		<view class="item">
 			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
 				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.address}}" placeholder="公司地址" placeholder-class="placeholder-class" />
+				<input value="{{companyInfo.address}}" placeholder="公司地址" placeholder-class="placeholder-class" bindinput="addressInput"/>
 			</view>
 		</view>
 	</view>
 
 	<view class="box">
-		<view class='item'>
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.field}}" placeholder="所在领域" placeholder-class="placeholder-class" />
+		<picker bindchange="bindIndustryPickerChange" range="{{items.industry}}" value='{{industryIndex}}'>
+			<view class="item">
+				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
+					<icon class='iconfont icon-circle-edit'></icon>
+					<view class="inputMsg placeholder-class" wx:if="{{!companyInfo.industry}}">所在领域</view>
+					<view class="inputMsg" wx:else>{{companyInfo.industry}}</view>
+				</view>
 			</view>
-		</view>
-        <view class='item'>
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{companyInfo.description}}" placeholder="公司简介" placeholder-class="placeholder-class" />
-			</view>
-		</view>
+		</picker>
+        <textarea value='{{companyInfo.description}}' maxlength="{{maxlength}}" class="_textarea" bindinput='textareaInput' style='height:{{windowHeight-24-20-41-10}}px;max-height:{{windowHeight-24-20-41-10}}px'></textarea>
+	<view class="hint">{{companyInfo.description.length}}/{{maxlength}}</view>
 	</view>
 
 	<view class="_footer box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='save'>

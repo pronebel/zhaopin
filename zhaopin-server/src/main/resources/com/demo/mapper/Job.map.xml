@@ -47,9 +47,14 @@
 		<foreach collection="keys" item="key" index="index" open="" close=" " separator="and">
 			j_name like CONCAT('%',#{key},'%')
 		</foreach> 
-		<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
+		<!--<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
 			workplace like CONCAT('%',#{workplace},'%')
-		</foreach>
+		</foreach>-->
+		<foreach collection="workplaces" item="key" index="index" open="" close=" " separator="">
+				<if test='key != "全国"'>
+					and job.workplace like CONCAT('%',#{key},'%')
+				</if>
+			</foreach>
 		and status=1 group by j_name
 	</select>
 	
@@ -58,15 +63,25 @@
 		<foreach collection="keys" item="key" index="index" open="" close=" " separator="and">
 			c_name like CONCAT('%',#{key},'%')
 		</foreach> 
-		<foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
+		<!-- <foreach collection="workplaces" item="workplace" index="index" open="and" close=" " separator="and">
 			address like CONCAT('%',#{workplace},'%')
-		</foreach>
+		</foreach> -->
+		<foreach collection="workplaces" item="key" index="index" open="" close=" " separator="">
+				<if test='key != "全国"'>
+					and address like CONCAT('%',#{key},'%')
+				</if>
+			</foreach>
 		group by c_name
 	</select>
 	
 	<select id='getIndexSearch' resultMap='Job'>
 		select job.*,company.* from job,company
-		where job.company_id=company.c_id and job_search like concat('%',#{key},'%') and job.status=1
+		where job.company_id=company.c_id and job_search like concat('%',#{search_key},'%') and job.status=1
+		<foreach collection="citys" item="city" index="index" open="" close=" " separator="">
+				<if test='city != "全国"'>
+					and job.workplace like CONCAT('%',#{city},'%')
+				</if>
+			</foreach>
 	</select>
 	
 	<select id='searchJob' resultMap='Job'>

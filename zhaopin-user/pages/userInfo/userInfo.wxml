@@ -33,18 +33,6 @@
 	</view>
 	
 	<view class='box'>
-		<!-- <view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.school}}" placeholder="毕业院校" placeholder-class="placeholder-class" />
-			</view>
-		</view>
-		<view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.major}}" placeholder="专业" placeholder-class="placeholder-class" />
-			</view>
-		</view> -->
 		<picker bindchange="bindDegreePickerChange" range="{{degrees}}" value='{{degreeIndex}}'>
 			<view class="item">
 				<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
@@ -54,12 +42,6 @@
 				</view>
 			</view>
 		</picker>
-		<!-- <view class="item">
-			<view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
-				<icon class='iconfont icon-circle-edit'></icon>
-				<input value="{{userInfo.graduationYear}}" placeholder="毕业年份" placeholder-class="placeholder-class" />
-			</view>
-		</view> -->
 	</view>
 
 	<view class='box'>

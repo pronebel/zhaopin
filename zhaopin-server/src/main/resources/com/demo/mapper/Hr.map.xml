@@ -4,12 +4,14 @@
 	<resultMap id="Hr" type="com.demo.model.Hr">
     	<id property="openid" column="id" jdbcType="VARCHAR" />
 		<result property="name" column="name" jdbcType="VARCHAR" />		
-		<result property="birthday" column="birthday" jdbcType="VARCHAR" />		
-		<result property="company_id" column="company_id" jdbcType="VARCHAR" />		
+		<result property="birthday" column="birthday" jdbcType="VARCHAR" />	
+		<result property="company" column="company" jdbcType="VARCHAR" />
 		<result property="job" column="job" jdbcType="VARCHAR" />	
 		<result property="telephone" column="telephone" jdbcType="VARCHAR" />	
+		<result property="email" column="email" jdbcType="VARCHAR" />
 		<result property="avatarUrl" column="avatarUrl" jdbcType="VARCHAR" />	
 		<result property="sex" column="sex" jdbcType="VARCHAR" />
+		<result property="city" column="city" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="TableName">
@@ -47,7 +49,6 @@
 			avatarUrl=#{avatarUrl}
 		where
 			id=#{openid}
-			
 	</update>
 	
 </mapper>

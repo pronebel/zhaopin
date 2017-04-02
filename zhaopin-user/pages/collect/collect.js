@@ -9,8 +9,10 @@ Page({
     },
     onLoad: function() {
         this.getCollections();
+        console.log(app.globalData.collectionLength);
     },
     getCollections() {
+
         $.ajax({
             url: `${server}/collection/getCollections`,
             data: {
@@ -57,7 +59,10 @@ Page({
                 this.setData({
                     collections: collections
                 })
+                console.log(app.globalData.collectionLength);
                 app.globalData.collectionLength--;
+                wx.setStorageSync('collectionLength', app.globalData.collectionLength);
+                console.log(app.globalData.collectionLength);
             }
         }).catch((res) => {
             wx.showToast({

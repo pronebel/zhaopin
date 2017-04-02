@@ -17,8 +17,8 @@ public class JobService {
 	@Resource
 	private JobDao jd;
 	
-	public List<Job> getIndexSearch(String key,int startIndex,int limitCount){
-		return jd.getIndexSearch(key,startIndex,limitCount);
+	public List<Job> getIndexSearch(JSON json,int startIndex,int limitCount){
+		return jd.getIndexSearch(json,startIndex,limitCount);
 	}
 
 	public List<String> getSearchRecommand(JSON json) {

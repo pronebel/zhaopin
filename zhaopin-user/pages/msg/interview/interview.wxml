@@ -1,0 +1,18 @@
+<view>
+    <view class='box _relative {{item.seeker_read?"":"hint"}}' wx:for='{{interviewList}}' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='navigateTo' data-id='{{item.id}}'>
+        <view style='font-weight: 600;margin-bottom: 10px;color: #000'>{{item.job.name}}</view>
+        <view style='margin-bottom: 15px;'>{{item.job.company.name}}</view>
+        <view>
+            <view style='margin-bottom: 10px;'>
+                <text style='color:#888;display: inline-block;margin-right: 5px'>面试时间:</text>
+                <text>{{item.date_time_filter}}</text>
+            </view>
+            <view class='_flex'>
+                <view style='color:#888;white-space:nowrap;margin-right: 5px'>面试地点:</view>
+                <view>{{item.i_address || item.job.company.address}}</view>
+            </view>
+        </view>
+        <view class='iconfont icon-right'></view>
+    </view>
+</view>
+<include src='../../../common/loader.wxml' />

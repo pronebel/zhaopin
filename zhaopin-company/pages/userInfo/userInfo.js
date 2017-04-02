@@ -2,15 +2,17 @@
 var app = getApp();
 
 var $ = require('../../utils/util.js');
-var event = require('../../utils/event.js');
+let event = require('../../utils/event.js');
 const degrees = require('../../configs/data_configs').degrees;
+const {
+	server
+} = require('../../configs/serverConfig.js');
 
 Page({
 	data: {
 		userInfoFromWX: {},
 		userInfo: {},
 		sexArray: ['男', '女'],
-		now: '',
 		defaultDate: '1994-01-01',
 		checkEmail: true,
 		checkMobile: true,
@@ -38,8 +40,6 @@ Page({
 					})
 				})
 			}
-
-			//	app.hiddenLoader.call(this);
 			app.hiddenLoader(this);
 		})
 
@@ -63,13 +63,13 @@ Page({
 		event.remove('cityChanged', this);
 	},
 	chooseImg: function() {
-		var _this = this;
+		let _this = this;
 		wx.chooseImage({
 			count: 1,
 			success: function(res) {
-				var tempFilePaths = res.tempFilePaths;
 				_this.setData({
-					'userInfo.imgUrl': tempFilePaths
+					filePath: res.tempFilePaths[0],
+					avatarChange: true
 				})
 			}
 		})
@@ -81,12 +81,42 @@ Page({
 	},
 	bindDatePickerChange: function(e) {
 		this.setData({
-			'userInfo.birth': e.detail.value
+			'userInfo.birthday': e.detail.value
 		})
 	},
-	bindDegreePickerChange: function(e) {
+	checkMobile() {
 		this.setData({
-			'userInfo.degree': degrees[e.detail.value]
+			checkMobile: $.checkMobile(this.data.userInfo.phone)
+		})
+	},
+	checkEmail() {
+		this.setData({
+			checkEmail: $.checkEmail(this.data.userInfo.email)
+		})
+	},
+	nameInput(e) {
+		this.setData({
+			'userInfo.name': e.detail.value
+		})
+	},
+	telephoneInput(e) {
+		this.setData({
+			'userInfo.telephone': e.detail.value
+		})
+	},
+	emailInput(e) {
+		this.setData({
+			'userInfo.email': e.detail.value
+		})
+	},
+	companyInput(e) {
+		this.setData({
+			'userInfo.company': e.detail.value
+		})
+	},
+	jobInput(e) {
+		this.setData({
+			'userInfo.job': e.detail.value
 		})
 	},
 	save: function() {
@@ -105,18 +135,13 @@ Page({
 			method: 'POST',
 			data: {
 				userInfo: JSON.stringify(userInfo),
-				thirdSessionKey: app.globalData.session.thirdSessionKey
+				openid: app.globalData.session.openid
 			}
 		}).then((res) => {
 			if (res.data === true) {
 				wx.showToast({
 					title: '保存成功',
 					icon: 'success'
-				})
-				event.emit('resumeChanged', {
-					event_type: 'change',
-					key: 'userInfo',
-					value: userInfo
 				})
 				event.emit('userInfoChanged', {
 					userInfo: userInfo
@@ -140,7 +165,7 @@ Page({
 				},
 				name: 'avatar',
 				formData: {
-					thirdSessionKey: app.globalData.session.thirdSessionKey
+					openid: app.globalData.session.openid
 				},
 				success: (res) => {
 					if (res.data != 'false') {
@@ -149,11 +174,6 @@ Page({
 						})
 						event.emit('userInfoChanged', {
 							userInfo: _this.data.userInfo
-						})
-						event.emit('resumeChanged', {
-							event_type: 'change',
-							key: 'userInfo',
-							value: _this.data.userInfo
 						})
 					} else {
 						wx.showToast({
