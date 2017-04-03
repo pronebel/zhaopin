@@ -11,9 +11,10 @@
     </view>
     <scroll-view style="height:{{windowHeight}}px;box-sizing:border-box;padding-top:43px;" scroll-y bindscrolltolower='loadMore'>
         <view class='list' wx:if='{{jobList.length>0}}'>
-            <view class="item animated fadeInRight" wx:for='{{jobList}}' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='navigateTo' data-url='../jobDetail/jobDetail?id={{item.id}}' data-id='{{item.id}}' bindlongtap='longtapHandle' style='animation-delay:{{index%limitCount*0.2}}s;-webkit-animation-delay:{{index%limitCount*0.2}}s'>
+            <view class="item animated fadeInRight" wx:for='{{jobList}}' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view"
+ bindtap='navigateTo' data-url='../jobDetail/jobDetail?id={{item.id}}' data-id='{{item.id}}' bindlongtap='longtapHandle' style='animation-delay:{{index%limitCount*0.2}}s;-webkit-animation-delay:{{index%limitCount*0.2}}s'>
                 <view class="logo">
-                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                    <image src="{{item.company.logo || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
                 </view>
                 <view class="details">
                     <view class="_block">
@@ -36,7 +37,8 @@
                 <view style="clear:both;"></view>
             </view>
         </view>
-        <image wx:if='{{jobList.length==0 && searched}}' src='../../images/empty.png' class='empty'></image>
+        <image
+ wx:if='{{jobList.length==0 && searched}}' src='../../images/empty.png' class='empty'></image>
         <view class='nomore' wx:if='{{searched && dataLimit && !showSuggestions && jobList.length>5}}'>
             <!-- <image src='../../images/nomore.png' class='img-nomore'></image> -->
             <view class='iconfont icon-meiyougengduoliao icon-nomore'></view>
@@ -45,12 +47,12 @@
     </scroll-view>
 </view>
 <view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd" class="user" style="width: {{ui.menuWidth}}px;left:{{-ui.menuWidth/3 + ui.offsetLeft/3}}px">
-    <image src='../../images/bkg.jpg' style='width: {{ui.menuWidth}}px;height:100%'></image>
+    <image src='../../images/bkg-2.jpg' style='width: {{ui.menuWidth}}px;height:100%'></image>
     <scroll-view class='user-box'>
         <view>
             <view class='user-box-item img-text'>
                 <view class='avator-box' bindtap='navigateTo' data-url='../userInfo/userInfo'>
-                    <image src='{{userInfo.imgUrl || userInfoFromWX.avatarUrl}}' class='avator'></image>
+                    <image src='{{userInfo.avatarUrl || userInfoFromWX.avatarUrl || "../../images/avatar.png"}}' class='avator'></image>
                 </view>
                 <text>{{userInfo.name || userInfoFromWX.nickName}}</text>
             </view>

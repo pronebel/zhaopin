@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Comment">
+	<resultMap id="Comment" type="com.demo.model.Comment">
+    	<id property="id" column="id" jdbcType="BIGINT" />
+		<result property="job_id" column="job_id" jdbcType="BIGINT" />	
+		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />
+		<result property="interview_id" column="interview_id" jdbcType="BIGINT" />
+		<result property="comment_date_time" column="comment_date_time" jdbcType="VARCHAR" />
+		<result property="content" column="content" jdbcType="VARCHAR" />
+		<result property="hr_comment" column="hr_comment" jdbcType="INTEGER" />
+		<result property="detail_conform_comment" column="detail_conform_comment" jdbcType="INTEGER" />
+		<result property="company_comment" column="company_comment" jdbcType="INTEGER" />
+		<result property='anonymity' column='anonymity' jdbcType='BOOLEAN' />
+		<association property="seeker" javaType="com.demo.model.Seeker" resultMap='Seeker'>    
+	   	</association>
+	</resultMap>
+	<resultMap id="Seeker" type="com.demo.model.Seeker">
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="avatarUrl" column="avatarUrl" jdbcType="VARCHAR" />	
+	</resultMap>
+	<sql id="TableName">
+		comment
+	</sql>
+	
+	<insert id='newComment' parameterType='com.demo.model.Comment'>
+		insert into comment
+		(job_id,seeker_id,interview_id,comment_date_time,content,hr_comment,detail_conform_comment,company_comment,anonymity)
+		values
+		(#{job_id},#{seeker_id},#{interview_id},#{comment_date_time},#{content},#{hr_comment},#{detail_conform_comment},#{company_comment},#{anonymity})
+	</insert>
+	
+	<select id='getComment' resultMap='Comment'>
+		select comment.*, seeker.name,seeker.avatarUrl from comment,seeker
+		where comment.seeker_id=seeker.id and comment.job_id=#{job_id}
+	</select>
+	
+</mapper>
+
+<!-- parameterType:使用的参数类型
+id:方法名
+resultMap和resultType不能一起用 -->

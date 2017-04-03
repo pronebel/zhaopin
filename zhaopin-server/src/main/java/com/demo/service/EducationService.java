@@ -30,4 +30,8 @@ public class EducationService {
 	public boolean addEducation(Education e){
 		return ed.addEducation(e);
 	}
+	
+	public void deleteEducations(Long resume_id){
+		ed.deleteEducations(resume_id);
+	}
 }

@@ -93,6 +93,11 @@ public class ResumeController {
 	public boolean deleteResume(Long id,HttpServletRequest req){
 		Resume r=new Resume();
 		r.setId(id);
+		es.deleteEducations(id);
+		is.deleteInterships(id);
+		hs.deleteHonors(id);
+		ps.deleteProjects(id);
+		hhs.deleteHope(id);
 		return rs.deleteResume(r);
 	}
 	

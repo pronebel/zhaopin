@@ -4,7 +4,7 @@ let {
 } = require('../../../configs/serverConfig.js');
 let $ = require('../../../utils/util.js');
 let event = require('../../../utils/event.js');
-
+let { ripple } = require('../../../utils/ripple.js');
 Page({
     data: {
         loading: true,
@@ -45,14 +45,18 @@ Page({
                     })
                 })
                 let interviewList = res.data.concat(oldInterviewList);
+                let ripple = {};
                 interviewList.map((val, index, arr) => {
                     if (val.date_time) {
                         val.date_time_filter = val.date_time.substring(0, 16)
                     }
+                    ripple["s" + index] = '';
                 })
                 this.setData({
-                    interviewList: interviewList
+                    interviewList: interviewList,
+                    ripple: ripple
                 })
+
                 wx.setStorageSync('interviewList', interviewList)
                 typeof cb == 'function' && cb();
             }
@@ -65,6 +69,7 @@ Page({
         })
     },
     navigateTo(e) {
+        ripple.call(this, e);
         wx.navigateTo({
             url: `interviewDetail/interviewDetail?id=${e.currentTarget.dataset.id}`
         })

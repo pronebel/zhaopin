@@ -52,6 +52,13 @@
 			id=#{openid}			
 	</update>
 	
+	<update id='updateSeekerName' parameterType="com.demo.model.Seeker">
+		update <include refid="TableName"/> set
+			name=#{name}
+		where
+			id=#{openid}			
+	</update>
+	
 	<update id='updateHope_job' parameterType="com.demo.model.Seeker">
 		update <include refid="TableName"/> set
 			hope_job=#{hope_job}

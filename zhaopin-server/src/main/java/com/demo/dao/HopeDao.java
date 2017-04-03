@@ -28,4 +28,9 @@ public class HopeDao extends BaseDao<Hope>{
 		String sn=getIbatisMapperNamespace() + ".newHope";
 		return getSqlSessionTemplate().insert(sn, h)==1?true:false;
 	}
+	
+	public void deleteHope(Long resume_id){
+		String sm=getIbatisMapperNamespace()+".deleteHope";
+		getSqlSessionTemplate().delete(sm, resume_id);
+	}
 }

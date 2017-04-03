@@ -4,9 +4,7 @@ const FAST_SPEED_SECOND = 300;
 const FAST_SPEED_DISTANCE = 5;
 const FAST_SPEED_EFF_Y = 50;
 let $ = require('../../utils/util.js');
-let {
-    server
-} = require('../../configs/serverConfig.js');
+let { server } = require('../../configs/serverConfig.js');
 let event = require('../../utils/event.js');
 Page({
     data: {
@@ -56,6 +54,26 @@ Page({
             } else {
                 this.getIndexSearch();
             }
+            if (data.avatarUrl == 'null' || data.avatarUrl == 'undefined' || !data.avatarUrl) {
+                app.getUserInfoFromWX(function(data) {
+                    if (data != 'null' && data != 'undefined' && data && data.avatarUrl) {
+                        this.updateSeekerAvatar(data.avatarUrl, function() {
+                            app.globalData.userInfo.avatarUrl = data.avatarUrl
+                            wx.setStorageSync('userInfo', app.globalData.userInfo)
+                        })
+                    }
+                }.bind(this))
+            }
+            if (data.name == 'null' || data.name == 'undefined' || !data.name) {
+                app.getUserInfoFromWX(function(data) {
+                    if (data != 'null' && data != 'undefined' && data && data.nickName) {
+                        this.updateSeekerName(data.nickName, function() {
+                            app.globalData.userInfo.name = data.nickName
+                            wx.setStorageSync('userInfo', app.globalData.userInfo)
+                        })
+                    }
+                }.bind(this))
+            }
         })
         event.on('userInfoChanged', this, (data) => {
             this.setData({
@@ -72,6 +90,34 @@ Page({
     onUnload() {
         event.remove('userInfoChanged', this);
         event.remove('cityChanged', this);
+    },
+    updateSeekerAvatar(data, cb) {
+        $.ajax({
+            url: `${server}/seeker/updateSeekerAvatar`,
+            data: {
+                avatarUrl: data,
+                openid: app.globalData.userInfo.openid
+            },
+            method: 'POST'
+        }).then((res) => {
+            if (res.statusCode == 200 && res.data) {
+                typeof cb == 'function' && cb();
+            }
+        })
+    },
+    updateSeekerName(data, cb) {
+        $.ajax({
+            url: `${server}/seeker/updateSeekerName`,
+            data: {
+                name: data,
+                openid: app.globalData.userInfo.openid
+            },
+            method: 'POST'
+        }).then((res) => {
+            if (res.statusCode == 200 && res.data) {
+                typeof cb == 'function' && cb();
+            }
+        })
     },
     confirm() {
         let {
@@ -158,8 +204,13 @@ Page({
                         jobList: res.data
                     })
                 }
+                let ripple = {};
+                this.data.jobList.forEach((val, index) => {
+                    ripple["s" + index] = '';
+                })
                 this.setData({
-                    searched: true
+                    searched: true,
+                    ripple: ripple
                 })
                 if (res.data.length < 10) {
                     this.setData({

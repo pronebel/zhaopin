@@ -14,7 +14,7 @@
         </view>
     </view>
 </view>
-<view class="container search-history" hidden="{{searchMsg!='' || searchHistory.length==0 || !showSuggestions}}">
+<view class="container search-history animated bounceInUp" hidden="{{searchMsg!='' || searchHistory.length==0 || !showSuggestions}}">
     <view>
         <view class="placeicon-1"></view>
         <text>历史搜索</text>
@@ -36,9 +36,9 @@
 			</button>	
 		</view>
 	</view> -->
-<view class="searchComplement" hidden="{{searchSuggestions.length==0 || !showSuggestions}}">
+<view class="searchComplement animated fadeInUp" hidden="{{searchSuggestions.length==0 || !showSuggestions}}">
     <view class="complement-list">
-        <view wx:for="{{searchSuggestions}}">
+        <view wx:for="{{searchSuggestions}}" class='animated lightSpeedIn' style='animation-delay: {{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s '>
             <view class="complement-item" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="complementSearch" data-complement="{{item}}">
                 <view class="_line" data-complement="{{item}}">
                     <icon type="search" size="15" color="#b2b2b2" data-complement="{{item}}" />
@@ -156,7 +156,7 @@
     <view class='list'>
         <view class="item animated fadeInRight" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="navigateTo" wx:for='{{jobList}}' data-url='../jobDetail/jobDetail?id={{item.id}}' data-id='{{item.id}}' style='animation-delay:{{index%limitCount*0.2}}s;-webkit-animation-delay:{{index%limitCount*0.2}}s'>
             <view class="logo">
-                <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                <image src="{{item.company.logo || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
             </view>
             <view class="details">
                 <view class="_block">

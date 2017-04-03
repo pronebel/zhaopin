@@ -2,7 +2,7 @@
     <view class='box box-top'>
         <view class="item ">
             <view class="logo">
-                <image src="../../../../images/_logo.png" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                <image src="{{detail.job.company.logo || '../../../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
             </view>
             <view class="details">
                 <view class="_block">
@@ -31,7 +31,7 @@
             </view>
             <view class='item-con'>
                 <view>对方已成功接收你的简历</view>
-                <view style='margin-top:7px;'>{{detail.deliver_date_time}}</view>
+                <view style='margin-top:7px;'>{{detail.deliver_date_time_filter}}</view>
             </view>
         </view>
         <view class='item-flex' wx:if="{{detail.read_date_time}}">
@@ -40,7 +40,7 @@
             </view>
             <view class='item-con'>
                 <view>查看了你的简历</view>
-                <view style='margin-top:7px;'>{{detail.read_date_time}}</view>
+                <view style='margin-top:7px;'>{{detail.read_date_time_filter}}</view>
             </view>
         </view>
         <view class='item-flex' wx:if="{{detail.reject_date_time}}">
@@ -49,7 +49,7 @@
             </view>
             <view class='item-con'>
                 <view>你的简历被判定为不合适</view>
-                <view style='margin-top:7px;'>{{detail.reject_date_time}}</view>
+                <view style='margin-top:7px;'>{{detail.reject_date_time_filter}}</view>
             </view>
         </view>
         <view class='item-flex' wx:if="{{detail.interview_date_time}}">
@@ -58,7 +58,7 @@
             </view>
             <view class='item-con'>
                 <view>邀请你参加面试</view>
-                <view style='margin-top:7px;'>{{detail.interview_date_time}}</view>
+                <view style='margin-top:7px;'>{{detail.interview_date_time_filter}}</view>
             </view>
         </view>
     </view>
