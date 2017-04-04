@@ -52,7 +52,7 @@ page {
 
 .details {
     float: left;
-    width: 525rpx;
+    width: 518rpx;
     height: 100%;
     padding-bottom: 20rpx;
 }

@@ -34,7 +34,8 @@ page {
 }
 
 .box .item text {
-    line-height: 40px;
+    line-height: 40px
+;
 }
 
 .box .item .iconfont {

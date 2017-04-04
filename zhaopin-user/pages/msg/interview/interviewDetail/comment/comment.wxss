@@ -16,7 +16,8 @@ view {
 
 .box-last {
     margin-bottom: 0px;
-    height: 40px;
+    height: 40px
+;
     padding: 0px;
 }
 

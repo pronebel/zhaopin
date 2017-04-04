@@ -164,7 +164,7 @@
     <view class='box box-last' style='background: rgb(239,239,244)'>
     </view>
     <view class='box box-last box-fixed'>
-        <view class='r-content' data-target='s1' data-flag='true' bindtap='judge' wx:if='{{!hadDelivered}}'>
+        <view class='r-content' data-target='s1' data-flag='fixed' bindtap='judge' wx:if='{{!hadDelivered}}'>
             <view class="item footer">
                 <icon class="iconfont icon-send flyaway {{sending?'popUp':''}}"></icon>
                 发送简历

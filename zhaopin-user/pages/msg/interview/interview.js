@@ -24,10 +24,14 @@ Page({
             })
             wx.setStorageSync('interviewList', interviewList)
         })
+        event.on('ws_interview_update', this, () => {
+            this.getInterview();
+        })
         this.getInterview();
     },
     onUnload() {
         event.remove('interviewRead', this);
+        event.remove('ws_interview_update', this);
     },
     getInterview(cb) {
         $.ajax({

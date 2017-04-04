@@ -3,6 +3,13 @@
 @import "common/ripple.wxss";
 @import 'common/animate.wxss';
 view,
+scroll-view,
+text {
+    margin: 0px;
+    padding: 0px;
+}
+
+view,
 scroll-view {
     font-family: '微软雅黑';
     font-size: 14px;
@@ -127,20 +134,18 @@ click-view-2 {
 }
 
 .modal-input {
-    /*height: 30px
-        line-height: 24px;
-        border: 1rpx solid #2188ff;
-        border-radius: 2px;
-        outline: none;
-        box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(20,92,205,.6);
-        width:100%;*/
     width: 100%;
     height: 32px;
     color: #353535;
-    border: 1rpx solid #2188ff;
     border-radius: 4px;
-    -webkit-box-shadow: 0 0px 3px #145ccd;
-    box-shadow: 0 0px 3px #145ccd;
+    border: 1px solid #d7dde4;
+    background-color: #fff;
+    transition: border .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.modal-input.focus {
+    box-shadow: 0 0 0 2px rgba(51, 153, 255, .2);
+    border-color: #5cadff;
 }
 
 .empty {

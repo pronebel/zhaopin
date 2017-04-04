@@ -26,16 +26,16 @@
     </view>
 </view>
 <!-- <view class="container search-hot" hidden="{{searchMsg!='' || !showSuggestions}}">
-		<view>
-			<view class="placeicon-2"></view>
-			<text>热门搜索</text>
-			<text class="handle">换一批</text>
-		</view>
-		<view class="hot-list"> 
-			<button  class="hot-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHot}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
-			</button>	
-		</view>
-	</view> -->
+        <view>
+            <view class="placeicon-2"></view>
+            <text>热门搜索</text>
+            <text class="handle">换一批</text>
+        </view>
+        <view class="hot-list"> 
+            <button  class="hot-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHot}}" wx:key="*this" bindtap="clickBtnSearch" >{{item}}
+            </button>   
+        </view>
+    </view> -->
 <view class="searchComplement animated fadeInUp" hidden="{{searchSuggestions.length==0 || !showSuggestions}}">
     <view class="complement-list">
         <view wx:for="{{searchSuggestions}}" class='animated lightSpeedIn' style='animation-delay: {{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s '>
@@ -159,21 +159,21 @@
                 <image src="{{item.company.logo || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
             </view>
             <view class="details">
-                <view class="_block">
+                <view style='height: 40rpx;'>
                     <text class="job-title">{{item.name}}</text>
                     <text class="job-salary">{{item.salary_lower}}-{{item.salary_upper}}k</text>
-                    <view style="clear:both"></view>
                 </view>
-                <text class="company-name">{{item.company.name}}</text>
-                <view class="_block translucence-msg" style="margin-top:10rpx">
-                    <text class="work-place">{{item.city}} {{item.district}}</text>
+                <view class="company-name" style='height: 40rpx;'>{{item.company.name}}</view>
+                <view class="_block translucence-msg" style="height:40rpx;margin-top:10rpx">
+                    <text class="work-place">{{item.city}}</text>
+                    <text class="district">{{item.district}}</text>
                     <text class="degree">{{item.degree_limit}}</text>
                     <text class="_right release-date">{{item.release_date}}</text>
                 </view>
-                <view class="_block translucence-msg" style="margin-top:6rpx">
+                <view class="_block translucence-msg" style="height:40rpx;margin-top:6rpx">
+                    <text class="">{{item.company.financing_stage}}</text>
                     <text class="scale">{{item.company.scale}}</text>
                     <text class="company-type">{{item.company.field}}</text>
-                    <text class="company-financing-stage">{{item.company.financing_stage}}</text>
                 </view>
             </view>
             <view style="clear:both;"></view>

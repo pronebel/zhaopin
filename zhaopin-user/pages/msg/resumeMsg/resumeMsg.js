@@ -53,10 +53,14 @@ Page({
             })
             wx.setStorageSync('resumeStatusList', resumeStatusList)
         })
+        event.on('ws_resume_status_update', this, () => {
+            this.getResumeStatus();
+        })
         this.getResumeStatus();
     },
     onUnload() {
         event.remove('resumeStatusRead', this);
+        event.remove('ws_resume_status_update', this);
     },
     getResumeStatus(cb) {
         $.ajax({
