@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<!--pages/msg/jobInvitationMsg/invication/invication.wxml-->
+<text>pages/msg/jobInvitationMsg/invication/invication.wxml</text>
+=======
 <view class='box'>
     <view style='padding:15px 0px'>
         <image src="{{invication.hr.avatarUrl || '../../../../images/avatar.png'}}" style="height:70rpx;width:70rpx;border-radius:35rpx; margin-right: 10px; margin-left: 10px; vertical-align: middle;" background-size="cover"></image>
@@ -149,3 +153,4 @@
     </view>
 </view>
 <include src='../../../../common/loader.wxml' />
+>>>>>>> 7c3b5d26c4576ca14b0248eda920654be896fd81

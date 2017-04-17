@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+/* pages/msg/resumeMsg/deliverRecode/deliverRecode.wxss */
+=======
 page {
 	background-color: rgb(239, 239, 244);
 	box-sizing: border-box;
@@ -124,3 +127,4 @@ page {
 .item-con view {
 	color: #00cc66;
 }
+>>>>>>> 7c3b5d26c4576ca14b0248eda920654be896fd81

@@ -1,0 +1,2 @@
+<!--pages/tmpTest/tmpTest.wxml-->
+<text>{{message}}</text>

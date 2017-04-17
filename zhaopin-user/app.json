@@ -1,5 +1,10 @@
 {
     "pages": [
+<<<<<<< HEAD
+        "pages/tmpTest/tmpTest",
+        "pages/index/index",
+        "pages/msg/msg",
+=======
         "pages/index/index",
         "pages/resume/resume",
         "pages/search/search",
@@ -7,6 +12,7 @@
         "pages/msg/msg",
         "pages/resume/resume",
         "pages/search/search",
+>>>>>>> 7c3b5d26c4576ca14b0248eda920654be896fd81
         "pages/msg/resumeMsg/resumeMsg",
         "pages/msg/resumeMsg/deliverRecode/deliverRecode",
         "pages/editResume/editResume",
