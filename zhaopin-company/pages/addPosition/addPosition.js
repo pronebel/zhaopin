@@ -7,8 +7,8 @@ const degrees = require('../../configs/data_configs').degrees;
 
 Page({
 	data: {
-		positionInfoFromWX: {},
-		positionInfo: {
+		jobInfoFromWX: {},
+		jobInfo: {
       id:'',
 			name: '',
 			salary: '',

@@ -16,7 +16,8 @@ page{
 
 .iconfont{
 	float: right;
-	line-height: 40px;
+	line-height: 40px
+;
 	color:rgb(72,194,61);
 	vertical-align: middle;
 	font-size: 12px;

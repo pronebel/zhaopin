@@ -30,4 +30,7 @@ public class IntershipService {
 	public boolean addIntership(Intership i){
 		return id.addIntership(i);
 	}
+	public void deleteInterships(Long resume_id){
+		id.deleteInterships(resume_id);
+	}
 }

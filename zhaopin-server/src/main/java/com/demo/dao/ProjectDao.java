@@ -35,4 +35,9 @@ public class ProjectDao extends BaseDao<Project>{
 		String sn=getIbatisMapperNamespace() + ".addProject";
 		return getSqlSessionTemplate().insert(sn, e)==1?true:false;
 	}
+	
+	public void deleteProjects(Long resume_id){
+		String sm=getIbatisMapperNamespace()+".deleteProjects";
+		getSqlSessionTemplate().delete(sm, resume_id);
+	}
 }

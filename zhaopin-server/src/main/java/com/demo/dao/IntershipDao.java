@@ -35,4 +35,9 @@ public class IntershipDao extends BaseDao<Intership>{
 		String sn=getIbatisMapperNamespace() + ".addIntership";
 		return getSqlSessionTemplate().insert(sn, i)==1?true:false;
 	}
+	
+	public void deleteInterships(Long resume_id){
+		String sm=getIbatisMapperNamespace()+".deleteInterships";
+		getSqlSessionTemplate().delete(sm, resume_id);
+	}
 }

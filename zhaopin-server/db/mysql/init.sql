@@ -11,7 +11,7 @@ create table seeker(
 	sex enum('男','女'),
 	telephone varchar(11) not null default '',
 	email varchar(30) not null default '',
-	avatarUrl varchar(100) not null default '',
+	avatarUrl varchar(500) not null default '',
 	city varchar(10) not null default '',
 	degree varchar(10) not null default '',
 	hope_job varchar(20),
@@ -25,7 +25,6 @@ create table company(
 	scale varchar(20) not null,
 	financing_stage varchar(20) not null,
 	address varchar(100) not null,
-	province varchar(10) not null,
 	c_city varchar(10) not null,
 	c_district varchar(10) comment '区县',
 	field varchar(20)  not null,
@@ -41,8 +40,10 @@ create table hr(
 	name varchar(20) comment '真实姓名',
 	birthday varchar(30),
 	company_id bigint(11),
+	company varchar(20),
 	job varchar(20),
 	telephone varchar(11),
+	email varchar(30),
 	avatarUrl varchar(100),
 	sex enum('男','女'),
 	foreign key(company_id) references company(c_id)
@@ -152,16 +153,6 @@ create table campus_talk(
 	foreign key(job_id) references job(j_id)
 );
 
-create table comment(
-	id bigint(11) auto_increment primary key not null,
-	job_id bigint(11) not null,
-	seeker_id varchar(50) not null,
-	date_time varchar(50) not null,
-	description varchar(200) not null,
-	foreign key(job_id) references job(j_id),
-	foreign key(seeker_id) references seeker(id)
-);
-
 create table config(
 	seeker_id varchar(100) not null primary key,
 	resume_open boolean default 1,
@@ -177,8 +168,9 @@ create table resume_deliver_status(
 	seeker_id varchar(50) not null,
 	resume_id bigint(11) not null comment '简历投递的id',
 	deliver_date_time varchar(50) not null comment '简历投递的时间',
-	read_date_time varchar(50) comment '企业查看该简历时的时间，插入值后要将status改为待沟通 _read改为未读',
-	interview_date_time varchar(50) comment '企业邀请面试时的时间，插入值后要将status改为面试 _read改为未读 并且在table interview 中插入一条新数据',
+	reject_date_time varchar(50) comment '企业判定为不合适简历的时间 插入时要将status改为不合适 seeker_read改为未读',
+	read_date_time varchar(50) comment '企业查看该简历时的时间，插入值后要将status改为待沟通 seeker_read改为未读',
+	interview_date_time varchar(50) comment '企业邀请面试时的时间，插入值后要将status改为面试 seeker_read改为未读 并且在table interview 中插入一条新数据',
 	status enum('未查看','待沟通','面试','不合适') not null default '未查看',
 	seeker_read boolean not null default 0 comment '投递者是否已读',
 	hr_read boolean not null default 0 comment 'hr是否已读 在发出面试邀请后 seeker方可能同意也可能拒绝',
@@ -191,12 +183,32 @@ create table interview(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
-	date_time varchar(50) not null comment '面试时间',
-	seeker_anwser boolean comment 'seeker是否同意面试',
-	result boolean comment '面试结果 通过和不通过 都要修改resume_deliver_status表对应的seeker_read为false',
-	address varchar(50) comment '面试地点',
+	interview_date_time varchar(50) not null comment '面试时间',
+	set_interview_end_date_time varchar(50) comment '面试结束后，hr设置面试者已经来面试了或者没有来参加面试的时间',
+	interview_flag enum('面试结束','没有参加') comment 'hr设置的结果,设置后要将seeker_read设置为false',
+	seeker_read boolean not null default 0 comment 'seeker是否已读',
+	set_result_date_time varchar(20) comment 'hr判定面试结果的时间',
+	result enum('通过','不通过') comment '面试结果 通过和不通过 都要修改seeker_read为false',
+	i_address varchar(50) comment '面试地点',
 	other varchar(200) comment '其他特殊说明,如邀请面试的场面话等',
+	had_commented boolean not null default 0 comment '是否已经评价',
 	foreign key(job_id) references job(j_id),
+	foreign key(seeker_id) references seeker(id)
+);
+
+create table comment(
+	id bigint(11) auto_increment primary key not null,
+	job_id bigint(11) not null,
+	seeker_id varchar(50) not null,
+	interview_id bigint(11) not null,
+	comment_date_time varchar(50) not null,
+	content varchar(200) not null,
+	hr_comment int not null default 3,
+	detail_conform_comment int not null default 3,
+	company_comment int not null default 3,
+	anonymity boolean not null default 0,
+	foreign key(job_id) references job(j_id),
+	foreign key(interview_id) references interview(id),
 	foreign key(seeker_id) references seeker(id)
 );
 
@@ -209,6 +221,7 @@ create table job_invication(
 	result boolean comment '被邀请者处理后 同意或者拒绝',
 	description varchar(500) not null,
 	status enum('未处理','已处理') not null default '未处理',
+	set_result_date_time varchar(30) comment '被邀请者处理的时间',
 	seeker_read boolean not null default 0,
 	hr_read boolean not null default 0,
 	foreign key(job_id) references job(j_id),
@@ -251,3 +264,6 @@ VALUES (10,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','2017-03-25 10:10:00')
 
 INSERT INTO job_invication(seeker_id,job_id,hr_id,invicate_date_time,description)
 VALUES('oUE_60BwG0F_Dna5NIsSvFz_YlRQ',10,'openidhr','2017-03-25 10:10','asdas')
+
+INSERT INTO interview (job_id,seeker_id,other,interview_date_time,i_address,interview_flag,set_interview_end_date_time)
+ VALUES (4,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','现场面试','2017-04-22 10:10:10','广东省深圳市南山区软件基地A栋0899号','面试结束','2017-04-02 10:10:10')

@@ -3,14 +3,17 @@ let {
     server
 } = require('../../configs/serverConfig');
 let $ = require('../../utils/util.js');
+let { ripple } = require('../../utils/ripple.js');
 Page({
     data: {
-        loading: true
+        loading: true,
+        hiddenLoader: false
     },
     onLoad: function() {
         this.getCollections();
     },
     getCollections() {
+
         $.ajax({
             url: `${server}/collection/getCollections`,
             data: {
@@ -18,20 +21,39 @@ Page({
             }
         }).then((res) => {
             if (res.statusCode == 200 && res.data) {
-                this.setData({
-                    collections: res.data
+                let ripple = {};
+                res.data.forEach((val, index) => {
+                    ripple["s" + index] = '';
+                    ripple["s_" + index] = '';
                 })
+                this.setData({
+                    collections: res.data,
+                    ripple: ripple
+                })
+                app.globalData.collectionLength = res.data.length;
+                wx.setStorageSync('collectionLength', res.data.length);
                 app.hiddenLoader(this);
             }
         })
     },
     navigateTo(e) {
-        let {
-            url,
-            id
-        } = e.currentTarget.dataset;
+        ripple.call(this, e);
+        let { url } = e.currentTarget.dataset;
         wx.navigateTo({
-            url: `${url}?id=${id}`
+            url: url
+        })
+    },
+    judgeDelete(e) {
+        ripple.call(this, e);
+        let that = this;
+        wx.showModal({
+            title: '提示信息',
+            content: '您确定要删除该收藏吗？',
+            success: (res) => {
+                if (res.confirm) {
+                    that.deleteCollection(e);
+                }
+            }
         })
     },
     deleteCollection(e) {
@@ -57,7 +79,10 @@ Page({
                 this.setData({
                     collections: collections
                 })
+                console.log(app.globalData.collectionLength);
                 app.globalData.collectionLength--;
+                wx.setStorageSync('collectionLength', app.globalData.collectionLength);
+                console.log(app.globalData.collectionLength);
             }
         }).catch((res) => {
             wx.showToast({

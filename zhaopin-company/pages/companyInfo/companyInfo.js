@@ -4,6 +4,9 @@ var app = getApp();
 var $ = require('../../utils/util.js');
 var event = require('../../utils/event.js');
 const degrees = require('../../configs/data_configs').degrees;
+const {
+	server
+} = require('../../configs/serverConfig.js');
 
 Page({
 	data: {
@@ -26,24 +29,37 @@ Page({
 		defaultDate: '1994-01-01'
 	},
 	onLoad: function(options) {
-		app.getcompanyInfo((data) => {
+			this.setData({
+			now: $.formatDate(new Date()),
+		})
+		app.getcompanyInfoFromWX((data) => {
 			this.setData({
 				companyInfoFromWX: data
 			})
 		})
-
-		//wx.request 
-		let _financingstage = this.data.companyInfo.financingstage;
-		if (!_financingstage) {
+		app.getCompanyInfo((data) => {
 			this.setData({
-				financingstageIndex: 1
+				companyInfo: data
 			})
-		} else {
+			if (data.city == '') {
+				app.getLocation((data) => {
+					this.setData({
+						'companyInfo.city': data
+					})
+				})
+			}
+			app.hiddenLoader(this);
+		})
+		event.on('cityChanged', this, function(data) {
 			this.setData({
-				financingstageIndex: $.inArray(_financingstage, financingstages)
+				'companyInfo.city': data.city
 			})
-		}
+		}.bind(this))
 	},
+	onUnload: function() {
+		event.remove('companycityChanged', this);
+	},
+
 	chooseImg: function() {
 		var _this = this;
 		wx.chooseImage({
@@ -51,7 +67,7 @@ Page({
 			success: function(res) {
 				var tempFilePaths = res.tempFilePaths;
 				_this.setData({
-					'companyInfo.imgUrl': tempFilePaths
+					'userInfo.avatorUrl': tempFilePaths
 				})
 			}
 		})
@@ -66,23 +82,35 @@ Page({
 			'companyInfo.financingstage': this.data.financingstageArray[e.detail.value]
 		})
 	},
-	// bindDatePickerChange: function(e) {
-	// 	this.setData({
-	// 		'companyInfo.birth': e.detail.value
-	// 	})
-	// },
-	// bindfinancingstagePickerChange: function(e) {
-	// 	this.setData({
-	// 		'companyInfo.financingstage': financingsyage[e.detail.value]
-	// 	})
-	// },
+	c_nameInput(e) {
+		this.setData({
+			'companyInfo.c_name': e.detail.value
+		})
+	},
+	c_shortnameInput(e) {
+		this.setData({
+			'companyInfo.c_shortname': e.detail.value
+		})
+	},
+	districtInput(e){
+		this.setData({
+			'companyInfo.district': e.detail.value
+		})
+	},
+	addressInput(e){
+		this.setData({
+			'companyInfo.address': e.detail.value
+		})
+	},
+	toWorkplace() {
+		wx.navigateTo({
+			url: `../workplace/workplace?city=${this.data.companyInfo.city}&flag=${'companyInfo_city'}`
+		})
+	},
+	
 	save: function() {
 		//wx.request
 		var _this = this;
-		event.emit('resumeChanged', {
-			key: 'companyInfo',
-			value: _this.data.userInfo
-		})
 		wx.navigateBack({});
 	}
 })

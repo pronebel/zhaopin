@@ -1,23 +1,16 @@
 package com.demo.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
 
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.model.*;
-import com.demo.util.HttpRequest;
 import com.demo.controller.LoginController;
 import com.demo.service.SeekerService;
 
@@ -54,6 +47,24 @@ public class SeekerController {
 		System.out.println(s.getSex());
 		s.setOpenid(openid);
 		return ss.updateSeeker(s);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/updateSeekerName"},method=RequestMethod.POST)
+	public boolean updateSeekerName(String name,String openid,HttpServletRequest req){
+		Seeker s=new Seeker();
+		s.setName(name);
+		s.setOpenid(openid);
+		return ss.updateSeekerName(s);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/updateSeekerAvatar"},method=RequestMethod.POST)
+	public boolean updateSeekerAvatar(String avatarUrl,String openid,HttpServletRequest req){
+		Seeker s=new Seeker();
+		s.setAvatarUrl(avatarUrl);
+		s.setOpenid(openid);
+		return ss.updateAvatar(s);
 	}
 	
 	@ResponseBody

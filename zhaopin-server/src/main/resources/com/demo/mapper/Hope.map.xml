@@ -35,6 +35,10 @@
 			description=#{otherDescription}
 		where resume_id=#{resume_id}
 	</update>
+	<delete id='deleteHope'>
+		delete from <include refid="TableName" />
+		where resume_id=#{resume_id}
+	</delete>
 </mapper>
 
 <!-- parameterType:使用的参数类型

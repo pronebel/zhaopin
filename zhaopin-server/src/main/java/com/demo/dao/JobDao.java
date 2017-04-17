@@ -39,10 +39,10 @@ public class JobDao extends BaseDao<Job>{
 		return jl;
 	}
 	
-	public List<Job> getIndexSearch(String key,int startIndex,int limitCount){
+	public List<Job> getIndexSearch(JSON json,int startIndex,int limitCount){
 		String sn=getIbatisMapperNamespace()+".getIndexSearch";
 		RowBounds rb=new RowBounds(startIndex,limitCount);
-		return getSqlSessionTemplate().selectList(sn,key,rb);
+		return getSqlSessionTemplate().selectList(sn,json,rb);
 	}
 	
 	public List<Job> searchJob(JSON json,int startIndex,int limitCount){

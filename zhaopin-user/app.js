@@ -75,14 +75,6 @@ App({
             typeof cb == 'function' && cb();
         })
     },
-    connectSocket() {
-        ws.open({
-            openid: this.globalData.session.openid
-        });
-        ws.on((res) => {
-            console.log(res);
-        });
-    },
     checkSession() {
         let that = this;
         wx.checkSession({
@@ -194,7 +186,8 @@ App({
         }
     },
     getCollectionLength(cb) {
-        let collectionLength = this.globalData.collectionLength || wx.getStorageSync('collectionLength');
+        this.globalData.collectionLength = wx.getStorageSync('collectionLength');
+        let collectionLength = this.globalData.collectionLength;
         if (collectionLength) {
             typeof cb == 'function' && cb(collectionLength)
         } else {
@@ -265,6 +258,26 @@ App({
                 hiddenLoader: true
             })
         }, 600)
+    },
+    connectSocket() {
+        ws.open({
+            openid: this.globalData.session.openid
+        });
+        ws.on((res) => {
+            console.log(res);
+            this.wsHandler(JSON.parse(res.data));
+        });
+    },
+    wsHandler(obj) {
+        let { action } = obj;
+        //action是int型参数 0代表有简历状态信息 1代表有职位邀请信息 2代表有面试邀请信息
+        if (action == 0) {
+            event.emit('ws_resume_status_update');
+        } else if (action == 1) {
+            event.emit('ws_job_invication_update');
+        } else if (action == 2) {
+            event.emit('ws_interview_update');
+        }
     },
     globalData: {
         userInfoFromWX: null,

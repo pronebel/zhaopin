@@ -31,6 +31,11 @@
 		where id=#{id}
 	</delete>
 	
+	<delete id='deleteHonors'>
+		delete from <include refid='TableName' />
+		where resume_id=#{resume_id}
+	</delete>
+	
 	<insert id='addHonor' parameterType="com.demo.model.Honor">
 		insert into <include refid="TableName" />
 		(resume_id,date,name,prize)

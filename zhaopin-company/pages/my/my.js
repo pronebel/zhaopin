@@ -10,9 +10,14 @@ Page({
 		}
 	},
 	onLoad: function() {
-		app.getUserInfo((data) => {
+		app.getUserInfoFromWX((data) => {
 			this.setData({
 				userInfoFromWX: data
+			})
+		})
+		app.getUserInfo((data) => {
+			this.setData({
+				userInfo: data
 			})
 		})
 	},

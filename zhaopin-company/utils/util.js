@@ -1,3 +1,5 @@
+﻿let Promise = require('../lib/es6-promise.min.js').Promise;
+
 var QQMapWX = require('qqmap-wx-jssdk.min.js');
 
 // 实例划API核心类
@@ -31,18 +33,44 @@ function formatNumber(n) {
     return n[1] ? n : '0' + n
 }
 
+function getLocation(app, cb) {
+    wx.getLocation({
+        success: function(res) {
+            console.log(res);
+            var location = res.latitude + ',' + res.longitude;
+            wx.request({
+                url: 'https://apis.map.qq.com/ws/geocoder/v1/',
+                data: {
+                    location: location,
+                    key: '7YHBZ-KIT3W-R5BRE-RNQUQ-NAOCE-M7BVE'
+                },
+                method: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    app.globalData.location = res.data.result.address_component.city.substring(0, res.data.result.address_component.city.length - 1);
+                    wx.setStorageSync('location', app.globalData.location);
+                    typeof cb == 'function' && cb();
+                },
+                fail: function() {
+                    typeof cb == 'function' && cb();
+                }
+            })
+        }
+    })
+}
+
 /**
  * @param  {[obj]} app
  * @return {[string]}location
  */
-function getLocationAddress(app) {
+function getWorkplace(app, cb) {
     wx.getLocation({
         //      type:'gcj02',
         success: function(res) {
             console.log(res);
             var location = res.latitude + ',' + res.longitude;
             wx.request({
-                url: 'http://apis.map.qq.com/ws/geocoder/v1/',
+                url: 'https://apis.map.qq.com/ws/geocoder/v1/',
                 data: {
                     location: location,
                     key: '7YHBZ-KIT3W-R5BRE-RNQUQ-NAOCE-M7BVE'
@@ -52,11 +80,13 @@ function getLocationAddress(app) {
                     console.log(res);
                     app.globalData.location = res.data.result.address_component.city.substring(0, res.data.result.address_component.city.length - 1);
                     //默认期待工作地点为当地
-                    if (app.globalData.workplaceCity == '') {
-                        app.globalData.workplaceCity = app.globalData.location;
-                        app.globalData.workplaceDistrict = app.globalData.location;
-                        wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
-                        wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+                    if (!app.globalData.workplace) {
+                        app.globalData.workplace = {
+                            city: app.globalData.location,
+                            district: app.globalData.location
+                        }
+                        wx.setStorageSync('workplace', app.globalData.workplace);
+                        typeof cb == 'function' && cb();
                     }
                 }
             })
@@ -64,13 +94,15 @@ function getLocationAddress(app) {
         fail: function() {
             //当用户拒绝授权时,采用默认地点------全国
             console.log('用户拒绝授权获取当前地址,采用默认地点---全国')
-            app.globalData.location = '全国';
+
             //默认期待工作地点为当地
-            if (app.globalData.workplaceCity == '') {
-                app.globalData.workplaceCity = app.globalData.location;
-                app.globalData.workplaceDistrict = app.globalData.location;
-                wx.setStorageSync('workplaceCity', app.globalData.workplaceCity);
-                wx.setStorageSync('workplaceDistrict', app.globalData.workplaceDistrict);
+            if (!app.globalData.workplace) {
+                app.globalData.workplace = {
+                    city: app.globalData.location,
+                    district: app.globalData.location
+                }
+                wx.setStorageSync('workplace', app.globalData.workplace);
+                typeof cb == 'function' && cb();
             }
         }
     })
@@ -182,12 +214,127 @@ function inArray(value, array) {
     return -1;
 }
 
+/**
+ * [ajax description] 发起网络请求 
+ * @param  {[type]} options.url     [description]
+ * @param  {[type]} options.method: 'GET'         [description]
+ * @param  {[type]} options.data:   {}          [description]
+ * @return {[type]}                 [description] 返回promise对象
+ */
+function ajax({
+    url,
+    method = 'GET',
+    data = {},
+}) {
+    return new Promise((resolve, reject) => {
+        wx.request({
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset="UTF-8"',
+                'Cookie': 'JSESSIONID=' + wx.getStorageSync('session').sessionId
+            },
+            url: url,
+            method: method,
+            data: data,
+            success: function(res) {
+                if (res.statusCode > 400) {
+                    console.log('reject' + JSON.stringify(res));
+                    reject(res)
+                } else {
+                    resolve(res)
+                }
+            },
+            fail: function(error) {
+                console.log('reject' + JSON.stringify(error));
+                reject(error)
+            }
+        })
+    })
+}
+
+/**
+ * [ajaxCheckSession description] wx.checkSession
+ * @return {[type]} [description] 返回promise
+ */
+function ajaxCheckSession() {
+    return new Promise((resolve, reject) => {
+        wx.checkSession({
+            success: () => resolve(),
+            fail: () => reject()
+        })
+    })
+}
+
+/**
+ * [ajaxLogin description] wx.login
+ * @return {[type]} [description] 返回promise
+ */
+function ajaxLogin() {
+    return new Promise((resolve, reject) => {
+        wx.login({
+            success: function(res) {
+                resolve(res)
+            },
+            fail: function(res) {
+                reject(res)
+            }
+        })
+    })
+}
+
+function checkMobile(phone) {
+    let reg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+    if (!phone) {
+        console.log(1);
+        return true;
+    } else {
+        return reg.test(phone) ? true : false;
+    }
+}
+
+function checkEmail(email) {
+    let reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    if (!email) {
+        console.log(1);
+        return true;
+    } else {
+        return reg.test(email) ? true : false;
+    }
+}
+
+/**
+ * [regStrToArr description] 将字符串转化成数组 ',.:"/?'等符号视为停顿
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description] array
+ */
+function regStrToArr(str) {
+    let regex = /[\！|\……|\—|\？|\、|\。|\】|\【|\，|\；|\’|\‘|\：|\~|\`|\!|\@|\$|\%|\^|\&|\*|\(|\)|\-|\_|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
+    str = str.replace(regex, ' '); //将特殊符号转化成空格
+    let arr = str.split(/\s+/);
+    return arr.filter((val) => {
+        return val != '';
+    })
+}
+
+String.prototype.dateFilter = function() {
+    let date = this.substring(0, 10);
+    let time = this.substring(11, this.length);
+    let now_date = formatDate(new Date());
+    return date == now_date ?
+        time : date.substring(5, 10)
+};
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
-    getLocationAddress: getLocationAddress,
+    getLocation: getLocation,
+    getWorkplace: getWorkplace,
     getCityList: getCityList,
     getDistrictByCityName: getDistrictByCityName,
     inArray: inArray,
-    isEmptyObject: isEmptyObject
+    isEmptyObject: isEmptyObject,
+    ajax: ajax,
+    ajaxCheckSession: ajaxCheckSession,
+    ajaxLogin: ajaxLogin,
+    checkMobile: checkMobile,
+    checkEmail: checkEmail,
+    regStrToArr: regStrToArr
 }

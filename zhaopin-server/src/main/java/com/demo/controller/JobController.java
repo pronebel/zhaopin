@@ -26,8 +26,10 @@ public class JobController {
 	
 	@ResponseBody
 	@RequestMapping("/getIndexSearch")
-	public List<Job> getIndexSearch(String key,int startIndex,int limitCount){
-		return js.getIndexSearch(key,startIndex,limitCount);
+	public List<Job> getIndexSearch(String searchConfig,int startIndex,int limitCount){
+		JSON json = JSONObject.fromObject(searchConfig);
+		System.out.println(json);
+		return js.getIndexSearch(json,startIndex,limitCount);
 	}
 	
 	@ResponseBody

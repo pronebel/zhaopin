@@ -34,7 +34,7 @@
         </view>
         <view class="item-2 flexbox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
             <view class="logo">
-                <image src="{{jobDetail.company.logo || '../../images/_logo.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                <image src="{{jobDetail.company.logo || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
             </view>
             <view class="companyMsg">
                 <view style="color:#353535;font-size:14px;">{{jobDetail.company.c_name_short}}</view>
@@ -107,34 +107,71 @@
             </view>
             <view class="flexbox">
                 <view>
-                    <image src="../../images/_logo.png" style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
+                    <image src="{{jobDetail.hr.avatarUrl || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
                 </view>
                 <view class="publisherDetail">
-                    <text class="_block publisherName">it-hr</text>
-                    <text class="_block">所属部门</text>
+                    <text class="_block publisherName">{{jobDetail.hr.name}}</text>
+                    <text class="_block">{{jobDetail.hr.job}}</text>
                 </view>
             </view>
         </view>
     </view>
-    <view class='box'>
+    <view class='box' wx:if='{{comment.length>0}}'>
         <view class="item">
-            <view class='item-top'>
+            <view class='item-top' style='margin-bottom: 0px'>
                 <icon class="iconfont icon-edit1"></icon>
                 <text>面试评价</text>
             </view>
+            <view wx:for='{{comment}}'>
+                <view class='animated fadeInRight' style='{{index!=comment.length-1?"border-bottom: 1rpx solid #eee":""}}'>
+                    <view class='_flex' style='flex-direction: row;padding: 15rpx 0px;'>
+                        <view wx:if='{{item.anonymity}}' style='margin-right: 15rpx;'>
+                            <image background-size="cover" src="../../images/avatar.png" style='height:90rpx;width:90rpx;border-radius: 45rpx;' />
+                        </view>
+                        <view wx:else style='margin-right: 15rpx;'>
+                            <image background-size="cover" src="{{item.seeker.avatarUrl || '../../images/avatar.png'}}" style='height:90rpx;width:90rpx;border-radius: 45rpx;' />
+                        </view>
+                        <view style='flex-grow: 1;height: 90rpx;'>
+                            <view wx:if='{{item.anonymity}}'>
+                                <view style='font-size: 38rpx;color:#353535'>匿名</view>
+                            </view>
+                            <view wx:else>
+                                <view style='font-size: 38rpx;color:#353535'>{{item.seeker.name}}</view>
+                            </view>
+                            <view class='view-text'>
+                                <text>描述符合:</text>
+                                <text class='color-text'>{{item.detail_conform_comment}}</text>
+                                <text>面试官:</text>
+                                <text class='color-text'>{{item.hr_comment}}</text>
+                                <text>公司:</text>
+                                <text class='color-text'>{{item.company_comment}}</text>
+                            </view>
+                        </view>
+                        <view class='top-right' style='font-size:24rpx;color:#b2b2b2'>
+                            {{item.comment_date_time_filter}}
+                        </view>
+                    </view>
+                    <view class='content' style='padding:15rpx 0px 30rpx 0px;'>
+                        {{item.content}}
+                    </view>
+                </view>
+            </view>
+            <button class='loadmore' type='default' wx:if='{{!comment_disable}}' bindtap='loadmore'>
+                查看更多评价
+            </button>
         </view>
     </view>
     <view class='box box-last' style='background: rgb(239,239,244)'>
     </view>
     <view class='box box-last box-fixed'>
-    	<view class='r-content' data-target='s1' bindtap='judge' wx:if='{{!hadDelivered}}'>
-	        <view class="item footer" >
-	            <icon class="iconfont icon-send flyaway {{sending?'popUp':''}}"></icon>
-	            发送简历
-	        </view>
-	        <view class="ripple" style="{{ripple.s1}}"></view>
-	    </view>
-        <view class="item footer disable" wx:if='{{hadDelivered}}' >
+        <view class='r-content' data-target='s1' data-flag='fixed' bindtap='judge' wx:if='{{!hadDelivered}}'>
+            <view class="item footer">
+                <icon class="iconfont icon-send flyaway {{sending?'popUp':''}}"></icon>
+                发送简历
+            </view>
+            <view class="ripple" style="{{ripple.s1}}"></view>
+        </view>
+        <view class="item footer disable" wx:if='{{hadDelivered}}'>
             已投递
         </view>
     </view>
