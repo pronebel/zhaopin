@@ -32,7 +32,7 @@ public class CompanyController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/updateEducation")
+	@RequestMapping("/updateCompany")
 	public boolean updateCompany(String company,HttpServletRequest req){
 		JSONObject jsStr = JSONObject.fromObject(company);
 		Company c=(Company)JSONObject.toBean(jsStr,Company.class);
@@ -40,7 +40,7 @@ public class CompanyController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/deleteEducation")
+	@RequestMapping("/deleteCompany")
 	public boolean deleteEducation(long id,HttpServletRequest req){
 		Company c=new Company();
 		c.setId(id);

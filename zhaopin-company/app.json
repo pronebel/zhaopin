@@ -12,7 +12,8 @@
     "pages/search/search",
     "pages/addPosition/addPosition",
     "pages/publishedPosition/publishedPosition",
-    "pages/stopedPostion/stopedPosition"
+    "pages/stopedPostion/stopedPosition",
+    "pages/workplace/workplace"
   ],
   "window":{
     "backgroundTextStyle":"light",

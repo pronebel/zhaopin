@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+/* pages/msg/jobInvitationMsg/invication/invication.wxss */
+=======
 @import "../../../../common/flyaway.wxss";
 
 page {
@@ -259,3 +262,4 @@ view {
 	color: #c3cbd6 !important;
 	background-color: rgb(239,239,244) !important;
 }
+>>>>>>> 7c3b5d26c4576ca14b0248eda920654be896fd81
