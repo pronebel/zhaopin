@@ -13,7 +13,6 @@ Page({
         this.getCollections();
     },
     getCollections() {
-
         $.ajax({
             url: `${server}/collection/getCollections`,
             data: {

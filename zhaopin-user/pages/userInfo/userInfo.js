@@ -39,6 +39,8 @@ Page({
 					})
 				})
 			}
+
+			//	app.hiddenLoader.call(this);
 			app.hiddenLoader(this);
 		})
 
