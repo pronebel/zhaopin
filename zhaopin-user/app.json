@@ -1,12 +1,9 @@
 {
     "pages": [
         "pages/index/index",
-<<<<<<< HEAD
         "pages/resume/resume",
         "pages/search/search",
-=======
         "pages/user/user",
->>>>>>> f2d505e0de32c5496cf0a156c664db59f3d4e412
         "pages/msg/msg",
         "pages/resume/resume",
         "pages/search/search",
