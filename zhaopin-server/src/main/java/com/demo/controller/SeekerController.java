@@ -50,6 +50,24 @@ public class SeekerController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value={"/updateSeekerName"},method=RequestMethod.POST)
+	public boolean updateSeekerName(String name,String openid,HttpServletRequest req){
+		Seeker s=new Seeker();
+		s.setName(name);
+		s.setOpenid(openid);
+		return ss.updateSeekerName(s);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value={"/updateSeekerAvatar"},method=RequestMethod.POST)
+	public boolean updateSeekerAvatar(String avatarUrl,String openid,HttpServletRequest req){
+		Seeker s=new Seeker();
+		s.setAvatarUrl(avatarUrl);
+		s.setOpenid(openid);
+		return ss.updateAvatar(s);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value={"/updateHope_job"},method=RequestMethod.POST)
 	public boolean updateHope_job(String hope_job,String openid,HttpServletRequest req){
 		Seeker s=new Seeker();

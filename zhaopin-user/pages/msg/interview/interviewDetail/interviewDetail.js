@@ -5,14 +5,15 @@ let {
 let $ = require('../../../../utils/util.js');
 let event = require('../../../../utils/event.js');
 let loop = require('../../../../utils/event-loop.js');
-let {
-    ripple
-} = require('../../../../utils/ripple.js');
+let { ripple } = require('../../../../utils/ripple.js');
 
 Page({
     data: {
         loading: true,
-        hiddenLoad: false
+        hiddenLoad: false,
+        ripple: {
+            s0: ''
+        }
     },
     onLoad(options) {
         let id = options.id;
@@ -20,6 +21,14 @@ Page({
             return;
         }
         this.getInterviewById(id)
+        event.on('comment', this, () => {
+            this.setData({
+                'interviewDetail.had_commented': true
+            })
+        })
+    },
+    onUnload() {
+        event.remove('comment', this);
     },
     getInterviewById(id, cb) {
         $.ajax({
@@ -30,19 +39,23 @@ Page({
             method: 'GET'
         }).then((res) => {
             if (res.statusCode == 200) {
-                console.log(1);
-                if (res.data.date_time) {
-                    res.data.date_time_filter = res.data.date_time.substring(0, 16);
-                }
-                this.setData({
-                    interviewDetail: res.data
+                let obj = res.data;
+                Object.keys(obj).forEach((val) => {
+                    if (val.match(/time/g)) {
+                        if (obj[val]) {
+                            obj[val + '_filter'] = obj[val].substring(0, 16);
+                        }
+                    }
                 })
-                if (!res.data.seeker_read) {
+                this.setData({
+                    interviewDetail: obj
+                })
+                if (!obj.seeker_read) {
                     this.setRead(id);
                 }
             }
-            app.hiddenLoad(this);
-        }).catch(error => app.hiddenLoad(this))
+            app.hiddenLoader(this);
+        }).catch(error => app.hiddenLoader(this))
     },
     setRead(id) {
         $.ajax({
@@ -63,4 +76,10 @@ Page({
             }
         })
     },
+    navigateTo(e) {
+        ripple.call(this, e);
+        wx.navigateTo({
+            url: e.currentTarget.dataset.url
+        })
+    }
 })

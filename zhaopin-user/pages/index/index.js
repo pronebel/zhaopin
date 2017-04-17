@@ -4,9 +4,7 @@ const FAST_SPEED_SECOND = 300;
 const FAST_SPEED_DISTANCE = 5;
 const FAST_SPEED_EFF_Y = 50;
 let $ = require('../../utils/util.js');
-let {
-    server
-} = require('../../configs/serverConfig.js');
+let { server } = require('../../configs/serverConfig.js');
 let event = require('../../utils/event.js');
 Page({
     data: {
@@ -19,6 +17,7 @@ Page({
             offsetTop: 0,
         },
         setHope_job: false,
+        modal_input_focus: false,
         no_hope_job: false,
         hiddenLoader: true,
         limitCount: 10
@@ -36,6 +35,7 @@ Page({
             this.data.ui.menuWidth = this.windowWidth * MENU_WIDTH_SCALE;
             this.data.ui.offsetLeft = 0;
             this.data.ui.windowWidth = res.windowWidth;
+            console.log(res.windowHeight);
             this.setData({
                 ui: this.data.ui,
                 windowHeight: res.windowHeight
@@ -56,6 +56,26 @@ Page({
             } else {
                 this.getIndexSearch();
             }
+            if (data.avatarUrl == 'null' || data.avatarUrl == 'undefined' || !data.avatarUrl) {
+                app.getUserInfoFromWX(function(data) {
+                    if (data != 'null' && data != 'undefined' && data && data.avatarUrl) {
+                        this.updateSeekerAvatar(data.avatarUrl, function() {
+                            app.globalData.userInfo.avatarUrl = data.avatarUrl
+                            wx.setStorageSync('userInfo', app.globalData.userInfo)
+                        })
+                    }
+                }.bind(this))
+            }
+            if (data.name == 'null' || data.name == 'undefined' || !data.name) {
+                app.getUserInfoFromWX(function(data) {
+                    if (data != 'null' && data != 'undefined' && data && data.nickName) {
+                        this.updateSeekerName(data.nickName, function() {
+                            app.globalData.userInfo.name = data.nickName
+                            wx.setStorageSync('userInfo', app.globalData.userInfo)
+                        })
+                    }
+                }.bind(this))
+            }
         })
         event.on('userInfoChanged', this, (data) => {
             this.setData({
@@ -73,11 +93,39 @@ Page({
         event.remove('userInfoChanged', this);
         event.remove('cityChanged', this);
     },
+    updateSeekerAvatar(data, cb) {
+        $.ajax({
+            url: `${server}/seeker/updateSeekerAvatar`,
+            data: {
+                avatarUrl: data,
+                openid: app.globalData.userInfo.openid
+            },
+            method: 'POST'
+        }).then((res) => {
+            if (res.statusCode == 200 && res.data) {
+                typeof cb == 'function' && cb();
+            }
+        })
+    },
+    updateSeekerName(data, cb) {
+        $.ajax({
+            url: `${server}/seeker/updateSeekerName`,
+            data: {
+                name: data,
+                openid: app.globalData.userInfo.openid
+            },
+            method: 'POST'
+        }).then((res) => {
+            if (res.statusCode == 200 && res.data) {
+                typeof cb == 'function' && cb();
+            }
+        })
+    },
     confirm() {
         let {
-            hope_job
-        } = this.data.userInfo;
-        if (hope_job == 'null' || hope_job == 'undefined' || !hope_job) {
+            inputkey
+        } = this.data;
+        if (inputkey == 'null' || inputkey == 'undefined' || !inputkey) {
             return;
         }
         $.ajax({
@@ -85,13 +133,15 @@ Page({
             method: 'POST',
             data: {
                 openid: app.globalData.session.openid,
-                hope_job: hope_job
+                hope_job: inputkey
             }
         }).then((res) => {
             if (res.statusCode == 200) {
                 this.setData({
                     setHope_job: false,
-                    no_hope_job: false
+                    modal_input_focus: false,
+                    no_hope_job: false,
+                    'userInfo.hope_job': inputkey
                 })
                 wx.setStorageSync('userInfo', this.data.userInfo);
                 app.globalData.userInfo = this.data.userInfo;
@@ -103,17 +153,29 @@ Page({
     },
     cancel() {
         this.setData({
-            setHope_job: false
+            setHope_job: false,
+            modal_input_focus: false,
         })
     },
     input(e) {
         this.setData({
-            'userInfo.hope_job': e.detail.value
+            'inputkey': e.detail.value
+        })
+    },
+    focus() {
+        this.setData({
+            modal_input_focus: true
+        })
+    },
+    blur() {
+        this.setData({
+            modal_input_focus: false
         })
     },
     setHope_job() {
         this.setData({
             setHope_job: true,
+            modal_input_focus: true
         })
         if (this.data.userInfo.hope_job == 'null' || this.data.userInfo.hope_job == 'undefined' || !this.data.userInfo.hope_job) {
             this.setData({
@@ -158,8 +220,13 @@ Page({
                         jobList: res.data
                     })
                 }
+                let ripple = {};
+                this.data.jobList.forEach((val, index) => {
+                    ripple["s" + index] = '';
+                })
                 this.setData({
-                    searched: true
+                    searched: true,
+                    ripple: ripple
                 })
                 if (res.data.length < 10) {
                     this.setData({
@@ -195,23 +262,94 @@ Page({
             })
         })
     },
-    longtapHandle: function() {
-        wx.showActionSheet({
-            itemList: ['不感兴趣', '收藏'],
-            itemColor: '#353535',
-            success: function() {
-                wx.showToast({
-                    title: '操作成功',
-                    icon: 'success'
-                })
-            }
-        })
-    },
+    // handlerStart(e) {
+    //     let {
+    //         clientX,
+    //         clientY
+    //     } = e.touches[0];
+    //     this.tapStartX = clientX;
+    //     this.tapStartY = clientY;
+    //     this.tapStartTime = e.timeStamp;
+    //     this.startX = clientX;
+    //     this.startY = clientY;
+    //     this.data.ui.tStart = true;
+    //     this.setData({
+    //         ui: this.data.ui
+    //     })
+    // },
+    // handlerMove(e) {
+    //     let {
+    //         clientX,
+    //         clientY
+    //     } = e.touches[0];
+    //     let {
+    //         ui
+    //     } = this.data;
+    //     let offsetX = this.startX - clientX;
+    //     let offsetY = this.startY - clientY;
+    //     this.startY = clientY;
+    //     this.startX = clientX;
+    //     if (Math.abs(offsetY) * 1.5 > Math.abs(offsetX))
+    //         return;
+    //     ui.offsetLeft -= offsetX;
+    //     // ui.offsetTop -= offsetY;
+    //     if (ui.offsetLeft <= 0) {
+    //         ui.offsetLeft = 0;
+    //     } else if (ui.offsetLeft >= ui.menuWidth) {
+    //         ui.offsetLeft = ui.menuWidth;
+    //     }
+    //     this.setData({
+    //         ui: ui
+    //     })
+    // },
+    // handlerEnd(e) {
+    //     this.data.ui.tStart = false;
+    //     this.setData({
+    //         ui: this.data.ui
+    //     })
+    //     let {
+    //         ui
+    //     } = this.data;
+    //     let {
+    //         clientX,
+    //         clientY
+    //     } = e.changedTouches[0];
+    //     let endTime = e.timeStamp;
+    //     let offsetX = this.startX - clientX;
+    //     let offsetY = this.startY - clientY;
+    //     if (Math.abs(offsetY) * 1.5 > Math.abs(offsetX))
+    //         return;
+    //     //快速滑动
+    //     if (endTime - this.tapStartTime <= FAST_SPEED_SECOND) {
+    //         //向左
+    //         if (this.tapStartX - clientX > FAST_SPEED_DISTANCE) {
+    //             ui.offsetLeft = 0;
+    //         } else if (this.tapStartX - clientX < -FAST_SPEED_DISTANCE && Math.abs(this.tapStartY - clientY) < FAST_SPEED_EFF_Y) {
+    //             ui.offsetLeft = ui.menuWidth;
+    //         } else {
+    //             if (ui.offsetLeft >= ui.menuWidth / 2) {
+    //                 ui.offsetLeft = ui.menuWidth;
+    //             } else {
+    //                 ui.offsetLeft = 0;
+    //             }
+    //         }
+    //     } else {
+    //         if (ui.offsetLeft >= ui.menuWidth / 2) {
+    //             ui.offsetLeft = ui.menuWidth;
+    //         } else {
+    //             ui.offsetLeft = 0;
+    //         }
+    //     }
+    //     this.setData({
+    //         ui: ui
+    //     })
+    // },
     handlerStart(e) {
         let {
             clientX,
             clientY
         } = e.touches[0];
+        console.log(e);
         this.tapStartX = clientX;
         this.tapStartY = clientY;
         this.tapStartTime = e.timeStamp;
@@ -237,7 +375,6 @@ Page({
         if (Math.abs(offsetY) * 1.5 > Math.abs(offsetX))
             return;
         ui.offsetLeft -= offsetX;
-        // ui.offsetTop -= offsetY;
         if (ui.offsetLeft <= 0) {
             ui.offsetLeft = 0;
         } else if (ui.offsetLeft >= ui.menuWidth) {
@@ -260,10 +397,6 @@ Page({
             clientY
         } = e.changedTouches[0];
         let endTime = e.timeStamp;
-        let offsetX = this.startX - clientX;
-        let offsetY = this.startY - clientY;
-        if (Math.abs(offsetY) * 1.5 > Math.abs(offsetX))
-            return;
         //快速滑动
         if (endTime - this.tapStartTime <= FAST_SPEED_SECOND) {
             //向左
@@ -289,30 +422,27 @@ Page({
             ui: ui
         })
     },
-    shadowcatch: function() {
-        return;
-    },
-    showScan: function() {
-        wx.scanCode({
-            success: function(res) {
-                if (res.result) {
-                    try {
-                        let {
-                            uid,
-                            action
-                        } = JSON.parse(res.result);
-                        if (action == 'pc') {
-                            wx.navigateTo({
-                                url: `../editResume/scanCode/scanCode?uid=${uid}`
-                            })
-                        }
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-            }
-        })
-    },
+    // showScan: function() {
+    //     wx.scanCode({
+    //         success: function(res) {
+    //             if (res.result) {
+    //                 try {
+    //                     let {
+    //                         uid,
+    //                         action
+    //                     } = JSON.parse(res.result);
+    //                     if (action == 'pc') {
+    //                         wx.navigateTo({
+    //                             url: `../editResume/scanCode/scanCode?uid=${uid}`
+    //                         })
+    //                     }
+    //                 } catch (e) {
+    //                     console.log(e);
+    //                 }
+    //             }
+    //         }
+    //     })
+    // },
     handlerPageTap(e) {
         let {
             ui

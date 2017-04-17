@@ -30,4 +30,8 @@ public class HonorService {
 	public boolean addHonor(Honor e){
 		return hd.addHonor(e);
 	}
+	
+	public void deleteHonors(Long resume_id){
+		hd.deleteHonors(resume_id);
+	}
 }

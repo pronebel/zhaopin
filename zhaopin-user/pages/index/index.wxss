@@ -1,215 +1,223 @@
-page{
-	background: #fff;
-	height: 100%;
+page {
+    background: #fff;
+    height: 100%;
 }
 
-.header{
-	height:43px;
-	width: 100%;
-	z-index:11;
-	background:#fff;
-	box-shadow: 0 2px 4px #aaa;
+.header {
+    height: 43px;
+    width: 100%;
+    z-index: 11;
+    background: #fff;
+    box-shadow: 0 2px 4px #aaa;
 }
 
-.header .iconfont{
-	line-height: 43px;
-	margin:0px 15px;
+.header .iconfont {
+    line-height: 43px;
+    margin: 0px 15px;
 }
 
-.search-box{
-	flex-grow: 1;
-	background:rgb(239,239,244);
-	margin:6px 0px;
-	border-radius: 16px;
+.search-box {
+    flex-grow: 1;
+    background: rgb(239, 239, 244);
+    margin: 6px 0px;
+    border-radius: 16px;
 }
 
-.search-box .icon-search{
-	line-height: 31px;
-	margin-right: 10rpx;
-	display: inline-block;
-	color:#888888;
-}
-.search{
-	display: inline-block;
-	line-height: 31px;
-	color:#888888;
-}
-.list{
-	width:100%;
+.search-box .icon-search {
+    line-height: 31px;
+    margin-right: 10rpx;
+    display: inline-block;
+    color: #888888;
 }
 
-.item{
-	width:100%;
-	padding:25rpx 25rpx 0 25rpx;
-	box-sizing: border-box;
-	background:#fff;
+.search {
+    display: inline-block;
+    line-height: 31px;
+    color: #888888;
 }
 
-.logo{
-	float:left;
-	width:175rpx;
-	/*background:rgba(0,0,0,0.1);*/
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	height:100%;
+.list {
+    width: 100%;
 }
 
-.details{
-	float:left;
-	width:525rpx;
-	height:100%;
-	padding-bottom: 20rpx;
-	border-bottom: 1rpx solid rgba(50,40,50,0.1);
+.item {
+    width: 100%;
+    padding: 25rpx 25rpx 0 25rpx;
+    box-sizing: border-box;
+    background: #fff;
 }
 
-.job-title{
-	font-weight:700;
-	font-size: 30rpx;
-	float:left;
+.logo {
+    float: left;
+    width: 175rpx;
+    /*background:rgba(0,0,0,0.1);*/
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
 }
 
-.job-salary{
-	font-weight:700;
-	color:#ff9a00;
-	font-weight:600;
-	float:right;
+.details {
+    float: left;
+    width: 525rpx;
+    height: 100%;
+    padding-bottom: 20rpx;
+    border-bottom: 1rpx solid rgba(50, 40, 50, 0.1);
 }
 
-.company-name{
-	color:#353535;
+.job-title {
+    font-weight: 700;
+    font-size: 30rpx;
+    float: left;
 }
 
-.translucence-msg{
-	color: #888888;
+.job-salary {
+    color: #ff9a00;
+    font-weight: 700;
+    float: right;
 }
 
-.work-place{
-
+.company-name {
+    color: #353535;
+    font-size: 30rpx;
 }
 
-.internship,.degree,.company-type{
-	margin-left:15rpx;
+.translucence-msg {
+    color: #888888;
 }
 
-.release-date{
-	color:#b2b2b2;
+.translucence-msg text {
+    font-size: 28rpx;
+}
+
+.work-place {}
+
+.district,
+.degree,
+.company-type,
+.scale {
+    margin-left: 15rpx;
+}
+
+.release-date {
+    color: #b2b2b2;
 }
 
 .mpage {
-  z-index: 10;
-  background: #fff;
-  position: absolute;
+    z-index: 10;
+    background: #fff;
+    position: absolute;
 }
 
-.shadow{
-	position:fixed;
-	z-index:20;
-	height:100%;
-	background:#000;
+.shadow {
+    position: fixed;
+    z-index: 20;
+    height: 100%;
+    background: #000;
 }
+
 .withAnimate {
-  transition: all 300ms ease;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+    transition: left 300ms ease;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 .user {
-  position: fixed;
-  height:100%;
-  left: 0;
-  background-color: #fff;
-  box-sizing: border-box;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    background-color: #fff;
+    box-sizing: border-box;
 }
 
 .user .user-box {
-	height:100%;
-  	position: absolute;
-	top:0;
-	width: 100%;
-	box-sizing: border-box;
-	padding: 30px 0px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 0px;
 }
 
-.user-box view,.user-box text,.user-box scroll-view{
-	color:#dddddd;
+.user-box view,
+.user-box text,
+.user-box scroll-view {
+    color: #dddddd;
 }
 
-.avator-box{
-	border:1px solid #148FA4;
-	border-radius:29px;
-	width:58px;
-	height:58px;
-	box-sizing: border-box;
-	display: inline-block;
-	vertical-align: middle;
-	margin-right:40rpx;
+.avator-box {
+    border: 1px solid #148FA4;
+    border-radius: 29px;
+    width: 58px;
+    height: 58px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 40rpx;
 }
 
-.avator{
-	width:50px;
-	height:50px;
-	border-radius:25px;
-	margin:3px 0px 0px 3px;
+.avator {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 3px 0px 0px 3px;
 }
 
-.user-box-item{
-	border-bottom: 1rpx solid #148FA4;
-	margin:0px 30px;
+.user-box-item {
+    border-bottom: 1rpx solid #148FA4;
+    margin: 0px 30px;
 }
 
-.user-box .iconfont{
-	display: inline-block;
-	color:#a0c4f4;
-	margin-right: 30rpx;
+.user-box .iconfont {
+    display: inline-block;
+    color: #a0c4f4;
+    margin-right: 30rpx;
 }
 
-.icon-text{
-	line-height: 40px;
-	height:40px;
-	padding-right:12px;
+.icon-text {
+    line-height: 40px;
+    height: 40px;
+    padding-right: 12px;
 }
 
-.img-text{
-	margin:0px 20px 0px 20px;
-	padding-bottom: 20px;
+.img-text {
+    margin: 0px 20px 0px 20px;
+    padding-bottom: 20px;
 }
 
-.ctn{
-	font-size: 11px;
-	float: right;
+.ctn {
+    font-size: 11px;
+    float: right;
 }
 
-.mrt10{
-	margin-top: 10px;
+.mrt10 {
+    margin-top: 10px;
 }
 
-.user-box-item-last{
-	margin-bottom: 10px;
-	padding-left:10px;
-	margin:0px 20px;
-	padding-right: 22px;
+.user-box-item-last {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    margin: 0px 20px;
+    padding-right: 22px;
 }
 
-.config{
-	position: absolute;
-	bottom: 20px;
-	left:25px;
+.config {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
 }
 
-.footer-line{
-	box-sizing: border-box;
-	height: 1rpx;
-	background: #148FA4;
-	margin:10px 20px;
+.footer-line {
+    box-sizing: border-box;
+    height: 1rpx;
+    background: #148FA4;
+    margin: 10px 20px;
 }
 
-.line{
-	box-sizing: border-box;
-	height: 1px;
-	background: rgba(0,0,0,0);
-	border-top: 1rpx solid #148FA4;
-	margin:10px 30px;
+.line {
+    box-sizing: border-box;
+    height: 1px;
+    background: rgba(0, 0, 0, 0);
+    border-top: 1rpx solid #148FA4;
+    margin: 10px 30px;
 }

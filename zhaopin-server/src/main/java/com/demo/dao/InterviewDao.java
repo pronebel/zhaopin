@@ -35,4 +35,9 @@ public class InterviewDao extends BaseDao<Interview>{
 		String sm=getIbatisMapperNamespace()+".setRead";
 		return getSqlSessionTemplate().update(sm, id)==1?true:false;
 	}
+	
+	public boolean comment(Long id){
+		String sm=getIbatisMapperNamespace()+".comment";
+		return getSqlSessionTemplate().update(sm,id)==1?true:false;
+	}
 }

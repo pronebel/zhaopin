@@ -3,9 +3,11 @@
         <view class="iconfont icon-circle-edit"></view>
         <input class="input" value="{{education.school}}" placeholder="学校" placeholder-class="placeholder-class" bindinput='input' data-key='school' bindfocus='focus' bindblur='blur' />
         <icon type='warn' class='icon-warn' size='20' hidden='{{check.school}}'></icon>
-        <view class='msg-fill animated fadeInUp' wx:if='{{hint.school.length>0}}' hidden='{{!focus.school}}'>
-            <view wx:for='{{hint.school}}' class='one-line-text animated lightSpeedIn' hover='true' hover-start-time="10" hover-stay-time="300" hover-class="click-view" style='animation-delay:{{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s;' bindtap='setInput' data-key='school' data-index='{{index}}'>
-                {{item}}
+        <view class='animated fadeInUp msg-fill' wx:if='{{hint.school.length>0}}' hidden='{{!focus.school}}'>
+            <view style='max-height: 230px;overflow-y: auto; overflow-x: hidden;'>
+                <view wx:for='{{hint.school}}' class='one-line-text animated lightSpeedIn' hover='true' hover-start-time="10" hover-stay-time="300" hover-class="click-view" style='animation-delay:{{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s;' bindtap='setInput' data-key='school' data-index='{{index}}'>
+                    {{item}}
+                </view>
             </view>
         </view>
     </view>
@@ -14,8 +16,10 @@
         <input class="input" value="{{education.major}}" placeholder="专业" placeholder-class="placeholder-class" bindinput='input' data-key='major' bindfocus='focus' bindblur='blur' data-input='school' />
         <icon type='warn' class='icon-warn' size='20' hidden='{{check.major}}'></icon>
         <view class='msg-fill animated fadeInUp' wx:if='{{hint.major.length>0}}' hidden='{{!focus.major}}'>
-            <view wx:for='{{hint.major}}' class='one-line-text animated lightSpeedIn' hover='true' hover-start-time="10" hover-stay-time="300" hover-class="click-view" style='animation-delay:{{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s;' bindtap='setInput' data-key='major' data-index='{{index}}'>
-                {{item}}
+            <view style='max-height: 230px;overflow-y: auto; overflow-x: hidden;'>
+                <view wx:for='{{hint.major}}' class='one-line-text animated lightSpeedIn' hover='true' hover-start-time="10" hover-stay-time="300" hover-class="click-view" style='animation-delay:{{index*0.2}}s;-webkit-animation-delay:{{index*0.2}}s;' bindtap='setInput' data-key='major' data-index='{{index}}'>
+                    {{item}}
+                </view>
             </view>
         </view>
     </view>

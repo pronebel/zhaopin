@@ -4,11 +4,15 @@ public class Interview {
 	private Long id;
 	private Long job_id;
 	private String seeker_id;
-	private String date_time;
-	private boolean result;
+	private String interview_date_time;
+	private String set_interview_end_date_time;
+	private String interview_flag;
+	private String set_result_date_time;
+	private String result;
 	private String i_address;
 	private String other;
 	private boolean seeker_read;
+	private boolean had_commented;
 	private Job job;
 	public Long getId() {
 		return id;
@@ -28,10 +32,10 @@ public class Interview {
 	public void setSeeker_id(String seeker_id) {
 		this.seeker_id = seeker_id;
 	}
-	public boolean isResult() {
+	public String getResult() {
 		return result;
 	}
-	public void setResult(boolean result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 
@@ -47,12 +51,6 @@ public class Interview {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	public String getDate_time() {
-		return date_time;
-	}
-	public void setDate_time(String date_time) {
-		this.date_time = date_time;
-	}
 	public String getI_address() {
 		return i_address;
 	}
@@ -64,6 +62,36 @@ public class Interview {
 	}
 	public void setOther(String other) {
 		this.other = other;
+	}
+	public String getInterview_date_time() {
+		return interview_date_time;
+	}
+	public void setInterview_date_time(String interview_date_time) {
+		this.interview_date_time = interview_date_time;
+	}
+	public String getSet_interview_end_date_time() {
+		return set_interview_end_date_time;
+	}
+	public void setSet_interview_end_date_time(String set_interview_end_date_time) {
+		this.set_interview_end_date_time = set_interview_end_date_time;
+	}
+	public String getInterview_flag() {
+		return interview_flag;
+	}
+	public void setInterview_flag(String interview_flag) {
+		this.interview_flag = interview_flag;
+	}
+	public String getSet_result_date_time() {
+		return set_result_date_time;
+	}
+	public void setSet_result_date_time(String set_result_date_time) {
+		this.set_result_date_time = set_result_date_time;
+	}
+	public boolean isHad_commented() {
+		return had_commented;
+	}
+	public void setHad_commented(boolean had_commented) {
+		this.had_commented = had_commented;
 	}
 	
 }

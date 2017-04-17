@@ -46,6 +46,10 @@ public class SeekerDao extends BaseDao<Seeker>{
 		return getSqlSessionTemplate().update(sn, s)==1?true : false;
 	}
 	
+	public boolean updateSeekerName(Seeker s){
+		String sn=getIbatisMapperNamespace() + ".updateSeekerName";
+		return getSqlSessionTemplate().update(sn, s)==1?true : false;
+	}
 	public boolean updateHope_job(Seeker s){
 		String sn=getIbatisMapperNamespace() + ".updateHope_job";
 		return getSqlSessionTemplate().update(sn, s)==1?true : false;

@@ -30,4 +30,8 @@ public class ProjectService {
 	public boolean addProject(Project e){
 		return pd.addProject(e);
 	}
+	
+	public void deleteProjects(Long resume_id){
+		pd.deleteProjects(resume_id);
+	}
 }

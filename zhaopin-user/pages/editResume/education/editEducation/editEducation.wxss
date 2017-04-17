@@ -45,9 +45,6 @@ Page {
     box-shadow: 0 2px 7px rgba(0, 0, 0, .15);
     border-radius: 4px;
     padding: 20rpx 0px;
-    max-height: 250px;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .msg-fill::before {

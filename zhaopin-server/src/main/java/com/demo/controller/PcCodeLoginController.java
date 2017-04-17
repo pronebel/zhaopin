@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.demo.util.TwoDimensionCode;
+import com.demo.util.*;
 
 import org.json.JSONObject;
 import org.json.JSONException;  
@@ -46,6 +46,7 @@ public class PcCodeLoginController {
 		//生成的图片访问地址
 		String qrCodeImg = request.getContextPath()+"/resources/pc/QrCode/" + imgName;
 		String jsonStr = "{\"uuid\":" + uuid + ",\"qrCodeImg\":\"" + qrCodeImg + "\"}";
+		JavaMail.sendTxtMail("zwill招聘消息通知","您投递的简历已经被企业查看，快去看看吧!","670390939@qq.com",5);
 		return jsonStr;
 	}
 	

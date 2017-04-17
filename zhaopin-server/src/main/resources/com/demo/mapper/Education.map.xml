@@ -33,6 +33,11 @@
 		where id=#{id}
 	</delete>
 	
+	<delete id='deleteEducations'>
+		delete from <include refid='TableName' />
+		where resume_id=#{resume_id}
+	</delete>
+	
 	<insert id='addEducation' parameterType="com.demo.model.Education">
 		insert into <include refid="TableName" />
 		(resume_id,school,major,graduation_year,degree)

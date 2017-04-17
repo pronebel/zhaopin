@@ -35,4 +35,9 @@ public class EducationDao extends BaseDao<Education>{
 		String sn=getIbatisMapperNamespace() + ".addEducation";
 		return getSqlSessionTemplate().insert(sn, e)==1?true:false;
 	}
+	
+	public void deleteEducations(Long resume_id){
+		String sm=getIbatisMapperNamespace()+".deleteEducations";
+		getSqlSessionTemplate().delete(sm, resume_id);
+	}
 }

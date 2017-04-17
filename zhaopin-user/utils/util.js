@@ -315,9 +315,19 @@ function regStrToArr(str) {
     })
 }
 
+function onlyChinese(str) {
+    let regex = /^[\u4e00-\u9fa5]+$/;
+    let s = '';
+    for (let i = 0; i < str.length; i++) {
+        if (regex.test(str.charAt(i))) {
+            s += str.charAt(i)
+        }
+    }
+    return s;
+}
 String.prototype.dateFilter = function() {
     let date = this.substring(0, 10);
-    let time = this.substring(11, this.length);
+    let time = this.substring(11, 16);
     let now_date = formatDate(new Date());
     return date == now_date ?
         time : date.substring(5, 10)
@@ -336,5 +346,6 @@ module.exports = {
     ajaxLogin: ajaxLogin,
     checkMobile: checkMobile,
     checkEmail: checkEmail,
-    regStrToArr: regStrToArr
+    regStrToArr: regStrToArr,
+    onlyChinese: onlyChinese
 }

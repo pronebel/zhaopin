@@ -60,11 +60,15 @@ Page({
             })
             wx.setStorageSync('InvicationList', InvicationList)
         })
+        event.on('ws_job_invication_update', this, () => {
+            this.getInvicationUnread();
+        })
         this.getInvicationUnread();
     },
     onUnload() {
         event.remove('invicationRead', this);
         event.remove('setInvicationResult', this);
+        event.remove('ws_job_invication_update', this);
     },
     getInvicationUnread(cb) {
         $.ajax({

@@ -1,17 +1,22 @@
 {
     "pages": [
         "pages/index/index",
+<<<<<<< HEAD
         "pages/resume/resume",
         "pages/search/search",
+=======
+        "pages/user/user",
+>>>>>>> f2d505e0de32c5496cf0a156c664db59f3d4e412
         "pages/msg/msg",
+        "pages/resume/resume",
+        "pages/search/search",
         "pages/msg/resumeMsg/resumeMsg",
         "pages/msg/resumeMsg/deliverRecode/deliverRecode",
         "pages/editResume/editResume",
-        "pages/editResume/scanCode/scanCode",
         "pages/editResume/education/editEducation/editEducation",
-        "pages/user/user",
         "pages/msg/interview/interview",
         "pages/msg/interview/interviewDetail/interviewDetail",
+        "pages/msg/interview/interviewDetail/comment/comment",
         "pages/msg/jobInvitationMsg/jobInvitationMsg",
         "pages/msg/jobInvitationMsg/invication/invication",
         "pages/editResume/selfAssessment/selfAssessment",
@@ -23,10 +28,7 @@
         "pages/editResume/intership/editIntership/editIntership",
         "pages/editResume/project/project",
         "pages/editResume/project/editProject/editProject",
-        "pages/logs/logs",
-        "pages/searchResult/searchResult",
         "pages/workplace/workplace",
-        "pages/discover/discover",
         "pages/userInfo/userInfo",
         "pages/collect/collect",
         "pages/config/config",

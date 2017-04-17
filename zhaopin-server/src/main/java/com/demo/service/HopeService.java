@@ -23,4 +23,8 @@ public class HopeService {
 	public boolean newHope(Hope h){
 		return hd.newHope(h);
 	}
+	
+	public void deleteHope(Long resume_id){
+		hd.deleteHope(resume_id);
+	}
 }

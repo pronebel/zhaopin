@@ -6,10 +6,14 @@
 		<result property="job_id" column="job_id" jdbcType="BIGINT" />	
 		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />
 		<result property='seeker_read' column='seeker_read' jdbcType='BOOLEAN' />	
-		<result property="date_time" column="date_time" jdbcType="VARCHAR" />		
-		<result property="result" column="result" jdbcType="BOOLEAN" />	
+		<result property='had_commented' column='had_commented' jdbcType='BOOLEAN' />	
+		<result property="interview_date_time" column="interview_date_time" jdbcType="VARCHAR" />		
+		<result property="result" column="result" jdbcType="VARCHAR" />	
 		<result property="i_address" column="i_address" jdbcType="VARCHAR" />
 		<result property="other" column="other" jdbcType="VARCHAR" />
+		<result property="set_interview_end_date_time" column="set_interview_end_date_time" jdbcType="VARCHAR" />	
+		<result property="interview_flag" column="interview_flag" jdbcType="VARCHAR" />	
+		<result property="set_result_date_time" column="set_result_date_time" jdbcType="VARCHAR" />	
 		<association property="job" javaType="com.demo.model.Job" resultMap='Job'></association>
 	</resultMap>
 	<resultMap id='Job' type="com.demo.model.Job">
@@ -60,6 +64,12 @@
 	<update id='setRead'>
 		update <include refid='TableName' /> set
 		seeker_read=true 
+		where id=#{id}
+	</update>
+	
+	<update id='comment'>
+		update interview set
+		had_commented=true
 		where id=#{id}
 	</update>
 </mapper>

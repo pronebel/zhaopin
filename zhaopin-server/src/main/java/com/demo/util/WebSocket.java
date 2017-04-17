@@ -13,24 +13,26 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @ServerEndpoint(value = "/ws")
 public class WebSocket {
-	//与某个客户端的连接会话，需要通过它来给客户端发送数据
-    private Session session;
     
     private static Map<String,Session> sessions=new HashMap<String,Session>();
     private static Map<Session,String> keys=new HashMap<Session,String>();
 
 	@OnOpen
-    public void onOpen(Session session) throws IOException{
+    public void onOpen(Session session) throws IOException, JSONException{
     //    String id=java.net.URLDecoder.decode(session.getQueryString(),"utf-8");
 		String key=session.getRequestParameterMap().get("openid").get(0);
         WebSocket.sessions.put(key, session); //openid为key session为value
         WebSocket.keys.put(session, key);
         System.out.println("有新连接加入！:"+key);
-        sendMessage(session,"哦哦");
+//        JSONObject json=new JSONObject();
+//        json.put("action", 1);
+//        send(key,json.toString());
     }
      
     @OnClose
@@ -56,5 +58,12 @@ public class WebSocket {
     public void sendMessage(Session session, String message) throws IOException{
         session.getBasicRemote().sendText(message);
         //this.session.getAsyncRemote().sendText(message);
+    }
+    
+    public void send(String openid, String jsonmsg) throws IOException{
+    	Session s=WebSocket.sessions.get(openid);
+    	if(s!=null){
+    		sendMessage(s,jsonmsg);
+    	}
     }
 }

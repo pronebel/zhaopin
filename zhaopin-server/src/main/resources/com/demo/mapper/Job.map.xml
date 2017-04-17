@@ -97,16 +97,36 @@
 				</if>
 			</foreach>
 			<foreach collection="educations" item="key" index="index" open="" close=" " separator="">
-				and job.degree_limit like CONCAT('%',#{key},'%')
+				<if test='index==0'>
+					and job.degree_limit like CONCAT('%',#{key},'%')
+				</if>
+				<if test='index>0'>
+					or job.degree_limit like CONCAT('%',#{key},'%')
+				</if>				
 			</foreach>
 			<foreach collection="types" item="key" index="index" open="" close=" " separator="">
-				and job.type like CONCAT('%',#{key},'%')
+				<if test='index==0'>
+					and job.type like CONCAT('%',#{key},'%')
+				</if>
+				<if test='index>0'>
+					or job.type like CONCAT('%',#{key},'%')
+				</if>
 			</foreach>
 			<foreach collection="industry" item="key" index="index" open="" close=" " separator="">
-				and company.field like CONCAT('%',#{key},'%')
+				<if test='index==0'>
+					and company.field like CONCAT('%',#{key},'%')
+				</if>
+				<if test='index>0'>
+					or company.field like CONCAT('%',#{key},'%')
+				</if>				
 			</foreach>
 			<foreach collection="financle" item="key" index="index" open="" close=" " separator="">
-				and company.financing_stage like CONCAT('%',#{key},'%')
+				<if test='index==0'>
+					and company.financing_stage like CONCAT('%',#{key},'%')
+				</if>
+				<if test='index>0'>
+					or company.financing_stage like CONCAT('%',#{key},'%')
+				</if>
 			</foreach>
 		</where>
 	</select>

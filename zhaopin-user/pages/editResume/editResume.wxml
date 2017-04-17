@@ -4,7 +4,8 @@
 		<text>用电脑编辑简历,体验更好更流畅</text>
 		<view class='iconfont icon-right'></view>
 	</view> -->
-    <view class="box box-top _relative" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toUserInfo'>
+    <view class="box box-top _relative r-content" data-target='s0' bindtap='navigateTo' data-url='../userInfo/userInfo'>
+        <view class='ripple' style='{{ripple.s0}}'></view>
         <view class="title">
             <view class="placeicon-1"></view>
             <text>基本信息</text>
@@ -41,7 +42,7 @@
                 <text> {{userInfo.birth}}</text>
             </view>
             <view class='imgbox'>
-                <image mode="aspectFit" src="{{userInfo.avatarUrl || userInfoFromWX.avatarUrl }}" class="img"></image>
+                <image mode="aspectFit" src="{{userInfo.avatarUrl || userInfoFromWX.avatarUrl || '../../images/avatar.png'}}" class="img"></image>
             </view>
         </view>
     </view>
@@ -61,7 +62,8 @@
 		</view>
 	</view> -->
     <view>
-        <view class="box {{resume.educations.length==0?box-top:datebox}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap="gotoPage" data-flag='true' data-url='education/education'>
+        <view class="box r-content {{resume.educations.length==0?box-top:datebox}}" bindtap="gotoPage" data-flag='true' data-url='education/education' data-target='s1'>
+            <view class='ripple' style='{{ripple.s1}}'></view>
             <view class="title">
                 <view class="placeicon-1"></view>
                 <text>教育经历</text>
@@ -74,13 +76,15 @@
                 </view>
             </view>
         </view>
-        <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.educations.length==0}}" bindtap='gotoPage' data-flag='false' data-url='education/editEducation/editEducation'>
+        <view class="add r-content" data-target='s12' wx:if="{{resume.educations.length==0}}" bindtap='gotoPage' data-flag='false' data-url='education/editEducation/editEducation'>
             <view class="_inline-block iconfont icon-add"></view>
             <text>新增</text>
+            <view class='ripple' style='{{ripple.s12}}'></view>
         </view>
     </view>
     <view>
-        <view class="box {{resume.interships.length==0?box-top:datebox}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='gotoPage' data-flag='true' data-url='intership/intership'>
+        <view class="box r-content {{resume.interships.length==0?box-top:datebox}}" bindtap='gotoPage' data-flag='true' data-url='intership/intership' data-target='s2'>
+            <view class='ripple' style='{{ripple.s2}}'></view>
             <view class="title">
                 <view class="placeicon-1"></view>
                 <text>实习经验</text>
@@ -93,13 +97,15 @@
                 </view>
             </view>
         </view>
-        <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.interships.length==0}}" data-flag='false' bindtap='gotoPage' data-url='intership/editIntership/editIntership'>
+        <view class="add r-content" data-target='s3' wx:if="{{resume.interships.length==0}}" data-flag='false' bindtap='gotoPage' data-url='intership/editIntership/editIntership'>
             <view class="_inline-block iconfont icon-add"></view>
             <text>新增</text>
+            <view class='ripple' style='{{ripple.s3}}'></view>
         </view>
     </view>
     <view>
-        <view class="box {{resume.projects.length==0?box-top:datebox}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='gotoPage' data-flag='true' data-url='project/project'>
+        <view class="box {{resume.projects.length==0?box-top:datebox}} r-content" data-target='s4' bindtap='gotoPage' data-flag='true' data-url='project/project'>
+            <view class='ripple' style='{{ripple.s4}}'></view>
             <view class="title">
                 <view class="placeicon-1"></view>
                 <text>项目经验</text>
@@ -113,13 +119,15 @@
                 </view>
             </view>
         </view>
-        <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.projects.length==0}}" data-flag='false' bindtap='gotoPage' data-url='project/editProject/editProject'>
+        <view class="add r-content" data-target='s5' wx:if="{{resume.projects.length==0}}" data-flag='false' bindtap='gotoPage' data-url='project/editProject/editProject'>
             <view class="_inline-block iconfont icon-add"></view>
             <text>新增</text>
+            <view class='ripple' style='{{ripple.s5}}'></view>
         </view>
     </view>
     <view>
-        <view class="box {{resume.honors.length==0?box-top:datebox}}" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='gotoPage' data-flag='true' data-url='honor/honor'>
+        <view class="box {{resume.honors.length==0?box-top:datebox}} r-content" data-target='s6' bindtap='gotoPage' data-flag='true' data-url='honor/honor'>
+            <view class='ripple' style='{{ripple.s6}}'></view>
             <view class="title">
                 <view class="placeicon-1"></view>
                 <text>荣誉奖项</text>
@@ -132,12 +140,14 @@
                 </view>
             </view>
         </view>
-        <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if="{{resume.honors.length==0}}" data-flag='false' bindtap='gotoPage' data-url='honor/editHonor/editHonor'>
+        <view class="add r-content" data-target='s7' wx:if="{{resume.honors.length==0}}" data-flag='false' bindtap='gotoPage' data-url='honor/editHonor/editHonor'>
             <view class="_inline-block iconfont icon-add"></view>
             <text>新增</text>
+            <view class='ripple' style='{{ripple.s7}}'></view>
         </view>
     </view>
-    <view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" data-msg='{{resume.selfAssessment}}' bindtap='toSelfAssessment'>
+    <view class="box r-content" data-target='s8' data-msg='{{resume.selfAssessment}}' bindtap='toSelfAssessment'>
+        <view class='ripple' style='{{ripple.s8}}'></view>
         <view class="title">
             <view class="placeicon-1"></view>
             <text>自我评价</text>
@@ -148,11 +158,13 @@
             </view>
         </view>
     </view>
-    <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.selfAssessment}}' data-msg='' bindtap='toSelfAssessment'>
+    <view class="add r-content" data-target='s9' wx:if='{{!resume.selfAssessment}}' data-msg='' bindtap='toSelfAssessment'>
+        <view class='ripple' style='{{ripple.s9}}'></view>
         <view class="_inline-block iconfont icon-add"></view>
         <text>新增</text>
     </view>
-    <view class="box" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" bindtap='toHope'>
+    <view class="box r-content" data-target='s10' bindtap='toHope'>
+        <view class='ripple' style='{{ripple.s10}}'></view>
         <view class="title">
             <view class="placeicon-1"></view>
             <text>求职意向</text>
@@ -165,20 +177,17 @@
             </view>
         </view>
     </view>
-    <view class="add" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{!resume.hope.job}}' bindtap='toHope'>
+    <view class="add r-content" data-target='s11' wx:if='{{!resume.hope.job}}' bindtap='toHope'>
         <view class="_inline-block iconfont icon-add"></view>
         <text>新增</text>
+        <view class='ripple' style='{{ripple.s11}}'></view>
     </view>
-    <view class="handle">
+    <!-- <view class="handle">
         <view class="handle-btn preview" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
             <view class="_inline-block iconfont icon-preview"></view>
             <text>预览</text>
         </view>
-        <!-- <view class="handle-btn" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
-			<view class='_inline-block iconfont icon-save save'></view>
-			<text>保存</text>
-		</view> -->
     </view>
-    <view class='box footer'></view>
+    <view class='box footer'></view> -->
 </view>
 <include src='../../common/loader.wxml' />

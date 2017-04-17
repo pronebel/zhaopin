@@ -35,4 +35,9 @@ public class HonorDao extends BaseDao<Honor>{
 		String sn=getIbatisMapperNamespace() + ".addHonor";
 		return getSqlSessionTemplate().insert(sn, e)==1?true:false;
 	}
+	
+	public void deleteHonors(Long resume_id){
+		String sm=getIbatisMapperNamespace()+".deleteHonors";
+		getSqlSessionTemplate().delete(sm, resume_id);
+	}
 }

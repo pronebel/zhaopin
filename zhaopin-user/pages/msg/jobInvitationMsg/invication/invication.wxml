@@ -1,6 +1,6 @@
 <view class='box'>
     <view style='padding:15px 0px'>
-        <image src="{{invication.hr.avator || '../../../../images/_logo.png'}}" style="height:70rpx;width:70rpx;border-radius:35rpx; margin-right: 10px; margin-left: 10px; vertical-align: middle;" background-size="cover"></image>
+        <image src="{{invication.hr.avatarUrl || '../../../../images/avatar.png'}}" style="height:70rpx;width:70rpx;border-radius:35rpx; margin-right: 10px; margin-left: 10px; vertical-align: middle;" background-size="cover"></image>
         <text>{{invication.hr.name}}({{invication.hr.job}})</text>
         <view class='modal-msg'>
             {{invication.description}}
@@ -42,7 +42,7 @@
         </view>
         <view class="item-2 flexbox" hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view">
             <view class="logo">
-                <image src="{{jobDetail.company.logo || '../../../../images/_logo.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
+                <image src="{{jobDetail.company.logo || '../../../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
             </view>
             <view class="companyMsg">
                 <view style="color:#353535;font-size:14px;">{{jobDetail.company.c_name_short}}</view>
@@ -115,7 +115,7 @@
             </view>
             <view class="flexbox">
                 <view>
-                    <image src='{{jobDetail.hr.avator || "../../../../images/_logo.png"}}' style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
+                    <image src='{{jobDetail.hr.avatarUrl || "../../../../images/avatar.png"}}' style="height:120rpx;width:120rpx;border-radius:60rpx;" background-size="cover"></image>
                 </view>
                 <view class="publisherDetail">
                     <text class="_block publisherName">{{jobDetail.hr.name}}</text>
@@ -136,10 +136,10 @@
     </view>
     <view class='box box-last box-fixed _flex' wx:if='{{invication.status=="未处理"}}'>
         <view class='reject' bindtap='handler' data-result='false'>
-            拒绝
+            <button type='default' style='font-size: 13px'>拒绝</button>
         </view>
         <view class='resolve' bindtap='handler' data-result='true'>
-            接受
+            <button type="primary" style='font-size: 13px'>接受</button>
         </view>
     </view>
     <view class='box box-last box-fixed' wx:if='{{invication.status=="已处理"}}'>

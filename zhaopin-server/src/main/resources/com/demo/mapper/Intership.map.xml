@@ -35,6 +35,11 @@
 		where id=#{id}
 	</delete>
 	
+	<delete id='deleteInterships'>
+		delete from <include refid='TableName' />
+		where resume_id=#{resume_id}
+	</delete>
+	
 	<insert id='addIntership' parameterType="com.demo.model.Intership">
 		insert into <include refid="TableName" />
 		(resume_id,company,job,start_date,end_date,description)

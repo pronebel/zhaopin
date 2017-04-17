@@ -30,4 +30,8 @@ public class InterviewService {
 	public boolean setRead(Long id){
 		return rdsd.setRead(id);
 	}
+	
+	public boolean comment(Long id){
+		return rdsd.comment(id);
+	}
 }

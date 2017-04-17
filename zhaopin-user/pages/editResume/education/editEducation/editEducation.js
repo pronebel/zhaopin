@@ -4,6 +4,7 @@ const degrees = require('../../../../configs/data_configs.js').degrees;
 const schools = require('../../../../configs/schools_config.js');
 const majors = require('../../../../configs/majors_config.js');
 let loop = require('../../../../utils/event-loop.js');
+let $ = require('../../../../utils/util.js');
 let app = getApp();
 Page({
     data: {
@@ -82,14 +83,16 @@ Page({
             education: education,
             check: check
         })
+        let s_key = $.onlyChinese(e.detail.value);
         if (key == 'school') {
-            loop.push('school-input', this, e.detail.value, (key) => {
+            loop.push('school-input', this, s_key, (key) => {
                 if (!key) {
                     this.setData({
                         'hint.school': []
                     })
                     return;
                 }
+                console.log(2);
                 let school = schools.filter((val, index) => {
                     return val.match(key);
                 })
@@ -98,7 +101,7 @@ Page({
                 })
             }, 300)
         } else if (key == 'major') {
-            loop.push('major-input', this, e.detail.value, (key) => {
+            loop.push('major-input', this, s_key, (key) => {
                 if (!key) {
                     this.setData({
                         'hint.major': []
@@ -113,8 +116,6 @@ Page({
                 })
             }, 300)
         }
-
-
     },
     setInput(e) {
         let { key, index } = e.currentTarget.dataset;
