@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/msg/msg",
+        "pages/tmpTest/tmpTest",
         "pages/index/index",
+        "pages/msg/msg",
         "pages/msg/resumeMsg/resumeMsg",
         "pages/msg/resumeMsg/deliverRecode/deliverRecode",
         "pages/editResume/editResume",

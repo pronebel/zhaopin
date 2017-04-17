@@ -1,5 +1,5 @@
 const SERVER_CONFIG = {
-	server: 'https://zwill.space/zhaopin',
+	server:'localhost:8080/zhaopin',
 	port: 80,
 	appName: 'zhaopin',
 	ws: 'wss://zwill.space/zhaopin/ws',
