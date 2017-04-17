@@ -30,6 +30,7 @@ public class WebSocket {
         WebSocket.sessions.put(key, session); //openid为key session为value
         WebSocket.keys.put(session, key);
         System.out.println("有新连接加入！:"+key);
+        //websocket的json结构 0 1 2
 //        JSONObject json=new JSONObject();
 //        json.put("action", 1);
 //        send(key,json.toString());

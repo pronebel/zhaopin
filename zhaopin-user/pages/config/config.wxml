@@ -12,12 +12,12 @@
 				<switch checked="{{config.default_send_open}}" bindchange="switchChange" data-key='default_send_open' class="_right" />
 			</view>
 		</view>
-		<view class="item" >
+		<!-- <view class="item" >
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>投递反馈短信提醒</text>
 				<switch checked="{{config.sms_accept_open}}" bindchange="switchChange" data-key='sms_accept_open' class="_right" />
 			</view>
-		</view>
+		</view> -->
 		<view class="item" >
 			<view style="border-bottom:1rpx solid rgb(239,239,244)">
 				<text>投递反馈邮箱提醒</text>

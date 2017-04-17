@@ -415,5 +415,11 @@ Page({
                 url: `${url}?flag=${'search_city'}&city=${this.data.workplace.city}`
             })
         }
+    },
+    clearHis() {
+        wx.removeStorageSync('searchHistory');
+        this.setData({
+            searchHistory: []
+        })
     }
 })

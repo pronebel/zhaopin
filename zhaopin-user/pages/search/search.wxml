@@ -18,7 +18,7 @@
     <view>
         <view class="placeicon-1"></view>
         <text>历史搜索</text>
-        <text class="handle">清除</text>
+        <text class="handle" bindtap='clearHis'>清除</text>
     </view>
     <view class="history-list">
         <button class="history-item" hover-start-time="10" hover-stay-time="200" data-value="{{item}}" wx:for="{{searchHistory}}" wx:key="*this" bindtap="clickBtnSearch">{{item}}

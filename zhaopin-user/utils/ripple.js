@@ -5,6 +5,7 @@ function ripple(e) {
     let { offsetLeft, offsetTop } = e.currentTarget;
     let { pageX, pageY } = e.changedTouches[0];
     let ripple = this.data.ripple;
+
     if (flag && flag == 'fixed') { //绝对定位
         ripple[target] = 'top:20px ; left:' + (pageX - offsetLeft - 20) + 'px;' + animation
     } else {

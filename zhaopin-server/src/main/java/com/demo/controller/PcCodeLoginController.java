@@ -21,6 +21,7 @@ public class PcCodeLoginController {
 	
 	@RequestMapping(value = {"" , "/"})
 	public String index(){
+		System.out.println("访问pc");
 		return "onLogin";
 	}
 	
