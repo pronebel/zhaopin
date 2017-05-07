@@ -25,10 +25,7 @@ public class SeekerController {
 	@Resource
 	private SeekerService ss;
 	
-	@RequestMapping(value = {"" , "/"})
-	public String index(){
-		return "user";
-	}
+	
 	
 	@ResponseBody
 	@RequestMapping("/getUserInfo")

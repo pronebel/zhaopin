@@ -76,6 +76,7 @@ Page({
                     oldResumeStatusList = oldResumeStatusList.filter((value) => {
                         return val.id != value.id
                     })
+                    val.job.company.logo = $.setLogo(val.job.company.logo)
                 })
                 let resumeStatusList = res.data.concat(oldResumeStatusList);
                 let pages = this.data.pages;
@@ -96,9 +97,22 @@ Page({
                 })
                 wx.setStorageSync('resumeStatusList', resumeStatusList)
                 typeof cb == 'function' && cb();
+            } else {
+                let oldResumeStatusList = wx.getStorageSync('resumeStatusList') || [];
+                this.setData({
+                    resumeStatusList: oldResumeStatusList
+                })
+                $.toast('获取失败', this, false)
             }
             app.hiddenLoader(this)
-        }).catch(error => app.hiddenLoader(this))
+        }).catch(error => {
+            app.hiddenLoader(this);
+            let oldResumeStatusList = wx.getStorageSync('resumeStatusList') || [];
+            this.setData({
+                resumeStatusList: oldResumeStatusList
+            })
+            $.toast('获取失败', this, false)
+        })
     },
     onPullDownRefresh() {
         this.getResumeStatus(() => {

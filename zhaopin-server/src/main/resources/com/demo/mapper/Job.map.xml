@@ -82,6 +82,7 @@
 					and job.workplace like CONCAT('%',#{city},'%')
 				</if>
 			</foreach>
+		order by j_id desc
 	</select>
 	
 	<select id='searchJob' resultMap='Job'>
@@ -128,6 +129,7 @@
 					or company.financing_stage like CONCAT('%',#{key},'%')
 				</if>
 			</foreach>
+			order by j_id desc
 		</where>
 	</select>
 	

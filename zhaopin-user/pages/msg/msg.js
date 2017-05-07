@@ -19,6 +19,9 @@ Page({
 				msg: msg
 			})
 		})
+		event.on('ws_msg', this, () => {
+			this.getMsg();
+		})
 	},
 	onUnload() {
 		event.remove('length--', this);
@@ -37,9 +40,14 @@ Page({
 					this.setData({
 						msg: res.data
 					})
+				} else {
+					$.toast('获取消息失败', this, false)
 				}
 				app.hiddenLoader(this);
-			}).catch(error => app.hiddenLoader(this))
+			}).catch(error => {
+				app.hiddenLoader(this);
+				$.toast('获取消息失败', this, false)
+			})
 		})
 	},
 	navigateTo(e) {

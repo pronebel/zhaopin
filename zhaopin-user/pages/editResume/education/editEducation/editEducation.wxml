@@ -1,4 +1,4 @@
-<view class="box">
+<view class="box" style='margin-top:15px;'>
     <view class="item _flex _relative">
         <view class="iconfont icon-circle-edit"></view>
         <input class="input" value="{{education.school}}" placeholder="学校" placeholder-class="placeholder-class" bindinput='input' data-key='school' bindfocus='focus' bindblur='blur' />

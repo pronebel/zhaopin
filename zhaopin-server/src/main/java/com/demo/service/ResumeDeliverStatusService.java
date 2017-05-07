@@ -38,4 +38,20 @@ public class ResumeDeliverStatusService {
 	public boolean hadDelivered(ResumeDeliverStatus rds){
 		return rdsd.hadDelivered(rds)>0?true:false;
 	}
+	
+	public List<ResumeDeliverStatus> getAll(){
+		return rdsd.getAll();
+	}
+	
+	public boolean setResumeStatusRead(ResumeDeliverStatus rds){
+		return rdsd.setResumeStatusRead(rds);
+	}
+	
+	public boolean invicate(ResumeDeliverStatus rds){
+		return rdsd.invicate(rds);
+	}
+	
+	public boolean reject(ResumeDeliverStatus rds){
+		return rdsd.reject(rds);
+	}
 }

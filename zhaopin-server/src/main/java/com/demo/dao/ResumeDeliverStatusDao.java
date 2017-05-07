@@ -45,4 +45,24 @@ public class ResumeDeliverStatusDao extends BaseDao<ResumeDeliverStatus>{
 		String sm=getIbatisMapperNamespace()+".hadDelivered";
 		return getSqlSessionTemplate().selectOne(sm,rds);
 	}
+	
+	public List<ResumeDeliverStatus> getAll(){
+		String sm=getIbatisMapperNamespace()+".getAll";
+		return getSqlSessionTemplate().selectList(sm);
+	}
+	
+	public boolean setResumeStatusRead(ResumeDeliverStatus rds){
+		String sm=getIbatisMapperNamespace()+".setResumeStatusRead";
+		return getSqlSessionTemplate().update(sm,rds)==1?true:false;
+	}
+	
+	public boolean invicate(ResumeDeliverStatus rds){
+		String sm=getIbatisMapperNamespace()+".invicate";
+		return getSqlSessionTemplate().update(sm,rds)==1?true:false;
+	}
+	
+	public boolean reject(ResumeDeliverStatus rds){
+		String sm=getIbatisMapperNamespace()+".reject";
+		return getSqlSessionTemplate().update(sm,rds)==1?true:false;
+	}
 }

@@ -1,5 +1,8 @@
 let Promise = require('../lib/es6-promise.min.js').Promise;
 
+let {
+    server
+} = require('../configs/serverConfig.js');
 var QQMapWX = require('qqmap-wx-jssdk.min.js');
 
 // 实例划API核心类
@@ -332,20 +335,100 @@ String.prototype.dateFilter = function() {
     return date == now_date ?
         time : date.substring(5, 10)
 };
+
+function setLogo(logo) {
+    if (logo == 'null' || logo == 'undefined' || !logo) {
+        return logo;
+    } else {
+        return `${server}${logo}`
+    }
+}
+
+/**
+ * [geocoder description] 将地址转换为经度和纬度
+ * @param  {[type]}   address [description]
+ * @param  {Function} cb      [description]
+ * @return {[type]}           [description]
+ */
+function geocoder(address, cb) {
+    console.log(address);
+    demo.geocoder({
+        address: address,
+        success: function(res) {
+            console.log(res);
+            typeof cb == 'function' && cb(res.result.location);
+        }
+    })
+}
+
+/**
+ * [toast description]
+ * @param  {[type]}  content [description] toast的内容
+ * @param  {[type]}  self    [description] 操作page
+ * @param  {Boolean} flag    [description] 失败或成功toast
+ * @param  {Number}  delay   [description] 延迟
+ * @return {[type]}          [description]
+ */
+function toast(content, self, flag = true, delay = 1800) {
+    if (!content || !self) {
+        return;
+    } else {
+        if (flag) {
+            self.setData({
+                showToast: true,
+                content: content
+            })
+            setTimeout(() => {
+                self.setData({
+                    showToast: false
+                })
+            }, delay)
+        } else {
+            wx.getNetworkType({
+                success(res) {
+                    if (res.networkType == 'none') {
+                        self.setData({
+                            showToast: true,
+                            content: '您未连接到网络'
+                        })
+                        setTimeout(() => {
+                            self.setData({
+                                showToast: false
+                            })
+                        }, delay)
+                    } else {
+                        self.setData({
+                            showToast: true,
+                            content: content
+                        })
+                        setTimeout(() => {
+                            self.setData({
+                                showToast: false
+                            })
+                        }, delay)
+                    }
+                }
+            })
+        }
+    }
+}
 module.exports = {
-    formatTime: formatTime,
-    formatDate: formatDate,
-    getLocation: getLocation,
-    getWorkplace: getWorkplace,
-    getCityList: getCityList,
-    getDistrictByCityName: getDistrictByCityName,
-    inArray: inArray,
-    isEmptyObject: isEmptyObject,
-    ajax: ajax,
-    ajaxCheckSession: ajaxCheckSession,
-    ajaxLogin: ajaxLogin,
-    checkMobile: checkMobile,
-    checkEmail: checkEmail,
-    regStrToArr: regStrToArr,
-    onlyChinese: onlyChinese
+    formatTime,
+    formatDate,
+    getLocation,
+    getWorkplace,
+    getCityList,
+    getDistrictByCityName,
+    inArray,
+    isEmptyObject,
+    ajax,
+    ajaxCheckSession,
+    ajaxLogin,
+    checkMobile,
+    checkEmail,
+    regStrToArr,
+    onlyChinese,
+    setLogo,
+    geocoder,
+    toast
 }

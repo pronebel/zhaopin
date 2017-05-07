@@ -1,4 +1,4 @@
-<view class="box">
+<view class="box" style='margin-top:15px;'>
 	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
 		<input class="input" value="{{intership.company}}" placeholder="公司名称" placeholder-class="placeholder-class" bindinput='input' data-key='company' />
@@ -19,7 +19,7 @@
 	</picker>
 	<view class="item _flex _relative">
 		<view class="iconfont icon-circle-edit"></view>
-		<picker bindchange="bindEndPickerChange" value="{{intership.end_date}}" mode="date" star="2000-01-01" end="{{now}}" fields='month' style="flex-grow:1">
+		<picker bindchange="bindEndPickerChange" value="{{intership.end_date}}" mode="date" start="{{intership.start_date || '2000-01-01'}}" end="{{now}}" fields='month' style="flex-grow:1">
 			<view class="input" wx:if="{{intership.end_date&&!checked}}">{{intership.end_date}}离职</view>
 			<view class="input" wx:if="{{intership.end_date&&checked}}">{{intership.end_date}}</view>
 			<view class="input placeholder-class" wx:if="{{!intership.end_date}}">离职时间</view>

@@ -4,7 +4,9 @@ let $ = require('../../utils/util.js');
 const {
     server
 } = require('../../configs/serverConfig.js');
-let { ripple } = require('../../utils/ripple.js');
+let {
+    ripple
+} = require('../../utils/ripple.js');
 Page({
     data: {
         userInfoFromWX: {},
@@ -53,9 +55,14 @@ Page({
                 this.setData({
                     defaultResumeName: this.getResumeName(this.data.defaultResumeId)
                 })
+            } else {
+                $.toast('获取简历失败', this, false)
             }
             app.hiddenLoader(this);
-        }).catch((err) => app.hiddenLoader(this))
+        }).catch((err) => {
+            app.hiddenLoader(this);
+            $.toast('获取简历失败', this, false)
+        })
     },
     toEditResume: function(e) {
         ripple.call(this, e);
@@ -88,10 +95,7 @@ Page({
     },
     confirm() {
         if (!this.data.newResumeName) {
-            wx.showToast({
-                icon: 'warn',
-                title: '名字不能为空'
-            })
+            $.toast('名字不能为空', this)
         } else {
             $.ajax({
                 url: `${server}/resume/changeResumeName`,
@@ -115,12 +119,11 @@ Page({
                         newResumeName: '',
                         defaultResumeName: this.getResumeName(this.data.defaultResumeId)
                     })
-                    wx.showToast({
-                        title: '修改成功',
-                        icon: 'success'
-                    })
+                    $.toast('修改成功', this)
+                } else {
+                    $.toast('修改失败', this)
                 }
-            })
+            }).catch(res => $.toast('修改失败', this))
         }
     },
     inputNewResumeName(e) {
@@ -132,9 +135,7 @@ Page({
     newResume(e) {
         ripple.call(this, e);
         if (this.data.resumes.length >= 5) {
-            wx.showToast({
-                title: '您的简历个数已达上限!'
-            })
+            $.toast('您的简历个数已达上限', this)
             return;
         }
         $.ajax({
@@ -163,8 +164,10 @@ Page({
                 wx.navigateTo({
                     url: '../editResume/editResume?' + options
                 });
+            } else {
+                $.toast('新建简历失败', this, false)
             }
-        })
+        }).catch(res => $.toast('新建简历失败', this, false))
     },
     openActionSheet(e) {
         let _this = this;
@@ -201,11 +204,11 @@ Page({
                             _this.setData({
                                 resumes: resumes
                             })
-                            wx.showToast({
-                                title: '删除成功'
-                            })
+                            $.toast('删除简历成功', _this)
+                        } else {
+                            $.toast('删除简历失败', _this, false)
                         }
-                    })
+                    }).catch(res => $.toast('删除简历失败', _this, false))
                 }
             }
         })

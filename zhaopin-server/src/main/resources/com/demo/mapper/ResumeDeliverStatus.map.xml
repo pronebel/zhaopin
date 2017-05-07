@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.ResumeDeliverStatus">
 	<resultMap id="ResumeDeliverStatus" type="com.demo.model.ResumeDeliverStatus">
-    	<id property="id" column="id" jdbcType="BIGINT" />
+    	<id property="id" column="rds_id" jdbcType="BIGINT" />
 		<result property="job_id" column="job_id" jdbcType="BIGINT" />	
 		<result property="resume_id" column="resume_id" jdbcType="BIGINT" />		
 		<result property="seeker_id" column="seeker_id" jdbcType="VARCHAR" />		
@@ -14,6 +14,7 @@
 		<result property="seeker_read" column="seeker_read" jdbcType="BOOLEAN" />
 		<result property="hr_read" column="hr_read" jdbcType="BOOLEAN" />
 		<association property="job" javaType="com.demo.model.Job" resultMap='Job'></association>
+		<association property="seeker" javaType="com.demo.model.Seeker" resultMap='Seeker'></association>
 	</resultMap>
 	<resultMap id='Job' type="com.demo.model.Job">
 		<id property="id" column="j_id" jdbcType="BIGINT" />
@@ -29,6 +30,11 @@
 		<id property="id" column="c_id" jdbcType="BIGINT" />
 	    <result property="name" column="c_name" jdbcType="VARCHAR" />
 	    <result property="logo" column="logo" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id='Seeker' type='com.demo.model.Seeker'>
+		<id property="openid" column="id" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="TableName">
 		resume_deliver_status
@@ -46,13 +52,13 @@
 	
 	<select id='getDeliverRecodeById' resultMap='ResumeDeliverStatus'>
 		select resume_deliver_status.*,job.*,company.* from <include refid='TableName' />,job,company
-		where resume_deliver_status.id=#{id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
+		where resume_deliver_status.rds_id=#{id} and resume_deliver_status.job_id=job.j_id and company.c_id=job.company_id
 	</select>
 	
 	<update id='setRead'>
 		update <include refid='TableName' /> set
 		seeker_read=true 
-		where id=#{id}
+		where rds_id=#{id}
 	</update>
 	
 	<insert id='deliver' parameterType='com.demo.model.ResumeDeliverStatus'>
@@ -66,6 +72,36 @@
 		select count(*) from <include refid='TableName' />
 		where job_id=#{job_id} and seeker_id=#{seeker_id}
 	</select>
+	
+	<!-- 以下为测试用 -->
+	<select  id="getAll" resultMap='ResumeDeliverStatus'>
+		select resume_deliver_status.*,job.*,seeker.name,seeker.email from <include refid='TableName' />,job,seeker
+		where resume_deliver_status.job_id=job.j_id and resume_deliver_status.seeker_id=seeker.id order by resume_deliver_status.rds_id desc
+	</select>
+	
+	<update id='setResumeStatusRead'>
+		update resume_deliver_status set
+		status='待沟通',
+		seeker_read=false,
+		read_date_time=#{read_date_time}
+		where resume_deliver_status.rds_id=#{id}
+	</update>
+	
+	<update id='invicate'>
+		update resume_deliver_status set
+		status='面试',
+		interview_date_time=#{interview_date_time},
+		seeker_read=false
+		where resume_deliver_status.rds_id=#{id}
+	</update>
+	
+	<update id='reject'>
+		update resume_deliver_status set
+		status='不合适',
+		reject_date_time=#{reject_date_time},
+		seeker_read=false
+		where resume_deliver_status.rds_id=#{id}
+	</update>
 </mapper>
 
 <!-- parameterType:使用的参数类型

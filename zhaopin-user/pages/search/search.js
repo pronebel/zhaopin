@@ -16,7 +16,6 @@ Page({
         hidden: [false, false, false],
         searchMsg: '',
         pickerViewValue: 0,
-        searchConfig: {},
         salary: {
             lower: 1,
             upper: 50
@@ -97,8 +96,12 @@ Page({
         })
     },
     changeDistrict: function(e) {
+        let index = e.detail.value[0];
+        console.log(index)
+        let district = index == 0 ? this.data.workplace.city : this.data.citycidx[index - 1].fullname
         this.setData({
-            pickerViewValue: e.detail.value[0]
+            pickerViewValue: e.detail.value[0],
+            'workplace.district': district
         })
     },
     handleAnimate: function(e) {
@@ -233,16 +236,20 @@ Page({
             }
         }).then((res) => {
             if (res.statusCode == 200) {
+                let list = res.data;
+                list.forEach(val => {
+                    val.company.logo = $.setLogo(val.company.logo)
+                })
                 if (flag) {
                     let {
                         jobList
                     } = this.data;
                     this.setData({
-                        jobList: jobList.concat(res.data)
+                        jobList: jobList.concat(list)
                     })
                 } else {
                     this.setData({
-                        jobList: res.data
+                        jobList: list
                     })
                 }
                 let arr = wx.getStorageSync('searchHistory') || [];
@@ -264,9 +271,13 @@ Page({
                         dataLimit: true
                     })
                 }
-                app.hiddenLoader(this);
+            } else {
+                $.toast('搜索职位失败', this, false)
             }
+            app.hiddenLoader(this);
         }).catch((error) => {
+            $.toast('搜索职位失败', this, false)
+            app.hiddenLoader(this);
             console.log(`${'searchJob-fail:'}error`);
         })
     },
@@ -285,23 +296,6 @@ Page({
             return;
         }
         this.searchJob(true);
-    },
-    ajaxData: function() {
-        var arr = wx.getStorageSync('searchHistory') || [];
-        var val = this.data.searchMsg;
-        if ($.inArray(val, arr) == -1) {
-            arr.unshift(this.data.searchMsg);
-            wx.setStorageSync('searchHistory', arr);
-        }
-        this.setData({
-            searchHistory: arr,
-            showSuggestions: false,
-        })
-        this.setData({
-            jobList: [{
-                'searchMsg': 'java'
-            }]
-        })
     },
     complementSearch: function(e) {
         this.setData({

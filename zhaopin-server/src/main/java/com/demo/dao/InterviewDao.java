@@ -40,4 +40,10 @@ public class InterviewDao extends BaseDao<Interview>{
 		String sm=getIbatisMapperNamespace()+".comment";
 		return getSqlSessionTemplate().update(sm,id)==1?true:false;
 	}
+	
+	public boolean insertNewInterview(Interview i){
+		String sm=getIbatisMapperNamespace()+".newInterview";
+		System.out.println(sm);
+		return getSqlSessionTemplate().insert(sm, i)==1?true:false;
+	}
 }

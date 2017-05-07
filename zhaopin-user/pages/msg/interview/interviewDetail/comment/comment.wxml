@@ -1,7 +1,7 @@
-<view>
+<view style='padding: 0'>
     <view class='box' style='padding: 0px 25rpx'>
-        <textarea placeholder="说说面试后的总体感觉吧..." bindinput='input' placeholder-class="placeholder-class" maxlength="{{maxlength}}" style='padding: 12px 0px'>{{content}}</textarea>
-        <view class="hint">{{content.length}}/{{maxlength}}</view>
+        <textarea placeholder="说说面试后的总体感觉吧..." bindinput='input' placeholder-class="placeholder-class" maxlength="{{maxlength}}" style='padding: 12px 0px' class='_textarea' >{{c_content}}</textarea>
+        <view class="hint">{{c_content.length}}/{{maxlength}}</view>
     </view>
     <view class='box' style='padding: 0px'>
         <picker bindchange="bindPickerChange" value="{{range_comment.hr_comment}}" data-key='hr_comment' range="{{ranges}}">
@@ -46,10 +46,15 @@
         </view>
     </view>
     <view class='box box-last'>
-        <view class='item r-content' data-target='s3' style='text-align: center;' bindtap='comment'>
+        <view class='item r-content' data-target='s3' style='text-align: center;' bindtap='comment' wx-if='{{!disableBtn}}'>
             <view class='iconfont icon-edit1'></view>
             <text>评价</text>
             <view class="ripple" style="{{ripple.s3}}"></view>
         </view>
+        <view class='item disable' style='text-align: center;' wx-if='{{disableBtn}}'>
+            <text>已评价</text>
+        </view>
     </view>
 </view>
+
+<include src='../../../../../common/toast.wxml' />

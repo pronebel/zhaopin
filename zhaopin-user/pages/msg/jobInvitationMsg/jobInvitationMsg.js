@@ -88,6 +88,7 @@ Page({
                 let InvicationList = res.data.concat(oldInvicationList);
                 let pages = this.data.pages;
                 InvicationList.map((val, index, arr) => {
+                    //    val.job.company.logo = $.setLogo(val.job.company.logo);
                     if (val.invicate_date_time) {
                         val.invicate_date_time_filter = val.invicate_date_time.dateFilter();
                     }
@@ -104,9 +105,22 @@ Page({
                 })
                 wx.setStorageSync('InvicationList', InvicationList)
                 typeof cb == 'function' && cb();
+            } else {
+                let oldInvicationList = wx.getStorageSync('InvicationList') || [];
+                this.setData({
+                    InvicationList: oldInvicationList
+                })
+                $.toast('获取失败', this, false)
             }
             app.hiddenLoader(this)
-        }).catch(error => app.hiddenLoader(this))
+        }).catch(error => {
+            let oldInvicationList = wx.getStorageSync('InvicationList') || [];
+            this.setData({
+                InvicationList: oldInvicationList
+            })
+            $.toast('获取失败', this, false)
+            app.hiddenLoader(this)
+        })
     },
     onPullDownRefresh() {
         this.getInvicationUnread(() => {

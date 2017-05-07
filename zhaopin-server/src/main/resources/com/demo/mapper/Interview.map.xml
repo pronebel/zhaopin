@@ -72,6 +72,13 @@
 		had_commented=true
 		where id=#{id}
 	</update>
+	
+	<insert id='newInterview' parameterType='com.demo.model.Interview'>
+		insert into interview
+		(job_id,seeker_id,interview_date_time,i_address,other)
+		values
+		(#{job_id},#{seeker_id},#{interview_date_time},#{i_address},#{other})
+	</insert>
 </mapper>
 
 <!-- parameterType:使用的参数类型

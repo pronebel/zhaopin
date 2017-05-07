@@ -114,14 +114,11 @@ App({
     },
     getUserInfo(cb) {
         let _this = this;
-        console.log(1);
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
         } else {
-            console.log(2);
             let userInfo = wx.getStorageSync('userInfo');
             if (!userInfo) {
-                console.log(3);
                 let timer = setInterval(function() {
                     let {
                         openid
@@ -269,13 +266,20 @@ App({
         });
     },
     wsHandler(obj) {
-        let { action } = obj;
+        let {
+            action
+        } = obj;
         //action是int型参数 0代表有简历状态信息 1代表有职位邀请信息 2代表有面试邀请信息
+        console.log(obj);
+        event.emit('ws_msg');
         if (action == 0) {
+            console.log("event.emit('ws_resume_status_update')")
             event.emit('ws_resume_status_update');
         } else if (action == 1) {
+            console.log(" event.emit('ws_job_invication_update');")
             event.emit('ws_job_invication_update');
         } else if (action == 2) {
+            console.log("event.emit('ws_interview_update')")
             event.emit('ws_interview_update');
         }
     },

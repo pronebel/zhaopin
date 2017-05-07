@@ -4,7 +4,9 @@ let {
 } = require('../../../configs/serverConfig.js');
 let $ = require('../../../utils/util.js');
 let event = require('../../../utils/event.js');
-let { ripple } = require('../../../utils/ripple.js');
+let {
+    ripple
+} = require('../../../utils/ripple.js');
 Page({
     data: {
         loading: true,
@@ -25,6 +27,7 @@ Page({
             wx.setStorageSync('interviewList', interviewList)
         })
         event.on('ws_interview_update', this, () => {
+            console.log('ws_interview_update');
             this.getInterview();
         })
         this.getInterview();
@@ -51,8 +54,8 @@ Page({
                 let interviewList = res.data.concat(oldInterviewList);
                 let ripple = {};
                 interviewList.map((val, index, arr) => {
-                    if (val.date_time) {
-                        val.date_time_filter = val.date_time.substring(0, 16)
+                    if (val.interview_date_time) {
+                        val.interview_date_time_filter = val.interview_date_time.substring(0, 16)
                     }
                     ripple["s" + index] = '';
                 })
@@ -63,9 +66,22 @@ Page({
 
                 wx.setStorageSync('interviewList', interviewList)
                 typeof cb == 'function' && cb();
+            } else {
+                let oldInterviewList = wx.getStorageSync('interviewList') || [];
+                this.setData({
+                    interviewList: oldInterviewList
+                })
+                $.toast('获取失败', this, false)
             }
             app.hiddenLoader(this)
-        }).catch(error => app.hiddenLoader(this))
+        }).catch(error => {
+            app.hiddenLoader(this)
+            let oldInterviewList = wx.getStorageSync('interviewList') || [];
+            this.setData({
+                interviewList: oldInterviewList
+            })
+            $.toast('获取失败', this, false)
+        })
     },
     onPullDownRefresh() {
         this.getInterview(() => {

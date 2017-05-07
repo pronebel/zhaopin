@@ -80,6 +80,7 @@ Page({
             }
         }).then((res) => {
             if (res.statusCode == 200) {
+                res.data.company.logo = $.setLogo(res.data.company.logo)
                 if (res.data.campustalk.length > 1) {
                     res.data.campustalk.sort((a, b) => {
                         return a.date_time > b.date_time
@@ -166,7 +167,9 @@ Page({
         }).catch((err) => console.log(err))
     },
     handler(e) {
-        let { result } = e.currentTarget.dataset;
+        let {
+            result
+        } = e.currentTarget.dataset;
         if (result == 'false') { //拒绝
             this.showModal('你确定要拒绝吗?', function() {
                 this.setResult(false);

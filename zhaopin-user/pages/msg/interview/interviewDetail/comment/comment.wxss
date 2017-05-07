@@ -69,3 +69,10 @@ view {
     color: #b2b2b2;
     text-align: right;
 }
+
+._textarea{
+    box-sizing: border-box;
+    width: 100%;
+    color:#353535;
+    font-size: 0pt;
+}

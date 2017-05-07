@@ -17,11 +17,11 @@
                     <image src="{{item.company.logo || '../../images/avatar.png'}}" style="height:120rpx;width:120rpx;" background-size="cover"></image>
                 </view>
                 <view class="details">
-                    <view style='height: 40rpx;'>
+                    <view style='height: 45rpx;'>
                         <text class="job-title">{{item.name}}</text>
                         <text class="job-salary">{{item.salary_lower}}-{{item.salary_upper}}k</text>
                     </view>
-                    <view class="company-name" style='height:40rpx;'>{{item.company.name}}</view>
+                    <view class="company-name" style='height:40rpx;'>{{item.company.c_name_short}}</view>
                     <view class="_block translucence-msg" style="height:40rpx;margin-top:10rpx">
                         <text class="work-place">{{item.city}}</text>
                         <text class="district">{{item.district}}</text>
@@ -91,6 +91,9 @@
     </scroll-view>
 </view>
 <include src="../../common/loader.wxml" />
+
+<include src='../../common/toast.wxml' />
+
 <modal bindconfirm="confirm" wx:if="{{setHope_job}}" no-cancel='{{no_hope_job}}' title='告诉我你想找什么工作？' bindcancel='cancel'>
-    <input class="modal-input" placeholder="期待职位" placeholder-class="placeholder-class" bindinput='input' bindfocus='focus' bindblur='blur' focus class='modal-input {{modal_input_focus?"focus":""}}' value='{{userInfo.hope_job}}' max-length='15' />
+    <input class="modal-input" placeholder="{{userInfo.hope_job || '期待职位'}}" placeholder-class="placeholder-class" bindinput='input' bindfocus='focus' bindblur='blur' focus class='modal-input {{modal_input_focus?"focus":""}}' max-length='15' />
 </modal>

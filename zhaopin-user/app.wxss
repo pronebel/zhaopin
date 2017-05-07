@@ -2,6 +2,7 @@
 @import "common/loader.wxss";
 @import "common/ripple.wxss";
 @import 'common/animate.wxss';
+@import 'common/toast.wxss';
 view,
 scroll-view,
 text {

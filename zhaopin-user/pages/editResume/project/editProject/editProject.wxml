@@ -1,4 +1,4 @@
-<view class="box">
+<view class="box" style='margin-top:15px;'>
     <view class="item _flex _relative">
         <view class="iconfont icon-circle-edit"></view>
         <input class="input" value="{{project.name}}" placeholder="项目名称" placeholder-class="placeholder-class" bindinput='input' data-key='name' />

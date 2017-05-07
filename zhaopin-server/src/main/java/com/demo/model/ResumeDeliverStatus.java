@@ -13,6 +13,13 @@ public class ResumeDeliverStatus {
 	private boolean seeker_read;
 	private boolean hr_read;
 	private Job job;
+	private Seeker seeker;
+	public Seeker getSeeker() {
+		return seeker;
+	}
+	public void setSeeker(Seeker seeker) {
+		this.seeker = seeker;
+	}
 	public Long getId() {
 		return id;
 	}

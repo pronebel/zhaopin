@@ -3,6 +3,7 @@ let event = require('../../utils/event.js');
 let {
     ripple
 } = require('../../utils/ripple.js');
+let $ = require('../../utils/util.js')
 Page({
     data: {
         userInfoFromWX: {},
@@ -29,6 +30,7 @@ Page({
             this.setData({
                 userInfo: data.userInfo
             })
+            $.toast('个人信息修改成功', this)
         }.bind(this))
     },
     onUnolad: function() {

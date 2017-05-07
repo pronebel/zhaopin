@@ -8,7 +8,7 @@ page {
     width: 100%;
     z-index: 11;
     background: #fff;
-    box-shadow: 0 2px 4px #aaa;
+   /* box-shadow: 0 2px 4px #aaa;*/
 }
 
 .header .iconfont {
@@ -221,3 +221,166 @@ page {
     border-top: 1rpx solid #148FA4;
     margin: 10px 30px;
 }
+
+
+/*来自search*/
+/*.handleBar {
+    background: #fff;
+    width: 100%;
+    border-top: 1rpx solid rgb(239, 239, 244);
+    border-bottom: 1rpx solid rgb(239, 239, 244);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 80rpx;
+    height: 38px;
+    z-index: 10;
+}
+
+.handleItem {
+    font-size: 14px;
+    line-height: 38px;
+}
+
+.handleArea {
+    position: fixed;
+    margin-top: 38px;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%;
+}
+
+.itemArea {
+    background: #fff;
+    top: -400px;
+    position: absolute;
+    width: 100%;
+}
+
+.itemArea-1 {
+    height: 265px;
+}
+
+.itemArea .leftArea {
+    height: 100%;
+    float: left;
+    width: 30%;
+    background: rgb(239, 239, 244);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.itemArea .rightArea {
+    height: 100%;
+    float: right;
+    width: 70%;
+    padding: 0 100rpx;
+    box-sizing: border-box;
+}
+
+.cidx-text {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    line-height: 40px;
+    height: 40px;
+}
+
+.changeCity {
+    height: 35px;
+    line-height: 35px;
+    color: #888888;
+    box-sizing: border-box;
+    text-align: center;
+    background: #ffffff;
+}
+
+.icon-change {
+    vertical-align: baseline;
+    margin-right: 10px;
+}
+
+.changeCity text {
+    color: #353535;
+    vertical-align: baseline;
+}
+
+.itemArea-2,
+.itemArea-3 {
+    padding: 7px 30rpx 12px 30rpx;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.itemArea-2 text,
+.itemArea-3 text {
+    font-size: 13px;
+    width: 100rpx;
+}
+
+.itemArea-2 slider {
+    margin: 5px 40rpx;
+    width: 490rpx;
+    display: inline-block;
+}
+
+.itemArea-2 .wx-slider-handle {
+    width: 24px;
+    height: 24px;
+}
+
+.itemArea-2 .title,
+.itemArea-3 .title {
+    color: #000;
+    font-size: 15px;
+}
+
+.itemArea-item {}
+
+.itemArea .btn-view {
+    margin-top: 7px;
+    margin-left: -10px;
+}
+
+.lxCheckboxGroup view {
+    display: inline-block;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+}
+
+.itemArea-2 .lxCheckboxGroup view {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+
+.circle {
+    background: #F8F8F8;
+    border-radius: 4px;
+    padding: 4px 10rpx;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 22rpx;
+    font-size: 24rpx;
+}
+
+.success_circle {
+    background: rgb(72, 194, 61);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 4px 10rpx;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    color: #fff;
+    margin-bottom: 22rpx;
+    font-size: 24rpx;
+}
+
+.arrows-down{
+    margin-left:2px;
+}*/

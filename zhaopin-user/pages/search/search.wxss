@@ -360,7 +360,7 @@ icon {
 .work-place {}
 
 .degree,
-.scale .company-type,
+.scale, .company-type,
 .company-financing-stage {
     margin-left: 15rpx;
 }

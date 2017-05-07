@@ -5,7 +5,7 @@
         <view>
             <view style='margin-bottom: 10px;'>
                 <text style='color:#888;display: inline-block;margin-right: 5px'>面试时间:</text>
-                <text>{{item.date_time_filter}}</text>
+                <text>{{item.interview_date_time_filter}}</text>
             </view>
             <view class='_flex'>
                 <view style='color:#888;white-space:nowrap;margin-right: 5px'>面试地点:</view>

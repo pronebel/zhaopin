@@ -45,7 +45,12 @@ Page({
 			if (res.statusCode == 200 && res.data) {
 				app.globalData.config = config;
 				wx.setStorageSync('config', config);
+				$.toast('设置成功', this)
+			} else {
+				$.toast('修改设置失败！', this, false)
 			}
+		}).catch(res => {
+			$.toast('修改设置失败！', this, false)
 		})
 	}
 })

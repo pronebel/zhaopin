@@ -42,3 +42,5 @@
     <image wx:if='{{collections.length==0}}' src='../../images/empty.png' class='empty'></image>
 </view>
 <include src='../../common/loader.wxml' />
+
+<include src='../../common/toast.wxml' />

@@ -121,9 +121,7 @@ Page({
 			userInfo
 		} = this.data;
 		if (!this.data.checkEmail || !this.data.checkMobile) {
-			wx.showToast({
-				title: '您的输入错误，请检查!'
-			})
+			$.toast('您的输入格式错误', this)
 			return;
 		}
 		$.ajax({
@@ -134,11 +132,10 @@ Page({
 				openid: app.globalData.session.openid
 			}
 		}).then((res) => {
-			if (res.data === true) {
-				wx.showToast({
-					title: '保存成功',
-					icon: 'success'
-				})
+			console.log(res);
+			console.log(res.data == true)
+			if (res.statusCode == 200 && res.data == true) {
+				console.log(3);
 				event.emit('resumeChanged', {
 					event_type: 'change',
 					key: 'userInfo',
@@ -149,12 +146,15 @@ Page({
 				})
 				wx.setStorageSync('userInfo', userInfo);
 				app.globalData.userInfo = userInfo;
-				wx.navigateBack({});
+				$.toast('保存成功', this)
 			} else {
-				wx.showToast({
-					title: '数据保存失败',
-				})
+				$.toast('数据保存失败', this, false)
+				console.log(5)
 			}
+		}).catch(res => {
+			console.log(res)
+			$.toast('数据保存失败', this, false);
+			console.log(4)
 		})
 		if (this.data.avatarChange) {
 			wx.uploadFile({
@@ -181,16 +181,16 @@ Page({
 							key: 'userInfo',
 							value: _this.data.userInfo
 						})
+						console.log(res);
+						wx.setStorageSync('userInfo', userInfo);
+						app.globalData.userInfo = userInfo;
+						$.toast('头像修改成功', this)
 					} else {
-						wx.showToast({
-							title: '头像上传失败'
-						})
+						$.toast('头像上传失败', this, false)
 					}
 				},
 				fail: (res) => {
-					wx.showToast({
-						title: '头像上传失败'
-					})
+					$.toast('头像上传失败', this, false)
 				}
 			})
 		}

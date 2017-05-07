@@ -31,3 +31,5 @@
     <input class="modal-input" placeholder="{{actionResumeName}}" placeholder-class="placeholder-class" bindinput='inputNewResumeName' data-id='{{actionResumeId}}' foucs class='modal-input' value='{{newResumeName}}' max-length='20' />
 </modal>
 <include src='../../common/loader.wxml' />
+<include src='../../common/toast.wxml' />
+

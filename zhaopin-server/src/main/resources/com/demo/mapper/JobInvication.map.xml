@@ -57,6 +57,13 @@
 		set_resule_date_time=#{set_resule_date_time}
 		where id=#{id}
 	</update>
+	
+	<insert id='job_invicate'>
+		insert into <include refid="TableName" />
+		(job_id,seeker_id,hr_id,invicate_date_time,description)
+		values
+		(#{job_id},#{seeker_id},#{hr_id},#{invicate_date_time},#{description})
+	</insert>
 </mapper>
 
 <!-- parameterType:使用的参数类型

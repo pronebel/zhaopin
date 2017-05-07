@@ -65,4 +65,5 @@ public class ResumeDeliverStatusController {
 		rds.setJob_id(job_id);
 		return rdss.hadDelivered(rds);
 	}
+	
 }

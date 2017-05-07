@@ -32,3 +32,6 @@
         </picker-view-column>
     </picker-view>
 </view>
+
+
+<include src='../../common/toast.wxml' />

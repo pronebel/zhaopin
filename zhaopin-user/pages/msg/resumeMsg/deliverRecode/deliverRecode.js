@@ -28,6 +28,7 @@ Page({
         }).then((res) => {
             if (res.statusCode === 200) {
                 let obj = res.data;
+                obj.job.company.logo = $.setLogo(obj.job.company.logo)
                 Object.keys(obj).forEach((val) => {
                     if (val.match(/time/g)) {
                         if (obj[val]) {

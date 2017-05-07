@@ -34,4 +34,8 @@ public class JobInvicationService {
 	public boolean setSeekerRead(Long id){
 		return jid.setSeekerRead(id);
 	}
+	
+	public boolean job_invicate(JobInvication ji){
+		return jid.job_invicate(ji);
+	}
 }

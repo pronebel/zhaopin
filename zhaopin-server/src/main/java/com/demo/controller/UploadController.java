@@ -85,7 +85,8 @@ public class UploadController {
         Seeker s=new Seeker();
         openid=request.getAttribute("openid").toString();
         s.setOpenid(openid);
-        String url="http://localhost:8080/zhaopin/resources/avatars/"+saveName;
+        System.out.println("requestUrl:"+request.getRequestURL().substring(0,request.getRequestURL().length()-13));
+        String url=request.getRequestURL().substring(0,request.getRequestURL().length()-13)+"resources/avatars/"+saveName;
         s.setAvatarUrl(url);
         if(ss.updateAvatar(s)){
         	return url;

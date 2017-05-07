@@ -77,7 +77,9 @@ Page({
                         }
                     })
                 })
-                let { comment } = this.data;
+                let {
+                    comment
+                } = this.data;
                 this.setData({
                     comment: comment.concat(res.data)
                 })
@@ -99,6 +101,7 @@ Page({
             }
         }).then((res) => {
             if (res.statusCode == 200) {
+                res.data.company.logo = $.setLogo(res.data.company.logo);
                 if (res.data.campustalk.length > 1) {
                     res.data.campustalk.sort((a, b) => {
                         return a.date_time > b.date_time
@@ -181,25 +184,16 @@ Page({
                 method: 'POST'
             }).then((res) => {
                 if (res.statusCode && res.statusCode == 200) {
-                    let title = this.data.star ? '收藏成功' : '取消收藏成功';
-                    wx.showToast({
-                        title: title
-                    })
+                    let content = this.data.star ? '收藏成功' : '取消收藏成功';
+                    $.toast(content, this)
                     this.setData({
                         STAR: !STAR
                     })
+                } else {
+                    $.toast('收藏失败！', this, false)
                 }
-            })
+            }).catch(res => $.toast('收藏失败！', this, false))
         }, 300)
-    },
-    openMap: function() {
-        // const latitude = parseFloat(this.data.job.workplace.location.latitude);
-        // const longitude = parseFloat(this.data.job.workplace.location.longitude);
-        // wx.openLocation({
-        //  latitude: latitude,
-        //  longitude: longitude,
-        //  scale: 16
-        // })
     },
     getResumesName() {
         $.ajax({
@@ -257,6 +251,10 @@ Page({
             config,
             resumes
         } = this.data;
+        if (resumes.length == 0) {
+            $.toast('您未创建任何简历,无法投递', this)
+            return;
+        }
         let resume_id = '';
         if (config.default_send_open) {
             //打开默认投递
@@ -301,13 +299,15 @@ Page({
                         hadDelivered: true,
                         sending: false
                     })
+                    $.toast('简历投递成功', this)
                 }.bind(this), 1000)
             } else {
                 setTimeout(function() {
                     this.setData({
                         btnDisable: false,
-                        sending: false
+                        sending: false,
                     })
+                    $.toast('简历投递失败!', this, false)
                 }.bind(this), 1000)
             }
         }).catch((res) => {
@@ -316,7 +316,19 @@ Page({
                     btnDisable: false,
                     sending: false
                 })
+                $.toast('简历投递失败', this, false)
             }.bind(this), 1000)
         })
-    }
+    },
+    openMap() {
+        console.log(2);
+        $.geocoder(this.data.jobDetail.workplace, (location) => {
+            console.log(2);
+            wx.openLocation({
+                latitude: location.lat,
+                longitude: location.lng,
+                scale: 16
+            })
+        })
+    },
 })

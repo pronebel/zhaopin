@@ -34,4 +34,8 @@ public class InterviewService {
 	public boolean comment(Long id){
 		return rdsd.comment(id);
 	}
+	
+	public boolean insertNewInterview(Interview i){
+		return rdsd.insertNewInterview(i);
+	}
 }

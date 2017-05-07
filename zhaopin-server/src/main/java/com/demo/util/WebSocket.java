@@ -56,12 +56,13 @@ public class WebSocket {
     }
      
 
-    public void sendMessage(Session session, String message) throws IOException{
+    public static void sendMessage(Session session, String message) throws IOException{
+    	System.out.println("发送websocket："+message);
         session.getBasicRemote().sendText(message);
         //this.session.getAsyncRemote().sendText(message);
     }
     
-    public void send(String openid, String jsonmsg) throws IOException{
+    public static void  send(String openid, String jsonmsg) throws IOException{
     	Session s=WebSocket.sessions.get(openid);
     	if(s!=null){
     		sendMessage(s,jsonmsg);

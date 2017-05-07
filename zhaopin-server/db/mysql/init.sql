@@ -148,7 +148,7 @@ create table job_skill(
 create table campus_talk(
 	id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
-	scholl varchar(50) not null,
+	school varchar(50) not null,
 	date_time varchar(50) not null,
 	foreign key(job_id) references job(j_id)
 );
@@ -163,7 +163,7 @@ create table config(
 );
 
 create table resume_deliver_status(
-	id bigint(11) auto_increment primary key not null,
+	rds_id bigint(11) auto_increment primary key not null,
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
 	resume_id bigint(11) not null comment '简历投递的id',
@@ -217,8 +217,8 @@ create table job_invication(
 	job_id bigint(11) not null,
 	seeker_id varchar(50) not null,
 	hr_id varchar(50) not null,
-	invicate_date_time varchar(50) not null comment '企业发出邀请时的时间 企业发出邀请后要在intreview表中插入一条新数据',
-	result boolean comment '被邀请者处理后 同意或者拒绝',
+	invicate_date_time varchar(50) not null comment '企业发出邀请时的时间',
+	result boolean comment '被邀请者处理后 同意或者拒绝 如果同意，企业可以进一步在intreview表中插入一条新数据',
 	description varchar(500) not null,
 	status enum('未处理','已处理') not null default '未处理',
 	set_result_date_time varchar(30) comment '被邀请者处理的时间',
@@ -248,22 +248,130 @@ create table collection(
 );
 
 
-insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)
- 	values('openidhr','hr','',1,'','','','男');
+-- insert into hr(id,name,birthday,company_id,job,telephone,avatarUrl,sex)
+--  	values('openidhr','hr','',1,'','','','男');
 
 
- insert into company(c_name_short,c_name,scale,financing_stage,address,province,c_city,c_district,field)
-  values ('爱奇艺','爱奇艺公司','100-500人','天使轮','深圳南山区','广东省','深圳','南山区','移动互联网');
+-- INSERT INTO company(c_name_short,c_name,scale,financing_stage,address,province,c_city,c_district,FIELD,logo)
+--   VALUES ('小赢理财','小赢理财','500-2000人','B轮','深圳南山区深湾一路3号红树西岸','广东省','深圳','南山区','金融','/resources/xiaoyinglicai.jpg');
+
+-- INSERT INTO job(j_name,salary_lower,salary_upper,STATUS,workplace,j_city,j_district,degree_limit,TYPE,welfare,hr_id,company_id,job_search,release_date)
+--  VALUES('前端开发工程师',10,15,1,'深圳南山区深湾一路3号红树西岸','深圳','南山区','本科','全职','双休，上升空间大','openidhr',8,'前端开发工程师','2017-03-30');
+
+-- INSERT INTO resume_deliver_status(job_id,seeker_id,deliver_date_time)
+-- VALUES (10,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','2017-03-25 10:10:00')
+
+-- INSERT INTO job_invication(seeker_id,job_id,hr_id,invicate_date_time,description)
+-- VALUES('oUE_60BwG0F_Dna5NIsSvFz_YlRQ',10,'openidhr','2017-03-25 10:10','asdas')
+
+-- INSERT INTO interview (job_id,seeker_id,other,interview_date_time,i_address,interview_flag,set_interview_end_date_time)
+--  VALUES (4,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','现场面试','2017-04-22 10:10:10','广东省深圳市南山区软件基地A栋0899号','面试结束','2017-04-02 10:10:10')
 
 
- insert into job(j_name,salary_lower,salary_upper,status,workplace,j_city,j_district,degree_limit,type,welfare,hr_id,company_id,job_search,release_date)
- 	values('前端',5,10,1,'深圳南山区','深圳','南山区','本科','全职','没有','openidhr',1,'前端','2017-03-20');
 
-INSERT INTO resume_deliver_status(job_id,seeker_id,deliver_date_time)
-VALUES (10,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','2017-03-25 10:10:00')
+insert into campus_talk(job_id ,school,date_time )values
+	(27,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(28,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(29,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(30,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(31,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(32,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(33,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(34,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(35,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(36,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(37,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(38,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(39,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(40,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(41,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(42,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(43,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(44,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(45,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(46,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(47,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(48,'兰州大学','2017-05-28 14:20');
+insert into campus_talk(job_id ,school,date_time )values
+	(49,'兰州大学','2017-05-28 14:20');
 
-INSERT INTO job_invication(seeker_id,job_id,hr_id,invicate_date_time,description)
-VALUES('oUE_60BwG0F_Dna5NIsSvFz_YlRQ',10,'openidhr','2017-03-25 10:10','asdas')
 
-INSERT INTO interview (job_id,seeker_id,other,interview_date_time,i_address,interview_flag,set_interview_end_date_time)
- VALUES (4,'oUE_60BwG0F_Dna5NIsSvFz_YlRQ','现场面试','2017-04-22 10:10:10','广东省深圳市南山区软件基地A栋0899号','面试结束','2017-04-02 10:10:10')
+
+
+
+
+
+
+
+
+
+
+--  INSERT INTO job_skill(job_id,description)VALUES
+-- (49,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (48,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (47,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (46,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (45,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (44,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (43,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (42,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (41,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (40,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (39,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (38,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (37,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (36,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (35,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (34,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (33,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (32,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (31,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (30,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (29,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (28,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+-- INSERT INTO job_duty(job_id,description)VALUES
+-- (27,'熟悉git、svn等版本控制工具，熟悉团队协作开发，有良好的沟通能力');
+
+

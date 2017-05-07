@@ -32,3 +32,5 @@
         </view>
     </view>
 </view>
+
+<include src='../../common/toast.wxml' />

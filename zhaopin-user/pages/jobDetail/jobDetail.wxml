@@ -53,13 +53,13 @@
                 <text>职位描述</text>
             </view>
             <view style="margin-bottom:10px;" wx:if='{{jobDetail.jobduty.length>0}}'>
-                <text>岗位职责</text>
+                <text style='color:#353535'>岗位职责</text>
             </view>
             <view wx:for="{{jobDetail.jobduty}}" style="margin-bottom:10px;">
                 <text>{{index+1}}.{{item.description}}</text>
             </view>
             <view style="margin-bottom:10px;" wx:if='{{jobDetail.jobskill.length>0}}'>
-                <text>职位要求</text>
+                <text style='color:#353535'>职位要求</text>
             </view>
             <view wx:for="{{jobDetail.jobskill}}" style="margin-bottom:10px;">
                 <text>{{index+1}}.{{item.description}}</text>
@@ -177,3 +177,6 @@
     </view>
 </view>
 <include src='../../common/loader.wxml' />
+
+
+<include src='../../common/toast.wxml' />
