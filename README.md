@@ -40,16 +40,16 @@
 
 ### 部分截图
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_190443.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_190443.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_190606.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_190606.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_190640.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_190640.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_190733.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_190733.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_190828.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_190828.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_191034.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_191034.jpg)
 
-![](https://github.com/linrui1994/zhaopin/tree/master/zhaopin-user/screenshot/20170303_191300.jpg)
+![](https://github.com/linrui1994/zhaopin/blob/master/zhaopin-user/screenshot/20170303_191300.jpg)
