@@ -4,6 +4,9 @@ let {
     ripple
 } = require('../../utils/ripple.js');
 let $ = require('../../utils/util.js')
+let {
+    server
+} = require('../../configs/serverConfig.js');
 Page({
     data: {
         userInfoFromWX: {},
@@ -21,16 +24,38 @@ Page({
                 userInfoFromWX: data
             })
         })
-        app.getUserInfo((data) => {
-            this.setData({
-                userInfo: data
+        $.ajax({
+            url: `${server}/seeker/getUserInfo`,
+            data: {
+                openid: app.globalData.session.openid
+            }
+        }).then((res) => {
+            if (res.statusCode == 200) {
+                console.log('getinfo')
+                app.globalData.userInfo = res.data;
+                wx.setStorageSync('userInfo', res.data);
+                this.setData({
+                    userInfo: res.data
+                })
+            } else {
+                app.getUserInfo((data) => {
+                    this.setData({
+                        userInfo: data
+                    })
+                })
+            }
+        }).catch((res) => {
+            app.getUserInfo((data) => {
+                this.setData({
+                    userInfo: data
+                })
             })
         })
         event.on('userInfoChanged', this, function(data) {
             this.setData({
                 userInfo: data.userInfo
             })
-            $.toast('个人信息修改成功', this)
+            $.toast('个人信息修改成功', this, true, 1800, false)
         }.bind(this))
     },
     onUnolad: function() {

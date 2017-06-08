@@ -24,8 +24,8 @@
             <view class="item">
                 <view class="_flex" style="border-bottom:1rpx solid rgb(239,239,244)">
                     <icon class='iconfont icon-circle-edit'></icon>
-                    <view class="inputMsg placeholder-class" wx:if="{{!userInfo.birth}}">出生年月</view>
-                    <view class="inputMsg" wx:else>{{userInfo.birth}}</view>
+                    <view class="inputMsg placeholder-class" wx:if="{{!userInfo.birthday}}">出生年月</view>
+                    <view class="inputMsg" wx:else>{{userInfo.birthday}}</view>
                 </view>
             </view>
         </picker>
@@ -63,7 +63,7 @@
         <view class="item">
             <view class="_flex _relative" style="border-bottom:1rpx solid rgb(239,239,244)">
                 <icon class='iconfont icon-circle-edit'></icon>
-                <input value="{{userInfo.phone}}" placeholder="手机号" placeholder-class="placeholder-class" bindblur='checkMobile' bindinput='phoneInput' />
+                <input value="{{userInfo.telephone}}" placeholder="手机号" placeholder-class="placeholder-class" bindblur='checkMobile' bindinput='phoneInput' />
                 <icon type='warn' class='icon-warn' size='20' hidden='{{checkMobile}}'></icon>
             </view>
         </view>

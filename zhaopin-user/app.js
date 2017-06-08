@@ -7,6 +7,7 @@ import Websocket from './utils/websocket';
 let ws = new Websocket();
 App({
     onLaunch: function() {
+        //     wx.clearStorage()
         let location = wx.getStorageSync('location');
         if (!location) {
             $.getLocation(this);
@@ -117,13 +118,13 @@ App({
         if (this.globalData.userInfo) {
             typeof cb == "function" && cb(this.globalData.userInfo)
         } else {
-            let userInfo = wx.getStorageSync('userInfo');
+            //    let userInfo = wx.getStorageSync('userInfo');
+            let userInfo = null;
             if (!userInfo) {
                 let timer = setInterval(function() {
                     let {
                         openid
                     } = _this.globalData.session;
-                    console.log(_this.globalData.session);
                     if (!openid) {
                         console.log(4)
                         return;
@@ -141,11 +142,14 @@ App({
                             wx.setStorageSync('userInfo', res.data);
                             typeof cb == "function" && cb(_this.globalData.userInfo)
                         } else {
+                            _this.globalData.userInfo = wx.getStorageSync('userInfo');;
+                            typeof cb == "function" && cb(_this.globalData.userInfo)
                             clearInterval(timer);
                         }
                     }).catch((res) => {
-                        console.log(7);
-                        clearInterval(timer)
+                        _this.globalData.userInfo = wx.getStorageSync('userInfo');;
+                        typeof cb == "function" && cb(_this.globalData.userInfo)
+                        clearInterval(timer);
                     })
                 }.bind(this), 2000)
             } else {

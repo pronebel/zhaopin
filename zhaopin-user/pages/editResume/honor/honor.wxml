@@ -12,3 +12,5 @@
 </view>
 
 <include src='../../../common/loader.wxml' />
+
+<include src='../../../common/toast.wxml' />

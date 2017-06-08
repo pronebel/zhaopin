@@ -369,7 +369,10 @@ function geocoder(address, cb) {
  * @param  {Number}  delay   [description] 延迟
  * @return {[type]}          [description]
  */
-function toast(content, self, flag = true, delay = 1800) {
+
+let timer = null;
+
+function toast(content, self, flag = true, delay = 1800, clear = true) {
     if (!content || !self) {
         return;
     } else {
@@ -378,10 +381,16 @@ function toast(content, self, flag = true, delay = 1800) {
                 showToast: true,
                 content: content
             })
-            setTimeout(() => {
+            if (timer && clear) {
+                console.log(timer);
+                clearTimeout(timer);
+                timer = null;
+            }
+            timer = setTimeout(() => {
                 self.setData({
                     showToast: false
                 })
+                timer = null;
             }, delay)
         } else {
             wx.getNetworkType({
@@ -391,20 +400,32 @@ function toast(content, self, flag = true, delay = 1800) {
                             showToast: true,
                             content: '您未连接到网络'
                         })
-                        setTimeout(() => {
+                        if (timer && clear) {
+                            console.log(timer);
+                            clearTimeout(timer);
+                            timer = null;
+                        }
+                        timer = setTimeout(() => {
                             self.setData({
                                 showToast: false
                             })
+                            timer = null;
                         }, delay)
                     } else {
                         self.setData({
                             showToast: true,
                             content: content
                         })
-                        setTimeout(() => {
+                        if (timer && clear) {
+                            console.log(timer);
+                            clearTimeout(timer);
+                            timer = null;
+                        }
+                        timer = setTimeout(() => {
                             self.setData({
                                 showToast: false
                             })
+                            timer = null;
                         }, delay)
                     }
                 }

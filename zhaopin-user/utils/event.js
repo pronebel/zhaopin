@@ -5,6 +5,7 @@
  * @author linrui
  */
 
+let $ = require('./util.js')
 let events = {};
 
 /**
@@ -61,36 +62,35 @@ function cb(data) {
     if (!inArray(data.key, Object.keys(this.data.resume))) return;
     let _key = data.key;
     let _resume = this.data.resume;
+    $.toast('修改成功', this, true, 1800, false)
     if (data.event_type == 'change') {
         if (Array.isArray(_resume[_key])) {
             _resume[_key].forEach((val, index) => {
                 if (val.id == data.value.id) {
                     _resume[_key][index] = data.value;
                     this.setData({
-                        resume: _resume
-                    })
+                            resume: _resume
+                        })
+                        //    $.toast('修改成功', this)
                 }
             })
         } else {
             if (_key == 'userInfo') {
                 this.setData({
-                    userInfo: data.value
-                })
+                        userInfo: data.value
+                    })
+                    //   $.toast('修改成功', this)
             } else {
                 _resume[_key] = data.value;
                 this.setData({
-                    resume: _resume
-                })
+                        resume: _resume
+                    })
+                    //   $.toast('修改成功', this)
             }
         }
     } else if (data.event_type == 'add') {
         let _this = this;
         let app = getApp();
-        // data.value['id'] = parseInt(_resume[_key][_resume[_key].length - 1].id) + 1;
-        // _resume[_key].push(data.value);
-        // this.setData({
-        // 	resume: _resume
-        // })
         console.log(`resume/get${_key.substring(0,1).toUpperCase()+_key.substring(1)}`);
         app.resume(`resume/get${_key.substring(0,1).toUpperCase()+_key.substring(1)}`, 'GET', {
             resume_id: data.value.resume_id
@@ -98,8 +98,9 @@ function cb(data) {
             if (res.data) {
                 _resume[_key] = res.data;
                 _this.setData({
-                    resume: _resume
-                })
+                        resume: _resume
+                    })
+                    //   $.toast('修改成功', this)
             }
         })
     } else {
@@ -107,8 +108,9 @@ function cb(data) {
             if (val.id == data.value.id) {
                 _resume[_key].splice(index, 1);
                 this.setData({
-                    resume: _resume
-                })
+                        resume: _resume
+                    })
+                    //   $.toast('修改成功', this)
             }
         })
     }

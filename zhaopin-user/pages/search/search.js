@@ -64,6 +64,21 @@ Page({
                 checkedValues: searchConfig.checkedValues,
                 workplace: searchConfig.workplace
             })
+            let {
+                items
+            } = this.data;
+            Object.keys(searchConfig.checkedValues).forEach(key => {
+                for (let i = 0; i < searchConfig.checkedValues[key].length; i++) {
+                    for (let j = 0; j < items[key].length; j++) {
+                        if (items[key][j].value == searchConfig.checkedValues[key][i]) {
+                            items[key][j].type = 'success_circle'
+                        }
+                    }
+                }
+            })
+            this.setData({
+                items: items
+            })
             $.getDistrictByCityName(searchConfig.workplace.city, app.globalData.cityList, this);
         } else {
             app.getWorkplace((data) => {

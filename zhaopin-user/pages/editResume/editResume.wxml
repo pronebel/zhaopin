@@ -31,7 +31,7 @@
             </view>
             <view class='item'>
                 <text>联系电话 :</text>
-                <text> {{userInfo.phone}}</text>
+                <text> {{userInfo.telephone}}</text>
             </view>
             <view class='item'>
                 <text>电子邮箱 :</text>
@@ -39,7 +39,7 @@
             </view>
             <view class='item'>
                 <text>出生日期 :</text>
-                <text> {{userInfo.birth}}</text>
+                <text> {{userInfo.birthday}}</text>
             </view>
             <view class='imgbox'>
                 <image mode="aspectFit" src="{{userInfo.avatarUrl || userInfoFromWX.avatarUrl || '../../images/avatar.png'}}" class="img"></image>
@@ -191,3 +191,4 @@
     <view class='box footer'></view> -->
 </view>
 <include src='../../common/loader.wxml' />
+<include src='../../common/toast.wxml' />

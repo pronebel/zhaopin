@@ -99,3 +99,7 @@ page {
     border: 1px dashed #3399ff;
     border-radius: 4px;
 }
+
+.content{
+    overflow-x: hidden
+}

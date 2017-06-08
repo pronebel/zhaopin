@@ -9,7 +9,7 @@
         <swiper current='{{current}}' bindchange='currentChanged' style='height:{{windowHeight-40}}px'>
             <block wx:for="{{pages}}" wx:for-item="page">
                 <swiper-item>
-                    <block wx:if='{{page.key=="全部"}}'>
+                    <block wx:if='{{page.key=="全部" && page.loaded}}'>
                         <view wx:for='{{resumeStatusList}}'>
                             <view hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" class='item animated lightSpeedIn {{item.seeker_read?"":"hint"}}' bindtap='navigateTo' data-id='{{item.id}}' style='margin-bottom:10px;animation-delay: {{index*0.2}}s;-webkit-animation-delay: {{index*0.2}}s;'>
                                 <view class="logo">
@@ -33,7 +33,7 @@
                         </view>
                         <image src='../../../images/empty.png' class='empty' wx:if='{{resumeStatusList.length==0}}'></image>
                     </block>
-                    <block wx:else>
+                    <block wx:if='{{page.key!="全部" && page.loaded }}'>
                         <view wx:for='{{resumeStatusList}}'>
                             <view class='item animated lightSpeedIn {{item.seeker_read?"":"hint"}}' hover="true" hover-start-time="10" hover-stay-time="300" hover-class="click-view" wx:if='{{item.status==page.key}}' bindtap='navigateTo' data-id='{{item.id}}' style='margin-bottom:10px;animation-delay: {{index*0.2}}s;-webkit-animation-delay: {{index*0.2}}s;'>
                                 <view class="logo">

@@ -24,26 +24,60 @@ Page({
 			degrees: degrees
 		})
 		app.getUserInfoFromWX((data) => {
-			this.setData({
-				userInfoFromWX: data
+				this.setData({
+					userInfoFromWX: data
+				})
 			})
-		})
-		app.getUserInfo((data) => {
-			this.setData({
-				userInfo: data
-			})
-			if (data.city == '') {
-				app.getLocation((data) => {
+			// app.getUserInfo((data) => {
+			// 	// this.setData({
+			// 	// 	userInfo: data
+			// 	// })
+			// 	if (data.city == '') {
+			// 		app.getLocation((data) => {
+			// 			this.setData({
+			// 				'userInfo.city': data
+			// 			})
+			// 		})
+			// 	}
+
+		// 	//	app.hiddenLoader.call(this);
+		// 	app.hiddenLoader(this);
+		// })
+
+		$.ajax({
+			url: `${server}/seeker/getUserInfo`,
+			data: {
+				openid: app.globalData.session.openid
+			}
+		}).then((res) => {
+			if (res.statusCode == 200) {
+				app.globalData.userInfo = res.data;
+				wx.setStorageSync('userInfo', res.data);
+				this.setData({
+					userInfo: res.data
+				})
+				if (res.data.city == '') {
+					app.getLocation((data) => {
+						this.setData({
+							'userInfo.city': data
+						})
+					})
+				}
+			} else {
+				app.getUserInfo((data) => {
 					this.setData({
-						'userInfo.city': data
+						userInfo: data
 					})
 				})
 			}
-
-			//	app.hiddenLoader.call(this);
 			app.hiddenLoader(this);
+		}).catch((res) => {
+			app.getUserInfo((data) => {
+				this.setData({
+					userInfo: data
+				})
+			})
 		})
-
 		let _degree = this.data.userInfo.degree;
 		if (!_degree) {
 			this.setData({
@@ -82,7 +116,7 @@ Page({
 	},
 	bindDatePickerChange: function(e) {
 		this.setData({
-			'userInfo.birth': e.detail.value
+			'userInfo.birthday': e.detail.value
 		})
 	},
 	bindDegreePickerChange: function(e) {
@@ -92,7 +126,7 @@ Page({
 	},
 	checkMobile() {
 		this.setData({
-			checkMobile: $.checkMobile(this.data.userInfo.phone)
+			checkMobile: $.checkMobile(this.data.userInfo.telephone)
 		})
 	},
 	checkEmail() {
@@ -107,7 +141,7 @@ Page({
 	},
 	phoneInput(e) {
 		this.setData({
-			'userInfo.phone': e.detail.value
+			'userInfo.telephone': e.detail.value
 		})
 	},
 	emailInput(e) {
@@ -146,7 +180,8 @@ Page({
 				})
 				wx.setStorageSync('userInfo', userInfo);
 				app.globalData.userInfo = userInfo;
-				$.toast('保存成功', this)
+				wx.navigateBack();
+				//	$.toast('保存成功', this)
 			} else {
 				$.toast('数据保存失败', this, false)
 				console.log(5)
@@ -176,6 +211,7 @@ Page({
 						event.emit('userInfoChanged', {
 							userInfo: _this.data.userInfo
 						})
+						userInfo.avatarUrl = res.data;
 						event.emit('resumeChanged', {
 							event_type: 'change',
 							key: 'userInfo',
@@ -184,7 +220,8 @@ Page({
 						console.log(res);
 						wx.setStorageSync('userInfo', userInfo);
 						app.globalData.userInfo = userInfo;
-						$.toast('头像修改成功', this)
+						//	wx.navigateBack();
+						//	$.toast('头像修改成功', this)
 					} else {
 						$.toast('头像上传失败', this, false)
 					}

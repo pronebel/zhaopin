@@ -1,5 +1,4 @@
 var app = getApp();
-let event = require('../../utils/event.js');
 let $ = require('../../utils/util.js');
 const {
     server

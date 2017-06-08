@@ -162,8 +162,8 @@
             </view>
             <view class="details">
                 <view style='height: 45rpx;'>
-                    <text class="job-title">{{item.name}}</text>
-                    <text class="job-salary">{{item.salary_lower}}-{{item.salary_upper}}k</text>
+                    <text class="job-title" style='height: 45rpx;'>{{item.name}}</text>
+                    <text class="job-salary" style='height: 45rpx;'>{{item.salary_lower}}-{{item.salary_upper}}k</text>
                 </view>
                 <view class="company-name" style='height: 40rpx;'>{{item.company.c_name_short}}</view>
                 <view class="_block translucence-msg" style="height:40rpx;margin-top:10rpx">

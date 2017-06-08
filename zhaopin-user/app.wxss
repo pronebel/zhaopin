@@ -194,6 +194,7 @@ click-view-2 {
 }
 
 swiper-item {
-    overflow: auto;
+    overflow-y: auto;
     height: auto;
+    overflow-x: hidden
 }

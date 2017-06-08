@@ -4,7 +4,9 @@ const {
     server
 } = require('../../configs/serverConfig.js');
 let app = getApp();
-let { ripple } = require('../../utils/ripple.js');
+let {
+    ripple
+} = require('../../utils/ripple.js');
 Page({
     data: {
         actionType: '', //0表示新建简历   1表示修改简历
@@ -42,9 +44,35 @@ Page({
                 title: '新建简历'
             })
         }
-        app.getUserInfo((data) => {
-            this.setData({
-                userInfo: data
+        // app.getUserInfo((data) => {
+        //     this.setData({
+        //         userInfo: data
+        //     })
+        // })
+        $.ajax({
+            url: `${server}/seeker/getUserInfo`,
+            data: {
+                openid: app.globalData.session.openid
+            }
+        }).then((res) => {
+            if (res.statusCode == 200) {
+                app.globalData.userInfo = res.data;
+                wx.setStorageSync('userInfo', res.data);
+                this.setData({
+                    userInfo: res.data
+                })
+            } else {
+                app.getUserInfo((data) => {
+                    this.setData({
+                        userInfo: data
+                    })
+                })
+            }
+        }).catch((res) => {
+            app.getUserInfo((data) => {
+                this.setData({
+                    userInfo: data
+                })
             })
         })
         app.getUserInfoFromWX((data) => {
@@ -79,7 +107,9 @@ Page({
     },
     navigateTo(e) {
         ripple.call(this, e);
-        let { url } = e.currentTarget.dataset;
+        let {
+            url
+        } = e.currentTarget.dataset;
         wx.navigateTo({
             url: url
         })

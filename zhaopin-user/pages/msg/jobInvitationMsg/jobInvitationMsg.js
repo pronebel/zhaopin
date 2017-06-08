@@ -8,13 +8,16 @@ Page({
     data: {
         pages: [{
             key: '全部',
-            count: 0
+            count: 0,
+            loaded: true
         }, {
             key: '未处理',
-            count: 0
+            count: 0,
+            loaded: false
         }, {
             key: '已处理',
-            count: 0
+            count: 0,
+            loaded: false
         }],
         current: 0,
         sliderLeft: 0
@@ -134,17 +137,23 @@ Page({
     },
     changeCurrent(e) {
         let {
-            current
+            current,
+            pages
         } = this.data;
+        pages[current].loaded = true
         current = parseInt(e.currentTarget.dataset.index);
         this.setData({
-            current: current
+            current: current,
+            pages: pages
         })
     },
     currentChanged(e) {
         let current = e.detail.current;
+        let pages = this.data.pages;
+        pages[current].loaded = true
         this.setData({
-            current: current
+            current: current,
+            pages: pages
         })
     },
     navigateTo(e) {
